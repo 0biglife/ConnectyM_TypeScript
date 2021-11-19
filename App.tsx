@@ -27,31 +27,38 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import styled from 'styled-components/native'
+
+const SectionContainer = styled.View`
+  margin-top: 32px;
+  padding-left: 24px;
+`;
+
+const SectionTitle = styled.Text`
+  font-size: 24px;
+  font-weight: 600;
+`;
+
+const SectionDescription = styled.Text`
+  margin-top: 8px;
+  font-size: 18px;
+  font-weight: 400;
+`;
+
+
 const Section: React.FC<{
   title: string;
 }> = ({children, title}) => {
   const isDarkMode = useColorScheme() === 'dark';
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
+    <SectionContainer>
+      <SectionTitle style={{ color: isDarkMode ? Colors.white : Colors.black, }}>
         {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
+      </SectionTitle>
+      <SectionDescription style={{ color: isDarkMode ? Colors.light : Colors.dark }}>
         {children}
-      </Text>
-    </View>
+      </SectionDescription>
+    </SectionContainer>
   );
 };
 
@@ -93,14 +100,6 @@ const App = () => {
 };
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
   sectionDescription: {
     marginTop: 8,
     fontSize: 18,
