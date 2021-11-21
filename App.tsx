@@ -27,7 +27,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-import styled from 'styled-components/native'
+import styled from 'styled-components/native';
 
 const SectionContainer = styled.View`
   margin-top: 32px;
@@ -45,19 +45,25 @@ const SectionDescription = styled.Text`
   font-weight: 400;
 `;
 
-
 const Section: React.FC<{
   title: string;
 }> = ({children, title}) => {
   const isDarkMode = useColorScheme() === 'dark';
   return (
     <SectionContainer>
-      <SectionTitle style={{ color: isDarkMode ? Colors.white : Colors.black, }}>
+      <SectionTitle style={{color: isDarkMode ? Colors.white : Colors.black}}>
         {title}
       </SectionTitle>
-      <SectionDescription style={{ color: isDarkMode ? Colors.light : Colors.dark }}>
+      <SectionDescription></SectionDescription>
+      <Text
+        style={[
+          styles.sectionDescription,
+          {
+            color: isDarkMode ? Colors.light : Colors.dark,
+          },
+        ]}>
         {children}
-      </SectionDescription>
+      </Text>
     </SectionContainer>
   );
 };
