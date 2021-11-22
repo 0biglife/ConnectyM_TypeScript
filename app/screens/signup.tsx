@@ -1,7 +1,8 @@
-import React, {FC} from 'react';
+import React from 'react';
 import {View, Text} from 'react-native';
+// import styled from 'styled-components/native';
 
-const signup: FC = () => {
+const signup = () => {
   return (
     <View>
       <Text>Sign Up Screen</Text>
