@@ -16,12 +16,12 @@ const Title = styled.Text`
   font-weight: 400;
 `;
 
-const profileView = () => {
+const boardView = () => {
   return (
     <Container>
-      <Title>Profile View</Title>
+      <Title>Board View</Title>
     </Container>
   );
 };
 
-export default profileView;
+export default boardView;

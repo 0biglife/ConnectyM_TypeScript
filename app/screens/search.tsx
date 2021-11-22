@@ -16,12 +16,12 @@ const Title = styled.Text`
   font-weight: 400;
 `;
 
-const profileView = () => {
+const searchView = () => {
   return (
     <Container>
-      <Title>Profile View</Title>
+      <Title>Search View</Title>
     </Container>
   );
 };
 
-export default profileView;
+export default searchView;
