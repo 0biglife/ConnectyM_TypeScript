@@ -1,8 +1,17 @@
-import homeView from './home';
-import loginView from './login';
-import searchView from './search';
-import mymusicView from './mymusic';
-import boardView from './boardView';
-import profileView from './profile';
+import homeView from './home/home';
+import homeView2 from './home/home2';
+import loginView from './login/login';
+import searchView from './search/search';
+import mymusicView from './mymusic/mymusic';
+import boardView from './board/boardView';
+import profileView from './profile/profile';
 
-export {homeView, loginView, searchView, mymusicView, boardView, profileView };
+export {
+  homeView,
+  homeView2,
+  loginView,
+  searchView,
+  mymusicView,
+  boardView,
+  profileView,
+};
