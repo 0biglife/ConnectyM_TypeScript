@@ -15,22 +15,38 @@ import {
   profileView,
 } from './screens';
 
-const AuthStack = createStackNavigator();
-const isLoggedIn = true;
-
+import IonIcon from 'react-native-vector-icons/Ionicons';
 
 const Tab = createBottomTabNavigator();
+const AuthStack = createStackNavigator();
+
+const isLoggedIn = true;
 
 const AppTabComponent = () => {
   return (
     <Tab.Navigator
-      // initialRouteName="Home"
-      // screenOptions={({ route }) => ({
-      //   tabBarIcon: ({ focused, color, size }) => {
-          
-      //   }
-      // })}
-    >
+      initialRouteName="Home"
+      screenOptions={({route}) => ({
+        tabBarIcon: ({focused, color, size}) => {
+          let iconName: string;
+
+          if (route.name === 'Home') {
+            iconName = focused ? 'home' : 'home-outline';
+          } else if (route.name === 'Search') {
+            iconName = focused ? 'search' : 'ios-search-outline';
+          } else if (route.name === 'MyMusician') {
+            iconName = focused
+              ? 'ios-musical-notes'
+              : 'ios-musical-notes-outline';
+          } else if (route.name === 'Practice') {
+            iconName = 'clipboard';
+          } else if (route.name === 'Profile') {
+            iconName = 'person';
+          }
+          return <IonIcon name={iconName} size={size} color={color} />;
+        },
+        headerTitleAlign: 'center',
+      })}>
       <Tab.Screen name="Home" component={homeView} />
       <Tab.Screen name="Search" component={searchView} />
       <Tab.Screen name="MyMusician" component={mymusicView} />
@@ -45,7 +61,7 @@ export const RootNavigator = () => {
   return (
     <AuthStack.Navigator screenOptions={{headerShown: false}}>
       {isLoggedIn ? (
-        <AuthStack.Screen name="Home" component={AppTabComponent} />
+        <AuthStack.Screen name="Main" component={AppTabComponent} />
       ) : (
         <AuthStack.Screen name="Login" component={LoginNavigator} />
       )}
