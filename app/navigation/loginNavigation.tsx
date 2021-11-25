@@ -14,7 +14,7 @@ export type LoginStackParamList = {
 };
 
 const LoginStack = createStackNavigator<LoginStackParamList>();
-const LoginNavigator: React.FC = () => {
+const LoginNavigation: React.FC = () => {
   return (
     <LoginStack.Navigator screenOptions={{headerShown: false}}>
       <LoginStack.Screen name={LoginScreens.Login} component={loginView} />
@@ -23,4 +23,4 @@ const LoginNavigator: React.FC = () => {
   );
 };
 
-export default LoginNavigator;
+export default LoginNavigation;

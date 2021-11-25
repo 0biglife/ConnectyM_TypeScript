@@ -1,14 +1,13 @@
 import React from 'react';
-// import { Button } from 'react-native';
+import { Button } from 'react-native';
 
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import HomeNavigator from './navigation/homeNavigator';
+import HomeNavigator from './navigation/homeNavigation';
 import LoginNavigator from './navigation/loginNavigation';
+import SearchNavigator from './navigation/searchNavigation';
 //screens
 import {
-  homeView,
-  homeView2,
   searchView,
   mymusicView,
   boardView,
@@ -28,7 +27,7 @@ const AppTabComponent = () => {
       initialRouteName="Home"
       screenOptions={({route}) => ({
         tabBarIcon: ({focused, color, size}) => {
-          let iconName: string;
+          let iconName;
 
           if (route.name === 'Home') {
             iconName = focused ? 'home' : 'home-outline';
@@ -46,9 +45,14 @@ const AppTabComponent = () => {
           return <IonIcon name={iconName} size={size} color={color} />;
         },
         headerTitleAlign: 'center',
+        headerShown: false,
       })}>
-      <Tab.Screen name="Home" component={homeView} />
-      <Tab.Screen name="Search" component={searchView} />
+      <Tab.Screen
+        name="Home"
+        component={HomeNavigator}
+        options={{headerRight: () => <Button/>}}
+      />
+      <Tab.Screen name="Search" component={SearchNavigator} />
       <Tab.Screen name="MyMusician" component={mymusicView} />
       <Tab.Screen name="Board" component={boardView} />
       <Tab.Screen name="Profilie" component={profileView} />
