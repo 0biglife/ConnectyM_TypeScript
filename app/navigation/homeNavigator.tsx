@@ -4,8 +4,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {homeView, homeView2} from '../screens';
 
 export enum HomeScreens {
-  Main = 'Main',
-  Details = 'Details',
+  Main = 'Home',
+  Details = 'Home2',
 }
 
 export type HomeStackParamList = {
