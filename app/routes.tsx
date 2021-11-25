@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'react-native';
+import {Button} from 'react-native';
 
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -7,19 +7,14 @@ import HomeNavigator from './navigation/homeNavigation';
 import LoginNavigator from './navigation/loginNavigation';
 import SearchNavigator from './navigation/searchNavigation';
 //screens
-import {
-  searchView,
-  mymusicView,
-  boardView,
-  profileView,
-} from './screens';
+import {mymusicView, boardView, profileView} from './screens';
 
 import IonIcon from 'react-native-vector-icons/Ionicons';
 
 const Tab = createBottomTabNavigator();
 const AuthStack = createStackNavigator();
 
-const isLoggedIn = true;
+const isLoggedIn = false;
 
 const AppTabComponent = () => {
   return (
@@ -67,7 +62,11 @@ export const RootNavigator = () => {
       {isLoggedIn ? (
         <AuthStack.Screen name="Main" component={AppTabComponent} />
       ) : (
-        <AuthStack.Screen name="Login" component={LoginNavigator} />
+        <AuthStack.Screen
+          name="Login"
+          component={LoginNavigator}
+          options={{headerShown: false}}
+        />
       )}
     </AuthStack.Navigator>
   )

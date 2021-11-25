@@ -19,7 +19,7 @@ const Title = styled.Text`
 `;
 
 const homeView = () => {
-  const [feed, setFeed] = useState<string[]>([]);
+  const [feed, setFeed] = useState([]);
 
   useEffect(() => {
     fetch(
