@@ -17,8 +17,8 @@ const LoginStack = createStackNavigator<LoginStackParamList>();
 const LoginNavigation: React.FC = () => {
   return (
     <LoginStack.Navigator screenOptions={{headerShown: false}}>
-      <LoginStack.Screen name={LoginScreens.Login} component={signupView} />
-      <LoginStack.Screen name={LoginScreens.Signup} component={loginView} />
+      <LoginStack.Screen name={LoginScreens.Login} component={loginView} />
+      <LoginStack.Screen name={LoginScreens.Signup} component={signupView} />
     </LoginStack.Navigator>
   );
 };

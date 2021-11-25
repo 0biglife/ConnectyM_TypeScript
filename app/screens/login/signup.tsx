@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 // import {View, Text} from 'react-native';
 import styled from 'styled-components/native';
-import {Input} from '../../components';
+import {Input, Button} from '../../components';
 
 const Container = styled.View`
   flex: 1;
@@ -17,7 +17,7 @@ const Title = styled.Text`
   font-weight: 400;
 `;
 
-const signupView: React.FC = () => {
+const signupView: React.FC = (props) => {
   const [name, setName] = useState<string | null>(null);
   const [email, setEmail] = useState<string | null>(null);
   const [password, setPassword] = useState<string | null>(null);
@@ -31,6 +31,10 @@ const signupView: React.FC = () => {
         placeholder="Password"
         secureTextEntry
         onChangeText={text => setPassword(text)}
+      />
+      <Button
+        title="Sign Up"
+        onPress={() => props.navigation.navigate('AppTabComponent')}
       />
     </Container>
   );

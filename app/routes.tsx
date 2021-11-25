@@ -4,7 +4,7 @@ import {Button} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeNavigator from './navigation/homeNavigation';
-import LoginNavigator from './navigation/loginNavigation';
+import LoginNavigation from './navigation/loginNavigation';
 import SearchNavigator from './navigation/searchNavigation';
 //screens
 import {mymusicView, boardView, profileView} from './screens';
@@ -62,12 +62,19 @@ export const RootNavigator = () => {
       {isLoggedIn ? (
         <AuthStack.Screen name="Main" component={AppTabComponent} />
       ) : (
-        <AuthStack.Screen
-          name="Login"
-          component={LoginNavigator}
-          options={{headerShown: false}}
-        />
+        <>
+          <AuthStack.Screen
+            name="Login"
+            component={LoginNavigation}
+            options={{headerShown: false}}
+          />
+          <AuthStack.Screen
+            name="AppTabComponent"
+            component={AppTabComponent}
+            options={{gestureEnabled: false}}
+          />
+        </>
       )}
     </AuthStack.Navigator>
-  )
+  );
 };

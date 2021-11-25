@@ -3,11 +3,18 @@ import React from 'react';
 import styled from 'styled-components/native';
 
 const Container = styled.TouchableOpacity`
-  flex: 1;
+  background-color: #000;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  padding: 10px;
+  border-radius: 8px;
+  margin: 10px;
+  width: 100px;
 `;
 
-const ButtonText = styled.TextInput`
-  
+const ButtonText = styled.Text`
+  color: #fff;
 `;
 
 interface Props {
@@ -15,12 +22,12 @@ interface Props {
   onPress: () => void;
 }
 
-const Button: React.FC<Props> = (props) => {
+const Button: React.FC<Props> = props => {
   return (
-    <Container>
+    <Container onPress={props.onPress}>
       <ButtonText>{props.title}</ButtonText>
     </Container>
-  )
-}
+  );
+};
 
 export default Button;
