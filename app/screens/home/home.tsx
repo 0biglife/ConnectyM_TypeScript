@@ -11,13 +11,6 @@ const Container = styled.View`
   padding: 10px;
 `;
 
-const Title = styled.Text`
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  font-weight: 400;
-`;
-
 const homeView = () => {
   const [feed, setFeed] = useState([]);
 
@@ -40,7 +33,7 @@ const homeView = () => {
       <View>
         <FlatList
           data={feed}
-          renderItem={({ item }) => <PostCard item={item} />}
+          renderItem={({item}) => <PostCard item={item} />}
           keyExtractor={item => item.articles}
           showsVerticalScrollIndicator={false}
         />

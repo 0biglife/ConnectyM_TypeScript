@@ -1,8 +1,8 @@
 import React from 'react';
-import {Button} from 'react-native';
 
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+
 import HomeNavigator from './navigation/homeNavigation';
 import LoginNavigation from './navigation/loginNavigation';
 import SearchNavigator from './navigation/searchNavigation';
@@ -32,25 +32,20 @@ const AppTabComponent = () => {
             iconName = focused
               ? 'ios-musical-notes'
               : 'ios-musical-notes-outline';
-          } else if (route.name === 'Practice') {
-            iconName = 'clipboard';
+          } else if (route.name === 'Board') {
+            iconName = focused ? 'clipboard' : 'clipboard-outline';
           } else if (route.name === 'Profile') {
-            iconName = 'person';
+            iconName = focused ? 'person' : 'person-outline';
           }
           return <IonIcon name={iconName} size={size} color={color} />;
         },
         headerTitleAlign: 'center',
-        headerShown: false,
       })}>
-      <Tab.Screen
-        name="Home"
-        component={HomeNavigator}
-        options={{headerRight: () => <Button/>}}
-      />
+      <Tab.Screen name="Home" component={HomeNavigator} />
       <Tab.Screen name="Search" component={SearchNavigator} />
       <Tab.Screen name="MyMusician" component={mymusicView} />
       <Tab.Screen name="Board" component={boardView} />
-      <Tab.Screen name="Profilie" component={profileView} />
+      <Tab.Screen name="Profile" component={profileView} />
     </Tab.Navigator>
   );
 };

@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 
 const Card = styled.View`
-  background-color: #f99; //#f8f8f8;
+  background-color: #ebebeb; //#f8f8f8;
   width: 100%;
   margin-bottom: 10px;
   border-radius: 10px;

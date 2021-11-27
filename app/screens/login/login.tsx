@@ -25,7 +25,10 @@ const loginView = props => {
         title="Sign In"
         onPress={() => props.navigation.navigate('Signup')}
       />
-      {/* <Button title="Log In" onPress={() => props.navigate('AppTabComponent')} /> */}
+      <Button
+        title="Log In"
+        onPress={() => props.navigation.navigate('AppTabComponent')}
+      />
     </Container>
   );
 };

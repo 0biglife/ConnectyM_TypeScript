@@ -16,7 +16,10 @@ export type HomeStackParamList = {
 const HomeStack = createStackNavigator<HomeStackParamList>();
 const HomeNavigation: React.FC = () => {
   return (
-    <HomeStack.Navigator>
+    <HomeStack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}>
       <HomeStack.Screen name={HomeScreens.Home} component={homeView} />
       <HomeStack.Screen name={HomeScreens.Sub} component={homeView2} />
     </HomeStack.Navigator>

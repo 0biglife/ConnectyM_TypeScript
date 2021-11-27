@@ -11,6 +11,7 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		32B9B8E3274F60DA002CBF60 /* dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B9B8E2274F60DA002CBF60 /* dummy.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		A78FC2BF43C86C239619464D /* libPods-ConnectyM_TS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 99CE37595412A0E616AC3E72 /* libPods-ConnectyM_TS.a */; };
 		D3B416F63923F2F17582EA12 /* libPods-ConnectyM_TS-ConnectyM_TSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8888A6BCB6EB8BBFE9C912AE /* libPods-ConnectyM_TS-ConnectyM_TSTests.a */; };
@@ -52,6 +53,8 @@
 		32B9B8DE274F2B5F002CBF60 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		32B9B8DF274F2B5F002CBF60 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		32B9B8E0274F2B5F002CBF60 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
+		32B9B8E1274F60DA002CBF60 /* ConnectyM_TS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ConnectyM_TS-Bridging-Header.h"; sourceTree = "<group>"; };
+		32B9B8E2274F60DA002CBF60 /* dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dummy.swift; sourceTree = "<group>"; };
 		70831612965C0D813A60C320 /* Pods-ConnectyM_TS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConnectyM_TS.debug.xcconfig"; path = "Target Support Files/Pods-ConnectyM_TS/Pods-ConnectyM_TS.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ConnectyM_TS/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8888A6BCB6EB8BBFE9C912AE /* libPods-ConnectyM_TS-ConnectyM_TSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ConnectyM_TS-ConnectyM_TSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -156,12 +159,14 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				32B9B8E2274F60DA002CBF60 /* dummy.swift */,
 				13B07FAE1A68108700A75B9A /* ConnectyM_TS */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* ConnectyM_TSTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				E233CBF5F47BEE60B243DCF8 /* Pods */,
+				32B9B8E1274F60DA002CBF60 /* ConnectyM_TS-Bridging-Header.h */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -247,7 +252,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1310;
 					};
 				};
 			};
@@ -451,6 +456,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				32B9B8E3274F60DA002CBF60 /* dummy.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -540,6 +546,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = ConnectyM_TS;
+				SWIFT_OBJC_BRIDGING_HEADER = "ConnectyM_TS-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -566,6 +573,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = ConnectyM_TS;
+				SWIFT_OBJC_BRIDGING_HEADER = "ConnectyM_TS-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
