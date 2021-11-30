@@ -8,6 +8,8 @@ import mymusicView from './mymusic/mymusic';
 import boardView from './board/boardView';
 import profileView from './profile/profile';
 
+import musicPlayer from './MusicPlayer';
+
 export {
   homeView,
   homeView2,
@@ -17,4 +19,5 @@ export {
   mymusicView,
   boardView,
   profileView,
+  musicPlayer,
 };

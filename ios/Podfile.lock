@@ -274,6 +274,11 @@ PODS:
     - glog
   - react-native-safe-area-context (3.3.2):
     - React-Core
+  - react-native-slider (4.1.12):
+    - React-Core
+  - react-native-track-player (2.1.2):
+    - React-Core
+    - SwiftAudioEx (= 0.14.5)
   - React-perflogger (0.66.3)
   - React-RCTActionSheet (0.66.3):
     - React-Core/RCTActionSheetHeaders (= 0.66.3)
@@ -348,6 +353,7 @@ PODS:
     - React-RCTImage
   - RNVectorIcons (9.0.0):
     - React-Core
+  - SwiftAudioEx (0.14.5)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -394,6 +400,8 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
+  - "react-native-slider (from `../node_modules/@react-native-community/slider`)"
+  - react-native-track-player (from `../node_modules/react-native-track-player`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
@@ -427,6 +435,7 @@ SPEC REPOS:
     - fmt
     - libevent
     - OpenSSL-Universal
+    - SwiftAudioEx
     - YogaKit
 
 EXTERNAL SOURCES:
@@ -466,6 +475,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/logger"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
+  react-native-slider:
+    :path: "../node_modules/@react-native-community/slider"
+  react-native-track-player:
+    :path: "../node_modules/react-native-track-player"
   React-perflogger:
     :path: "../node_modules/react-native/ReactCommon/reactperflogger"
   React-RCTActionSheet:
@@ -533,6 +546,8 @@ SPEC CHECKSUMS:
   React-jsinspector: d9c8eb0b53f0da206fed56612b289fec84991157
   React-logger: e522e76fa3e9ec3e7d7115b49485cc065cf4ae06
   react-native-safe-area-context: 584dc04881deb49474363f3be89e4ca0e854c057
+  react-native-slider: 6e9b86e76cce4b9e35b3403193a6432ed07e0c81
+  react-native-track-player: 23dd515aacf1d36a0e522ef7fdbc55f13f26d4fb
   React-perflogger: 73732888d37d4f5065198727b167846743232882
   React-RCTActionSheet: 96c6d774fa89b1f7c59fc460adc3245ba2d7fd79
   React-RCTAnimation: 8940cfd3a8640bd6f6372150dbdb83a79bcbae6c
@@ -549,6 +564,7 @@ SPEC CHECKSUMS:
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNScreens: 4d79118be80f79fa1f4aa131909a1d6e86280af3
   RNVectorIcons: 4143ba35feebab8fdbe6bc43d1e776b393d47ac8
+  SwiftAudioEx: bfaff9894c885aded7edfb0793e25165d55053d4
   Yoga: 32a18c0e845e185f4a2a66ec76e1fd1f958f22fa
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 

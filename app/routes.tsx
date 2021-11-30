@@ -8,7 +8,7 @@ import LoginNavigation from './navigation/loginNavigation';
 import SearchNavigator from './navigation/searchNavigation';
 //screens
 import {mymusicView, boardView, profileView} from './screens';
-
+import MusicPlayer from './screens/MusicPlayer';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 
 const Tab = createBottomTabNavigator();
@@ -60,7 +60,7 @@ export const RootNavigator = () => {
         <>
           <AuthStack.Screen
             name="Login"
-            component={LoginNavigation}
+            component={MusicPlayer}
             options={{headerShown: false}}
           />
           <AuthStack.Screen
