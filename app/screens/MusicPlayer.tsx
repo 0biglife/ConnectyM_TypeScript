@@ -1,6 +1,5 @@
-import React from 'react';
-import {Dimensions, TouchableOpacity, View} from 'react-native';
-import Slider from '@react-native-community/slider';
+import React, {useEffect, useRef, useState} from 'react';
+import {Dimensions, TouchableOpacity, View, Animated} from 'react-native';
 import styled from 'styled-components/native';
 
 import IonIcon from 'react-native-vector-icons/Ionicons';
@@ -14,10 +13,34 @@ import IonIcon from 'react-native-vector-icons/Ionicons';
 //   useProgress,
 //   useTrackPlayerEvents,
 // } from 'react-native-track-player';
+const songs = [
+  {
+    title: 'cover1',
+    artist: 'giriboy',
+    image: require('../assets/artwork/cover1.jpeg'),
+    url: require('../assets/songs/song1.mp3'),
+    id: 1,
+    // duration: 311,
+  },
+  {
+    title: 'cover2',
+    artist: 'giriboy',
+    image: require('../assets/artwork/cover2.jpeg'),
+    url: require('../assets/songs/song2.mp3'),
+    id: 2,
+    // duration: 311,
+  },
+  {
+    title: 'cover3',
+    artist: 'giriboy',
+    image: require('../assets/artwork/cover3.jpeg'),
+    url: require('../assets/songs/song3.mp3'),
+    id: 3,
+    // duration: 311,
+  },
+];
 
-import songs from '../model/data';
-
-const { width, height } = Dimensions.get('window');
+const windowWidth = Dimensions.get('window').width;
 
 const SafeAreaViewContainer = styled.SafeAreaView`
   flex: 1;
@@ -30,6 +53,12 @@ const MainContainer = styled.View`
   justify-content: center;
 `;
 
+const FlatListTrackWrapper = styled.View`
+  width: windowWidth;
+  justify-content: center;
+  align-items: center;
+`;
+
 const ArtworkWrapper = styled.View`
   width: 300px;
   height: 300px;
@@ -39,7 +68,7 @@ const ArtworkWrapper = styled.View`
 const ArtworkImage = styled.Image`
   width: 100%;
   height: 100%;
-  border-radius: 15px;
+  border-radius: 12px;
 `;
 
 const TitleText = styled.Text`
@@ -113,16 +142,60 @@ const BottomControls = styled.View`
 // };
 
 const MusicPlayer = () => {
-  // const playbackState = usePlaybackState();
+  const scrollX = useRef(new Animated.Value(0)).current;
+
+  const [songIndex, setSongIndex] = useState(0);
+
+  useEffect(() => {
+    scrollX.addListener(({value}) => {
+      const index = Math.round(value / windowWidth);
+      console.log('Scroll x', scrollX);
+      console.log('Device Width', windowWidth);
+      setSongIndex(index);
+      console.log('Index', index);
+    });
+  }, []);
+
+  const renderSongs = ({index, item}) => {
+    return (
+      <Animated.View
+        style={{
+          width: windowWidth,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <ArtworkWrapper>
+          <ArtworkImage source={item.image} />
+        </ArtworkWrapper>
+      </Animated.View>
+    );
+  };
+
   return (
     <SafeAreaViewContainer>
       <MainContainer>
-        <ArtworkWrapper>
-          <ArtworkImage source={require('../assets/artwork/cover2.jpeg')} />
-        </ArtworkWrapper>
+        <Animated.FlatList
+          data={songs}
+          renderItem={renderSongs}
+          keyExtractor={item => item.id}
+          horizontal
+          pagingEnabled
+          showsHorizontalScrollIndicator={false}
+          scrollEventThrottle={16}
+          onScroll={Animated.event(
+            [
+              {
+                nativeEvent: {
+                  contentOffset: {x: scrollX},
+                },
+              },
+            ],
+            {useNativeDriver: true},
+          )}
+        />
         <View>
-          <TitleText>Song Title</TitleText>
-          <ArtistText>Song Artist Name</ArtistText>
+          <TitleText>{songs[songIndex].title}</TitleText>
+          <ArtistText>{songs[songIndex].artist}</ArtistText>
         </View>
         <View>
           <SliderContainer
@@ -157,7 +230,8 @@ const MusicPlayer = () => {
               name="play-skip-forward-outline"
               size={35}
               color="black"
-              style={{marginTop: 25}}/>
+              style={{marginTop: 25}}
+            />
           </TouchableOpacity>
         </ButtonContainer>
       </MainContainer>
