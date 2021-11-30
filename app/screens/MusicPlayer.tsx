@@ -56,6 +56,30 @@ const ArtistText = styled.Text`
   color: black;
 `;
 
+const SliderContainer = styled.Slider`
+  width: 350px;
+  height: 40px;
+  margin-top: 25px;
+  flex-direction: row;
+`;
+
+const SliderLabelContainer = styled.View`
+  width: 340px;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+const SliderLabelText = styled.Text`
+  color: black;
+`;
+
+const ButtonContainer = styled.View`
+  flex-direction: row;
+  width: 60%;
+  justify-content: space-between;
+  margin-top: 15px;
+`;
+
 const BottomContainer = styled.View`
   border-top-color: #393e46;
   border-top-width: 1px;
@@ -100,6 +124,42 @@ const MusicPlayer = () => {
           <TitleText>Song Title</TitleText>
           <ArtistText>Song Artist Name</ArtistText>
         </View>
+        <View>
+          <SliderContainer
+            value={10}
+            minimumValue={0}
+            maximumValue={100}
+            thumbTintColor="black"
+            minimumTrackTintColor="black"
+            maximumTrackTintColor="lightgray"
+            onSlidingComplete={() => {}}
+          />
+          <SliderLabelContainer>
+            <SliderLabelText>0:00</SliderLabelText>
+            <SliderLabelText>3:45</SliderLabelText>
+          </SliderLabelContainer>
+        </View>
+
+        <ButtonContainer>
+          <TouchableOpacity onPress={() => { }}>
+            <IonIcon
+              name="play-skip-back-outline"
+              size={35}
+              color="black"
+              style={{marginTop: 25}}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => { }}>
+            <IonIcon name="ios-pause-circle" size={75} color="black" />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => { }}>
+            <IonIcon
+              name="play-skip-forward-outline"
+              size={35}
+              color="black"
+              style={{marginTop: 25}}/>
+          </TouchableOpacity>
+        </ButtonContainer>
       </MainContainer>
       <BottomContainer>
         <BottomControls>
