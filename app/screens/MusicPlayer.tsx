@@ -3,16 +3,18 @@ import {Dimensions, TouchableOpacity, View, Animated} from 'react-native';
 import styled from 'styled-components/native';
 
 import IonIcon from 'react-native-vector-icons/Ionicons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-// import TrackPlayer, {
-//   Capability,
-//   Event,
-//   RepeatMode,
-//   State,
-//   usePlaybackState,
-//   useProgress,
-//   useTrackPlayerEvents,
-// } from 'react-native-track-player';
+import TrackPlayer, {
+  Capability,
+  Event,
+  RepeatMode,
+  State,
+  usePlaybackState,
+  useProgress,
+  useTrackPlayerEvents,
+} from 'react-native-track-player';
+
 const songs = [
   {
     title: 'cover1',
@@ -24,7 +26,7 @@ const songs = [
   },
   {
     title: 'cover2',
-    artist: 'giriboy',
+    artist: 'Yo Han',
     image: require('../assets/artwork/cover2.jpeg'),
     url: require('../assets/songs/song2.mp3'),
     id: 2,
@@ -32,7 +34,7 @@ const songs = [
   },
   {
     title: 'cover3',
-    artist: 'giriboy',
+    artist: 'Kid Milli',
     image: require('../assets/artwork/cover3.jpeg'),
     url: require('../assets/songs/song3.mp3'),
     id: 3,
@@ -51,12 +53,6 @@ const MainContainer = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
-`;
-
-const FlatListTrackWrapper = styled.View`
-  width: windowWidth;
-  justify-content: center;
-  align-items: center;
 `;
 
 const ArtworkWrapper = styled.View`
@@ -123,38 +119,67 @@ const BottomControls = styled.View`
   width: 80%;
 `;
 
-// const setupPlayer = async () => {
-//   await TrackPlayer.setupPlayer();
+const setupPlayer = async () => {
+  await TrackPlayer.setupPlayer();
 
-//   await TrackPlayer.add(songs);
-// };
+  await TrackPlayer.add(songs);
+};
 
-// const togglePlayback = async (playbackState) => {
-//   const currentTrack = await TrackPlayer.getCurrentTrack();
+const togglePlayback = async (playbackState) => {
+  const currentTrack = await TrackPlayer.getCurrentTrack();
 
-//   if (currentTrack !== null) {
-//     if (playbackState == State.Paused) {
-//       await TrackPlayer.play();
-//     } else {
-//       await TrackPlayer.pause();
-//     }
-//   }
-// };
+  if (currentTrack !== null) {
+    if (playbackState == State.Paused) {
+      await TrackPlayer.play();
+    } else {
+      await TrackPlayer.pause();
+    }
+  }
+};
 
 const MusicPlayer = () => {
+  //UI
   const scrollX = useRef(new Animated.Value(0)).current;
 
   const [songIndex, setSongIndex] = useState(0);
 
+  const songSlider = useRef(null);
+
+  //Track
+  const playbackState = usePlaybackState();
+  const progress = useProgress();
+
+  const skipTo = async(trackID) => {
+    TrackPlayer.skip(trackID);
+  };
+
   useEffect(() => {
+    setupPlayer();
     scrollX.addListener(({value}) => {
       const index = Math.round(value / windowWidth);
-      console.log('Scroll x', scrollX);
-      console.log('Device Width', windowWidth);
+      // console.log('Scroll x', scrollX);
+      // console.log('Device Width', windowWidth);
+      skipTo(index);
       setSongIndex(index);
-      console.log('Index', index);
+      // console.log('Index', index);
     });
+
+    return () => {
+      scrollX.removeAllListeners();
+    };
   }, []);
+
+  const skiptoNext = () => {
+    songSlider.current.scrollToOffset({
+      offset: (songIndex + 1) * windowWidth,
+    });
+  };
+
+  const skiptoPrevious = () => {
+    songSlider.current.scrollToOffset({
+      offset: (songIndex - 1) * windowWidth,
+    });
+  };
 
   const renderSongs = ({index, item}) => {
     return (
@@ -174,47 +199,55 @@ const MusicPlayer = () => {
   return (
     <SafeAreaViewContainer>
       <MainContainer>
-        <Animated.FlatList
-          data={songs}
-          renderItem={renderSongs}
-          keyExtractor={item => item.id}
-          horizontal
-          pagingEnabled
-          showsHorizontalScrollIndicator={false}
-          scrollEventThrottle={16}
-          onScroll={Animated.event(
-            [
-              {
-                nativeEvent: {
-                  contentOffset: {x: scrollX},
+        <View style={{width: windowWidth}}>
+          <Animated.FlatList
+            ref={songSlider}
+            data={songs}
+            renderItem={renderSongs}
+            keyExtractor={item => item.id}
+            horizontal
+            pagingEnabled
+            showsHorizontalScrollIndicator={false}
+            scrollEventThrottle={16}
+            onScroll={Animated.event(
+              [
+                {
+                  nativeEvent: {
+                    contentOffset: {x: scrollX},
+                  },
                 },
-              },
-            ],
-            {useNativeDriver: true},
-          )}
-        />
+              ],
+              {useNativeDriver: true},
+            )}
+          />
+        </View>
         <View>
           <TitleText>{songs[songIndex].title}</TitleText>
           <ArtistText>{songs[songIndex].artist}</ArtistText>
         </View>
         <View>
           <SliderContainer
-            value={10}
+            value={progress.position}
             minimumValue={0}
-            maximumValue={100}
+            maximumValue={progress.duration}
             thumbTintColor="black"
             minimumTrackTintColor="black"
             maximumTrackTintColor="lightgray"
-            onSlidingComplete={() => {}}
+            onSlidingComplete={async(value) => {
+              await TrackPlayer.seekTo(value);
+            }}
           />
           <SliderLabelContainer>
-            <SliderLabelText>0:00</SliderLabelText>
-            <SliderLabelText>3:45</SliderLabelText>
+            <SliderLabelText>
+              {new Date(progress.position * 1000).toISOString().substr(14,5)}
+            </SliderLabelText>
+            <SliderLabelText>
+              {new Date(progress.duration * 1000).toISOString().substr(14,5)}</SliderLabelText>
           </SliderLabelContainer>
         </View>
 
         <ButtonContainer>
-          <TouchableOpacity onPress={() => { }}>
+          <TouchableOpacity onPress={skiptoPrevious}>
             <IonIcon
               name="play-skip-back-outline"
               size={35}
@@ -222,10 +255,18 @@ const MusicPlayer = () => {
               style={{marginTop: 25}}
             />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => { }}>
-            <IonIcon name="ios-pause-circle" size={75} color="black" />
+          <TouchableOpacity onPress={() => togglePlayback(playbackState)}>
+            <IonIcon
+              name={
+                playbackState === State.Playing
+                  ? 'ios-pause-circle'
+                  : 'ios-play-circle'
+              }
+              size={75}
+              color="black"
+            />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => { }}>
+          <TouchableOpacity onPress={skiptoNext}>
             <IonIcon
               name="play-skip-forward-outline"
               size={35}
@@ -241,7 +282,7 @@ const MusicPlayer = () => {
             <IonIcon name="heart-outline" size={30} color="#777777" />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => { }}>
-            <IonIcon name="repeat" size={30} color="#777777" />
+            <MaterialCommunityIcons name="repeat" size={30} color="#777777" />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => { }}>
             <IonIcon name="share-outline" size={30} color="#777777" />
