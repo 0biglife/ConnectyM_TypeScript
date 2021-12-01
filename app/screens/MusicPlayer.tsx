@@ -17,25 +17,25 @@ import TrackPlayer, {
 
 const songs = [
   {
-    title: 'cover1',
-    artist: 'giriboy',
-    image: require('../assets/artwork/cover1.jpeg'),
+    title: '그땐 어렸으니까',
+    artist: '기리보이',
+    artwork: require('../assets/artwork/cover1.jpeg'),
     url: require('../assets/songs/song1.mp3'),
     id: 1,
     // duration: 311,
   },
   {
-    title: 'cover2',
-    artist: 'Yo Han',
-    image: require('../assets/artwork/cover2.jpeg'),
+    title: 'Home',
+    artist: 'Kid Milli',
+    artwork: require('../assets/artwork/cover2.jpeg'),
     url: require('../assets/songs/song2.mp3'),
     id: 2,
     // duration: 311,
   },
   {
-    title: 'cover3',
-    artist: 'Kid Milli',
-    image: require('../assets/artwork/cover3.jpeg'),
+    title: '라식',
+    artist: '기리보이',
+    artwork: require('../assets/artwork/cover3.jpeg'),
     url: require('../assets/songs/song3.mp3'),
     id: 3,
     // duration: 311,
@@ -79,6 +79,7 @@ const ArtistText = styled.Text`
   font-weight: 200;
   text-align: center;
   color: black;
+  padding-top: 10px;
 `;
 
 const SliderContainer = styled.Slider`
@@ -152,6 +153,24 @@ const MusicPlayer = () => {
   //Track repeat mode control
   const [repeatMode, setRepeatMode] = useState('off');
 
+  //Repeat Mode Additional Control
+  const [trackArtwork, setTrackArtwork] = useState();
+  const [trackArtist, setTrackArtist] = useState();
+  const [trackTitle, setTrackTitle] = useState();
+
+  useTrackPlayerEvents([Event.PlaybackTrackChanged], async event => {
+    if (event.type === Event.PlaybackTrackChanged && event.nextTrack !== null) {
+      const track = await TrackPlayer.getTrack(event.nextTrack);
+      const {title, artwork, artist} = track;
+      // const titles = track.title;
+      // const artworks = track.artwork;
+      // const artists = track.artist;
+      setTrackTitle(title);
+      setTrackArtist(artist);
+      setTrackArtwork(artwork);
+    }
+  });
+
   const repeatIcon = () => {
     if (repeatMode === 'off') {
       return 'repeat-off';
@@ -216,7 +235,7 @@ const MusicPlayer = () => {
           alignItems: 'center',
         }}>
         <ArtworkWrapper>
-          <ArtworkImage source={item.image} />
+          <ArtworkImage source={trackArtwork} />
         </ArtworkWrapper>
       </Animated.View>
     );
@@ -248,8 +267,8 @@ const MusicPlayer = () => {
           />
         </View>
         <View>
-          <TitleText>{songs[songIndex].title}</TitleText>
-          <ArtistText>{songs[songIndex].artist}</ArtistText>
+          <TitleText>{trackTitle}</TitleText>
+          <ArtistText>{trackArtist}</ArtistText>
         </View>
         <View>
           <SliderContainer
