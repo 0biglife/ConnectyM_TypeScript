@@ -125,11 +125,11 @@ const setupPlayer = async () => {
   await TrackPlayer.add(songs);
 };
 
-const togglePlayback = async (playbackState) => {
+const togglePlayback = async (playbackState: State) => {
   const currentTrack = await TrackPlayer.getCurrentTrack();
 
   if (currentTrack !== null) {
-    if (playbackState == State.Paused) {
+    if (playbackState === State.Paused) {
       await TrackPlayer.play();
     } else {
       await TrackPlayer.pause();
@@ -149,7 +149,33 @@ const MusicPlayer = () => {
   const playbackState = usePlaybackState();
   const progress = useProgress();
 
-  const skipTo = async(trackID) => {
+  //Track repeat mode control
+  const [repeatMode, setRepeatMode] = useState('off');
+
+  const repeatIcon = () => {
+    if (repeatMode === 'off') {
+      return 'repeat-off';
+    } else if (repeatMode === 'track') {
+      return 'repeat-once';
+    } else if (repeatMode === 'repeat') {
+      return 'repeat';
+    }
+  };
+
+  const changeRepeatMode = () => {
+    if (repeatMode === 'off') {
+      TrackPlayer.setRepeatMode(RepeatMode.Track);
+      setRepeatMode('track');
+    } else if (repeatMode === 'track') {
+      TrackPlayer.setRepeatMode(RepeatMode.Queue);
+      setRepeatMode('repeat');
+    } else if (repeatMode === 'repeat') {
+      TrackPlayer.setRepeatMode(RepeatMode.Off);
+      setRepeatMode('off');
+    }
+  };
+
+  const skipTo = async (trackID: number) => {
     TrackPlayer.skip(trackID);
   };
 
@@ -233,7 +259,7 @@ const MusicPlayer = () => {
             thumbTintColor="black"
             minimumTrackTintColor="black"
             maximumTrackTintColor="lightgray"
-            onSlidingComplete={async(value) => {
+            onSlidingComplete={async value => {
               await TrackPlayer.seekTo(value);
             }}
           />
@@ -281,8 +307,12 @@ const MusicPlayer = () => {
           <TouchableOpacity onPress={() => { }}>
             <IonIcon name="heart-outline" size={30} color="#777777" />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => { }}>
-            <MaterialCommunityIcons name="repeat" size={30} color="#777777" />
+          <TouchableOpacity onPress={changeRepeatMode}>
+            <MaterialCommunityIcons
+              name={repeatIcon()}
+              size={30}
+              color={repeatMode !== 'off' ? 'black' : '#777777'}
+            />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => { }}>
             <IonIcon name="share-outline" size={30} color="#777777" />
