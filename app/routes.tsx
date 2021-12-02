@@ -8,6 +8,7 @@ import LoginNavigation from './navigation/loginNavigation';
 import SearchNavigator from './navigation/searchNavigation';
 //screens
 import {
+  homeView2,
   homeView,
   searchView,
   mymusicView,
@@ -21,7 +22,7 @@ import IonIcon from 'react-native-vector-icons/Ionicons';
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
-const isLoggedIn = false;
+const isLoggedIn = true;
 
 const AppTabComponent = () => {
   return (
@@ -48,7 +49,7 @@ const AppTabComponent = () => {
         },
         headerTitleAlign: 'center',
       })}>
-      <Tab.Screen name="Home" component={homeView} />
+      <Tab.Screen name="Home" component={homeView2} />
       <Tab.Screen name="Search" component={searchView} />
       <Tab.Screen name="MyMusician" component={mymusicView} />
       <Tab.Screen name="Board" component={boardView} />
