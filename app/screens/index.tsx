@@ -9,6 +9,7 @@ import boardView from './board/boardView';
 import profileView from './profile/profile';
 
 import musicPlayer from './MusicPlayer';
+import PlayerWidget from './PlayerWidget';
 
 export {
   homeView,
@@ -20,4 +21,5 @@ export {
   boardView,
   profileView,
   musicPlayer,
+  PlayerWidget,
 };

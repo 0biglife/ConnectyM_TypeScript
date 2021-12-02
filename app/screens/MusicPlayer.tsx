@@ -4,6 +4,7 @@ import styled from 'styled-components/native';
 
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Slider from '@react-native-community/slider';
 
 import TrackPlayer, {
   Capability,
@@ -14,6 +15,8 @@ import TrackPlayer, {
   useProgress,
   useTrackPlayerEvents,
 } from 'react-native-track-player';
+
+const {width, height} = Dimensions.get('window');
 
 const songs = [
   {
@@ -41,8 +44,6 @@ const songs = [
     // duration: 311,
   },
 ];
-
-const windowWidth = Dimensions.get('window').width;
 
 const SafeAreaViewContainer = styled.SafeAreaView`
   flex: 1;
@@ -123,6 +124,17 @@ const BottomControls = styled.View`
 const setupPlayer = async () => {
   await TrackPlayer.setupPlayer();
 
+  //Widget Setting for Android
+  await TrackPlayer.updateOptions({
+    capabilities: [
+      Capability.Play,
+      Capability.Pause,
+      Capability.SkipToNext,
+      Capability.SkipToPrevious,
+      Capability.Stop,
+    ]
+  })
+
   await TrackPlayer.add(songs);
 };
 
@@ -201,7 +213,7 @@ const MusicPlayer = () => {
   useEffect(() => {
     setupPlayer();
     scrollX.addListener(({value}) => {
-      const index = Math.round(value / windowWidth);
+      const index = Math.round(value / width);
       // console.log('Scroll x', scrollX);
       // console.log('Device Width', windowWidth);
       skipTo(index);
@@ -216,13 +228,13 @@ const MusicPlayer = () => {
 
   const skiptoNext = () => {
     songSlider.current.scrollToOffset({
-      offset: (songIndex + 1) * windowWidth,
+      offset: (songIndex + 1) * width,
     });
   };
 
   const skiptoPrevious = () => {
     songSlider.current.scrollToOffset({
-      offset: (songIndex - 1) * windowWidth,
+      offset: (songIndex - 1) * width,
     });
   };
 
@@ -230,7 +242,7 @@ const MusicPlayer = () => {
     return (
       <Animated.View
         style={{
-          width: windowWidth,
+          width: width,
           justifyContent: 'center',
           alignItems: 'center',
         }}>
@@ -244,7 +256,7 @@ const MusicPlayer = () => {
   return (
     <SafeAreaViewContainer>
       <MainContainer>
-        <View style={{width: windowWidth}}>
+        <View style={{width: width}}>
           <Animated.FlatList
             ref={songSlider}
             data={songs}

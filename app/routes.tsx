@@ -7,12 +7,19 @@ import HomeNavigator from './navigation/homeNavigation';
 import LoginNavigation from './navigation/loginNavigation';
 import SearchNavigator from './navigation/searchNavigation';
 //screens
-import {mymusicView, boardView, profileView} from './screens';
-import MusicPlayer from './screens/MusicPlayer';
+import {
+  homeView,
+  searchView,
+  mymusicView,
+  boardView,
+  profileView,
+  loginView,
+} from './screens';
+// import MusicPlayer from './screens/MusicPlayer';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 
 const Tab = createBottomTabNavigator();
-const AuthStack = createStackNavigator();
+const Stack = createStackNavigator();
 
 const isLoggedIn = false;
 
@@ -41,8 +48,8 @@ const AppTabComponent = () => {
         },
         headerTitleAlign: 'center',
       })}>
-      <Tab.Screen name="Home" component={HomeNavigator} />
-      <Tab.Screen name="Search" component={SearchNavigator} />
+      <Tab.Screen name="Home" component={homeView} />
+      <Tab.Screen name="Search" component={searchView} />
       <Tab.Screen name="MyMusician" component={mymusicView} />
       <Tab.Screen name="Board" component={boardView} />
       <Tab.Screen name="Profile" component={profileView} />
@@ -53,23 +60,23 @@ const AppTabComponent = () => {
 export const RootNavigator = () => {
   // return <HomeNavigator />;
   return (
-    <AuthStack.Navigator screenOptions={{headerShown: false}}>
+    <Stack.Navigator screenOptions={{headerShown: false}}>
       {isLoggedIn ? (
-        <AuthStack.Screen name="Main" component={AppTabComponent} />
+        <Stack.Screen name="Main" component={AppTabComponent} />
       ) : (
         <>
-          <AuthStack.Screen
+          <Stack.Screen
             name="Login"
-            component={MusicPlayer}
+            component={loginView}
             options={{headerShown: false}}
           />
-          <AuthStack.Screen
+          <Stack.Screen
             name="AppTabComponent"
             component={AppTabComponent}
             options={{gestureEnabled: false}}
           />
         </>
       )}
-    </AuthStack.Navigator>
+    </Stack.Navigator>
   );
 };
