@@ -1,31 +1,55 @@
+//User Interface
 export interface User {
-  id: number,
-  name: string,
-  username: string,
-  email: string,
-  address: Address,
-  phone: string,
-  website: string,
-  company: Company,
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+  address: Address;
+  phone: string;
+  website: string;
+  company: Company;
 }
 
 export interface Address {
-  street: string,
-  suite: string,
-  city: string,
-  zipcode: string,
-  geo: Geolocation,
+  street: string;
+  suite: string;
+  city: string;
+  zipcode: string;
+  geo: Geolocation;
 }
 
 export interface Geolocation {
-  lat: string,
-  lng: string,
+  lat: string;
+  lng: string;
 }
 
 export interface Company {
-  name: string,
-  catchPhrase: string,
-  bs: string,
+  name: string;
+  catchPhrase: string;
+  bs: string;
+}
+
+//NewsAPI Interface
+export interface inputData {
+  status: string;
+  roralResults: number;
+  articles: Articles;
+}
+
+export interface Articles {
+  source: Source;
+  author: string;
+  title: string;
+  description: string;
+  url: string;
+  urlToImage: string;
+  publishedAt: string;
+  content: string;
+}
+
+export interface Source {
+  id: string;
+  name: string;
 }
 
 // [

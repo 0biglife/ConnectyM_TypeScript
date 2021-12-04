@@ -8,7 +8,7 @@ import LoginNavigation from './navigation/loginNavigation';
 import SearchNavigator from './navigation/searchNavigation';
 //screens
 import {
-  homeView2,
+  homeViewDataTest,
   homeView,
   searchView,
   mymusicView,
@@ -49,7 +49,7 @@ const AppTabComponent = () => {
         },
         headerTitleAlign: 'center',
       })}>
-      <Tab.Screen name="Home" component={homeView2} />
+      <Tab.Screen name="Home" component={homeViewDataTest} />
       <Tab.Screen name="Search" component={searchView} />
       <Tab.Screen name="MyMusician" component={mymusicView} />
       <Tab.Screen name="Board" component={boardView} />

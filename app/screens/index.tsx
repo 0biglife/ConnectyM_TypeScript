@@ -1,5 +1,5 @@
 import homeView from './home/home';
-import homeView2 from './home/home2';
+import homeViewDataTest from './home/homeViewDataTest';
 
 import loginView from './login/login';
 import signupView from './login/signup';
@@ -13,7 +13,7 @@ import PlayerWidget from './PlayerWidget';
 
 export {
   homeView,
-  homeView2,
+  homeViewDataTest,
   loginView,
   signupView,
   searchView,
