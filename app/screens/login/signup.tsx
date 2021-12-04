@@ -34,7 +34,7 @@ const signupView: React.FC = (props) => {
       />
       <Button
         title="Sign Up"
-        onPress={() => props.navigation.navigate('AppTabComponent')}
+        onPress={() => props.navigation.navigate('BottomTabNavigation')}
       />
     </Container>
   );

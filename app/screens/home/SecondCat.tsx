@@ -1,11 +1,10 @@
 import React from 'react';
 // import {View, Text} from 'react-native';
 import styled from 'styled-components/native';
-import {Button} from '../../components';
 
 const Container = styled.View`
   flex: 1;
-  background-color: white;
+  background-color: gray;
   align-items: center;
   justify-content: center;
 `;
@@ -17,20 +16,12 @@ const Title = styled.Text`
   font-weight: 400;
 `;
 
-const loginView = props => {
+const SecondCatView = () => {
   return (
     <Container>
-      <Title>Login View</Title>
-      <Button
-        title="Sign In"
-        onPress={() => props.navigation.navigate('Signup')}
-      />
-      <Button
-        title="Log In"
-        onPress={() => props.navigation.navigate('BottomTabNavigation')}
-      />
+      <Title>SecondCat View</Title>
     </Container>
   );
 };
 
-export default loginView;
+export default SecondCatView;

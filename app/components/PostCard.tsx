@@ -1,6 +1,9 @@
 import React from 'react';
+import {Dimensions} from 'react-native';
 import styled from 'styled-components/native';
 import IonIcon from 'react-native-vector-icons/Ionicons';
+
+// const Width = Dimensions.get('window').width;
 
 const Card = styled.View`
   background-color: #ebebeb; //#f8f8f8;
@@ -13,6 +16,7 @@ const UserInfo = styled.View`
   flex-direction: row;
   justify-content: flex-start;
   padding: 15px;
+  /* width: 100%; */
 `;
 
 const UserImg = styled.Image`
@@ -90,21 +94,21 @@ const PostCard = ({item}) => {
       <UserInfo>
         <UserImg
           source={{
-            uri: 'https://upload.wikimedia.org/wikipedia/commons/9/9d/2017_%EA%B8%B0%EB%A6%AC%EB%B3%B4%EC%9D%B4.jpg',
+            uri: item.thumbnailUrl,
           }}
         />
         <UserInfoText>
-          <UserName>{item.name}</UserName>
-          <PostTime>{item.address.zipcode}</PostTime>
+          <UserName>{item.id}</UserName>
+          <PostTime>{item.id}</PostTime>
         </UserInfoText>
       </UserInfo>
       <PostImg
         source={{
-          uri: item.urlToImage,
+          uri: item.url,
         }}
       />
       {/* {item.urlToImage == '' ? <Divider /> : <PostImg source={item.urlToImage} />} */}
-      <PostText>{item.company.catchPhrase}</PostText>
+      <PostText>{item.title}</PostText>
       <InteractionWrapper>
         <Interaction active>
           <IonIcon name="heart" size={22} color="#2e64e5" />

@@ -1,5 +1,7 @@
 import homeView from './home/home';
 import homeViewDataTest from './home/homeViewDataTest';
+import SecondCatView from './home/SecondCat';
+import ThirdCatView from './home/ThirdCat';
 
 import loginView from './login/login';
 import signupView from './login/signup';
@@ -14,6 +16,8 @@ import PlayerWidget from './PlayerWidget';
 export {
   homeView,
   homeViewDataTest,
+  SecondCatView,
+  ThirdCatView,
   loginView,
   signupView,
   searchView,

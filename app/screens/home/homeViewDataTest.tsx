@@ -4,15 +4,7 @@ import styled from 'styled-components/native';
 import PostCard from '../../components/PostCard';
 
 import axios, {AxiosResponse} from 'axios';
-import {User} from '../../common/axios/interfaces';
-
-const Container = styled.View`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-  background-color: #fff;
-  padding: 10px;
-`;
+import {User, Photo} from '../../common/axios/interfaces';
 
 const TText = styled.Text`
   justify-content: center;
@@ -23,13 +15,13 @@ const TText = styled.Text`
 `;
 
 const homeViewDataTest = () => {
-  const [posts, setPosts] = useState<User[]>([]);
+  const [posts, setPosts] = useState<Photo[]>([]);
   console.clear();
   console.log('User Data:', posts);
 
   useEffect(() => {
     axios
-      .get<User[]>('https://jsonplaceholder.typicode.com/users')
+      .get<Photo[]>('https://jsonplaceholder.typicode.com/photos')
       .then((response: AxiosResponse) => {
         console.log('Response Data: ', response.data);
         setPosts(response.data);
@@ -52,17 +44,15 @@ const homeViewDataTest = () => {
   }, []);
 
   return (
-    <Container>
-      <View>
-        {/* <TText>{posts[3].name}</TText> */}
-        <FlatList
-          data={posts}
-          renderItem={({item}) => <PostCard item={item} />}
-          keyExtractor={item => item.name}
-          showsVerticalScrollIndicator={false}
-        />
-      </View>
-    </Container>
+    <View>
+      {/* <TText>{posts[3].name}</TText> */}
+      <FlatList
+        data={posts}
+        renderItem={({item}) => <PostCard item={item} />}
+        keyExtractor={item => item.id}
+        showsVerticalScrollIndicator={false}
+      />
+    </View>
   );
 };
 

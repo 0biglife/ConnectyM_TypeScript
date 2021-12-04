@@ -3,6 +3,9 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
+//top navigator
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+
 import HomeNavigator from './navigation/homeNavigation';
 import LoginNavigation from './navigation/loginNavigation';
 import SearchNavigator from './navigation/searchNavigation';
@@ -10,6 +13,8 @@ import SearchNavigator from './navigation/searchNavigation';
 import {
   homeViewDataTest,
   homeView,
+  SecondCatView,
+  ThirdCatView,
   searchView,
   mymusicView,
   boardView,
@@ -21,10 +26,21 @@ import IonIcon from 'react-native-vector-icons/Ionicons';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
+const HomeTopTab = createMaterialTopTabNavigator();
 
 const isLoggedIn = true;
 
-const AppTabComponent = () => {
+const HomeTabNavigation = () => {
+  return (
+    <HomeTopTab.Navigator>
+      <HomeTopTab.Screen name="홈1" component={homeViewDataTest} />
+      <HomeTopTab.Screen name="홈2" component={SecondCatView} />
+      <HomeTopTab.Screen name="홈3" component={ThirdCatView} />
+    </HomeTopTab.Navigator>
+  );
+};
+
+const BottomTabNavigation = () => {
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -49,7 +65,7 @@ const AppTabComponent = () => {
         },
         headerTitleAlign: 'center',
       })}>
-      <Tab.Screen name="Home" component={homeViewDataTest} />
+      <Tab.Screen name="Home" component={HomeTabNavigation} />
       <Tab.Screen name="Search" component={searchView} />
       <Tab.Screen name="MyMusician" component={mymusicView} />
       <Tab.Screen name="Board" component={boardView} />
@@ -63,7 +79,7 @@ export const RootNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
       {isLoggedIn ? (
-        <Stack.Screen name="Main" component={AppTabComponent} />
+        <Stack.Screen name="Main" component={BottomTabNavigation} />
       ) : (
         <>
           <Stack.Screen
@@ -72,8 +88,8 @@ export const RootNavigator = () => {
             options={{headerShown: false}}
           />
           <Stack.Screen
-            name="AppTabComponent"
-            component={AppTabComponent}
+            name="BottomTabNavigation"
+            component={BottomTabNavigation}
             options={{gestureEnabled: false}}
           />
         </>

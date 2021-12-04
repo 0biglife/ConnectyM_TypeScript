@@ -1,3 +1,12 @@
+//Photos
+export interface Photo {
+  albumId: number;
+  id: number;
+  title: string;
+  url: string;
+  thumbnailUrl: string;
+}
+
 //User Interface
 export interface User {
   id: number;
@@ -20,7 +29,7 @@ export interface Address {
 
 export interface Geolocation {
   lat: string;
-  lng: string;
+  lng: number;
 }
 
 export interface Company {
