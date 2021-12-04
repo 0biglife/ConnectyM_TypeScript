@@ -31,7 +31,7 @@ const homeViewDataTest = () => {
     axios
       .get<User[]>('https://jsonplaceholder.typicode.com/users')
       .then((response: AxiosResponse) => {
-        console.log(response.data);
+        console.log('Response Data: ', response.data);
         setPosts(response.data);
       });
     // const fetchPosts = async () => {
@@ -54,13 +54,13 @@ const homeViewDataTest = () => {
   return (
     <Container>
       <View>
-        <TText>{posts}</TText>
-        {/* <FlatList
+        {/* <TText>{posts[3].name}</TText> */}
+        <FlatList
           data={posts}
           renderItem={({item}) => <PostCard item={item} />}
-          keyExtractor={item => item.articles}
+          keyExtractor={item => item.name}
           showsVerticalScrollIndicator={false}
-        /> */}
+        />
       </View>
     </Container>
   );

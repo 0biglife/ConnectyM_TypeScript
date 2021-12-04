@@ -94,8 +94,8 @@ const PostCard = ({item}) => {
           }}
         />
         <UserInfoText>
-          <UserName>{item.author}</UserName>
-          <PostTime>{item.publishedAt}</PostTime>
+          <UserName>{item.name}</UserName>
+          <PostTime>{item.address.zipcode}</PostTime>
         </UserInfoText>
       </UserInfo>
       <PostImg
@@ -104,7 +104,7 @@ const PostCard = ({item}) => {
         }}
       />
       {/* {item.urlToImage == '' ? <Divider /> : <PostImg source={item.urlToImage} />} */}
-      <PostText>{item.description}</PostText>
+      <PostText>{item.company.catchPhrase}</PostText>
       <InteractionWrapper>
         <Interaction active>
           <IonIcon name="heart" size={22} color="#2e64e5" />
