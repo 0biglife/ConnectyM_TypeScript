@@ -12,7 +12,7 @@ import SearchNavigator from './navigation/searchNavigation';
 //screens
 import {
   homeViewDataTest,
-  homeView,
+  // homeView,
   SecondCatView,
   ThirdCatView,
   searchView,
@@ -24,7 +24,7 @@ import {
 // import MusicPlayer from './screens/MusicPlayer';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 
-const Tab = createBottomTabNavigator();
+const MainTab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 const HomeTopTab = createMaterialTopTabNavigator();
 
@@ -32,17 +32,31 @@ const isLoggedIn = true;
 
 const HomeTabNavigation = () => {
   return (
-    <HomeTopTab.Navigator>
-      <HomeTopTab.Screen name="홈1" component={homeViewDataTest} />
-      <HomeTopTab.Screen name="홈2" component={SecondCatView} />
-      <HomeTopTab.Screen name="홈3" component={ThirdCatView} />
+    <HomeTopTab.Navigator
+      screenOptions={{
+        tabBarActiveTintColor: 'black',
+        tabBarInactiveTintColor: 'gray',
+        tabBarStyle: {
+          height: 40,
+        },
+        tabBarIndicatorStyle: {
+          borderBottomWidth: 1,
+        },
+        tabBarLabelStyle: {
+          fontSize: 14,
+          margin: -10,
+        },
+      }}>
+      <HomeTopTab.Screen name="팔로잉" component={homeViewDataTest} />
+      <HomeTopTab.Screen name="인기아티스트" component={SecondCatView} />
+      <HomeTopTab.Screen name="게시판" component={ThirdCatView} />
     </HomeTopTab.Navigator>
   );
 };
 
 const BottomTabNavigation = () => {
   return (
-    <Tab.Navigator
+    <MainTab.Navigator
       initialRouteName="Home"
       screenOptions={({route}) => ({
         tabBarIcon: ({focused, color, size}) => {
@@ -65,12 +79,12 @@ const BottomTabNavigation = () => {
         },
         headerTitleAlign: 'center',
       })}>
-      <Tab.Screen name="Home" component={HomeTabNavigation} />
-      <Tab.Screen name="Search" component={searchView} />
-      <Tab.Screen name="MyMusician" component={mymusicView} />
-      <Tab.Screen name="Board" component={boardView} />
-      <Tab.Screen name="Profile" component={profileView} />
-    </Tab.Navigator>
+      <MainTab.Screen name="Home" component={HomeTabNavigation} />
+      <MainTab.Screen name="Search" component={searchView} />
+      <MainTab.Screen name="MyMusician" component={mymusicView} />
+      <MainTab.Screen name="Board" component={boardView} />
+      <MainTab.Screen name="Profile" component={profileView} />
+    </MainTab.Navigator>
   );
 };
 
