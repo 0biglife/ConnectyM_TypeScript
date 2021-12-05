@@ -17,13 +17,13 @@ const TText = styled.Text`
 const homeViewDataTest = () => {
   const [posts, setPosts] = useState<Photo[]>([]);
   console.clear();
-  console.log('User Data:', posts);
+  // console.log('User Data:', posts);
 
   useEffect(() => {
     axios
       .get<Photo[]>('https://jsonplaceholder.typicode.com/photos')
       .then((response: AxiosResponse) => {
-        console.log('Response Data: ', response.data);
+        // console.log('Response Data: ', response.data);
         setPosts(response.data);
       });
     // const fetchPosts = async () => {
