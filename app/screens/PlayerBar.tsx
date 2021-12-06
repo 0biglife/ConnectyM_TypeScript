@@ -80,7 +80,8 @@ const ArtistText = styled.Text`
 const PlayerBar = () => {
   return (
     <MainContainer>
-      <ArtworkImage source={{uri: songs[0].artwork}} />
+      {/* source 안에 uri: <- 이거 지우니까 사진이 뜨고 Android 에러 사라짐 */}
+      <ArtworkImage source={songs[0].artwork} /> 
       <RightContainer>
         <NameContainer>
           <TitleText>{songs[0].title}</TitleText>
