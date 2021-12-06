@@ -4,7 +4,7 @@ import styled from 'styled-components/native';
 
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Slider from '@react-native-community/slider';
+// import Slider from '@react-native-community/slider';
 
 import TrackPlayer, {
   Capability,

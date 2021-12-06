@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import {Alert, Button, TouchableOpacity} from 'react-native';
 
 //Navigator
 import {createStackNavigator} from '@react-navigation/stack';
@@ -89,7 +90,24 @@ const BottomTabNavigation = () => {
           },
           headerTitleAlign: 'center',
         })}>
-        <MainTab.Screen name="Home" component={HomeTabNavigation} />
+        <MainTab.Screen
+          name="Home"
+          component={HomeTabNavigation}
+          options={{
+            headerRight: () => {
+              return (
+                <TouchableOpacity onPress={() => Alert.alert('test')}>
+                  <IonIcon
+                    name="add"
+                    size={24}
+                    color="black"
+                    style={{marginRight: 8}}
+                  />
+                </TouchableOpacity>
+              );
+            },
+          }}
+        />
         <MainTab.Screen name="Search" component={searchView} />
         <MainTab.Screen name="MyMusician" component={mymusicView} />
         <MainTab.Screen name="Board" component={boardView} />
