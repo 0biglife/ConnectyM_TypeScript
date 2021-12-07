@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components/native';
-import {Alert, Button, TouchableOpacity} from 'react-native';
+import {Alert, TouchableOpacity} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
 
 //Navigator
 import {createStackNavigator} from '@react-navigation/stack';
@@ -19,7 +20,7 @@ import {
   profileView,
   loginView,
   PlayerBar,
-} from './screens';
+} from '../screens';
 
 // import MusicPlayer from './screens/MusicPlayer';
 import IonIcon from 'react-native-vector-icons/Ionicons';
@@ -96,7 +97,7 @@ const BottomTabNavigation = () => {
           options={{
             headerRight: () => {
               return (
-                <TouchableOpacity onPress={() => Alert.alert('test')}>
+                <TouchableOpacity onPress={() => Alert.alert('Test')}>
                   <IonIcon
                     name="add"
                     size={24}
@@ -120,26 +121,30 @@ const BottomTabNavigation = () => {
   );
 };
 
-export const RootNavigator = () => {
+export const RootNavigation = () => {
   // return <HomeNavigator />;
   return (
-    <Stack.Navigator screenOptions={{headerShown: false}}>
-      {isLoggedIn ? (
-        <Stack.Screen name="Main" component={BottomTabNavigation} />
-      ) : (
-        <>
-          <Stack.Screen
-            name="Login"
-            component={loginView}
-            options={{headerShown: false}}
-          />
-          <Stack.Screen
-            name="BottomTabNavigation"
-            component={BottomTabNavigation}
-            options={{gestureEnabled: false}}
-          />
-        </>
-      )}
-    </Stack.Navigator>
+    <>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{headerShown: false}}>
+          {isLoggedIn ? (
+            <Stack.Screen name="Main" component={BottomTabNavigation} />
+          ) : (
+            <>
+              <Stack.Screen
+                name="Login"
+                component={loginView}
+                options={{headerShown: false}}
+              />
+              <Stack.Screen
+                name="BottomTabNavigation"
+                component={BottomTabNavigation}
+                options={{gestureEnabled: false}}
+              />
+            </>
+          )}
+        </Stack.Navigator>
+      </NavigationContainer>
+    </>
   );
 };

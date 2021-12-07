@@ -1,4 +1,5 @@
 import Input from './Input';
 import Button from './Button';
+import PostCard from './PostCard';
 
-export {Input, Button};
+export {Input, Button, PostCard};

@@ -49,12 +49,14 @@ const ArtworkImage = styled.Image`
 const RightContainer = styled.View`
   flex: 1;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
 `;
 
 const NameContainer = styled.View`
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
+  margin-left: 30px;
+  /* justify-content: center; */
 `;
 
 const ButtonContainer = styled.View`
@@ -68,30 +70,31 @@ const TitleText = styled.Text`
   color: black;
   font-size: 14px;
   font-weight: bold;
-  margin-left: 10px;
+  /* margin-left: 10px; */
 `;
 
 const ArtistText = styled.Text`
   color: black;
   font-size: 14px;
-  margin-left: 4px;
+  /* margin-left: 4px; */
+  margin-top: 4px;
 `;
 
 const PlayerBar = () => {
   return (
     <MainContainer>
       {/* source 안에 uri: <- 이거 지우니까 사진이 뜨고 Android 에러 사라짐 */}
-      <ArtworkImage source={songs[0].artwork} /> 
+      <ArtworkImage source={songs[0].artwork} />
       <RightContainer>
         <NameContainer>
           <TitleText>{songs[0].title}</TitleText>
           <ArtistText>{songs[0].artist}</ArtistText>
         </NameContainer>
-        <ButtonContainer>
-          <IonIcon name="heart" size={28} color="black" />
-          <IonIcon name="ios-play-sharp" size={28} color="black" />
-        </ButtonContainer>
       </RightContainer>
+      <ButtonContainer>
+        <IonIcon name="heart" size={28} color="black" />
+        <IonIcon name="ios-play-sharp" size={28} color="black" />
+      </ButtonContainer>
     </MainContainer>
   );
 };
