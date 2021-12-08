@@ -15,6 +15,24 @@ export type rootStackParamList = {
   //
 };
 
+/*
+export type rootStackParamList = {
+  //
+};export type rootStackParamList = {
+  //
+};export type rootStackParamList = {
+  //
+};export type rootStackParamList = {
+  //
+};export type rootStackParamList = {
+  //
+};export type rootStackParamList = {
+  //
+};export type rootStackParamList = {
+  //
+};
+*/
+
 const Stack = createStackNavigator();
 
 const isLoggedIn = true;
