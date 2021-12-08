@@ -15,12 +15,18 @@ const SafeContainer = styled.SafeAreaView`
 const homeViewDataTest = () => {
   const [posts, setPosts] = useState<Photo[]>([]);
   console.clear();
-
+//
+  //
+  //
+  //
+  //
+  //
+  
   useEffect(() => {
     axios
       .get<Photo[]>(
         'https://dff60062-abae-46c2-8562-f30dd0e10b89.mock.pstmn.io/list',
-      )
+      )//djdfsddfldjsk 
       .then((response: AxiosResponse) => {
         setPosts(response.data);
       });
