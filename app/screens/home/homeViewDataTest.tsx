@@ -18,7 +18,9 @@ const homeViewDataTest = () => {
 
   useEffect(() => {
     axios
-      .get<Photo[]>('https://jsonplaceholder.typicode.com/photos')
+      .get<Photo[]>(
+        'https://dff60062-abae-46c2-8562-f30dd0e10b89.mock.pstmn.io/list',
+      )
       .then((response: AxiosResponse) => {
         setPosts(response.data);
       });
