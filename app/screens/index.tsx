@@ -3,6 +3,7 @@ import homeViewDataTest from './Home/homeViewDataTest';
 import SecondCatView from './Home/SecondCat';
 import ThirdCatView from './Home/ThirdCat';
 import modalScreen from './Home/modalScreen';
+import postView from './Home/postView';
 
 import loginView from './Auth/login';
 import signupView from './Auth/signup';
@@ -28,4 +29,5 @@ export {
   musicPlayer,
   PlayerBar,
   modalScreen,
+  postView,
 };

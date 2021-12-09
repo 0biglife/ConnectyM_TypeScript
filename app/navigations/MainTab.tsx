@@ -5,6 +5,7 @@ import {TouchableOpacity, Modal, Alert} from 'react-native';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import {createStackNavigator} from '@react-navigation/stack';
 
 //screens
 import {
@@ -16,6 +17,7 @@ import {
   boardView,
   profileView,
   PlayerBar,
+  postView,
 } from '../screens';
 
 const PlayerContainer = styled.View`
@@ -70,9 +72,19 @@ const ModalButtonText = styled.Text`
   font-size: 16px;
 `;
 
+const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator();
 // const Stack = createStackNavigator();
 const HomeTopTab = createMaterialTopTabNavigator();
+
+const HomeStack = () => {
+  return (
+    <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Screen component={HomeTabNavigation} name="HomeTab" />
+      <Stack.Screen component={postView} name="PostView" />
+    </Stack.Navigator>
+  );
+};
 
 const HomeTabNavigation = () => {
   return (
@@ -128,7 +140,7 @@ const MainTab = () => {
         })}>
         <Tab.Screen
           name="Home"
-          component={HomeTabNavigation}
+          component={HomeStack}
           options={{
             headerRight: () => {
               return (
@@ -152,6 +164,13 @@ const MainTab = () => {
                           <ModalTitle>
                             <ModalTitleText>게시글 업로드</ModalTitleText>
                           </ModalTitle>
+                          <ModalButton
+                            onPress={() => {
+                              Alert.alert('Post');
+                              setOpen(false);
+                            }}>
+                            <ModalButtonText>Post</ModalButtonText>
+                          </ModalButton>
                           <ModalButton
                             onPress={() => {
                               Alert.alert('Camera');
