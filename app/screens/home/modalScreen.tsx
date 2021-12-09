@@ -1,8 +1,14 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
-import {Alert, Modal, Text} from 'react-native';
+import {Modal, Text} from 'react-native';
 
-const SafeContainer = styled.SafeAreaView`
+interface Props {
+  oepn: boolean;
+  setOpen: any;
+  // body: any;
+}
+
+const MainContainer = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
@@ -17,24 +23,21 @@ const StyledModalContainer = styled.View`
   border-radius: 10px;
 `;
 
-const modalScreen = () => {
-  const [modalVisible, setModalVisible] = useState<boolean>(false);
-
+const modalScreen = (props: Props) => {
   return (
-    <SafeContainer>
+    <MainContainer>
       <Modal
-        visible={modalVisible}
+        visible={props.oepn}
         animationType="fade"
         transparent={true}
         onRequestClose={() => {
-          Alert.alert('Modal closed');
-          setModalVisible(!modalVisible);
+          props.setOpen(false);
         }}>
         <StyledModalContainer>
           <Text>test</Text>
         </StyledModalContainer>
       </Modal>
-    </SafeContainer>
+    </MainContainer>
   );
 };
 
