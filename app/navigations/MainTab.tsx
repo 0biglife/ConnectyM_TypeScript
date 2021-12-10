@@ -7,6 +7,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {createStackNavigator} from '@react-navigation/stack';
 
+// import {navigate} from './rootNavigation';
 //screens
 import {
   homeViewDataTest,
@@ -18,7 +19,9 @@ import {
   profileView,
   PlayerBar,
   postView,
+  modalScreen,
 } from '../screens';
+import {navigation, navigationRef} from './rootNavigation';
 
 const PlayerContainer = styled.View`
   /* width: 100%;
@@ -81,7 +84,7 @@ const HomeStack = () => {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen component={HomeTabNavigation} name="HomeTab" />
-      <Stack.Screen component={postView} name="PostView" />
+      <Stack.Screen component={postView} name="postView" />
     </Stack.Navigator>
   );
 };
@@ -201,7 +204,7 @@ const MainTab = () => {
             },
           }}
         />
-        <Tab.Screen name="Search" component={searchView} />
+        <Tab.Screen name="Search" component={postView} />
         <Tab.Screen name="MyMusician" component={mymusicView} />
         <Tab.Screen name="Board" component={boardView} />
         <Tab.Screen name="Profile" component={profileView} />
