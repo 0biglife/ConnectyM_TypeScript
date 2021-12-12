@@ -21,7 +21,7 @@ import {
   postView,
   modalScreen,
 } from '../screens';
-import {navigation, navigationRef} from './rootNavigation';
+import {navigation} from './rootNavigation';
 
 const PlayerContainer = styled.View`
   /* width: 100%;
@@ -113,7 +113,7 @@ const HomeTabNavigation = () => {
   );
 };
 
-const MainTab = () => {
+const MainTab = ({navigation}) => {
   const [open, setOpen] = useState<boolean>(false);
 
   return (
@@ -169,22 +169,22 @@ const MainTab = () => {
                           </ModalTitle>
                           <ModalButton
                             onPress={() => {
-                              Alert.alert('Post');
                               setOpen(false);
+                              navigation.navigate('postView');
                             }}>
                             <ModalButtonText>Post</ModalButtonText>
                           </ModalButton>
                           <ModalButton
                             onPress={() => {
-                              Alert.alert('Camera');
                               setOpen(false);
+                              navigation.navigate('postView');
                             }}>
                             <ModalButtonText>Camera</ModalButtonText>
                           </ModalButton>
                           <ModalButton
                             onPress={() => {
-                              Alert.alert('Album');
                               setOpen(false);
+                              navigation.navigate('postView');
                             }}>
                             <ModalButtonText>Album</ModalButtonText>
                           </ModalButton>
@@ -204,7 +204,7 @@ const MainTab = () => {
             },
           }}
         />
-        <Tab.Screen name="Search" component={postView} />
+        <Tab.Screen name="Search" component={searchView} />
         <Tab.Screen name="MyMusician" component={mymusicView} />
         <Tab.Screen name="Board" component={boardView} />
         <Tab.Screen name="Profile" component={profileView} />

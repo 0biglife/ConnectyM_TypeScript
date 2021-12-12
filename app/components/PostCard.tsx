@@ -1,5 +1,4 @@
 import React from 'react';
-import {Dimensions} from 'react-native';
 import styled from 'styled-components/native';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 
@@ -77,13 +76,6 @@ const InteractionText = styled.Text`
   color: ${props => (props.active ? '#2e64e5' : '#333')};
   margin-top: 5px;
   margin-left: 5px;
-`;
-
-const Divider = styled.View`
-  border-bottom-color: #333;
-  border-bottom-width: 1px;
-  width: 92%;
-  align-self: center;
 `;
 
 const PostCard = ({item}) => {
