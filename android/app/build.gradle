@@ -137,6 +137,8 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        //유툽 보류 코드
+        // vectorDrawables.useSupportLibrary = true
     }
     splits {
         abi {
