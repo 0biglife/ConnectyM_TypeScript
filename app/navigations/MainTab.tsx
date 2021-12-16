@@ -116,33 +116,33 @@ const HomeTabNavigation = () => {
 
 const MainTab = ({ navigation }) => {
   const [open, setOpen] = useState<boolean>(false);
-  const [imageCamera, setImageCamera] = useState(null);
+  // const [imageCamera, setImageCamera] = useState(null);
 
-  const openCamera = () => {
-    const option = {
-      mediaType: 'photo',
-      quality: 1,
-    };
-    launchCamera(option, res => {
-      if (res.didCancel) {
-        console.log('User Cancelled Image Picker');
-      } else if (res.errorCode) {
-        console.log(res.errorMessage);
-      } else {
-        const data = res.assets;
-        setImageCamera(data);
-        console.log(data);
-      }
-    });
-  };
+  // const openCamera = () => {
+  //   const option = {
+  //     mediaType: 'photo',
+  //     quality: 1,
+  //   };
+  //   launchCamera(option, res => {
+  //     if (res.didCancel) {
+  //       console.log('User Cancelled Image Picker');
+  //     } else if (res.errorCode) {
+  //       console.log(res.errorMessage);
+  //     } else {
+  //       const data = res.assets;
+  //       setImageCamera(data);
+  //       console.log(data);
+  //     }
+  //   });
+  // };
 
-  const openLibrary = () => {
-    //
-  };
+  // const openLibrary = () => {
+  //   //
+  // };
 
-  const headerButtonOption = () => {
+  // const headerButtonOption = () => {
     
-  };
+  // };
 
   return (
     <>
@@ -205,14 +205,14 @@ const MainTab = ({ navigation }) => {
                           <ModalButton
                             onPress={() => {
                               setOpen(false);
-                              openCamera();
+                              // openCamera();
                             }}>
                             <ModalButtonText>Camera</ModalButtonText>
                           </ModalButton>
                           <ModalButton
                             onPress={() => {
                               setOpen(false);
-                              openLibrary();
+                              // openLibrary();
                             }}>
                             <ModalButtonText>Album</ModalButtonText>
                           </ModalButton>
@@ -271,14 +271,14 @@ const MainTab = ({ navigation }) => {
                           <ModalButton
                             onPress={() => {
                               setOpen(false);
-                              openCamera();
+                              // openCamera();
                             }}>
                             <ModalButtonText>Camera</ModalButtonText>
                           </ModalButton>
                           <ModalButton
                             onPress={() => {
                               setOpen(false);
-                              openLibrary();
+                              // openLibrary();
                             }}>
                             <ModalButtonText>Album</ModalButtonText>
                           </ModalButton>

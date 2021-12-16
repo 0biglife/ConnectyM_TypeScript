@@ -17,18 +17,12 @@ const Title = styled.Text`
   font-weight: 400;
 `;
 
-const loginView = props => {
+const loginView = ({navigation}) => {
   return (
     <Container>
       <Title>Login View</Title>
-      <Button
-        title="Sign In"
-        onPress={() => props.navigation.navigate('Signup')}
-      />
-      <Button
-        title="Log In"
-        onPress={() => props.navigation.navigate('BottomTabNavigation')}
-      />
+      <Button title="Sign In" onPress={() => navigation.navigate('Signup')} />
+      <Button title="Log In" onPress={() => navigation.navigate('MainTab')} />
     </Container>
   );
 };

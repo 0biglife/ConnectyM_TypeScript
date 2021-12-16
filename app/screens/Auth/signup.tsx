@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 // import {View, Text} from 'react-native';
 import styled from 'styled-components/native';
-import {Input, Button} from '../../components';
+import { Input, Button } from '../../components';
+import MainTab from '../../navigations/MainTab';
 
 const Container = styled.View`
   flex: 1;
@@ -34,7 +35,7 @@ const signupView: React.FC = (props) => {
       />
       <Button
         title="Sign Up"
-        onPress={() => props.navigation.navigate('BottomTabNavigation')}
+        onPress={() => props.navigation.navigate(MainTab)}
       />
     </Container>
   );
