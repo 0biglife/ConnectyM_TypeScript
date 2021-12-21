@@ -13,7 +13,7 @@ export type AuthStackParamList = {
 };
 
 const Stack = createStackNavigator<AuthStackParamList>();
-
+//
 const AuthStack = () => {
   const navigationOptions: StackNavigationOptions = {
     headerShown: false,
