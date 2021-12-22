@@ -9,9 +9,15 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import {RootNavigation} from './navigations';
+import {ThemeProvider} from 'styled-components';
+import {dark, light} from './styles/theme';
 
 const App = () => {
-  return <RootNavigation />;
+  return (
+    <ThemeProvider theme={dark}>
+      <RootNavigation />
+    </ThemeProvider>
+  )
 };
 
 export default App;
