@@ -10,6 +10,7 @@ const SafeContainer = styled.SafeAreaView`
   flex: 1;
   justify-content: center;
   align-items: center;
+  background-color: ${props => props.theme.color.bg};
 `;
 
 const homeViewDataTest = () => {

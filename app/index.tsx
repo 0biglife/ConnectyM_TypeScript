@@ -13,8 +13,9 @@ import {ThemeProvider} from 'styled-components';
 import {dark, light} from './styles/theme';
 
 const App = () => {
+  const theme: string = 'dark';
   return (
-    <ThemeProvider theme={dark}>
+    <ThemeProvider theme={theme === 'dark' ? dark : light}>
       <RootNavigation />
     </ThemeProvider>
   )
