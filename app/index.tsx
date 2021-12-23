@@ -13,12 +13,12 @@ import {ThemeProvider} from 'styled-components';
 import {dark, light} from './styles/theme';
 
 const App = () => {
-  const theme: string = 'dark';
+  const theme: string = 'light';
   return (
     <ThemeProvider theme={theme === 'dark' ? dark : light}>
       <RootNavigation />
     </ThemeProvider>
-  )
+  );
 };
 
 export default App;

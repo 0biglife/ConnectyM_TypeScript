@@ -7,6 +7,8 @@ declare module 'styled-components/native' {
       white: string;
       gray: string;
       bg: string;
+      button: string;
+      buttonText: string;
     };
   }
 }

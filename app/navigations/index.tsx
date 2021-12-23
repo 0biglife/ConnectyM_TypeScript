@@ -1,5 +1,6 @@
-import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import React, {useContext} from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { ThemeContext } from 'styled-components';
 
 //Navigator
 import {
@@ -10,6 +11,7 @@ import {
 //View Module Stacks
 import AuthStack from './AuthStack';
 import MainTab from './MainTab';
+import { isPropertySignature } from 'typescript';
 
 export type rootStackParamList = {
   //
@@ -17,11 +19,16 @@ export type rootStackParamList = {
 
 const Stack = createStackNavigator();
 
-const isLoggedIn = true;
+const isLoggedIn = false;
 
 export const RootNavigation = () => {
+  const themeContext = useContext(ThemeContext);
+
   const navigationOptions: StackNavigationOptions = {
     headerShown: false,
+    headerStyle: {
+      backgroundColor: '#323232',
+    },
   };
   return (
     <NavigationContainer>

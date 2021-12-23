@@ -6,6 +6,8 @@ const dark: DefaultTheme = {
     white: 'white',
     gray: 'gray',
     bg: 'black',
+    button: 'white',
+    buttonText: 'black',
   },
 };
 
@@ -16,6 +18,7 @@ const light: DefaultTheme = {
     white: 'white',
     gray: 'gray',
     bg: 'white',
+    buttonText: 'white',
   },
 };
 

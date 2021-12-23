@@ -11,10 +11,11 @@ const Container = styled.TouchableOpacity`
   border-radius: 8px;
   margin: 10px;
   width: 100px;
+  background-color: ${props => props.theme.color.button};
 `;
 
 const ButtonText = styled.Text`
-  color: #fff;
+  color: ${props => props.theme.color.buttonText};
 `;
 
 interface Props {

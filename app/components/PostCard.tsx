@@ -7,7 +7,9 @@ import IonIcon from 'react-native-vector-icons/Ionicons';
 const Card = styled.View`
   /* background-color: #ebebeb; //#f8f8f8; */
   background-color: ${props => props.theme.color.bg};
-  width: 100%;
+  /* width: 380px; */
+  /* max-width: 100%; */
+  min-width: 100%;
   margin-bottom: 10px;
   border-radius: 10px;
 `;
@@ -29,6 +31,7 @@ const UserName = styled.Text`
   font-size: 14px;
   font-weight: bold;
   padding-right: 40px;
+  /* color: ${props => props.theme.color.white}; */
   /* font-family: ; */
 `;
 
