@@ -17,7 +17,8 @@ const light: DefaultTheme = {
     main: '#00f2ab',
     white: 'white',
     gray: 'gray',
-    bg: 'white',
+    bg: 'black',
+    button: 'black',
     buttonText: 'white',
   },
 };
