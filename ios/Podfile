@@ -12,6 +12,10 @@ target 'ConnectyM_TS' do
     :hermes_enabled => false
   )
   
+  # pod 'Firebase/Analytics'
+  # pod 'Firebase/Auth'
+  # pod 'Firebase/Firestore'
+
   target 'ConnectyM_TSTests' do
     inherit! :complete
     # Pods for testing
