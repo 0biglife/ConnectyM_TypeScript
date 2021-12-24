@@ -26,12 +26,11 @@ const loginView = ({navigation}) => {
   const [user, setUser] = useState({});
   useEffect(() => {
     GoogleSignin.configure({
-      iosClientId:
+      webClientId:
         '21966285335-pd59r4mk54v02nd8v5k2kem3gt1th3fl.apps.googleusercontent.com',
-      //reverse : com.googleusercontent.apps.21966285335-pd59r4mk54v02nd8v5k2kem3gt1th3fl
-      // iosClientId:
-      //   '21966285335-0r4fqc0aoe84encol860j1q7l95mnt1o.apps.googleusercontent.com',
-      offlineAccess: false,
+      iosClientId:
+        '21966285335-0r4fqc0aoe84encol860j1q7l95mnt1o.apps.googleusercontent.com',
+      offlineAccess: true,
       forceCodeForRefreshToken: true,
     });
     isSignedIn();
