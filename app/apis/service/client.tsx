@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axios, {AxiosInstance} from 'axios';
 
-const apiClient = axios.create({
+const apiClient: AxiosInstance = axios.create({
   headers: {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type',

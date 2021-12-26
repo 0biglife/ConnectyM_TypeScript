@@ -7,6 +7,7 @@ import {
   GoogleSigninButton,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
+import { Alert } from 'react-native';
 
 const Container = styled.View`
   flex: 1;

@@ -4,7 +4,7 @@ import {FlatList} from 'react-native';
 import PostCard from '../../components/PostCard';
 
 import apiClient from '../../apis/service/client';
-import {Photo} from '../../utils/axios/model/data';
+import {Photo} from '../../apis/model/data';
 import {AxiosResponse} from 'axios';
 
 const SafeContainer = styled.SafeAreaView`
