@@ -42,6 +42,7 @@ const loginView = ({navigation}) => {
       const userInfo = await GoogleSignin.signIn();
       console.log('due_______', userInfo);
       setUser(userInfo);
+      console.log('here is wher post should be !');
     } catch (error) {
       console.log('MESSAGE', error.message);
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {

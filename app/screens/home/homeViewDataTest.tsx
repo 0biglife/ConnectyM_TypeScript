@@ -3,8 +3,9 @@ import styled from 'styled-components/native';
 import {FlatList} from 'react-native';
 import PostCard from '../../components/PostCard';
 
-import axios, {AxiosResponse} from 'axios';
+import apiClient from '../../apis/service/client';
 import {Photo} from '../../utils/axios/model/data';
+import {AxiosResponse} from 'axios';
 
 const SafeContainer = styled.SafeAreaView`
   flex: 1;
@@ -17,13 +18,9 @@ const homeViewDataTest = () => {
   const [posts, setPosts] = useState<Photo[]>([]);
   console.clear();
   useEffect(() => {
-    axios
-      .get<Photo[]>(
-        'https://dff60062-abae-46c2-8562-f30dd0e10b89.mock.pstmn.io/get',
-      )
-      .then((response: AxiosResponse) => {
-        setPosts(response.data);
-      });
+    apiClient.get<Photo[]>('/photos').then((response: AxiosResponse) => {
+      setPosts(response.data);
+    });
   }, []);
 
   return (
