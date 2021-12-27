@@ -7,7 +7,7 @@ import {
   GoogleSigninButton,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
-import { Alert } from 'react-native';
+import {Alert} from 'react-native';
 
 const Container = styled.View`
   flex: 1;
@@ -41,9 +41,12 @@ const loginView = ({navigation}) => {
     try {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
+      const accessToken = (await GoogleSignin.getTokens()).accessToken;
+      // const refreshToken = (await GoogleSignin.getTokens()).idToken;
       console.log('due_______', userInfo);
       setUser(userInfo);
-      console.log('here is wher post should be !');
+      console.log('Access-Token_____ : ', accessToken);
+      // console.log('Refresh-Token_____ : ', refreshToken);
     } catch (error) {
       console.log('MESSAGE', error.message);
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
@@ -75,7 +78,7 @@ const loginView = ({navigation}) => {
         Alert.alert('User has not signed in yet!');
         console.log('User has not signed in yet!');
       } else {
-        Alert.alert('Something went wrong');
+        //Alert.alert('Something went wrong');
         console.log('Something went wrong');
       }
     }

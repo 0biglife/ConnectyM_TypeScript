@@ -23,7 +23,6 @@ import {
 } from '../screens';
 
 import MusicPlayer from '../components/MusicPlayer';
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 
 const PlayerContainer = styled.View`
   /* width: 100%;
@@ -115,7 +114,7 @@ const HomeTabNavigation = () => {
   );
 };
 
-const MainTab = ({ navigation }) => {
+const MainTab = ({navigation}) => {
   const [open, setOpen] = useState<boolean>(false);
   // const [imageCamera, setImageCamera] = useState(null);
 
@@ -235,7 +234,7 @@ const MainTab = ({ navigation }) => {
         />
         <Tab.Screen name="Search" component={searchView} />
         <Tab.Screen name="MyMusician" component={mymusicView} />
-        <Tab.Screen name="Board" component={MusicPlayer} />
+        <Tab.Screen name="Board" component={boardView} />
         <Tab.Screen
           name="Profile"
           component={profileView}
