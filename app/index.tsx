@@ -8,7 +8,11 @@
 
 import 'react-native-gesture-handler';
 import React from 'react';
-import {RootNavigation} from './navigations';
+import { RootNavigation } from './navigations';
+//Redux
+
+
+//theme
 import {ThemeProvider} from 'styled-components';
 import {dark, light} from './styles/theme';
 
