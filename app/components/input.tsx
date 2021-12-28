@@ -23,6 +23,7 @@ const Input: React.FC<Props> = props => {
   return (
     <Container>
       <CustomInput
+        {...props}
         placeholder={props.placeholder}
         secureTextEntry={props.secureTextEntry || false}
         onChangeText={props.onChangeText}
