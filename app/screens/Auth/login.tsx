@@ -1,13 +1,15 @@
 import React, {useState, useEffect} from 'react';
-// import {View, Text} from 'react-native';
+import {Alert} from 'react-native';
 import styled from 'styled-components/native';
 import {Button} from '../../components';
+//Social Login
 import {
   GoogleSignin,
   GoogleSigninButton,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
-import {Alert} from 'react-native';
+//Token Control
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Container = styled.View`
   flex: 1;
@@ -37,16 +39,32 @@ const loginView = ({navigation}) => {
     isSignedIn();
   }, []);
 
+  const storeData = async (value: string) => {
+    try {
+      await AsyncStorage.setItem('GoogleAccessToken', value);
+      console.log('token saved successfully');
+    } catch (e) {
+      console.log('token saved error : Asynce Storage');
+    }
+  };
+
   const signIn = async () => {
     try {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
       const accessToken = (await GoogleSignin.getTokens()).accessToken;
-      // const refreshToken = (await GoogleSignin.getTokens()).idToken;
+      //google auth
       console.log('due_______', userInfo);
+      console.log('Google Access Token : ', accessToken);
       setUser(userInfo);
-      console.log('Access-Token_____ : ', accessToken);
-      // console.log('Refresh-Token_____ : ', refreshToken);
+      //token setting
+      storeData(accessToken);
+      //token getItem
+      AsyncStorage.getItem('GoogleAccessToken').then(res =>
+        console.log('Storage Token : ', res),
+      );
+      //Move to MainTabView
+      navigation.navigate('MainTab');
     } catch (error) {
       console.log('MESSAGE', error.message);
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
