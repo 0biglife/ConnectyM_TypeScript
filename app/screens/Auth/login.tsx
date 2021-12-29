@@ -116,7 +116,6 @@ const loginView = ({navigation}) => {
     <Container>
       <Title>Login View</Title>
       <Button title="Sign In" onPress={() => navigation.navigate('Signup')} />
-      <Button title="Log In" onPress={() => navigation.navigate('MainTab')} />
       <GoogleSigninButton
         style={{width: 192, height: 48}}
         size={GoogleSigninButton.Size.Wide}

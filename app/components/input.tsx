@@ -1,5 +1,9 @@
 import React from 'react';
 import styled from 'styled-components/native';
+//Redux
+import { connect } from 'react-redux';
+import { signUp } from '../store/actions/user_actions';
+import {AnyAction, bindActionCreators, Dispatch} from 'redux';
 
 const Container = styled.View`
   width: 90%;
@@ -31,5 +35,17 @@ const Input: React.FC<Props> = props => {
     </Container>
   );
 };
+
+// const mapStatetoProps = (state) => {
+//   return {
+//     User: state.User,
+//   };
+// };
+
+// const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => {
+//   return bindActionCreators({signUp}, dispatch);
+// };
+
+// export default connect(mapStatetoProps, mapDispatchToProps)(Input);
 
 export default Input;
