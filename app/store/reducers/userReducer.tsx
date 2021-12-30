@@ -1,7 +1,6 @@
-import { ActionSheetIOS } from 'react-native';
 import {SIGN_UP} from '../types';
 
-export default function (
+export default function userReducer(
   state = {},
   action: {type: string; payload: {email: string; token: string}},
 ) {

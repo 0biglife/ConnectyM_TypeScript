@@ -1,6 +1,5 @@
-import React, {useContext} from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { ThemeContext } from 'styled-components';
+import React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
 
 //Navigator
 import {
@@ -11,7 +10,6 @@ import {
 //View Module Stacks
 import AuthStack from './AuthStack';
 import MainTab from './MainTab';
-import { isPropertySignature } from 'typescript';
 
 export type rootStackParamList = {
   //
@@ -22,8 +20,6 @@ const Stack = createStackNavigator();
 const isLoggedIn = false;
 
 export const RootNavigation = () => {
-  const themeContext = useContext(ThemeContext);
-
   const navigationOptions: StackNavigationOptions = {
     headerShown: false,
     headerStyle: {
@@ -38,7 +34,10 @@ export const RootNavigation = () => {
         {isLoggedIn ? (
           <Stack.Screen name="MainTab" component={MainTab} />
         ) : (
-          <Stack.Screen name="AuthStack" component={AuthStack} />
+          <>
+            <Stack.Screen name="AuthStack" component={AuthStack} />
+            {/* <Stack.Screen name="MainTab" component={MainTab} /> */}
+          </>
         )}
       </Stack.Navigator>
     </NavigationContainer>

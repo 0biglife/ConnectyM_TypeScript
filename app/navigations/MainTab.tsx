@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import {TouchableOpacity, Modal, Alert} from 'react-native';
@@ -22,7 +22,8 @@ import {
   // modalScreen,
 } from '../screens';
 
-import MusicPlayer from '../components/MusicPlayer';
+//components
+import postModal from '../components/postModal';
 
 const PlayerContainer = styled.View`
   /* width: 100%;
@@ -114,36 +115,7 @@ const HomeTabNavigation = () => {
   );
 };
 
-const MainTab = ({navigation}) => {
-  const [open, setOpen] = useState<boolean>(false);
-  // const [imageCamera, setImageCamera] = useState(null);
-
-  // const openCamera = () => {
-  //   const option = {
-  //     mediaType: 'photo',
-  //     quality: 1,
-  //   };
-  //   launchCamera(option, res => {
-  //     if (res.didCancel) {
-  //       console.log('User Cancelled Image Picker');
-  //     } else if (res.errorCode) {
-  //       console.log(res.errorMessage);
-  //     } else {
-  //       const data = res.assets;
-  //       setImageCamera(data);
-  //       console.log(data);
-  //     }
-  //   });
-  // };
-
-  // const openLibrary = () => {
-  //   //
-  // };
-
-  // const headerButtonOption = () => {
-    
-  // };
-
+const MainTab = (navigation) => {
   return (
     <>
       <Tab.Navigator
@@ -174,130 +146,14 @@ const MainTab = ({navigation}) => {
           component={HomeStack}
           options={{
             headerRight: () => {
-              return (
-                <TouchableOpacity onPress={() => setOpen(true)}>
-                  <IonIcon
-                    name="add"
-                    size={24}
-                    color="black"
-                    style={{marginRight: 8}}
-                  />
-                  <Modal
-                    visible={open}
-                    animationType="fade"
-                    transparent={true}
-                    onRequestClose={() => {
-                      setOpen(false);
-                    }}>
-                    <ModalWrapper>
-                      <ModalContainer>
-                        <ModalBox>
-                          <ModalTitle>
-                            <ModalTitleText>게시글 업로드</ModalTitleText>
-                          </ModalTitle>
-                          <ModalButton
-                            onPress={() => {
-                              setOpen(false);
-                              navigation.navigate('postView');
-                            }}>
-                            <ModalButtonText>Post</ModalButtonText>
-                          </ModalButton>
-                          <ModalButton
-                            onPress={() => {
-                              setOpen(false);
-                              // openCamera();
-                            }}>
-                            <ModalButtonText>Camera</ModalButtonText>
-                          </ModalButton>
-                          <ModalButton
-                            onPress={() => {
-                              setOpen(false);
-                              // openLibrary();
-                            }}>
-                            <ModalButtonText>Album</ModalButtonText>
-                          </ModalButton>
-                          <ModalButton
-                            onPress={() => {
-                              Alert.alert('Music');
-                              setOpen(false);
-                            }}>
-                            <ModalButtonText>Music</ModalButtonText>
-                          </ModalButton>
-                        </ModalBox>
-                      </ModalContainer>
-                    </ModalWrapper>
-                  </Modal>
-                </TouchableOpacity>
-              );
+              return postModal(navigation);
             },
           }}
         />
         <Tab.Screen name="Search" component={searchView} />
         <Tab.Screen name="MyMusician" component={mymusicView} />
         <Tab.Screen name="Board" component={boardView} />
-        <Tab.Screen
-          name="Profile"
-          component={profileView}
-          options={{
-            headerRight: () => {
-              return (
-                <TouchableOpacity onPress={() => setOpen(true)}>
-                  <IonIcon
-                    name="add"
-                    size={24}
-                    color="black"
-                    style={{marginRight: 8}}
-                  />
-                  <Modal
-                    visible={open}
-                    animationType="fade"
-                    transparent={true}
-                    onRequestClose={() => {
-                      setOpen(false);
-                    }}>
-                    <ModalWrapper>
-                      <ModalContainer>
-                        <ModalBox>
-                          <ModalTitle>
-                            <ModalTitleText>게시글 업로드</ModalTitleText>
-                          </ModalTitle>
-                          <ModalButton
-                            onPress={() => {
-                              setOpen(false);
-                              navigation.navigate('postView');
-                            }}>
-                            <ModalButtonText>Post</ModalButtonText>
-                          </ModalButton>
-                          <ModalButton
-                            onPress={() => {
-                              setOpen(false);
-                              // openCamera();
-                            }}>
-                            <ModalButtonText>Camera</ModalButtonText>
-                          </ModalButton>
-                          <ModalButton
-                            onPress={() => {
-                              setOpen(false);
-                              // openLibrary();
-                            }}>
-                            <ModalButtonText>Album</ModalButtonText>
-                          </ModalButton>
-                          <ModalButton
-                            onPress={() => {
-                              Alert.alert('Music');
-                              setOpen(false);
-                            }}>
-                            <ModalButtonText>Music</ModalButtonText>
-                          </ModalButton>
-                        </ModalBox>
-                      </ModalContainer>
-                    </ModalWrapper>
-                  </Modal>
-                </TouchableOpacity>
-              );
-            },
-          }}
-        />
+        <Tab.Screen name="Profile" component={profileView} />
       </Tab.Navigator>
       <PlayerContainer>
         <PlayerBar />
