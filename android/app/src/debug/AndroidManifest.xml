@@ -3,6 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <!-- to access the camera -->
+    <uses-permission android:name="android.permission.CAMERA"/> 
+    <!-- to read and write storage -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/></
 
     <application
         android:usesCleartextTraffic="true"

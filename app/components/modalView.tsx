@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components/native';
 import Modal from 'react-native-modal';
+import * as ImagePicker from 'react-native-image-picker';
 
 interface Props {
   navigation: any;
@@ -49,7 +50,42 @@ const ModalButtonText = styled.Text`
 `;
 
 const ModalView = (props: Props) => {
-  // const [modalVisible, setmodalVisible] = useState<boolean>(false);
+  const [pickerResponse, setPickerResponse] = useState(null);
+
+  const onCameraPress = () => {
+    const options: ImagePicker.CameraOptions = {
+      saveToPhotos: true,
+      mediaType: 'photo',
+      cameraType: 'front',
+    };
+    ImagePicker.launchCamera(options, response => {
+      if (response.assets) {
+        console.log('due____camera_____:', response.assets);
+        // setPickerResponse(response.assets);
+      } else {
+        console.log('rn-image-picker camera error');
+      }
+    });
+  };
+
+  const onImageLibraryPress = () => {
+    const options: ImagePicker.ImageLibraryOptions = {
+      selectionLimit: 1,
+      mediaType: 'photo',
+      includeBase64: false,
+    };
+    ImagePicker.launchImageLibrary(options, response => {
+      if (response.assets) {
+        console.log('due____library____:', response.assets);
+        // setPickerResponse(response.assets);
+      } else {
+        console.log('rn-image-picker library error');
+      }
+    });
+  };
+
+  // const uri = pickerResponse?.assets && pickerResponse.assets[0].uri;
+
   return (
     <SafeAreaView>
       <Modal
@@ -60,10 +96,10 @@ const ModalView = (props: Props) => {
           <ModalTitle>
             <ModalTitleText>게시글 추가</ModalTitleText>
           </ModalTitle>
-          <ModalButton>
+          <ModalButton onPress={onCameraPress}>
             <ModalButtonText>카메라</ModalButtonText>
           </ModalButton>
-          <ModalButton>
+          <ModalButton onPress={onImageLibraryPress}>
             <ModalButtonText>앨범</ModalButtonText>
           </ModalButton>
           <ModalButton>
@@ -72,18 +108,6 @@ const ModalView = (props: Props) => {
         </ModalContainer>
       </Modal>
     </SafeAreaView>
-    // <SafeAreaView>
-    //   <Modal
-    //     isVisible={props.open}
-    //     useNativeDriver={true}
-    //     hideModalContentWhileAnimating={true}
-    //     style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}
-    //   >
-    //     <ModalContainer>
-    //       <ModalText>hi</ModalText>
-    //     </ModalContainer>
-    //   </Modal>
-    // </SafeAreaView>
   );
 };
 

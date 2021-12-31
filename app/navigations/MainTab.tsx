@@ -35,49 +35,7 @@ const PlayerContainer = styled.View`
   height: 50; */
 `;
 
-// const ModalWrapper = styled.TouchableOpacity`
-//   flex: 1;
-// `;
-
-// const ModalContainer = styled.View`
-//   flex: 1;
-//   justify-content: center;
-//   align-items: center;
-//   background-color: 'rgba(0,0,0,0.2)';
-// `;
-
-// const ModalBox = styled.View`
-//   flex-direction: column;
-//   align-items: center;
-//   width: 70%;
-//   height: 200px;
-//   background-color: white;
-//   border-radius: 10px;
-// `;
-
-// const ModalTitle = styled.View`
-//   flex: 1;
-//   width: 70%;
-//   justify-content: center;
-// `;
-
-// const ModalTitleText = styled.Text`
-//   align-self: center;
-//   font-size: 15px;
-// `;
-
-// const ModalButton = styled.TouchableOpacity`
-//   flex: 1;
-//   width: 70%;
-//   justify-content: center;
-// `;
-
-// const ModalButtonText = styled.Text`
-//   align-self: center;
-//   font-size: 16px;
-// `;
-
-const Stack = createStackNavigator()
+const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 // const Stack = createStackNavigator();
 const HomeTopTab = createMaterialTopTabNavigator();
@@ -101,7 +59,7 @@ const HomeTabNavigation = () => {
           height: 40,
         },
         tabBarIndicatorStyle: {
-          borderBottomWidth: 1,
+          // borderWidth: 1,
         },
         tabBarLabelStyle: {
           fontSize: 14,
