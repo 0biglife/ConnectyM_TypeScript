@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components/native';
-// import {TouchableOpacity} from 'react-native';
 import Modal from 'react-native-modal';
 
 interface Props {
@@ -16,17 +15,37 @@ const SafeAreaView = styled.SafeAreaView`
 `;
 
 const ModalContainer = styled.View`
-  /* flex-direction: column;
-  align-items: center;
-  width: 320px;
-  height: 220px; */
   flex: 1;
-  background-color: red;
-  /* border-radius: 10px; */
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  width: 220px;
+  max-height: 200px;
+  background-color: white;
+  border-radius: 10px;
 `;
 
-const ModalText = styled.Text`
-  color: red;
+const ModalTitle = styled.View`
+  flex: 1;
+  width: 70%;
+  justify-content: center;
+`;
+
+const ModalTitleText = styled.Text`
+  align-self: center;
+  font-size: 15px;
+  font-weight: 800;
+`;
+
+const ModalButton = styled.TouchableOpacity`
+  flex: 1;
+  width: 70%;
+  justify-content: center;
+`;
+
+const ModalButtonText = styled.Text`
+  align-self: center;
+  font-size: 16px;
 `;
 
 const ModalView = (props: Props) => {
@@ -38,7 +57,18 @@ const ModalView = (props: Props) => {
         hideModalContentWhileAnimating={true}
         onBackdropPress={() => props.setModalVisible(false)}>
         <ModalContainer>
-          <ModalText>modal view testing;</ModalText>
+          <ModalTitle>
+            <ModalTitleText>게시글 추가</ModalTitleText>
+          </ModalTitle>
+          <ModalButton>
+            <ModalButtonText>카메라</ModalButtonText>
+          </ModalButton>
+          <ModalButton>
+            <ModalButtonText>앨범</ModalButtonText>
+          </ModalButton>
+          <ModalButton>
+            <ModalButtonText>음악</ModalButtonText>
+          </ModalButton>
         </ModalContainer>
       </Modal>
     </SafeAreaView>
