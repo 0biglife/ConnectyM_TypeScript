@@ -1,103 +1,60 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
-import IonIcon from 'react-native-vector-icons/Ionicons';
-import {Alert, TouchableOpacity} from 'react-native';
+// import {TouchableOpacity} from 'react-native';
 import Modal from 'react-native-modal';
 
-const ModalWrapper = styled.TouchableOpacity`
+interface Props {
+  navigation: any;
+  modalVisible: boolean;
+  setModalVisible: any;
+}
+
+const SafeAreaView = styled.SafeAreaView`
   flex: 1;
+  justify-content: center;
+  align-items: center;
 `;
 
 const ModalContainer = styled.View`
-  flex: 1;
-  justify-content: center;
+  /* flex-direction: column;
   align-items: center;
-  background-color: 'rgba(0,0,0,0.2)';
-`;
-
-const ModalBox = styled.View`
-  flex-direction: column;
-  align-items: center;
-  width: 70%;
-  height: 200px;
-  background-color: white;
-  border-radius: 10px;
-`;
-
-const ModalTitle = styled.View`
+  width: 320px;
+  height: 220px; */
   flex: 1;
-  width: 70%;
-  justify-content: center;
+  background-color: red;
+  /* border-radius: 10px; */
 `;
 
-const ModalTitleText = styled.Text`
-  align-self: center;
-  font-size: 15px;
+const ModalText = styled.Text`
+  color: red;
 `;
 
-const ModalButton = styled.TouchableOpacity`
-  flex: 1;
-  width: 70%;
-  justify-content: center;
-`;
-
-const ModalButtonText = styled.Text`
-  align-self: center;
-  font-size: 16px;
-`;
-
-const modalView = (props) => {
-  const [open, setOpen] = useState<boolean>(false);
+const ModalView = (props: Props) => {
+  // const [modalVisible, setmodalVisible] = useState<boolean>(false);
   return (
-    <TouchableOpacity onPress={() => setOpen(true)}>
-      <IonIcon name="add" size={24} color="black" style={{marginRight: 8}} />
+    <SafeAreaView>
       <Modal
-        visible={open}
-        animationType="fade"
-        transparent={true}
-        onRequestClose={() => {
-          setOpen(false);
-        }}>
-        <ModalWrapper>
-          <ModalContainer>
-            <ModalBox>
-              <ModalTitle>
-                <ModalTitleText>게시글 업로드</ModalTitleText>
-              </ModalTitle>
-              <ModalButton
-                onPress={() => {
-                  setOpen(false);
-                  props.navigation.navigate('postView');
-                }}>
-                <ModalButtonText>Post</ModalButtonText>
-              </ModalButton>
-              <ModalButton
-                onPress={() => {
-                  setOpen(false);
-                  // openCamera();
-                }}>
-                <ModalButtonText>Camera</ModalButtonText>
-              </ModalButton>
-              <ModalButton
-                onPress={() => {
-                  setOpen(false);
-                  // openLibrary();
-                }}>
-                <ModalButtonText>Album</ModalButtonText>
-              </ModalButton>
-              <ModalButton
-                onPress={() => {
-                  Alert.alert('Music');
-                  setOpen(false);
-                }}>
-                <ModalButtonText>Music</ModalButtonText>
-              </ModalButton>
-            </ModalBox>
-          </ModalContainer>
-        </ModalWrapper>
+        isVisible={props.modalVisible}
+        hideModalContentWhileAnimating={true}
+        onBackdropPress={() => props.setModalVisible(false)}>
+        <ModalContainer>
+          <ModalText>modal view testing;</ModalText>
+        </ModalContainer>
       </Modal>
-    </TouchableOpacity>
+    </SafeAreaView>
+    // <SafeAreaView>
+    //   <Modal
+    //     isVisible={props.open}
+    //     useNativeDriver={true}
+    //     hideModalContentWhileAnimating={true}
+    //     style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}
+    //   >
+    //     <ModalContainer>
+    //       <ModalText>hi</ModalText>
+    //     </ModalContainer>
+    //   </Modal>
+    // </SafeAreaView>
   );
 };
 
-export default modalView;
+export default ModalView;

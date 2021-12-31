@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components/native';
 import IonIcon from 'react-native-vector-icons/Ionicons';
-import {TouchableOpacity, Modal, Alert} from 'react-native';
+import {TouchableOpacity} from 'react-native';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
@@ -23,7 +23,7 @@ import {
 } from '../screens';
 
 //components
-import postModal from '../components/postModal';
+import {ModalView} from '../components';
 
 const PlayerContainer = styled.View`
   /* width: 100%;
@@ -35,47 +35,47 @@ const PlayerContainer = styled.View`
   height: 50; */
 `;
 
-const ModalWrapper = styled.TouchableOpacity`
-  flex: 1;
-`;
+// const ModalWrapper = styled.TouchableOpacity`
+//   flex: 1;
+// `;
 
-const ModalContainer = styled.View`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-  background-color: 'rgba(0,0,0,0.2)';
-`;
+// const ModalContainer = styled.View`
+//   flex: 1;
+//   justify-content: center;
+//   align-items: center;
+//   background-color: 'rgba(0,0,0,0.2)';
+// `;
 
-const ModalBox = styled.View`
-  flex-direction: column;
-  align-items: center;
-  width: 70%;
-  height: 200px;
-  background-color: white;
-  border-radius: 10px;
-`;
+// const ModalBox = styled.View`
+//   flex-direction: column;
+//   align-items: center;
+//   width: 70%;
+//   height: 200px;
+//   background-color: white;
+//   border-radius: 10px;
+// `;
 
-const ModalTitle = styled.View`
-  flex: 1;
-  width: 70%;
-  justify-content: center;
-`;
+// const ModalTitle = styled.View`
+//   flex: 1;
+//   width: 70%;
+//   justify-content: center;
+// `;
 
-const ModalTitleText = styled.Text`
-  align-self: center;
-  font-size: 15px;
-`;
+// const ModalTitleText = styled.Text`
+//   align-self: center;
+//   font-size: 15px;
+// `;
 
-const ModalButton = styled.TouchableOpacity`
-  flex: 1;
-  width: 70%;
-  justify-content: center;
-`;
+// const ModalButton = styled.TouchableOpacity`
+//   flex: 1;
+//   width: 70%;
+//   justify-content: center;
+// `;
 
-const ModalButtonText = styled.Text`
-  align-self: center;
-  font-size: 16px;
-`;
+// const ModalButtonText = styled.Text`
+//   align-self: center;
+//   font-size: 16px;
+// `;
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator();
@@ -116,6 +116,7 @@ const HomeTabNavigation = () => {
 };
 
 const MainTab = (navigation) => {
+  const [modalVisible, setModalVisible] = useState(false);
   return (
     <>
       <Tab.Navigator
@@ -146,7 +147,21 @@ const MainTab = (navigation) => {
           component={HomeStack}
           options={{
             headerRight: () => {
-              return postModal(navigation);
+              return (
+                <TouchableOpacity onPress={() => setModalVisible(true)}>
+                  <IonIcon
+                    name="add"
+                    size={24}
+                    color="black"
+                    style={{marginRight: 8}}
+                  />
+                  <ModalView
+                    modalVisible={modalVisible}
+                    setModalVisible={setModalVisible}
+                    navigation={navigation}
+                  />
+                </TouchableOpacity>
+              );
             },
           }}
         />
