@@ -11,6 +11,7 @@ import searchView from './search/search';
 import mymusicView from './mymusic/mymusic';
 import boardView from './board/boardView';
 import profileView from './profile/profile';
+import editProfileView from './profile/editProfileView';
 
 import musicPlayer from './MusicPlayer';
 import PlayerBar from './PlayerBar';
@@ -26,6 +27,7 @@ export {
   mymusicView,
   boardView,
   profileView,
+  editProfileView,
   musicPlayer,
   PlayerBar,
   modalScreen,

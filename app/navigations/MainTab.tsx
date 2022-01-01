@@ -19,6 +19,7 @@ import {
   profileView,
   PlayerBar,
   postView,
+  editProfileView,
   // modalScreen,
 } from '../screens';
 
@@ -73,7 +74,33 @@ const HomeTabNavigation = () => {
   );
 };
 
-const MainTab = (navigation) => {
+const ProfileStack = ({navigation}) => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Profile"
+        component={profileView}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="EditProfile"
+        component={editProfileView}
+        options={{
+          headerTitle: 'Edit Profile Test',
+          headerBackTitleVisible: false,
+          headerTitleAlign: 'center',
+          headerStyle: {
+            backgroundColor: '#fff',
+            shadowColor: '#fff',
+            elevation: 0,
+          }
+        }}
+      />
+  </Stack.Navigator>
+  );
+};
+
+const MainTab = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <>
@@ -126,7 +153,7 @@ const MainTab = (navigation) => {
         <Tab.Screen name="Search" component={searchView} />
         <Tab.Screen name="MyMusician" component={mymusicView} />
         <Tab.Screen name="Board" component={boardView} />
-        <Tab.Screen name="Profile" component={profileView} />
+        <Tab.Screen name="Profile" component={ProfileStack} />
       </Tab.Navigator>
       <PlayerContainer>
         <PlayerBar />
