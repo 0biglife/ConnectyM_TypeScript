@@ -18,7 +18,7 @@ const Title = styled.Text`
   font-weight: 400;
 `;
 
-const signupView: React.FC = (props) => {
+const signupView: React.FC = (props: any) => {
   const [name, setName] = useState<string | null>(null);
   const [email, setEmail] = useState<string | null>(null);
   const [password, setPassword] = useState<string | null>(null);

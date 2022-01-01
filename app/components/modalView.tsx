@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 import Modal from 'react-native-modal';
 import * as ImagePicker from 'react-native-image-picker';
@@ -50,13 +50,12 @@ const ModalButtonText = styled.Text`
 `;
 
 const ModalView = (props: Props) => {
-  const [pickerResponse, setPickerResponse] = useState(null);
-
   const onCameraPress = () => {
     const options: ImagePicker.CameraOptions = {
       saveToPhotos: true,
       mediaType: 'photo',
-      cameraType: 'front',
+      cameraType: 'back',
+      includeBase64: true,
     };
     ImagePicker.launchCamera(options, response => {
       if (response.assets) {
