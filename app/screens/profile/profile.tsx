@@ -1,28 +1,25 @@
-import React, {useState} from 'react';
+import React from 'react';
+import {View} from 'react-native';
 import styled from 'styled-components/native';
-//import Paging Views
-import {TabView, SceneMap} from 'react-native-tab-view';
+
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import PostInfo from './PostInfo';
 import PostPhoto from './PostPhoto';
 import PostMusic from './PostMusic';
-import {Dimensions, View} from 'react-native';
-
-const initialLayout = {width: Dimensions.get('window').width};
 
 const SafeAreaContainer = styled.SafeAreaView`
   flex: 1;
   background-color: ${props => props.theme.color.bg};
 `;
 
-// const ProfileHeaderView = styled.View`
-//   height: 100%;
-// `;
-
 const ScrollViewContainer = styled.ScrollView`
   flex: 1;
-  background-color: ${props => props.theme.color.bg};
-  padding: 20px;
+`;
+
+const PaddingView = styled.View`
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
 `;
 
 const ProfileImage = styled.Image`
@@ -60,7 +57,6 @@ const UserInfoSubTitle = styled.Text`
 `;
 
 const InfoContainer = styled.View`
-  align-self: flex-start;
   padding: 4px;
 `;
 
@@ -95,61 +91,35 @@ const UserButtonText = styled.Text`
   align-self: center;
 `;
 
-const PostView = () => <PostPhoto />;
-
-const MusicView = () => <PostMusic />;
-
-const InfoView = () => <PostInfo />;
-
 const profileView = ({navigation}) => {
-  const [index, setIndex] = useState<number>(0);
-  const [routes] = useState([
-    {key: 'first', title: 'PostView'},
-    {key: 'second', title: 'MusicView'},
-    {key: 'third', title: 'InfoView'},
-  ]);
-
-  const renderScene = ({route}) => {
-    switch (route.key) {
-      case 'first':
-        return <PostView />;
-      case 'Second':
-        return <MusicView />;
-      case 'Third':
-        return <InfoView />;
-      default:
-        return null;
-    }
-  };
-
   return (
     <SafeAreaContainer>
       <ScrollViewContainer
+        stickyHeaderIndices={[1]}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <View style={{position: 'absolute', paddingTop: 150}}>
+          // justifyContent: 'center',
+          // alignItems: 'center',
+          }
+        }>
+        <PaddingView>
           <UserTopInfoContainer>
-            <ProfileImage
-              source={require('../../assets/artwork/cover1.jpeg')}
-            />
-            <UserInfoWrapper>
-              <UserInfoItem>
-                <UserInfoSubTitle>273</UserInfoSubTitle>
-                <UserInfoTitle>Post</UserInfoTitle>
-              </UserInfoItem>
-              <UserInfoItem>
-                <UserInfoSubTitle>10.2M</UserInfoSubTitle>
-                <UserInfoTitle>Follower</UserInfoTitle>
-              </UserInfoItem>
-              <UserInfoItem>
-                <UserInfoSubTitle>821</UserInfoSubTitle>
-                <UserInfoTitle>Following</UserInfoTitle>
-              </UserInfoItem>
-            </UserInfoWrapper>
-          </UserTopInfoContainer>
+          <ProfileImage source={require('../../assets/artwork/cover1.jpeg')} />
+          <UserInfoWrapper>
+            <UserInfoItem>
+              <UserInfoSubTitle>273</UserInfoSubTitle>
+              <UserInfoTitle>Post</UserInfoTitle>
+            </UserInfoItem>
+            <UserInfoItem>
+              <UserInfoSubTitle>10.2M</UserInfoSubTitle>
+              <UserInfoTitle>Follower</UserInfoTitle>
+            </UserInfoItem>
+            <UserInfoItem>
+              <UserInfoSubTitle>821</UserInfoSubTitle>
+              <UserInfoTitle>Following</UserInfoTitle>
+            </UserInfoItem>
+          </UserInfoWrapper>
+        </UserTopInfoContainer>
           <InfoContainer>
             <UserName>GiriBoy</UserName>
             <UserDescription>JustMusic Company, WYBH</UserDescription>
@@ -165,13 +135,9 @@ const profileView = ({navigation}) => {
               <UserButtonText>Boost</UserButtonText>
             </UserButton>
           </UserButtonWrapper>
-        </View>
-        <TabView
-          navigationState={{index, routes}}
-          renderScene={renderScene}
-          onIndexChange={setIndex}
-          initialLayout={{width: 300}}
-        />
+        </PaddingView>
+        <View style={{backgroundColor: 'red', height: 60, marginTop: 10}} />
+        <View style={{backgroundColor: 'blue', height: 800, marginTop: 10}} />
       </ScrollViewContainer>
     </SafeAreaContainer>
   );
