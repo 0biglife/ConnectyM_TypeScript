@@ -86,9 +86,13 @@ const ProfileStack = ({navigation}) => {
         name="EditProfile"
         component={editProfileView}
         options={{
-          headerTitle: 'Edit Profile Test',
           headerBackTitleVisible: false,
           headerTitleAlign: 'center',
+          headerStyle: {
+            backgroundColor: '#fff',
+            shadowColor: '#fff',
+            elevation: 0,
+          },
         }}
       />
   </Stack.Navigator>
@@ -150,9 +154,9 @@ const MainTab = ({navigation}) => {
         <Tab.Screen name="Board" component={boardView} />
         <Tab.Screen name="Profile" component={ProfileStack} />
       </Tab.Navigator>
-      <PlayerContainer>
+      {/* <PlayerContainer>
         <PlayerBar />
-      </PlayerContainer>
+      </PlayerContainer> */}
     </>
   );
 };

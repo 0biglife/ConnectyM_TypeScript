@@ -1,16 +1,23 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components/native';
-import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 //import Paging Views
+import {TabView, SceneMap} from 'react-native-tab-view';
 import IonIcon from 'react-native-vector-icons/Ionicons';
-import postInfo from './postInfo';
-import postPhoto from './postPhoto';
-import postMusic from './postMusic';
+import PostInfo from './PostInfo';
+import PostPhoto from './PostPhoto';
+import PostMusic from './PostMusic';
+import {Dimensions, View} from 'react-native';
+
+const initialLayout = {width: Dimensions.get('window').width};
 
 const SafeAreaContainer = styled.SafeAreaView`
   flex: 1;
   background-color: ${props => props.theme.color.bg};
 `;
+
+// const ProfileHeaderView = styled.View`
+//   height: 100%;
+// `;
 
 const ScrollViewContainer = styled.ScrollView`
   flex: 1;
@@ -88,57 +95,33 @@ const UserButtonText = styled.Text`
   align-self: center;
 `;
 
-const PagingContainer = styled.View`
-  height: 100px;
-  background-color: red;
-`;
+const PostView = () => <PostPhoto />;
 
-const Paging = createMaterialTopTabNavigator();
+const MusicView = () => <PostMusic />;
 
-const PagingView = () => {
-  return (
-    <Paging.Navigator
-      screenOptions={{
-        swipeEnabled: false,
-        tabBarIndicatorStyle: {
-          backgroundColor: 'clear',
-        },
-      }}>
-      <Paging.Screen
-        name="postPhoto"
-        component={postPhoto}
-        options={{
-          tabBarShowLabel: false,
-          tabBarIcon: () => {
-            return <IonIcon name="square" size={20} color="lightgray" />;
-          },
-        }}
-      />
-      <Paging.Screen
-        name="postInfo"
-        component={postInfo}
-        options={{
-          tabBarShowLabel: false,
-          tabBarIcon: () => {
-            return <IonIcon name="square" size={20} color="lightgray" />;
-          },
-        }}
-      />
-      <Paging.Screen
-        name="postMusic"
-        component={postMusic}
-        options={{
-          tabBarShowLabel: false,
-          tabBarIcon: () => {
-            return <IonIcon name="square" size={20} color="lightgray" />;
-          },
-        }}
-      />
-    </Paging.Navigator>
-  );
-};
+const InfoView = () => <PostInfo />;
 
 const profileView = ({navigation}) => {
+  const [index, setIndex] = useState<number>(0);
+  const [routes] = useState([
+    {key: 'first', title: 'PostView'},
+    {key: 'second', title: 'MusicView'},
+    {key: 'third', title: 'InfoView'},
+  ]);
+
+  const renderScene = ({route}) => {
+    switch (route.key) {
+      case 'first':
+        return <PostView />;
+      case 'Second':
+        return <MusicView />;
+      case 'Third':
+        return <InfoView />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <SafeAreaContainer>
       <ScrollViewContainer
@@ -147,41 +130,48 @@ const profileView = ({navigation}) => {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        {/* <PagingContainer>
-          <PagingView />
-        </PagingContainer> */}
-        <UserTopInfoContainer>
-          <ProfileImage source={require('../../assets/artwork/cover1.jpeg')} />
-          <UserInfoWrapper>
-            <UserInfoItem>
-              <UserInfoSubTitle>273</UserInfoSubTitle>
-              <UserInfoTitle>Post</UserInfoTitle>
-            </UserInfoItem>
-            <UserInfoItem>
-              <UserInfoSubTitle>10.2M</UserInfoSubTitle>
-              <UserInfoTitle>Follower</UserInfoTitle>
-            </UserInfoItem>
-            <UserInfoItem>
-              <UserInfoSubTitle>821</UserInfoSubTitle>
-              <UserInfoTitle>Following</UserInfoTitle>
-            </UserInfoItem>
-          </UserInfoWrapper>
-        </UserTopInfoContainer>
-        <InfoContainer>
-          <UserName>GiriBoy</UserName>
-          <UserDescription>JustMusic Company, WYBH</UserDescription>
-        </InfoContainer>
-        <UserButtonWrapper>
-          <UserButton onPress={() => navigation.navigate('EditProfile')}>
-            <UserButtonText>Edit Profile</UserButtonText>
-          </UserButton>
-          <UserButton>
-            <UserButtonText>Message</UserButtonText>
-          </UserButton>
-          <UserButton>
-            <UserButtonText>Boost</UserButtonText>
-          </UserButton>
-        </UserButtonWrapper>
+        <View style={{position: 'absolute', paddingTop: 150}}>
+          <UserTopInfoContainer>
+            <ProfileImage
+              source={require('../../assets/artwork/cover1.jpeg')}
+            />
+            <UserInfoWrapper>
+              <UserInfoItem>
+                <UserInfoSubTitle>273</UserInfoSubTitle>
+                <UserInfoTitle>Post</UserInfoTitle>
+              </UserInfoItem>
+              <UserInfoItem>
+                <UserInfoSubTitle>10.2M</UserInfoSubTitle>
+                <UserInfoTitle>Follower</UserInfoTitle>
+              </UserInfoItem>
+              <UserInfoItem>
+                <UserInfoSubTitle>821</UserInfoSubTitle>
+                <UserInfoTitle>Following</UserInfoTitle>
+              </UserInfoItem>
+            </UserInfoWrapper>
+          </UserTopInfoContainer>
+          <InfoContainer>
+            <UserName>GiriBoy</UserName>
+            <UserDescription>JustMusic Company, WYBH</UserDescription>
+          </InfoContainer>
+          <UserButtonWrapper>
+            <UserButton onPress={() => navigation.navigate('EditProfile')}>
+              <UserButtonText>Edit Profile</UserButtonText>
+            </UserButton>
+            <UserButton>
+              <UserButtonText>Message</UserButtonText>
+            </UserButton>
+            <UserButton>
+              <UserButtonText>Boost</UserButtonText>
+            </UserButton>
+          </UserButtonWrapper>
+        </View>
+        <TabView
+          navigationState={{index, routes}}
+          renderScene={renderScene}
+          onIndexChange={setIndex}
+          initialLayout={{width: 300}}
+        />
       </ScrollViewContainer>
     </SafeAreaContainer>
   );
