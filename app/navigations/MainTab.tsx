@@ -89,11 +89,6 @@ const ProfileStack = ({navigation}) => {
           headerTitle: 'Edit Profile Test',
           headerBackTitleVisible: false,
           headerTitleAlign: 'center',
-          headerStyle: {
-            backgroundColor: '#fff',
-            shadowColor: '#fff',
-            elevation: 0,
-          }
         }}
       />
   </Stack.Navigator>

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 //import Paging Views
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import postInfo from './postInfo';
@@ -19,17 +19,38 @@ const ScrollViewContainer = styled.ScrollView`
 `;
 
 const ProfileImage = styled.Image`
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   border-radius: 75px;
   align-self: flex-start;
   border-width: 0.5px;
   border-color: lightgray;
 `;
+const UserTopInfoContainer = styled.View`
+  flex-direction: row;
+`;
+const UserInfoWrapper = styled.View`
+  flex: 3;
+  flex-direction: row;
+  justify-content: space-around;
+  align-self: center;
+`;
 
-// const NumInfoContainer = styled.View`
-//   background-color: red;
-// `;
+const UserInfoItem = styled.View`
+  align-items: center;
+  /* justify-content: center; */
+`;
+
+const UserInfoTitle = styled.Text`
+  font-size: 14px;
+  padding-top: 2px;
+  color: darkgray;
+`;
+
+const UserInfoSubTitle = styled.Text`
+  font-weight: 600;
+  font-size: 16px;
+`;
 
 const InfoContainer = styled.View`
   align-self: flex-start;
@@ -42,7 +63,7 @@ const UserName = styled.Text`
   font-weight: 500;
 `;
 
-const Instruction = styled.Text`
+const UserDescription = styled.Text`
   font-size: 14px;
   padding-top: 4px;
 `;
@@ -67,9 +88,57 @@ const UserButtonText = styled.Text`
   align-self: center;
 `;
 
+const PagingContainer = styled.View`
+  height: 100px;
+  background-color: red;
+`;
+
 const Paging = createMaterialTopTabNavigator();
 
-const profileView = () => {
+const PagingView = () => {
+  return (
+    <Paging.Navigator
+      screenOptions={{
+        swipeEnabled: false,
+        tabBarIndicatorStyle: {
+          backgroundColor: 'clear',
+        },
+      }}>
+      <Paging.Screen
+        name="postPhoto"
+        component={postPhoto}
+        options={{
+          tabBarShowLabel: false,
+          tabBarIcon: () => {
+            return <IonIcon name="square" size={20} color="lightgray" />;
+          },
+        }}
+      />
+      <Paging.Screen
+        name="postInfo"
+        component={postInfo}
+        options={{
+          tabBarShowLabel: false,
+          tabBarIcon: () => {
+            return <IonIcon name="square" size={20} color="lightgray" />;
+          },
+        }}
+      />
+      <Paging.Screen
+        name="postMusic"
+        component={postMusic}
+        options={{
+          tabBarShowLabel: false,
+          tabBarIcon: () => {
+            return <IonIcon name="square" size={20} color="lightgray" />;
+          },
+        }}
+      />
+    </Paging.Navigator>
+  );
+};
+
+const profileView = ({navigation}) => {
   return (
     <SafeAreaContainer>
       <ScrollViewContainer
@@ -78,13 +147,32 @@ const profileView = () => {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        <ProfileImage source={require('../../assets/artwork/cover1.jpeg')} />
+        {/* <PagingContainer>
+          <PagingView />
+        </PagingContainer> */}
+        <UserTopInfoContainer>
+          <ProfileImage source={require('../../assets/artwork/cover1.jpeg')} />
+          <UserInfoWrapper>
+            <UserInfoItem>
+              <UserInfoSubTitle>273</UserInfoSubTitle>
+              <UserInfoTitle>Post</UserInfoTitle>
+            </UserInfoItem>
+            <UserInfoItem>
+              <UserInfoSubTitle>10.2M</UserInfoSubTitle>
+              <UserInfoTitle>Follower</UserInfoTitle>
+            </UserInfoItem>
+            <UserInfoItem>
+              <UserInfoSubTitle>821</UserInfoSubTitle>
+              <UserInfoTitle>Following</UserInfoTitle>
+            </UserInfoItem>
+          </UserInfoWrapper>
+        </UserTopInfoContainer>
         <InfoContainer>
           <UserName>GiriBoy</UserName>
-          <Instruction>JustMusic Company, WYBH</Instruction>
+          <UserDescription>JustMusic Company, WYBH</UserDescription>
         </InfoContainer>
         <UserButtonWrapper>
-          <UserButton>
+          <UserButton onPress={() => navigation.navigate('EditProfile')}>
             <UserButtonText>Edit Profile</UserButtonText>
           </UserButton>
           <UserButton>
@@ -95,41 +183,6 @@ const profileView = () => {
           </UserButton>
         </UserButtonWrapper>
       </ScrollViewContainer>
-      <Paging.Navigator
-        screenOptions={{
-          tabBarIndicatorStyle: {
-            backgroundColor: 'clear',
-      }}}>
-        <Paging.Screen
-          name="postPhoto"
-          component={postPhoto}
-          options={{
-            tabBarShowLabel: false,
-            tabBarIcon: () => {
-              return <IonIcon name="square" size={20} color="lightgray" />;
-            },
-          }}
-        />
-        <Paging.Screen
-          name="postInfo"
-          component={postInfo}
-          options={{
-            tabBarShowLabel: false,
-            tabBarIcon: () => {
-              return <IonIcon name="square" size={20} color="lightgray" />;
-            },
-          }}/>
-        <Paging.Screen
-          name="postMusic"
-          component={postMusic}
-          options={{
-            tabBarShowLabel: false,
-            tabBarIcon: () => {
-              return <IonIcon name="square" size={20} color="lightgray" />;
-            },
-          }}
-        />
-      </Paging.Navigator>
     </SafeAreaContainer>
   );
 };
