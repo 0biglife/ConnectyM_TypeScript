@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import styled from 'styled-components/native';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import {TouchableOpacity} from 'react-native';
 
@@ -25,16 +24,6 @@ import {
 
 //components
 import {ModalView} from '../components';
-
-const PlayerContainer = styled.View`
-  /* width: 100%;
-  position: absolute;
-  bottom: 79px;
-  flex-direction: row;
-  justify-content: center;
-  background-color: red;
-  height: 50; */
-`;
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -88,13 +77,7 @@ const ProfileStack = ({navigation}) => {
         name="EditProfile"
         component={editProfileView}
         options={{
-          headerBackTitleVisible: false,
-          headerTitleAlign: 'center',
-          headerStyle: {
-            backgroundColor: '#fff',
-            shadowColor: '#fff',
-            elevation: 0,
-          },
+          headerShown: false,
         }}
       />
     </Stack.Navigator>

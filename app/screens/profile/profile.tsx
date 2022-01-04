@@ -38,10 +38,12 @@ const ProfileImage = styled.Image`
   border-width: 0.5px;
   border-color: lightgray;
 `;
+
 const UserTopInfoContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
 `;
+
 const UserInfoWrapper = styled.View`
   flex: 3;
   flex-direction: row;
@@ -124,6 +126,8 @@ const TabComponent = () => {
     </ProfileTab.Navigator>
   );
 };
+const imageSource = require('../../assets/artwork/cover1.jpeg');
+const profileName = 'Giriboy';
 
 const profileView = () => {
   // const scrollY = useRef(new Animated.Value(0)).current;
@@ -150,9 +154,7 @@ const profileView = () => {
       <>
         <PaddingView>
           <UserTopInfoContainer>
-            <ProfileImage
-              source={require('../../assets/artwork/cover1.jpeg')}
-            />
+            <ProfileImage source={imageSource} />
             <UserInfoWrapper>
               <UserInfoItem>
                 <UserInfoSubTitle>273</UserInfoSubTitle>
@@ -169,7 +171,7 @@ const profileView = () => {
             </UserInfoWrapper>
           </UserTopInfoContainer>
           <InfoContainer>
-            <UserName>GiriBoy</UserName>
+            <UserName>{profileName}</UserName>
             <UserDescription>JustMusic Company, WYBH</UserDescription>
           </InfoContainer>
           <UserButtonWrapper>
