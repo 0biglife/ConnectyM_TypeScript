@@ -14,7 +14,7 @@ const Title = styled.Text`
   font-weight: 400;
 `;
 
-const editProfileView = () => {
+const editProfileView = (route, navigation) => {
   return (
     <SafeAreaContainer>
       <Title> editProfile View </Title>

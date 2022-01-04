@@ -80,7 +80,9 @@ const ProfileStack = ({navigation}) => {
       <Stack.Screen
         name="Profile"
         component={profileView}
-        options={{headerShown: false}}
+        options={{
+          headerShown: false,
+        }}
       />
       <Stack.Screen
         name="EditProfile"
@@ -95,7 +97,7 @@ const ProfileStack = ({navigation}) => {
           },
         }}
       />
-  </Stack.Navigator>
+    </Stack.Navigator>
   );
 };
 
@@ -152,7 +154,29 @@ const MainTab = ({navigation}) => {
         <Tab.Screen name="Search" component={searchView} />
         <Tab.Screen name="MyMusician" component={mymusicView} />
         <Tab.Screen name="Board" component={boardView} />
-        <Tab.Screen name="Profile" component={ProfileStack} />
+        <Tab.Screen
+          name="Profile"
+          component={ProfileStack}
+          options={{
+            headerRight: () => {
+              return (
+                <TouchableOpacity onPress={() => setModalVisible(true)}>
+                  <IonIcon
+                    name="add"
+                    size={24}
+                    color="black"
+                    style={{marginRight: 8}}
+                  />
+                  <ModalView
+                    modalVisible={modalVisible}
+                    setModalVisible={setModalVisible}
+                    navigation={navigation}
+                  />
+                </TouchableOpacity>
+              );
+            },
+          }}
+        />
       </Tab.Navigator>
       {/* <PlayerContainer>
         <PlayerBar />

@@ -1,20 +1,28 @@
-import React from 'react';
-import {View} from 'react-native';
+import React, {useRef} from 'react';
+import {Animated, View} from 'react-native';
 import styled from 'styled-components/native';
+import {SafeAreaProvider, useSafeAreaInsets} from 'react-native-safe-area-context';
+//Paging - Photo / Music / Info
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import Photo from './Photo';
+import Music from './Music';
+import Info from './Info';
+import {useNavigation} from '@react-navigation/native';
+// import Info from './Info';
+// import Photo from './Photo';
+// import Music from './Music';
 
-import IonIcon from 'react-native-vector-icons/Ionicons';
-import PostInfo from './PostInfo';
-import PostPhoto from './PostPhoto';
-import PostMusic from './PostMusic';
-
-const SafeAreaContainer = styled.SafeAreaView`
-  flex: 1;
-  background-color: ${props => props.theme.color.bg};
-`;
+const narrowedHeader = 90;
+const expandedHeader = 35;
 
 const ScrollViewContainer = styled.ScrollView`
   flex: 1;
+  /* margin-top: 90; */
+  /* padding-top: 35; */
+  background-color: lightgray;
 `;
+
+const AnimatedScrollView = Animated.createAnimatedComponent(ScrollViewContainer);
 
 const PaddingView = styled.View`
   padding-top: 10px;
@@ -32,12 +40,14 @@ const ProfileImage = styled.Image`
 `;
 const UserTopInfoContainer = styled.View`
   flex-direction: row;
+  justify-content: space-between;
 `;
 const UserInfoWrapper = styled.View`
   flex: 3;
   flex-direction: row;
   justify-content: space-around;
   align-self: center;
+  padding-left: 10px;
 `;
 
 const UserInfoItem = styled.View`
@@ -91,35 +101,73 @@ const UserButtonText = styled.Text`
   align-self: center;
 `;
 
-const profileView = ({navigation}) => {
+const ProfileTab = createMaterialTopTabNavigator();
+
+const TabComponent = () => {
   return (
-    <SafeAreaContainer>
-      <ScrollViewContainer
+    <ProfileTab.Navigator
+      screenOptions={{
+        // swipeEnabled: true,
+        tabBarActiveTintColor: 'black',
+        tabBarInactiveTintColor: 'gray',
+        tabBarIndicatorStyle: {
+          backgroundColor: 'red',
+        },
+        tabBarLabelStyle: {
+          fontSize: 14,
+          margin: -10,
+        },
+      }}>
+      <ProfileTab.Screen name="Photo" component={Photo} />
+      <ProfileTab.Screen name="Track" component={Music} />
+      <ProfileTab.Screen name="Info" component={Info} />
+    </ProfileTab.Navigator>
+  );
+};
+
+const profileView = () => {
+  // const scrollY = useRef(new Animated.Value(0)).current;
+  const navigation = useNavigation();
+  return (
+    <SafeAreaProvider>
+      {/* <AnimatedScrollView
         stickyHeaderIndices={[1]}
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{
-          // justifyContent: 'center',
-          // alignItems: 'center',
-          }
-        }>
+        onScroll={Animated.event(
+          [
+            {
+              nativeEvent: {
+                contentOffset: {
+                  y: scrollY,
+                },
+              },
+            },
+          ],
+          {
+            useNativeDriver: true,
+          },
+        )}
+        showsVerticalScrollIndicator={false}> */}
+      <>
         <PaddingView>
           <UserTopInfoContainer>
-          <ProfileImage source={require('../../assets/artwork/cover1.jpeg')} />
-          <UserInfoWrapper>
-            <UserInfoItem>
-              <UserInfoSubTitle>273</UserInfoSubTitle>
-              <UserInfoTitle>Post</UserInfoTitle>
-            </UserInfoItem>
-            <UserInfoItem>
-              <UserInfoSubTitle>10.2M</UserInfoSubTitle>
-              <UserInfoTitle>Follower</UserInfoTitle>
-            </UserInfoItem>
-            <UserInfoItem>
-              <UserInfoSubTitle>821</UserInfoSubTitle>
-              <UserInfoTitle>Following</UserInfoTitle>
-            </UserInfoItem>
-          </UserInfoWrapper>
-        </UserTopInfoContainer>
+            <ProfileImage
+              source={require('../../assets/artwork/cover1.jpeg')}
+            />
+            <UserInfoWrapper>
+              <UserInfoItem>
+                <UserInfoSubTitle>273</UserInfoSubTitle>
+                <UserInfoTitle>Post</UserInfoTitle>
+              </UserInfoItem>
+              <UserInfoItem>
+                <UserInfoSubTitle>10.2M</UserInfoSubTitle>
+                <UserInfoTitle>Follower</UserInfoTitle>
+              </UserInfoItem>
+              <UserInfoItem>
+                <UserInfoSubTitle>821</UserInfoSubTitle>
+                <UserInfoTitle>Following</UserInfoTitle>
+              </UserInfoItem>
+            </UserInfoWrapper>
+          </UserTopInfoContainer>
           <InfoContainer>
             <UserName>GiriBoy</UserName>
             <UserDescription>JustMusic Company, WYBH</UserDescription>
@@ -136,10 +184,11 @@ const profileView = ({navigation}) => {
             </UserButton>
           </UserButtonWrapper>
         </PaddingView>
-        <View style={{backgroundColor: 'red', height: 60, marginTop: 10}} />
-        <View style={{backgroundColor: 'blue', height: 800, marginTop: 10}} />
-      </ScrollViewContainer>
-    </SafeAreaContainer>
+        <TabComponent />
+        {/* <View style={{height: 900, backgroundColor: 'red', marginTop: 250}} /> */}
+        {/* </AnimatedScrollView> */}
+      </>
+    </SafeAreaProvider>
   );
 };
 
