@@ -1,8 +1,11 @@
-import React from 'react';
-import IonIcon from 'react-native-vector-icons/Ionicons';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import React, {useState} from 'react';
 import styled from 'styled-components/native';
+import IonIcon from 'react-native-vector-icons/Ionicons';
+
 import {useNavigation} from '@react-navigation/native';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import * as ImagePicker from 'react-native-image-picker';
+import { Modal, View } from 'react-native';
 
 const SafeAreaContainer = styled.SafeAreaView`
   flex: 1;
@@ -27,6 +30,12 @@ const Title = styled.Text`
   font-weight: 600;
 `;
 
+const ImageContainer = styled.View`
+  /* flex: 1; */
+  padding: 20px;
+  align-items: center;
+`;
+
 const ProfileImage = styled.Image`
   width: 120px;
   height: 120px;
@@ -35,6 +44,33 @@ const ProfileImage = styled.Image`
   border-color: lightgray;
   justify-content: center;
   align-self: center;
+`;
+
+const ProfileChangeText = styled.Text`
+  color: #3493d9;
+  padding-top: 10px;
+`;
+
+const InputConWrapper = styled.View`
+  flex-direction: row;
+`;
+
+const InputContainer = styled.View`
+  padding-left: 30px;
+  padding-top: 10px;
+  flex-direction: column;
+`;
+
+const EditTitle = styled.Text`
+  font-size: 16px;
+  padding-top: 10px;
+`;
+
+const EditInput = styled.TextInput`
+  font-size: 16px;
+  border-bottom-width: 1px;
+  border-color: lightgray;
+  padding-top: 10px;
 `;
 
 const editProfileView = () => {
@@ -46,11 +82,44 @@ const editProfileView = () => {
         <TopButtonView>
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <IonIcon name="close-outline" style={{fontSize: 35}} />
-            <Title>Edit Profile</Title>
+          </TouchableOpacity>
+          <Title>Edit Profile</Title>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
             <IonIcon name="checkmark" style={{fontSize: 35}} color="#3493D9" />
           </TouchableOpacity>
         </TopButtonView>
-        {/* <ProfileImage source={require('../../assets/artwork/cover1.jpeg')} /> */}
+        <ImageContainer>
+          <ProfileImage source={require('../../assets/artwork/cover1.jpeg')} />
+          <TouchableOpacity onPress={() => setModalVisible(true)}>
+            <ProfileChangeText>Change profile photo</ProfileChangeText>
+          </TouchableOpacity>
+        </ImageContainer>
+        <View style={{alignSelf: 'flex-start'}}>
+          <InputConWrapper>
+            <InputContainer>
+              <EditTitle>Name</EditTitle>
+              <EditTitle>User Name</EditTitle>
+              <EditTitle>Info</EditTitle>
+            </InputContainer>
+            <InputContainer>
+              <EditInput
+                placeholder="Name"
+                defaultValue="Giriboy"
+                placeholderTextColor="black"
+              />
+              <EditInput
+                placeholder="Name"
+                defaultValue="giriboy"
+                placeholderTextColor="black"
+              />
+              <EditInput
+                placeholder="UserInfo"
+                defaultValue="sjdfkdsjfldldfl"
+                placeholderTextColor="black"
+              />
+            </InputContainer>
+          </InputConWrapper>
+        </View>
       </MainContainer>
     </SafeAreaContainer>
   );
