@@ -1,19 +1,18 @@
-import React, {useRef} from 'react';
-import {Animated, View} from 'react-native';
+import React from 'react';
+import {Animated} from 'react-native';
 import styled from 'styled-components/native';
-import {SafeAreaProvider, useSafeAreaInsets} from 'react-native-safe-area-context';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 //Paging - Photo / Music / Info
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import Photo from './Photo';
 import Music from './Music';
 import Info from './Info';
 import {useNavigation} from '@react-navigation/native';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {ProfileParam} from '../../navigations/ProfileStack';
 // import Info from './Info';
 // import Photo from './Photo';
 // import Music from './Music';
-
-const narrowedHeader = 90;
-const expandedHeader = 35;
 
 const ScrollViewContainer = styled.ScrollView`
   flex: 1;
@@ -22,7 +21,7 @@ const ScrollViewContainer = styled.ScrollView`
   background-color: lightgray;
 `;
 
-const AnimatedScrollView = Animated.createAnimatedComponent(ScrollViewContainer);
+// const AnimatedScrollView = Animated.createAnimatedComponent(ScrollViewContainer);
 
 const PaddingView = styled.View`
   padding-top: 10px;
@@ -131,7 +130,7 @@ const profileName = 'Giriboy';
 
 const profileView = () => {
   // const scrollY = useRef(new Animated.Value(0)).current;
-  const navigation = useNavigation();
+  const navigation = useNavigation<NativeStackNavigationProp>();
   return (
     <SafeAreaProvider>
       {/* <AnimatedScrollView

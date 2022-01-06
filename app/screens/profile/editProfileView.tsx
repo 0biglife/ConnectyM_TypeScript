@@ -4,7 +4,6 @@ import IonIcon from 'react-native-vector-icons/Ionicons';
 
 import {useNavigation} from '@react-navigation/native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import * as ImagePicker from 'react-native-image-picker';
 import { Modal, View } from 'react-native';
 
 const SafeAreaContainer = styled.SafeAreaView`

@@ -3,86 +3,16 @@ import IonIcon from 'react-native-vector-icons/Ionicons';
 import {TouchableOpacity} from 'react-native';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import {createStackNavigator} from '@react-navigation/stack';
-
-// import {navigate} from './rootNavigation';
 //screens
-import {
-  homeViewDataTest,
-  SecondCatView,
-  ThirdCatView,
-  searchView,
-  mymusicView,
-  boardView,
-  profileView,
-  PlayerBar,
-  postView,
-  editProfileView,
-  // modalScreen,
-} from '../screens';
-
+import {searchView, mymusicView, boardView} from '../screens';
+//Navigations
+import ProfileStack from './ProfileStack';
+import HomeStack from './HomeStack';
 //components
 import {ModalView} from '../components';
 
-const Stack = createStackNavigator();
+//create Navigator
 const Tab = createBottomTabNavigator();
-// const Stack = createStackNavigator();
-const HomeTopTab = createMaterialTopTabNavigator();
-
-const HomeStack = () => {
-  return (
-    <Stack.Navigator screenOptions={{headerShown: false}}>
-      <Stack.Screen component={HomeTabNavigation} name="HomeTab" />
-      <Stack.Screen component={postView} name="postView" />
-    </Stack.Navigator>
-  );
-};
-
-const HomeTabNavigation = () => {
-  return (
-    <HomeTopTab.Navigator
-      screenOptions={{
-        tabBarActiveTintColor: 'black',
-        tabBarInactiveTintColor: 'gray',
-        tabBarStyle: {
-          height: 40,
-        },
-        tabBarIndicatorStyle: {
-          // borderWidth: 1,
-        },
-        tabBarLabelStyle: {
-          fontSize: 14,
-          margin: -10,
-        },
-      }}>
-      <HomeTopTab.Screen name="팔로잉" component={homeViewDataTest} />
-      <HomeTopTab.Screen name="인기아티스트" component={SecondCatView} />
-      <HomeTopTab.Screen name="게시판" component={ThirdCatView} />
-    </HomeTopTab.Navigator>
-  );
-};
-
-const ProfileStack = ({navigation}) => {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="Profile"
-        component={profileView}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="EditProfile"
-        component={editProfileView}
-        options={{
-          headerShown: false,
-        }}
-      />
-    </Stack.Navigator>
-  );
-};
 
 const MainTab = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -161,9 +91,6 @@ const MainTab = ({navigation}) => {
           }}
         />
       </Tab.Navigator>
-      {/* <PlayerContainer>
-        <PlayerBar />
-      </PlayerContainer> */}
     </>
   );
 };
