@@ -2,14 +2,11 @@ import React, {useState} from 'react';
 import styled from 'styled-components/native';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import { Modal, View } from 'react-native';
-
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RouteProp, useNavigation} from '@react-navigation/native';
-import {ProfileParam} from '../../navigations/ProfileStack';
-import { Props } from 'react-native-tab-view/lib/typescript/TabBarItem';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { ProfileParamsList } from '../../navigations/Types';
+import {Modal, View} from 'react-native';
+import {ModalView} from '../../components';
+import {RouteProp} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {ProfileParamsList} from '../../navigations/Types';
 
 const SafeAreaContainer = styled.SafeAreaView`
   flex: 1;
@@ -48,6 +45,10 @@ const ProfileImage = styled.Image`
   border-color: lightgray;
   justify-content: center;
   align-self: center;
+`;
+
+const ModalContainer = styled.View`
+  width: 100%;
 `;
 
 const ProfileChangeText = styled.Text`
@@ -102,7 +103,13 @@ const editProfileView: React.FC<EditProfileProps> = ({navigation, route}) => {
         <ImageContainer>
           <ProfileImage source={imageSource} />
           <TouchableOpacity onPress={() => setModalVisible(true)}>
-            <ProfileChangeText>Change profile photo</ProfileChangeText>
+            <ModalContainer>
+              <ProfileChangeText>Change profile photo</ProfileChangeText>
+              <ModalView
+                modalVisible={modalVisible}
+                setModalVisible={setModalVisible}
+              />
+            </ModalContainer>
           </TouchableOpacity>
         </ImageContainer>
         <View style={{alignSelf: 'flex-start'}}>

@@ -1,3 +1,5 @@
+import { ImageSourcePropType } from "react-native";
+
 export type AuthStackParamList = {
   Login: undefined;
   SignUp: undefined;
@@ -8,7 +10,7 @@ export type ProfileParamsList = {
   Profile: undefined;
   EditProfile: {
     name: string;
-    imageSource: string;
+    imageSource: ImageSourcePropType;
   };
 };
 
