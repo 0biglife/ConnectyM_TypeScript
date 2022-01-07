@@ -6,6 +6,8 @@ import PostCard from '../../components/PostCard';
 import apiClient from '../../apis/service/client';
 import {Photo} from '../../apis/model/data';
 import {AxiosResponse} from 'axios';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {TabNavigatorParamsList} from '../../navigations/Types';
 
 const SafeContainer = styled.SafeAreaView`
   flex: 1;
@@ -14,7 +16,11 @@ const SafeContainer = styled.SafeAreaView`
   background-color: ${props => props.theme.color.bg};
 `;
 
-const homeViewDataTest = () => {
+export interface HomeProps {
+  navigation: StackNavigationProp<TabNavigatorParamsList, 'Home'>
+}
+
+const homeView: React.FC<HomeProps> = ({navigation}) => {
   const [posts, setPosts] = useState<Photo[]>([]);
   console.clear();
   useEffect(() => {
@@ -35,4 +41,4 @@ const homeViewDataTest = () => {
   );
 };
 
-export default homeViewDataTest;
+export default homeView;

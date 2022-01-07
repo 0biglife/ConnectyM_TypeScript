@@ -10,6 +10,8 @@ import {
 } from '@react-native-google-signin/google-signin';
 //Token Control
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {AuthStackParamList} from '../../navigations/Types';
 
 const Container = styled.View`
   flex: 1;
@@ -25,7 +27,11 @@ const Title = styled.Text`
   font-weight: 400;
 `;
 
-const loginView = ({navigation}) => {
+export interface LoginProps {
+  navigation: StackNavigationProp<AuthStackParamList, 'Login'>;
+}
+
+const loginView: React.FC<LoginProps> = ({navigation}) => {
   const [user, setUser] = useState({});
   useEffect(() => {
     GoogleSignin.configure({
@@ -115,7 +121,7 @@ const loginView = ({navigation}) => {
   return (
     <Container>
       <Title>Login View</Title>
-      <Button title="Sign In" onPress={() => navigation.navigate('Signup')} />
+      <Button title="Sign In" onPress={() => navigation.navigate('SignUp')} />
       <GoogleSigninButton
         style={{width: 192, height: 48}}
         size={GoogleSigninButton.Size.Wide}

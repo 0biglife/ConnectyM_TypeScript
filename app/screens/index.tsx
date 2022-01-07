@@ -1,8 +1,6 @@
-import homeView from './Home/home';
-import homeViewDataTest from './Home/homeViewDataTest';
+import homeView from './Home/homeView';
 import SecondCatView from './Home/SecondCat';
 import ThirdCatView from './Home/ThirdCat';
-import modalScreen from './Home/modalScreen';
 import postView from './Home/postView';
 
 import loginView from './Auth/login';
@@ -18,7 +16,7 @@ import PlayerBar from './PlayerBar';
 
 export {
   homeView,
-  homeViewDataTest,
+  homeView as homeViewDataTest,
   SecondCatView,
   ThirdCatView,
   loginView,
@@ -30,6 +28,5 @@ export {
   editProfileView,
   musicPlayer,
   PlayerBar,
-  modalScreen,
   postView,
 };

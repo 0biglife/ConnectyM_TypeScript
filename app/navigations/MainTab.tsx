@@ -10,11 +10,12 @@ import ProfileStack from './ProfileStack';
 import HomeStack from './HomeStack';
 //components
 import {ModalView} from '../components';
+import {TabNavigatorParamsList} from './Types';
 
 //create Navigator
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<TabNavigatorParamsList>();
 
-const MainTab = ({navigation}) => {
+const MainTab = () => {
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <>
@@ -57,7 +58,6 @@ const MainTab = ({navigation}) => {
                   <ModalView
                     modalVisible={modalVisible}
                     setModalVisible={setModalVisible}
-                    navigation={navigation}
                   />
                 </TouchableOpacity>
               );
@@ -83,7 +83,6 @@ const MainTab = ({navigation}) => {
                   <ModalView
                     modalVisible={modalVisible}
                     setModalVisible={setModalVisible}
-                    navigation={navigation}
                   />
                 </TouchableOpacity>
               );

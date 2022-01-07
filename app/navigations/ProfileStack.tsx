@@ -1,5 +1,5 @@
 import React from 'react';
-import {createStackNavigator, StackScreenProps} from '@react-navigation/stack';
+import {createStackNavigator} from '@react-navigation/stack';
 
 import {profileView, editProfileView} from '../screens';
 

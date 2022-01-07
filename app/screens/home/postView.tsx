@@ -3,8 +3,8 @@ import {Text} from 'react-native';
 import styled from 'styled-components/native';
 import {Input, Button} from '../../components';
 
-import axios, { AxiosResponse } from 'axios';
-import {Photo} from '../../utils/axios/model/data';
+import axios, {AxiosResponse} from 'axios';
+import {Photo} from '../../apis/model/data';
 
 const Container = styled.View`
   flex: 1;
@@ -52,10 +52,3 @@ const postView = () => {
 };
 
 export default postView;
-
-  //   "albumId": 1,
-  //   "id": 1,
-  //   "title": "accusamus beatae ad facilis cum similique qui sunt",
-  //   "url": "https://via.placeholder.com/600/92c952",
-  //   "thumbnailUrl": "https://via.placeholder.com/150/92c952"
-  // }

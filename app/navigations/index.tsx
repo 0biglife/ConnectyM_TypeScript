@@ -17,7 +17,7 @@ export type rootStackParamList = {
 
 const Stack = createStackNavigator();
 
-const isLoggedIn = true;
+const isLoggedIn = false;
 
 export const RootNavigation = () => {
   const navigationOptions: StackNavigationOptions = {
@@ -36,7 +36,7 @@ export const RootNavigation = () => {
         ) : (
           <>
             <Stack.Screen name="AuthStack" component={AuthStack} />
-            {/* <Stack.Screen name="MainTab" component={MainTab} /> */}
+            <Stack.Screen name="MainTab" component={MainTab} />
           </>
         )}
       </Stack.Navigator>

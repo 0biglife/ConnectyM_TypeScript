@@ -4,7 +4,6 @@ import Modal from 'react-native-modal';
 import * as ImagePicker from 'react-native-image-picker';
 
 interface Props {
-  navigation: any;
   modalVisible: boolean;
   setModalVisible: any;
 }

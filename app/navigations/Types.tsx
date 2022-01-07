@@ -1,4 +1,8 @@
-import {NavigatorScreenParams} from '@react-navigation/native'
+export type AuthStackParamList = {
+  Login: undefined;
+  SignUp: undefined;
+  MainTab: undefined;
+};
 
 export type ProfileParamsList = {
   Profile: undefined;
@@ -13,8 +17,15 @@ export type TabNavigatorParamsList = {
   Profile: undefined;
 };
 /*
+RootNavigator
+-> Splash
 
-
+-> TabNavigator
+    -> HomeNavigator
+    -> BoatNavigator
+    -> TermsNavigator
+    -> Settings
+-----------------------------------------------------------------------------
 RootNavigator ( : createStackNavigator<RootNavigatorParamsList> )
 
  -> MainNavigator ( : createStackNavigator<TopNavigatorParamsList> )

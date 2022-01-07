@@ -6,11 +6,7 @@ import React from 'react';
 //screens
 import {loginView, signupView} from '../screens/Auth';
 import MainTab from './MainTab';
-
-export type AuthStackParamList = {
-  Login: undefined;
-  SignUp: undefined;
-};
+import {AuthStackParamList} from './Types';
 
 const Stack = createStackNavigator<AuthStackParamList>();
 //
@@ -21,9 +17,9 @@ const AuthStack = () => {
   };
   return (
     <Stack.Navigator screenOptions={navigationOptions}>
-      <Stack.Screen component={loginView} name="Login" />
-      <Stack.Screen component={signupView} name="Signup" />
-      <Stack.Screen component={MainTab} name="MainTab" />
+      <Stack.Screen name="Login" component={loginView} />
+      <Stack.Screen name="SignUp" component={signupView} />
+      <Stack.Screen name="MainTab" component={MainTab} />
     </Stack.Navigator>
   );
 };
