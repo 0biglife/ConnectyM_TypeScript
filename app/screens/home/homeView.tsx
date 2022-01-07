@@ -17,10 +17,10 @@ const SafeContainer = styled.SafeAreaView`
 `;
 
 export interface HomeProps {
-  navigation: StackNavigationProp<TabNavigatorParamsList, 'Home'>
+  navigation: StackNavigationProp<TabNavigatorParamsList, 'Home'>;
 }
 
-const homeView: React.FC<HomeProps> = ({navigation}) => {
+const homeView: React.FC<HomeProps> = () => {
   const [posts, setPosts] = useState<Photo[]>([]);
   console.clear();
   useEffect(() => {

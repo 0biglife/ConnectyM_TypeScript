@@ -6,7 +6,10 @@ export type AuthStackParamList = {
 
 export type ProfileParamsList = {
   Profile: undefined;
-  EditProfile: undefined;
+  EditProfile: {
+    name: string;
+    imageSource: string;
+  };
 };
 
 export type TabNavigatorParamsList = {

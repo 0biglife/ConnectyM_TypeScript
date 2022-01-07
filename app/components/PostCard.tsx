@@ -82,7 +82,17 @@ const InteractionText = styled.Text`
   margin-left: 5px;
 `;
 
-const PostCard = ({item}) => {
+interface Props {
+  item: {
+    albumId: number;
+    id: number;
+    title: string;
+    url: string;
+    thumbnailUrl: string;
+  };
+}
+
+const PostCard: React.FC<Props> = ({item}) => {
   // likeIcon = item.liked ? 'heart' : 'heart-outline';
   // like 에 대한 control : https://www.youtube.com/watch?v=iyNmGXt4vNA (28min ~ )
   return (

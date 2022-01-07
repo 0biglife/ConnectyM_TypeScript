@@ -8,9 +8,7 @@ import Info from './Info';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {ProfileParam} from '../../navigations/ProfileStack';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {useNavigation, useRoute} from '@react-navigation/native';
+import {ProfileParamsList, TabNavigatorParamsList} from '../../navigations/Types';
 // import Info from './Info';
 // import Photo from './Photo';
 // import Music from './Music';
@@ -129,13 +127,11 @@ const TabComponent = () => {
 const imageSource = require('../../assets/artwork/cover1.jpeg');
 const profileName = 'Giriboy';
 
-//Type Checking
-type ProfileScreenNavigationProp = StackNavigationProp<ProfileParam, 'Profile'>;
-type Props = {
-  navigation: ProfileScreenNavigationProp;
-};
+export interface ProfileProps {
+  navigation: StackNavigationProp<ProfileParamsList, 'Profile'>;
+}
 
-const profileView = () => {
+const profileView: React.FC<ProfileProps> = ({navigation}) => {
   return (
     <SafeAreaProvider>
       {/* <AnimatedScrollView
@@ -179,7 +175,13 @@ const profileView = () => {
             <UserDescription>JustMusic Company, WYBH</UserDescription>
           </InfoContainer>
           <UserButtonWrapper>
-            <UserButton onPress={() => navigation.navigate('EditProfile')}>
+            <UserButton
+              onPress={() =>
+                navigation.navigate('EditProfile', {
+                  name: profileName,
+                  imageSource: imageSource,
+                })
+              }>
               <UserButtonText>Edit Profile</UserButtonText>
             </UserButton>
             <UserButton>

@@ -8,9 +8,9 @@ export type ProfileParam = {
   EditProfile: undefined;
 };
 
-const Stack = createStackNavigator<ProfileParam>();
+const Stack = createStackNavigator();
 
-const ProfileStack: React.FunctionComponent = () => {
+const ProfileStack: React.FC = () => {
   return (
     <Stack.Navigator
       initialRouteName="Profile"

@@ -9,6 +9,7 @@ import {RouteProp, useNavigation} from '@react-navigation/native';
 import {ProfileParam} from '../../navigations/ProfileStack';
 import { Props } from 'react-native-tab-view/lib/typescript/TabBarItem';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { ProfileParamsList } from '../../navigations/Types';
 
 const SafeAreaContainer = styled.SafeAreaView`
   flex: 1;
@@ -75,15 +76,17 @@ const EditInput = styled.TextInput`
   border-color: lightgray;
   padding-top: 10px;
 `;
-type ProfileScreenRouteProp = StackNavigationProp<ProfileParam, 'Profile'>;
-type ProfileScreenNavigationProp = StackNavigationProp<ProfileParam, 'Profile'>;
-type Props = {
-  route: ProfileScreenRouteProp;
-  navigation: ProfileScreenNavigationProp;
-};
 
-const editProfileView = ({route, navigation}: Props) => {
-  // const {name, image} = route;
+export interface EditProfileProps {
+  navigation: StackNavigationProp<ProfileParamsList, 'EditProfile'>;
+  route: RouteProp<ProfileParamsList, 'EditProfile'>;
+}
+
+const editProfileView: React.FC<EditProfileProps> = ({navigation, route}) => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const {
+    params: {name, imageSource},
+  } = route;
   return (
     <SafeAreaContainer>
       <MainContainer>
@@ -97,7 +100,7 @@ const editProfileView = ({route, navigation}: Props) => {
           </TouchableOpacity>
         </TopButtonView>
         <ImageContainer>
-          <ProfileImage source={route} />
+          <ProfileImage source={imageSource} />
           <TouchableOpacity onPress={() => setModalVisible(true)}>
             <ProfileChangeText>Change profile photo</ProfileChangeText>
           </TouchableOpacity>
@@ -112,7 +115,7 @@ const editProfileView = ({route, navigation}: Props) => {
             <InputContainer>
               <EditInput
                 placeholder="Name"
-                defaultValue={route.setParams.name}
+                defaultValue={name}
                 placeholderTextColor="black"
               />
               <EditInput
