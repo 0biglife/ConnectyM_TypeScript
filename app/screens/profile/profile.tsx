@@ -1,15 +1,16 @@
 import React from 'react';
 import {Animated} from 'react-native';
 import styled from 'styled-components/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 //Paging - Photo / Music / Info
-import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import Photo from './Photo';
 import Music from './Music';
 import Info from './Info';
-import {useNavigation} from '@react-navigation/native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import {StackNavigationProp} from '@react-navigation/stack';
 import {ProfileParam} from '../../navigations/ProfileStack';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {useNavigation, useRoute} from '@react-navigation/native';
 // import Info from './Info';
 // import Photo from './Photo';
 // import Music from './Music';
@@ -128,9 +129,13 @@ const TabComponent = () => {
 const imageSource = require('../../assets/artwork/cover1.jpeg');
 const profileName = 'Giriboy';
 
+//Type Checking
+type ProfileScreenNavigationProp = StackNavigationProp<ProfileParam, 'Profile'>;
+type Props = {
+  navigation: ProfileScreenNavigationProp;
+};
+
 const profileView = () => {
-  // const scrollY = useRef(new Animated.Value(0)).current;
-  const navigation = useNavigation<NativeStackNavigationProp>();
   return (
     <SafeAreaProvider>
       {/* <AnimatedScrollView

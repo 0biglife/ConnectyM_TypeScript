@@ -1,11 +1,7 @@
 import React from 'react';
 import {createStackNavigator, StackScreenProps} from '@react-navigation/stack';
 
-import {
-  profileView,
-  editProfileView,
-  // modalScreen,
-} from '../screens';
+import {profileView, editProfileView} from '../screens';
 
 export type ProfileParam = {
   Profile: undefined;
