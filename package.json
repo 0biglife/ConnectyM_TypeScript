@@ -26,6 +26,7 @@
     "react-native": "0.66.3",
     "react-native-gesture-handler": "1.10.3",
     "react-native-image-picker": "4.6.1",
+    "react-native-make": "1.0.1",
     "react-native-modal": "13.0.0",
     "react-native-pager-view": "5.4.9",
     "react-native-safe-area-context": "3.3.2",
@@ -49,6 +50,7 @@
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@babel/runtime": "^7.12.5",
+    "@bam.tech/react-native-make": "3.0.3",
     "@react-native-community/eslint-config": "^2.0.0",
     "@types/jest": "^26.0.23",
     "@types/react": "17.0.36",
