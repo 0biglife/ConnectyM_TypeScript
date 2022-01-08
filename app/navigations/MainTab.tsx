@@ -71,22 +71,7 @@ const MainTab = () => {
           name="Profile"
           component={ProfileStack}
           options={{
-            headerRight: () => {
-              return (
-                <TouchableOpacity onPress={() => setModalVisible(true)}>
-                  <IonIcon
-                    name="add"
-                    size={24}
-                    color="black"
-                    style={{marginRight: 8}}
-                  />
-                  <ModalView
-                    modalVisible={modalVisible}
-                    setModalVisible={setModalVisible}
-                  />
-                </TouchableOpacity>
-              );
-            },
+            headerShown: false,
           }}
         />
       </Tab.Navigator>
