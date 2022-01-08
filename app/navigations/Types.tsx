@@ -12,6 +12,7 @@ export type ProfileParamsList = {
     name: string;
     imageSource: ImageSourcePropType;
   };
+  Message: undefined;
 };
 
 export type TabNavigatorParamsList = {

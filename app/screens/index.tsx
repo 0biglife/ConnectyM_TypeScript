@@ -10,6 +10,7 @@ import mymusicView from './mymusic/mymusic';
 import boardView from './board/boardView';
 import profileView from './profile/profile';
 import editProfileView from './profile/editProfileView';
+import MessageView from './profile/MessageView';
 
 import musicPlayer from './MusicPlayer';
 import PlayerBar from './PlayerBar';
@@ -29,4 +30,5 @@ export {
   musicPlayer,
   PlayerBar,
   postView,
+  MessageView,
 };

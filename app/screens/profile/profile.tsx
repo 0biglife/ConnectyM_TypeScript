@@ -124,7 +124,7 @@ const TabComponent = () => {
     </ProfileTab.Navigator>
   );
 };
-const imageSource = require('../../assets/artwork/cover1.jpeg');
+const imageSource = require('../../assets/artwork/cover3.jpeg');
 const profileName = 'Giriboy';
 
 export interface ProfileProps {
@@ -184,7 +184,7 @@ const profileView: React.FC<ProfileProps> = ({navigation}) => {
               }>
               <UserButtonText>Edit Profile</UserButtonText>
             </UserButton>
-            <UserButton>
+            <UserButton onPress={() => navigation.navigate('Message')}>
               <UserButtonText>Message</UserButtonText>
             </UserButton>
             <UserButton>
