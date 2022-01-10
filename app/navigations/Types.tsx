@@ -20,7 +20,7 @@ export type TabNavigatorParamsList = {
   Search: undefined;
   MyMusician: undefined;
   Board: undefined;
-  Profile: undefined;
+  ProfileStack: undefined;
 };
 /*
 RootNavigator

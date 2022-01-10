@@ -8,7 +8,7 @@ import Info from './Info';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {ProfileParamsList, TabNavigatorParamsList} from '../../navigations/Types';
+import {ProfileParamsList} from '../../navigations/Types';
 // import Info from './Info';
 // import Photo from './Photo';
 // import Music from './Music';

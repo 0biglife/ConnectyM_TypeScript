@@ -35,7 +35,7 @@ const MainTab = () => {
                 : 'ios-musical-notes-outline';
             } else if (route.name === 'Board') {
               iconName = focused ? 'clipboard' : 'clipboard-outline';
-            } else if (route.name === 'Profile') {
+            } else if (route.name === 'ProfileStack') {
               iconName = focused ? 'person' : 'person-outline';
             }
             return <IonIcon name={iconName} size={size} color={color} />;
@@ -68,7 +68,7 @@ const MainTab = () => {
         <Tab.Screen name="MyMusician" component={mymusicView} />
         <Tab.Screen name="Board" component={boardView} />
         <Tab.Screen
-          name="Profile"
+          name="ProfileStack"
           component={ProfileStack}
           options={{
             headerShown: false,

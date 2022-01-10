@@ -5,6 +5,7 @@ import {profileView, editProfileView, MessageView} from '../screens';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import {ModalView} from '../components';
+import { Dimensions } from 'react-native';
 
 export type ProfileParam = {
   Profile: undefined;
@@ -43,7 +44,23 @@ const ProfileStack: React.FC = () => {
       <Stack.Screen
         name="EditProfile"
         component={editProfileView}
-        options={{headerShown: false}}
+        options={{
+          headerShown: false,
+          cardStyleInterpolator: ({current, layouts}) => {
+            return {
+              cardStyle: {
+                transform: [
+                  {
+                    translateY: current.progress.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [layouts.screen.height, 0],
+                    }),
+                  },
+                ],
+              },
+            };
+          },
+        }}
       />
       <Stack.Screen name="Message" component={MessageView} />
     </Stack.Navigator>
