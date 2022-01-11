@@ -1,10 +1,12 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 import Modal from 'react-native-modal';
 
 interface Props {
   modalVisible: boolean;
   setModalVisible: any;
+  firstFunction: () => void;
+  secondFunction: () => void;
 }
 
 const SafeAreaView = styled.SafeAreaView`
@@ -48,30 +50,20 @@ const ModalButtonText = styled.Text`
 `;
 
 const ModalView = (props: Props) => {
-  const onCameraPress = () => {
-    //
-  };
-
-  const onImageLibraryPress = () => {
-    //
-  };
-
-  // const uri = pickerResponse?.assets && pickerResponse.assets[0].uri;
-
   return (
     <SafeAreaView>
       <Modal
         isVisible={props.modalVisible}
-        hideModalContentWhileAnimating={true}
+        // hideModalContentWhileAnimating={true}
         onBackdropPress={() => props.setModalVisible(false)}>
         <ModalContainer>
           <ModalTitle>
             <ModalTitleText>게시글 추가</ModalTitleText>
           </ModalTitle>
-          <ModalButton onPress={onCameraPress}>
+          <ModalButton onPress={props.firstFunction}>
             <ModalButtonText>카메라</ModalButtonText>
           </ModalButton>
-          <ModalButton onPress={onImageLibraryPress}>
+          <ModalButton onPress={props.secondFunction}>
             <ModalButtonText>앨범</ModalButtonText>
           </ModalButton>
           <ModalButton>

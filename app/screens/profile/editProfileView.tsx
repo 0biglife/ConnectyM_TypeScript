@@ -2,11 +2,12 @@ import React, {useState} from 'react';
 import styled from 'styled-components/native';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {View} from 'react-native';
+import {ImageSourcePropType, View} from 'react-native';
 import {ModalView} from '../../components';
 import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {ProfileParamsList} from '../../navigations/Types';
+import ImagePicker, {ImageOrVideo} from 'react-native-image-crop-picker';
 
 const SafeAreaContainer = styled.SafeAreaView`
   flex: 1;
@@ -84,10 +85,41 @@ export interface EditProfileProps {
 }
 
 const editProfileView: React.FC<EditProfileProps> = ({navigation, route}) => {
-  const [modalVisible, setModalVisible] = useState(false);
   const {
     params: {name, imageSource},
   } = route;
+  // const defaultImage = require('../../assets/images/profileDefault.jpeg');
+  const [modalVisible, setModalVisible] = useState(false);
+  const close = () => setModalVisible(false);
+  const [uri, setUri] = useState('');
+
+  const cameraAccess = () => {
+    ImagePicker.openCamera({
+      width: 300,
+      height: 300,
+      cropping: true,
+      // compressImageQuality: 0.7,
+    })
+      .then(image => {
+        console.log('ImgaeSource : ', image);
+      })
+      .finally(close);
+  };
+
+  const libraryAccess = () => {
+    ImagePicker.openPicker({
+      width: 300,
+      height: 300,
+      cropping: true,
+      // compressImageQuality: 0.7,
+    })
+      .then(image => {
+        console.log('ImgaeSource : ', image);
+        setUri(image.path);
+      })
+      .finally(close);
+  };
+
   return (
     <SafeAreaContainer>
       <MainContainer>
@@ -101,13 +133,15 @@ const editProfileView: React.FC<EditProfileProps> = ({navigation, route}) => {
           </TouchableOpacity>
         </TopButtonView>
         <ImageContainer>
-          <ProfileImage source={imageSource} />
+          <ProfileImage source={uri ? {uri} : imageSource} />
           <TouchableOpacity onPress={() => setModalVisible(true)}>
             <ModalContainer>
               <ProfileChangeText>Change profile photo</ProfileChangeText>
               <ModalView
                 modalVisible={modalVisible}
                 setModalVisible={setModalVisible}
+                firstFunction={cameraAccess}
+                secondFunction={libraryAccess}
               />
             </ModalContainer>
           </TouchableOpacity>
