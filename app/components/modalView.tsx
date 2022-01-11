@@ -1,7 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components/native';
 import Modal from 'react-native-modal';
-import * as ImagePicker from 'react-native-image-picker';
 
 interface Props {
   modalVisible: boolean;
@@ -50,36 +49,11 @@ const ModalButtonText = styled.Text`
 
 const ModalView = (props: Props) => {
   const onCameraPress = () => {
-    const options: ImagePicker.CameraOptions = {
-      saveToPhotos: true,
-      mediaType: 'photo',
-      cameraType: 'back',
-      includeBase64: true,
-    };
-    ImagePicker.launchCamera(options, response => {
-      if (response.assets) {
-        console.log('due____camera_____:', response.assets);
-        // setPickerResponse(response.assets);
-      } else {
-        console.log('rn-image-picker camera error');
-      }
-    });
+    //
   };
 
   const onImageLibraryPress = () => {
-    const options: ImagePicker.ImageLibraryOptions = {
-      selectionLimit: 1,
-      mediaType: 'photo',
-      includeBase64: false,
-    };
-    ImagePicker.launchImageLibrary(options, response => {
-      if (response.assets) {
-        console.log('due____library____:', response.assets);
-        // setPickerResponse(response.assets);
-      } else {
-        console.log('rn-image-picker library error');
-      }
-    });
+    //
   };
 
   // const uri = pickerResponse?.assets && pickerResponse.assets[0].uri;

@@ -26,7 +26,7 @@
     "react": "17.0.2",
     "react-native": "0.66.3",
     "react-native-gesture-handler": "1.10.3",
-    "react-native-image-picker": "4.6.1",
+    "react-native-image-crop-picker": "0.37.2",
     "react-native-make": "1.0.1",
     "react-native-modal": "13.0.0",
     "react-native-pager-view": "5.4.9",

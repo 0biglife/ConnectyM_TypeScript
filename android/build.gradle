@@ -41,10 +41,8 @@ allprojects {
             url("$rootDir/../node_modules/jsc-android/dist")
         }
 
+        maven { url 'https://maven.google.com' } //react-native-image-crop-picker
         maven { url 'https://www.jitpack.io' }
-        
-        //유툽에서는 추가하라 했으나 일단 보류한 코드
-        // maven { url 'https://maven.google.com' }
         
         jcenter() {
             content {

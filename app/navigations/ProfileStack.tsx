@@ -5,7 +5,6 @@ import {profileView, editProfileView, MessageView} from '../screens';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import {ModalView} from '../components';
-import { Dimensions } from 'react-native';
 
 export type ProfileParam = {
   Profile: undefined;

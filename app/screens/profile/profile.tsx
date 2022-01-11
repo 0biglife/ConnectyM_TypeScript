@@ -124,7 +124,7 @@ const TabComponent = () => {
     </ProfileTab.Navigator>
   );
 };
-const imageSource = require('../../assets/artwork/cover3.jpeg');
+const imageSource = require('../../assets/images/profileDefault.jpeg');
 const profileName = 'Giriboy';
 
 export interface ProfileProps {

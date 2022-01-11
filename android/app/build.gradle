@@ -138,8 +138,7 @@ android {
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
-        //유툽 보류 코드
-        // vectorDrawables.useSupportLibrary = true
+        vectorDrawables.useSupportLibrary = true //react-native-image-crop-picker
     }
     splits {
         abi {
