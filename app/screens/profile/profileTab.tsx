@@ -21,7 +21,7 @@ const ScrollViewContainer = styled.ScrollView`
   background-color: lightgray;
 `;
 
-// const AnimatedScrollView = Animated.createAnimatedComponent(ScrollViewContainer);
+const AnimatedScrollView = Animated.createAnimatedComponent(ScrollViewContainer);
 
 const PaddingView = styled.View`
   padding-top: 10px;

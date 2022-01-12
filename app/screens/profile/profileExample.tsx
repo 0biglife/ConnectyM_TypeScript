@@ -22,6 +22,83 @@
 //   padding-right: 10px;
 // `;
 
+// const ProfileImage = styled.Image`
+//   width: 120px;
+//   height: 120px;
+//   border-radius: 75px;
+//   align-self: flex-start;
+//   border-width: 0.5px;
+//   border-color: lightgray;
+// `;
+
+// const UserTopInfoContainer = styled.View`
+//   flex-direction: row;
+//   justify-content: space-between;
+// `;
+
+// const UserInfoWrapper = styled.View`
+//   flex: 3;
+//   flex-direction: row;
+//   justify-content: space-around;
+//   align-self: center;
+//   padding-left: 10px;
+// `;
+
+// const UserInfoItem = styled.View`
+//   align-items: center;
+//   /* justify-content: center; */
+// `;
+
+// const UserInfoTitle = styled.Text`
+//   font-size: 14px;
+//   padding-top: 2px;
+//   color: darkgray;
+// `;
+
+// const UserInfoSubTitle = styled.Text`
+//   font-weight: 600;
+//   font-size: 16px;
+// `;
+
+// const InfoContainer = styled.View`
+//   padding: 4px;
+// `;
+
+// const UserName = styled.Text`
+//   font-size: 16px;
+//   padding-top: 10px;
+//   font-weight: 500;
+// `;
+
+// const UserDescription = styled.Text`
+//   font-size: 14px;
+//   padding-top: 4px;
+// `;
+
+// const UserButtonWrapper = styled.View`
+//   flex-direction: row;
+//   width: 100%;
+//   justify-content: space-between;
+//   padding-top: 4px;
+// `;
+
+// const UserButton = styled.TouchableOpacity`
+//   width: 30%;
+//   border-width: 1px;
+//   border-color: lightgray;
+//   border-radius: 6px;
+// `;
+
+// const UserButtonText = styled.Text`
+//   padding: 6px;
+//   font-size: 14px;
+//   align-self: center;
+// `;
+
+// export interface ProfileProps {
+//   navigation: StackNavigationProp<ProfileParamsList, 'Profile'>;
+// }
+
 // const profileView: React.FC<ProfileProps> = ({navigation}) => {
 //   return (
 //     <SafeViewContainer>
@@ -32,7 +109,6 @@
 
 // export default profileView;
 import React, {useState, useEffect, useRef} from 'react';
-import styled from 'styled-components/native';
 import {
   StyleSheet,
   View,
@@ -41,125 +117,30 @@ import {
   Animated,
   PanResponder,
   Platform,
+  TouchableOpacity,
+  Alert,
   StatusBar,
   ActivityIndicator,
 } from 'react-native';
 import {TabView, TabBar} from 'react-native-tab-view';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {ProfileParamsList} from '../../navigations/Types';
-
-//Header UI
-const HeaderView = styled.View`
-  width: 100%;
-  height: 220;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  background-color: ${props => props.theme.color.bg};
-  /* background-color: lightskyblue; */
-  padding-top: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
-`;
-
-const AnimatedViewHeader = Animated.createAnimatedComponent(HeaderView);
-
-const ProfileImage = styled.Image`
-  width: 100px;
-  height: 100px;
-  border-radius: 75px;
-  align-self: flex-start;
-  border-width: 0.5px;
-  border-color: lightgray;
-`;
-
-const UserTopInfoContainer = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
-`;
-
-const UserInfoWrapper = styled.View`
-  flex: 3;
-  flex-direction: row;
-  justify-content: space-around;
-  align-self: center;
-  padding-left: 10px;
-`;
-
-const UserInfoItem = styled.View`
-  align-items: center;
-  /* justify-content: center; */
-`;
-
-const UserInfoTitle = styled.Text`
-  font-size: 14px;
-  padding-top: 2px;
-  color: darkgray;
-`;
-
-const UserInfoSubTitle = styled.Text`
-  font-weight: 600;
-  font-size: 16px;
-`;
-
-const InfoContainer = styled.View`
-  padding: 4px;
-  width: 100%;
-`;
-
-const UserName = styled.Text`
-  font-size: 16px;
-  padding-top: 10px;
-  font-weight: 500;
-`;
-
-const UserDescription = styled.Text`
-  font-size: 14px;
-  padding-top: 4px;
-`;
-
-const UserButtonWrapper = styled.View`
-  flex-direction: row;
-  width: 100%;
-  justify-content: space-between;
-  padding-top: 4px;
-`;
-
-const UserButton = styled.TouchableOpacity`
-  width: 30%;
-  height: 32px;
-  border-width: 1px;
-  border-color: lightgray;
-  background-color: ${prop => prop.theme.color.bg};
-  border-radius: 6px;
-  justify-content: center;
-`;
-
-const UserButtonText = styled.Text`
-  padding: 6px;
-  font-size: 14px;
-  align-self: center;
-`;
-
-const imageSource = require('../../assets/images/profileDefault.jpeg');
-const profileName = 'Giriboy';
 
 const AnimatedIndicator = Animated.createAnimatedComponent(ActivityIndicator);
 const windowHeight = Dimensions.get('window').height;
 const windowWidth = Dimensions.get('window').width;
-const TabBarHeight = 44;
-const HeaderHeight = 220;
+const TabBarHeight = 48;
+const HeaderHeight = 200;
 const SafeStatusBar = Platform.select({
   ios: 44,
   android: StatusBar.currentHeight,
 });
+const tab1ItemSize = (windowWidth - 30) / 2;
+const tab2ItemSize = (windowWidth - 40) / 3;
 const PullToRefreshDist = 150;
 
-export interface ProfileProps {
-  navigation: StackNavigationProp<ProfileParamsList, 'Profile'>;
-}
-
-const profileView: React.FC<ProfileProps> = ({navigation}) => {
+const profileView = () => {
+  /**
+   * stats
+   */
   const [tabIndex, setIndex] = useState<number>(0);
   const [routes] = useState([
     {key: 'tab1', title: 'Photo'},
@@ -167,9 +148,12 @@ const profileView: React.FC<ProfileProps> = ({navigation}) => {
     {key: 'tab3', title: 'Info'},
   ]);
   const [canScroll, setCanScroll] = useState(true);
-  const [tab1Data] = useState(Array(12).fill(0));
-  const [tab2Data] = useState(Array(4).fill(0));
+  const [tab1Data] = useState(Array(4).fill(0));
+  const [tab2Data] = useState(Array(12).fill(0));
 
+  /**
+   * ref
+   */
   const scrollY = useRef(new Animated.Value(0)).current;
   const headerScrollY = useRef(new Animated.Value(0)).current;
   // for capturing header scroll on Android
@@ -449,48 +433,16 @@ const profileView: React.FC<ProfileProps> = ({navigation}) => {
       // extrapolate: 'clamp',
     });
     return (
-      <AnimatedViewHeader
+      <Animated.View
         {...headerPanResponder.panHandlers}
-        style={{transform: [{translateY: y}]}}>
-        <UserTopInfoContainer>
-          <ProfileImage source={imageSource} />
-          <UserInfoWrapper>
-            <UserInfoItem>
-              <UserInfoSubTitle>273</UserInfoSubTitle>
-              <UserInfoTitle>Post</UserInfoTitle>
-            </UserInfoItem>
-            <UserInfoItem>
-              <UserInfoSubTitle>10.2M</UserInfoSubTitle>
-              <UserInfoTitle>Follower</UserInfoTitle>
-            </UserInfoItem>
-            <UserInfoItem>
-              <UserInfoSubTitle>821</UserInfoSubTitle>
-              <UserInfoTitle>Following</UserInfoTitle>
-            </UserInfoItem>
-          </UserInfoWrapper>
-        </UserTopInfoContainer>
-        <InfoContainer>
-          <UserName>{profileName}</UserName>
-          <UserDescription>JustMusic Company, WYBH</UserDescription>
-        </InfoContainer>
-        <UserButtonWrapper>
-          <UserButton
-            onPress={() =>
-              navigation.navigate('EditProfile', {
-                name: profileName,
-                imageSource: imageSource,
-              })
-            }>
-            <UserButtonText>Edit Profile</UserButtonText>
-          </UserButton>
-          <UserButton onPress={() => navigation.navigate('Message')}>
-            <UserButtonText>Message</UserButtonText>
-          </UserButton>
-          <UserButton>
-            <UserButtonText>Boost</UserButtonText>
-          </UserButton>
-        </UserButtonWrapper>
-      </AnimatedViewHeader>
+        style={[styles.header, {transform: [{translateY: y}]}]}>
+        <TouchableOpacity
+          style={{flex: 1, justifyContent: 'center'}}
+          activeOpacity={1}
+          onPress={() => Alert.alert('header Clicked!')}>
+          <Text>Pull to Refresh Header</Text>
+        </TouchableOpacity>
+      </Animated.View>
     );
   };
 
@@ -498,32 +450,32 @@ const profileView: React.FC<ProfileProps> = ({navigation}) => {
     return (
       <View
         style={{
-          backgroundColor: 'lightgray',
-          margin: 2,
-          width: windowWidth / 3 - 4,
-          height: windowWidth / 3 - 4,
+          borderRadius: 16,
+          marginLeft: index % 2 === 0 ? 0 : 10,
+          width: tab1ItemSize,
+          height: tab1ItemSize,
+          backgroundColor: '#aaa',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}>
+        <Text>{index}</Text>
       </View>
     );
   };
-
-  //         borderRadius: 16,
-  //         marginLeft: index % 2 === 0 ? 0 : 10,
-  //         width: tab1ItemSize,
-  //         height: tab1ItemSize,
-  //         backgroundColor: '#aaa',
-  //         justifyContent: 'center',
-  //         alignItems: 'center',
 
   const rednerTab2Item = ({item, index}) => {
     return (
       <View
         style={{
-          backgroundColor: 'lightgray',
-          borderRadius: 8,
-          width: windowWidth - 4,
-          height: 100,
+          marginLeft: index % 3 === 0 ? 0 : 10,
+          borderRadius: 16,
+          width: tab2ItemSize,
+          height: tab2ItemSize,
+          backgroundColor: '#aaa',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}>
+        <Text>{index}</Text>
       </View>
     );
   };
@@ -543,12 +495,12 @@ const profileView: React.FC<ProfileProps> = ({navigation}) => {
     let renderItem;
     switch (route.key) {
       case 'tab1':
-        numCols = 3;
+        numCols = 2;
         data = tab1Data;
         renderItem = rednerTab1Item;
         break;
       case 'tab2':
-        numCols = 1;
+        numCols = 3;
         data = tab2Data;
         renderItem = rednerTab2Item;
         break;
@@ -588,10 +540,11 @@ const profileView: React.FC<ProfileProps> = ({navigation}) => {
         onMomentumScrollBegin={onMomentumScrollBegin}
         onScrollEndDrag={onScrollEndDrag}
         onMomentumScrollEnd={onMomentumScrollEnd}
-        ItemSeparatorComponent={() => <View style={{height: 0}} />}
+        ItemSeparatorComponent={() => <View style={{height: 2}} />}
         ListHeaderComponent={() => <View style={{height: 2}} />}
         contentContainerStyle={{
           paddingTop: HeaderHeight + TabBarHeight,
+          paddingHorizontal: 10,
           minHeight: windowHeight - SafeStatusBar + HeaderHeight,
         }}
         showsHorizontalScrollIndicator={false}
@@ -707,7 +660,7 @@ const profileView: React.FC<ProfileProps> = ({navigation}) => {
   };
 
   return (
-    <View style={{flex: 1}}>
+    <View style={styles.container}>
       {renderTabView()}
       {renderHeader()}
       {renderCustomRefresh()}
@@ -716,11 +669,22 @@ const profileView: React.FC<ProfileProps> = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  label: {fontSize: 16, color: '#222', justifyContent: 'center'},
+  container: {
+    flex: 1,
+  },
+  header: {
+    height: HeaderHeight,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+    backgroundColor: '#FFA088',
+  },
+  label: {fontSize: 16, color: '#222'},
   tab: {
     elevation: 0,
     shadowOpacity: 0,
-    backgroundColor: 'lightgray',
+    backgroundColor: '#FFCC80',
     height: TabBarHeight,
   },
   indicator: {backgroundColor: '#222'},
