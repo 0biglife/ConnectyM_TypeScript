@@ -2,16 +2,14 @@ import React, {useEffect, useState} from 'react';
 import {FlatList, TouchableOpacity} from 'react-native-gesture-handler';
 import styled from 'styled-components/native';
 import {AxiosResponse} from 'axios';
-import apiClient from '../../apis/service/client';
+import apiClient from '../../apis/unsplash/client';
 import {Photo} from '../../apis/model/data';
 import {SearchParamsList} from '../../navigations/Types';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp, useNavigation} from '@react-navigation/native';
-import {profileView} from '../../screens';
-import {useWindowDimensions} from 'react-native';
 
 const headerHeight = 62;
-const BodyHeight = 120;
+const BodyHeight = 150;
 
 const SafeContainer = styled.SafeAreaView`
   flex: 1;
@@ -50,14 +48,14 @@ const HeaderSection = styled.View`
   min-width: 100%;
   height: ${headerHeight}px;
   justify-content: center;
-  background-color: lightcoral;
+  /* background-color: lightcoral; */
 `;
 
 const ProfileImage = styled.Image`
-  width: 50px;
-  height: 50px;
+  width: 44px;
+  height: 44px;
   border-width: 1px;
-  border-color: gray;
+  border-color: lightgray;
   border-radius: 25px;
   margin-left: 10px;
 `;
@@ -65,14 +63,19 @@ const ProfileImage = styled.Image`
 const ProfileName = styled.Text`
   align-self: center;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   margin: 10px;
 `;
 
 const BodySection = styled.View`
   min-width: 100%;
   height: ${BodyHeight}px;
-  background-color: lightblue;
+  /* background-color: lightblue; */
+`;
+
+const BodyImage = styled.Image`
+  width: ${BodyHeight - 20}px;
+  height: ${BodyHeight - 20}px;
 `;
 
 export interface SearchProps {
@@ -87,10 +90,13 @@ const searchView: React.FC<SearchProps> = () => {
   const navigation = useNavigation();
 
   useEffect(() => {
-    apiClient.get<Photo[]>('/photos').then((response: AxiosResponse) => {
+    apiClient.get<Photo[]>('').then((response: AxiosResponse) => {
       try {
-        setFilteredData(response.data);
-        setMasterdData(response.data);
+        const res = response.data;
+        console.log(res);
+        const jsonData = res;
+        setFilteredData(jsonData);
+        setMasterdData(jsonData);
       } catch (error) {
         console.error(error);
       }
@@ -103,13 +109,13 @@ const searchView: React.FC<SearchProps> = () => {
         <HeaderSection>
           <TouchableOpacity
             style={{flexDirection: 'row'}}
-            onPress={() => navigation.navigate(profileView)}>
-            <ProfileImage source={{uri: item.url}} />
-            <ProfileName>{item.id}</ProfileName>
+            onPress={() => navigation.navigate('ProfileStack')}>
+            <ProfileImage source={{uri: item.urls.thumb}} />
+            <ProfileName>{item.user.name}</ProfileName>
           </TouchableOpacity>
         </HeaderSection>
         <BodySection>
-
+          <BodyImage source={{uri: item.urls.full}} />
         </BodySection>
       </CellContainer>
     )
@@ -117,8 +123,8 @@ const searchView: React.FC<SearchProps> = () => {
 
   const searchFilter = (text: string) => {
     if (text) {
-      const newData = masterData.filter((item) => {
-        const itemData = item.title ? item.title : '';
+      const newData = masterData.filter(item => {
+        const itemData = item.id ? item.id : '';
         const textData = text;
         return itemData.indexOf(textData) > -1;
       });
