@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
-import { Text } from 'react-native';
+import React, {useEffect, useState} from 'react';
 import {FlatList} from 'react-native-gesture-handler';
 import styled from 'styled-components/native';
+import {AxiosResponse} from 'axios';
+import apiClient from '../../apis/service/client';
 
 const SafeContainer = styled.SafeAreaView`
   flex: 1;
@@ -27,11 +28,10 @@ const SearchTextInput = styled.TextInput`
 `;
 
 const Title = styled.Text`
-  align-items: centerr;
+  align-items: center;
   justify-content: center;
   font-size: 16px;
   font-weight: 400;
-  padding: 10;
 `;
 
 const ListView = styled.View`
@@ -42,6 +42,19 @@ const ListView = styled.View`
 
 const searchView = () => {
   const [filteredData, setFilteredData] = useState([]);
+  const [masterData, setMasterdData] = useState([]);
+  const [search, setSearch] = useState('');
+
+  useEffect(() => {
+    apiClient.get('/posts').then((response: AxiosResponse) => {
+      try {
+        setFilteredData(response.data);
+        setMasterdData(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    });
+  }, []);
 
   const ItemView = ({item}) => {
     return (
@@ -57,10 +70,30 @@ const searchView = () => {
     return <ListView />;
   };
 
+  const searchFilter = (text: string) => {
+    if (text) {
+      const newData = masterData.filter((item) => {
+        const itemData = item.title ? item.title : '';
+        const textData = text;
+        return itemData.indexOf(textData) > -1;
+      });
+      setFilteredData(newData);
+      setSearch(text);
+    } else {
+      setFilteredData(masterData);
+      setSearch(text);
+    }
+  };
+
   return (
     <SafeContainer>
       <MainContainer>
-        <SearchTextInput />
+        <SearchTextInput
+          value={search}
+          placeholder="검색"
+          underlineColorAndroid="transparent"
+          onChangeText={text => searchFilter(text)}
+        />
         <FlatList
           data={filteredData}
           keyExtractor={(item, index) => index.toString()}
