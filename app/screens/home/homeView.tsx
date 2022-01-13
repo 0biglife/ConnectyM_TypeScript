@@ -4,6 +4,7 @@ import {FlatList} from 'react-native';
 import PostCard from '../../components/PostCard';
 
 import apiClient from '../../apis/service/client';
+// import apiClient from '../../apis/spotify/client';
 import {Photo} from '../../apis/model/data';
 import {AxiosResponse} from 'axios';
 import {StackNavigationProp} from '@react-navigation/stack';
