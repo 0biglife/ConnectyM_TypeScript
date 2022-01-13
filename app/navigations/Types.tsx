@@ -15,9 +15,13 @@ export type ProfileParamsList = {
   Message: undefined;
 };
 
+export type SearchParamsList = {
+  Search: undefined;
+};
+
 export type TabNavigatorParamsList = {
   Home: undefined;
-  Search: undefined;
+  SearchStack: undefined;
   MyMusician: undefined;
   Board: undefined;
   ProfileStack: undefined;

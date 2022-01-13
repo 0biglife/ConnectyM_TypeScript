@@ -4,13 +4,15 @@ import {TouchableOpacity} from 'react-native';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 //screens
-import {searchView, mymusicView, boardView} from '../screens';
+import {mymusicView, boardView} from '../screens';
 //Navigations
 import ProfileStack from './ProfileStack';
 import HomeStack from './HomeStack';
+import SearchStack from './SearchStack';
 //components
 import {ModalView} from '../components';
 import {TabNavigatorParamsList} from './Types';
+import { SearchBar } from 'react-native-screens';
 
 //create Navigator
 const Tab = createBottomTabNavigator<TabNavigatorParamsList>();
@@ -27,7 +29,7 @@ const MainTab = () => {
 
             if (route.name === 'Home') {
               iconName = focused ? 'home' : 'home-outline';
-            } else if (route.name === 'Search') {
+            } else if (route.name === 'SearchStack') {
               iconName = focused ? 'search' : 'ios-search-outline';
             } else if (route.name === 'MyMusician') {
               iconName = focused
@@ -64,7 +66,13 @@ const MainTab = () => {
             },
           }}
         />
-        <Tab.Screen name="Search" component={searchView} />
+        <Tab.Screen
+          name="SearchStack"
+          component={SearchStack}
+          options={{
+            headerShown: false,
+          }}
+        />
         <Tab.Screen name="MyMusician" component={mymusicView} />
         <Tab.Screen name="Board" component={boardView} />
         <Tab.Screen

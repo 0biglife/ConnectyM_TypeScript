@@ -9,6 +9,8 @@ import {
   statusCodes,
 } from '@react-native-google-signin/google-signin';
 //Token Control
+import {clientId, redirectUri} from '../../apis/spotify/config';
+import apiClient from '../../apis/spotify/client';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {AuthStackParamList} from '../../navigations/Types';
@@ -43,6 +45,16 @@ const loginView: React.FC<LoginProps> = ({navigation}) => {
       forceCodeForRefreshToken: true,
     });
     isSignedIn();
+    //sporify authentication
+    apiClient
+      .get(
+        `/authorize?client_id=${clientId}$response_type=code$redirect_uri=${encodeURI(
+          redirectUri,
+        )}$show_dialog=true&scope=user-read-private user-read-email user-modify-playack-state user-read-playback-position user-library-read streaming user-read-playback-state user-read-recently-played playlist-modify-private playlist-read-private playlist-modify-public playlist-read-collaborative`,
+      )
+      .then(response => {
+        console.log('SPOTIFY AUTH : ', response.data);
+      });
   }, []);
 
   const storeData = async (value: string) => {
