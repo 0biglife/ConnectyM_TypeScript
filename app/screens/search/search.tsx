@@ -8,6 +8,10 @@ import {SearchParamsList} from '../../navigations/Types';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp, useNavigation} from '@react-navigation/native';
 import {profileView} from '../../screens';
+import {useWindowDimensions} from 'react-native';
+
+const headerHeight = 62;
+const BodyHeight = 120;
 
 const SafeContainer = styled.SafeAreaView`
   flex: 1;
@@ -32,29 +36,21 @@ const SearchTextInput = styled.TextInput`
   background-color: ${prop => prop.theme.color.bg};
 `;
 
-const Title = styled.Text`
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  font-weight: 400;
-`;
-
-const ListView = styled.View`
-  height: 8px;
-  width: 100%;
-  /* background-color: ${prop => prop.theme.color.bg}; */
-  background-color: white;
-`;
-
 const CellContainer = styled.View`
   /* flex-direction: row; */
   /* align-items: center; */
-  width: 100%;
-  height: 120px;
+  min-width: 100%;
+  height: ${headerHeight + BodyHeight}px;
   border-radius: 8px;
-  margin-top: 8px;
-  padding: 8px;
+  margin-top: 6px;
   background-color: lightgray;
+`;
+
+const HeaderSection = styled.View`
+  min-width: 100%;
+  height: ${headerHeight}px;
+  justify-content: center;
+  background-color: lightcoral;
 `;
 
 const ProfileImage = styled.Image`
@@ -63,6 +59,20 @@ const ProfileImage = styled.Image`
   border-width: 1px;
   border-color: gray;
   border-radius: 25px;
+  margin-left: 10px;
+`;
+
+const ProfileName = styled.Text`
+  align-self: center;
+  font-size: 14px;
+  font-weight: 700;
+  margin: 10px;
+`;
+
+const BodySection = styled.View`
+  min-width: 100%;
+  height: ${BodyHeight}px;
+  background-color: lightblue;
 `;
 
 export interface SearchProps {
@@ -90,16 +100,19 @@ const searchView: React.FC<SearchProps> = () => {
   const ItemView = ({item}) => {
     return (
       <CellContainer>
-        <TouchableOpacity onPress={() => navigation.navigate(profileView)}>
-          <ProfileImage source={{uri: item.url}} />
-        </TouchableOpacity>
-        <Title>{item.title}</Title>
+        <HeaderSection>
+          <TouchableOpacity
+            style={{flexDirection: 'row'}}
+            onPress={() => navigation.navigate(profileView)}>
+            <ProfileImage source={{uri: item.url}} />
+            <ProfileName>{item.id}</ProfileName>
+          </TouchableOpacity>
+        </HeaderSection>
+        <BodySection>
+
+        </BodySection>
       </CellContainer>
     )
-  };
-
-  const ItemSeperatorView = () => {
-    return <ListView />;
   };
 
   const searchFilter = (text: string) => {
