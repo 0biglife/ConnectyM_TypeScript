@@ -5,7 +5,7 @@ const apiClient: AxiosInstance = axios.create({
   headers: {
     Authorization: accessKey,
   },
-  baseURL: baseUrl + `/search/collections/?client_id=${accessKey}`,
+  baseURL: baseUrl,
 });
 
 export default apiClient;

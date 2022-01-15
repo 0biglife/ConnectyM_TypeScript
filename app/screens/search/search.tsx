@@ -7,6 +7,9 @@ import {Photo} from '../../apis/model/data';
 import {SearchParamsList} from '../../navigations/Types';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp, useNavigation} from '@react-navigation/native';
+import { accessKey } from '../../apis/unsplash/config';
+import { SearchBar } from 'react-native-screens';
+import IonIcon from 'react-native-vector-icons/Ionicons';
 
 const headerHeight = 62;
 const BodyHeight = 150;
@@ -21,6 +24,13 @@ const MainContainer = styled.View`
   align-items: center;
   justify-content: center;
   padding: 8px;
+`;
+
+const IconView = styled.View`
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: red;
 `;
 
 const SearchTextInput = styled.TextInput`
@@ -84,23 +94,45 @@ export interface SearchProps {
 }
 
 const searchView: React.FC<SearchProps> = () => {
+  const [query, setQuery] = useState('');
   const [filteredData, setFilteredData] = useState([]);
   const [masterData, setMasterdData] = useState([]);
-  const [search, setSearch] = useState('');
   const navigation = useNavigation();
 
+  const searchPhotos = () => {
+    apiClient
+      .get<Photo[]>(
+        `/search/photos?page=1&query=${query}/client_id=${accessKey}`,
+      )
+      .then((response: AxiosResponse) => {
+        try {
+          const res = response.data;
+          console.log(res);
+          const jsonData = res.result;
+          setFilteredData(jsonData);
+          setMasterdData(jsonData);
+        } catch (error) {
+          console.error(error);
+        }
+      });
+  };
+
   useEffect(() => {
-    apiClient.get<Photo[]>('').then((response: AxiosResponse) => {
-      try {
-        const res = response.data;
-        console.log(res);
-        const jsonData = res;
-        setFilteredData(jsonData);
-        setMasterdData(jsonData);
-      } catch (error) {
-        console.error(error);
-      }
-    });
+    // apiClient
+    //   .get<Photo[]>(
+    //     `/search/photos?page=1&query=${query}/client_id=${accessKey}`,
+    //   )
+    //   .then((response: AxiosResponse) => {
+    //     try {
+    //       const res = response.data;
+    //       console.log(res);
+    //       const jsonData = res.result;
+    //       setFilteredData(jsonData);
+    //       setMasterdData(jsonData);
+    //     } catch (error) {
+    //       console.error(error);
+    //     }
+    //   });
   }, []);
 
   const ItemView = ({item}) => {
@@ -110,37 +142,39 @@ const searchView: React.FC<SearchProps> = () => {
           <TouchableOpacity
             style={{flexDirection: 'row'}}
             onPress={() => navigation.navigate('ProfileStack')}>
-            <ProfileImage source={{uri: item.urls.thumb}} />
+            <ProfileImage source={{uri: item.user.profile_image.small}} />
             <ProfileName>{item.user.name}</ProfileName>
           </TouchableOpacity>
         </HeaderSection>
         <BodySection>
-          <BodyImage source={{uri: item.urls.full}} />
+          <BodyImage source={{uri: item.urls.self}} />
         </BodySection>
       </CellContainer>
-    )
+    );
   };
 
   const searchFilter = (text: string) => {
-    if (text) {
-      const newData = masterData.filter(item => {
-        const itemData = item.id ? item.id : '';
-        const textData = text;
-        return itemData.indexOf(textData) > -1;
-      });
-      setFilteredData(newData);
-      setSearch(text);
-    } else {
-      setFilteredData(masterData);
-      setSearch(text);
-    }
+    setQuery(text);
+    console.log(query);
+    // if (text) {
+    //   const newData = masterData.filter(item => {
+    //     const itemData = item.desctiption ? item.desctiption : '';
+    //     const textData = text;
+    //     return itemData.indexOf(textData) > -1;
+    //   });
+    //   setFilteredData(newData);
+    //   setSearch(text);
+    // } else {
+    //   setFilteredData(masterData);
+    //   setSearch(text);
+    // }
   };
 
   return (
     <SafeContainer>
       <MainContainer>
         <SearchTextInput
-          value={search}
+          value={query}
           placeholder="검색"
           underlineColorAndroid="transparent"
           onChangeText={text => searchFilter(text)}
