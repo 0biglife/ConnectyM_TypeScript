@@ -102,7 +102,7 @@ const searchView: React.FC<SearchProps> = () => {
   const searchPhotos = () => {
     apiClient
       .get<Photo[]>(
-        `/search/photos?page=1&query=${query}/client_id=${accessKey}`,
+        `/search/photos?page=1&query=${query}&client_id=${accessKey}`,
       )
       .then((response: AxiosResponse) => {
         try {
@@ -118,6 +118,7 @@ const searchView: React.FC<SearchProps> = () => {
   };
 
   useEffect(() => {
+    searchPhotos();
     // apiClient
     //   .get<Photo[]>(
     //     `/search/photos?page=1&query=${query}/client_id=${accessKey}`,

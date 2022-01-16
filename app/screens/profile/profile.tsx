@@ -51,7 +51,7 @@ import {ProfileParamsList} from '../../navigations/Types';
 //Header UI
 const HeaderView = styled.View`
   width: 100%;
-  height: 220;
+  height: 220px;
   align-items: center;
   justify-content: center;
   position: absolute;
