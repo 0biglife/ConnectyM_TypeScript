@@ -8,6 +8,8 @@ import {
   GoogleSigninButton,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
+import appleAuth from '@invertase/react-native-apple-authentication';
+
 //Token Control
 import {clientId, redirectUri} from '../../apis/spotify/config';
 import apiClient from '../../apis/spotify/client';
@@ -120,15 +122,15 @@ const loginView: React.FC<LoginProps> = ({navigation}) => {
     }
   };
 
-  const signOut = async () => {
-    try {
-      await GoogleSignin.revokeAccess();
-      await GoogleSignin.signOut();
-      setUser({});
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const signOut = async () => {
+  //   try {
+  //     await GoogleSignin.revokeAccess();
+  //     await GoogleSignin.signOut();
+  //     setUser({});
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <Container>
