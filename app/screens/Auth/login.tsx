@@ -8,14 +8,30 @@ import {
   GoogleSigninButton,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
-import appleAuth from '@invertase/react-native-apple-authentication';
+import appleAuth, {
+  AppleButton,
+} from '@invertase/react-native-apple-authentication';
+import jwtDecode from 'jwt-decode';
 
 //Token Control
-import {clientId, redirectUri} from '../../apis/spotify/config';
-import apiClient from '../../apis/spotify/client';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {AuthStackParamList} from '../../navigations/Types';
+
+interface tokenType {
+  aud: string;
+  auth_time: number;
+  c_hash: string;
+  email: string;
+  email_verified: string;
+  exp: number;
+  iat: number;
+  is_private_email: string;
+  iss: string;
+  nonce: string;
+  nonce_supported: boolean;
+  sub: string;
+}
 
 const Container = styled.View`
   flex: 1;
@@ -47,16 +63,6 @@ const loginView: React.FC<LoginProps> = ({navigation}) => {
       forceCodeForRefreshToken: true,
     });
     isSignedIn();
-    //sporify authentication
-    apiClient
-      .get(
-        `/authorize?client_id=${clientId}$response_type=code$redirect_uri=${encodeURI(
-          redirectUri,
-        )}$show_dialog=true&scope=user-read-private user-read-email user-modify-playack-state user-read-playback-position user-library-read streaming user-read-playback-state user-read-recently-played playlist-modify-private playlist-read-private playlist-modify-public playlist-read-collaborative`,
-      )
-      .then(response => {
-        console.log('SPOTIFY AUTH : ', response.data);
-      });
   }, []);
 
   const storeData = async (value: string) => {
@@ -68,7 +74,22 @@ const loginView: React.FC<LoginProps> = ({navigation}) => {
     }
   };
 
-  const signIn = async () => {
+  const AppleSignIn = async () => {
+    const appleAuthRequestResponse = await appleAuth.performRequest({
+      // performs login request
+      requestedOperation: appleAuth.Operation.LOGIN,
+      requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
+    });
+    //get user auth
+    const credentialState = await appleAuth.getCredentialStateForUser(
+      appleAuthRequestResponse.user,
+    );
+    if (credentialState === appleAuth.State.AUTHORIZED) {
+      console.log('Apple Login Test');
+    }
+  };
+
+  const GoogleSignIn = async () => {
     try {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
@@ -140,7 +161,16 @@ const loginView: React.FC<LoginProps> = ({navigation}) => {
         style={{width: 192, height: 48}}
         size={GoogleSigninButton.Size.Wide}
         color={GoogleSigninButton.Color.Dark}
-        onPress={signIn}
+        onPress={GoogleSignIn}
+      />
+      <AppleButton
+        buttonStyle={AppleButton.Style.WHITE}
+        buttonType={AppleButton.Type.SIGN_IN}
+        style={{
+          width: 160,
+          height: 45,
+        }}
+        onPress={() => Alert.alert('apple sign in test')}
       />
     </Container>
   );
