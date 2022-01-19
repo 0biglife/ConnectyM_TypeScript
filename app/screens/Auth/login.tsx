@@ -85,7 +85,10 @@ const loginView: React.FC<LoginProps> = ({navigation}) => {
       appleAuthRequestResponse.user,
     );
     if (credentialState === appleAuth.State.AUTHORIZED) {
-      console.log('Apple Login Test');
+      const {identityToken, email, user} = appleAuthRequestResponse;
+      const decodedToken: tokenType = jwtDecode(identityToken!);
+      console.log('Apple Login Test!!!');
+      console.log('Apple Auth - decodedToken : ', decodedToken);
     }
   };
 
@@ -170,7 +173,8 @@ const loginView: React.FC<LoginProps> = ({navigation}) => {
           width: 160,
           height: 45,
         }}
-        onPress={() => Alert.alert('apple sign in test')}
+        onPress={AppleSignIn}
+        // onPress={() => Alert.alert('apple sign in test')}
       />
     </Container>
   );

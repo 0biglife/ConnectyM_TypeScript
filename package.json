@@ -34,6 +34,7 @@
     "react-native-make": "1.0.1",
     "react-native-modal": "13.0.0",
     "react-native-pager-view": "5.4.9",
+    "react-native-permissions": "3.2.0",
     "react-native-safe-area-context": "3.3.2",
     "react-native-screens": "3.9.0",
     "react-native-splash-screen": "3.3.0",
