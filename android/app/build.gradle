@@ -1,5 +1,5 @@
-apply plugin: "com.android.application"
-
+// apply plugin: 'com.android.application'
+// ㄴ : 주석처리 for react-native-google-signin error
 import com.android.build.OutputFile
 
 /**
@@ -149,12 +149,27 @@ android {
         }
     }
     signingConfigs {
+        // debug {
+        //     storeFile file('debug.keystore')
+        //     storePassword 'android'
+        //     keyAlias 'androiddebugkey'
+        //     keyPassword 'android'
+        // }
         debug {
-            storeFile file('debug.keystore')
-            storePassword 'android'
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
+         storeFile file('debug.keystore')
+         storePassword 'android'
+         keyAlias 'androiddebugkey'
+         keyPassword 'android'
         }
+
+        // release {
+        //     if (project.hasProperty('debug.keystore')) {
+        //         storeFile file('debug.keystore')
+        //         storePassword 'android'
+        //         keyAlias 'androiddebugkey'
+        //         keyPassword 'android'
+        //     }
+        // }
     }
     buildTypes {
         debug {
@@ -192,6 +207,12 @@ android {
 }
 
 dependencies {
+    
+    //react-native-google-signin / for android
+    //https://dev.to/suyashvash/google-authsignin-in-react-native-without-firebase-43n
+    implementation 'com.google.android.gms:play-services-auth:20.0.0'
+    implementation "androidx.browser:browser:1.2.0"
+
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules

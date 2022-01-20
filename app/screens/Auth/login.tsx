@@ -57,6 +57,7 @@ const loginView: React.FC<LoginProps> = ({navigation}) => {
     GoogleSignin.configure({
       webClientId:
         '21966285335-pd59r4mk54v02nd8v5k2kem3gt1th3fl.apps.googleusercontent.com',
+      // '21966285335-03fbkdnq90cqmdsca6n828muuba0kd04.apps.googleusercontent.com',
       iosClientId:
         '21966285335-0r4fqc0aoe84encol860j1q7l95mnt1o.apps.googleusercontent.com',
       offlineAccess: true,

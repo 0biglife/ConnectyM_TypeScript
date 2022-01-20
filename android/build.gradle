@@ -14,9 +14,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:4.2.2")
-
-        // classpath 'com.android.tools.build:gradle:4.2.1'
+        classpath 'com.android.tools.build:gradle:4.2.1'
         classpath 'com.google.gms:google-services:4.3.10'
 
         // implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
@@ -29,9 +27,14 @@ buildscript {
 
 allprojects {
     repositories {
-        google()
         mavenLocal()
+        google()
         mavenCentral()
+        jcenter() {
+            content {
+                includeGroup("com.google.android.exoplayer")
+            }
+        }
         maven {
             // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
             url("$rootDir/../node_modules/react-native/android")
@@ -44,10 +47,5 @@ allprojects {
         maven { url 'https://maven.google.com' } //react-native-image-crop-picker
         maven { url 'https://www.jitpack.io' }
         
-        jcenter() {
-            content {
-                includeGroup("com.google.android.exoplayer")
-            }
-        }
     }
 }
