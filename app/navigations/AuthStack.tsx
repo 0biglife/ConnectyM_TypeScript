@@ -4,7 +4,7 @@ import {
 } from '@react-navigation/stack';
 import React from 'react';
 //screens
-import {loginView, signupView} from '../screens/Auth';
+import {loginView, signupView, phoneAuth} from '../screens/Auth';
 import MainTab from './MainTab';
 import {AuthStackParamList} from './Types';
 
@@ -19,6 +19,7 @@ const AuthStack = () => {
     <Stack.Navigator screenOptions={navigationOptions}>
       <Stack.Screen name="Login" component={loginView} />
       <Stack.Screen name="SignUp" component={signupView} />
+      <Stack.Screen name="PhoneAuth" component={phoneAuth} />
       <Stack.Screen name="MainTab" component={MainTab} />
     </Stack.Navigator>
   );

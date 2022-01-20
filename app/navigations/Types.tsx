@@ -4,6 +4,7 @@ export type AuthStackParamList = {
   Login: undefined;
   SignUp: undefined;
   MainTab: undefined;
+  PhoneAuth: undefined;
 };
 
 export type ProfileParamsList = {
