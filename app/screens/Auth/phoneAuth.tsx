@@ -1,5 +1,7 @@
 import {StackNavigationProp} from '@react-navigation/stack';
 import React from 'react';
+import { Keyboard } from 'react-native';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 // import {View, Text} from 'react-native';
 import styled from 'styled-components/native';
 import {AuthStackParamList} from '../../navigations/Types';
@@ -30,6 +32,7 @@ const SubTitle = styled.Text`
 
 const PhoneNumberInput = styled.TextInput`
   height: 40px;
+  font-size: 20px;
   /* background-color: greenyellow; */
   background-color: ${prop => prop.theme.color.bg};
   border-color: lightblue;
@@ -41,13 +44,22 @@ export interface PhoneAuthProps {
   navigation: StackNavigationProp<AuthStackParamList, 'PhoneAuth'>;
 }
 
-const phoneAuth: React.FC<PhoneAuthProps> = ({navigation}) => {
+const phoneAuth: React.FC<PhoneAuthProps> = ({ navigation }) => {
+
+  // useEffect(() => {
+  //   if()
+  // },[])
+
   return (
     <Container>
       <TitleContainer>
         <Title>휴대폰 번호를 입력해주세요.</Title>
         <SubTitle>본인 인증을 위해 필요합니다.</SubTitle>
-        <PhoneNumberInput keyboardType="number-pad" />
+        <PhoneNumberInput
+          keyboardType="number-pad"
+          maxLength={11}
+          dataDetectorTypes="phoneNumber"
+        />
       </TitleContainer>
     </Container>
   );
