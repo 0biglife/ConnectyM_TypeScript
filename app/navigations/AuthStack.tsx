@@ -9,11 +9,17 @@ import MainTab from './MainTab';
 import {AuthStackParamList} from './Types';
 
 const Stack = createStackNavigator<AuthStackParamList>();
-//
+
 const AuthStack = () => {
   const navigationOptions: StackNavigationOptions = {
-    headerShown: false,
+    // headerShown: false,
+    headerTitle: '',
     gestureEnabled: false,
+    headerBackTitleVisible: false,
+    headerTintColor: 'black',
+    headerStyle: {
+      shadowColor: 'transparent', //버튼을 보여주되 헤더 가리기
+    },
   };
   return (
     <Stack.Navigator screenOptions={navigationOptions}>
