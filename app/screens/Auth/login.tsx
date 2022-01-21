@@ -162,7 +162,7 @@ const loginView: React.FC<LoginProps> = ({navigation}) => {
       <Title>Login View</Title>
       <Button
         title="Sign In"
-        onPress={() => navigation.navigate('PhoneAuth')}
+        onPress={() => navigation.navigate('PermissionAuth')}
       />
       <GoogleSigninButton
         style={{width: 192, height: 48}}

@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import styled from 'styled-components/native';
 import {AuthStackParamList} from '../../navigations/Types';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
-import {Keyboard} from 'react-native';
+import {Alert, Keyboard} from 'react-native';
 
 const Container = styled.View`
   /* flex: 1; */
@@ -61,17 +61,20 @@ export interface PhoneAuthProps {
   navigation: StackNavigationProp<AuthStackParamList, 'PhoneAuth'>;
 }
 
-const phoneAuth: React.FC<PhoneAuthProps> = ({ navigation }) => {
+const phoneAuth: React.FC<PhoneAuthProps> = ({navigation}) => {
   // const [input, setInput] = useState<string>();
   const [buttonReady, setButtonReady] = useState<boolean>(false);
-  const [dismiss, setDismiss] = useState<boolean>(false);
+  const [input, setInput] = useState<string>();
+  const [counter, setCounter] = useState<number>(0);
 
   const ButtonChange = (text: string) => {
+    setInput(text);
     if (text.length < 11) {
       setButtonReady(false);
     } else if (text.length === 11) {
       setButtonReady(true);
     }
+    console.log(input + ' / ' + buttonReady);
   };
 
   return (
@@ -84,13 +87,15 @@ const phoneAuth: React.FC<PhoneAuthProps> = ({ navigation }) => {
             keyboardType="number-pad"
             maxLength={11}
             dataDetectorTypes="phoneNumber"
-            onChangeText={input => ButtonChange(input)}
+            onChangeText={value => ButtonChange(value)}
           />
           <ButtonView
             style={{
               backgroundColor: buttonReady === true ? 'black' : 'lightgray',
             }}
-            disabled={!buttonReady}>
+            disabled={false}
+            hitSlop={{top: 20, bottom: 20, left: 20, right: 20}}
+            onPress={navigation.navigate('OtpAuth')}>
             <ButtonText>확 인</ButtonText>
           </ButtonView>
         </TitleContainer>
