@@ -34,7 +34,6 @@ const AuthStack = () => {
       <Stack.Screen name="PhoneAuth" component={phoneAuth} />
       <Stack.Screen name="OtpAuth" component={otpAuth} />
       <Stack.Screen name="PermissionAuth" component={permissionAuth} />
-      <Stack.Screen name="MainTab" component={MainTab} />
     </Stack.Navigator>
   );
 };

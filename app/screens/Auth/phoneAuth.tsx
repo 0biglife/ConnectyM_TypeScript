@@ -1,5 +1,6 @@
 import {StackNavigationProp} from '@react-navigation/stack';
-import React, {useState} from 'react';
+import axios from 'axios';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components/native';
 import {AuthStackParamList} from '../../navigations/Types';
 // import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
@@ -67,12 +68,17 @@ const phoneAuth: React.FC<PhoneAuthProps> = ({navigation}) => {
 
   const ButtonChange = (text: string) => {
     setInput(text);
-    if (text.length < 11) {
+    if (text.length < 13) {
       setButtonReady(false);
-    } else if (text.length === 11) {
+    } else if (text.length === 13) {
       setButtonReady(true);
     }
     console.log(input + ' / ' + buttonReady);
+  };
+
+  const ButtonTapped = () => {
+    //.post number
+    navigation.navigate('OtpAuth');
   };
 
   return (
@@ -83,7 +89,7 @@ const phoneAuth: React.FC<PhoneAuthProps> = ({navigation}) => {
         <SubTitle>본인 인증을 위해 필요합니다.</SubTitle>
         <PhoneNumberInput
           keyboardType="number-pad"
-          maxLength={11}
+          maxLength={13}
           dataDetectorTypes="phoneNumber"
           onChangeText={value => ButtonChange(value)}
         />
@@ -92,7 +98,7 @@ const phoneAuth: React.FC<PhoneAuthProps> = ({navigation}) => {
             backgroundColor: buttonReady === true ? 'black' : 'lightgray',
           }}
           disabled={!buttonReady}
-          onPress={() => navigation.navigate('OtpAuth')}>
+          onPress={() => ButtonTapped()}>
           <ButtonText>확 인</ButtonText>
         </ButtonView>
       </TitleContainer>

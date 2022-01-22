@@ -40,13 +40,6 @@ const Container = styled.View`
   justify-content: center;
 `;
 
-const Title = styled.Text`
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  font-weight: 400;
-`;
-
 export interface LoginProps {
   navigation: StackNavigationProp<AuthStackParamList, 'Login'>;
 }
@@ -159,10 +152,9 @@ const loginView: React.FC<LoginProps> = ({navigation}) => {
 
   return (
     <Container>
-      <Title>Login View</Title>
       <Button
         title="Sign In"
-        onPress={() => navigation.navigate('PhoneAuth')}
+        onPress={() => navigation.navigate('PermissionAuth')}
       />
       <GoogleSigninButton
         style={{width: 192, height: 48}}

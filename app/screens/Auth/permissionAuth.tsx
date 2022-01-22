@@ -80,14 +80,14 @@ export interface PermissioinAuthProps {
   navigation: StackNavigationProp<AuthStackParamList, 'PermissionAuth'>;
 }
 
-const permissionAuth: React.FC<PermissioinAuthProps> = ({ navigation }) => {
+const permissionAuth: React.FC<PermissioinAuthProps> = ({navigation}) => {
   const requestPermission = () => {
     request(PERMISSIONS.IOS.CAMERA).then(response => {
       console.log(response);
     });
   };
 
-  const checkPermission = () => {//checkMultiple을 쓸거면 이 부분 생략 가능
+  const checkPermission = () => { //checkMultiple을 쓸거면 이 부분 생략 가능
     check(PERMISSIONS.IOS.CAMERA)
       .then(result => {
         switch (result) {
@@ -126,8 +126,9 @@ const permissionAuth: React.FC<PermissioinAuthProps> = ({ navigation }) => {
       PERMISSIONS.IOS.MICROPHONE,
     ]).then(response => {
       console.log('MULTIPLE REQUEST RESPONSE : ', response);
+      navigation.navigate('PhoneAuth');
     });
-  }; // 010 6796 3100
+  };
 
   const checkMultiplePermissions = () => {
     checkMultiple([
