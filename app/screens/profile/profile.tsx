@@ -47,6 +47,7 @@ import {
 import {TabView, TabBar} from 'react-native-tab-view';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {ProfileParamsList} from '../../navigations/Types';
+import axios from 'axios';
 
 //Header UI
 const HeaderView = styled.View`
@@ -160,6 +161,9 @@ export interface ProfileProps {
 }
 
 const profileView: React.FC<ProfileProps> = ({navigation}) => {
+  //axios data get
+  const [apiData, setApiData] = useState([]);
+
   const [tabIndex, setIndex] = useState<number>(0);
   const [routes] = useState([
     {key: 'tab1', title: 'Photo'},
@@ -286,6 +290,15 @@ const profileView: React.FC<ProfileProps> = ({navigation}) => {
     };
   }, [routes, tabIndex]);
 
+  useEffect(() => {
+    axios
+      .get('http://localhost:3000/api/users/user?user_id=7')
+      .then(response => {
+        console.log(response.data);
+        const jsonData = response.data.user[0].name;
+        setApiData(jsonData);
+      });
+  }, []);
   /**
    *  helper functions
    */
@@ -470,7 +483,7 @@ const profileView: React.FC<ProfileProps> = ({navigation}) => {
           </UserInfoWrapper>
         </UserTopInfoContainer>
         <InfoContainer>
-          <UserName>{profileName}</UserName>
+          <UserName>{apiData}</UserName>
           <UserDescription>JustMusic Company, WYBH</UserDescription>
         </InfoContainer>
         <UserButtonWrapper>

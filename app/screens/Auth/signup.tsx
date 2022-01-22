@@ -26,7 +26,7 @@ const signupView: React.FC<SignUpProps> = ({navigation}) => {
   const ButtonTapped = () => {
     axios
       .post('http://localhost:3000/api/users/add', {
-        id: 4,
+        // id: 4,
         name: name,
       })
       .then(response => {
