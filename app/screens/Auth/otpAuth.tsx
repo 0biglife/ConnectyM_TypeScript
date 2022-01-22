@@ -54,17 +54,15 @@ export interface OTPAuthProps {
 
 const otpAuth: React.FC<OTPAuthProps> = ({ navigation }) => {
   return (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <Container>
-        <TitleContainer>
-          <Title>전송된 인증번호를 입력하세요.</Title>
-          <SubTitle>본인 인증을 위해 필요합니다.</SubTitle>
-          <ButtonView>
-            <ButtonText>확 인</ButtonText>
-          </ButtonView>
-        </TitleContainer>
-      </Container>
-    </TouchableWithoutFeedback>
+    <Container>
+      <TitleContainer>
+        <Title>전송된 인증번호를 입력하세요.</Title>
+        <SubTitle>본인 인증을 위해 필요합니다.</SubTitle>
+        <ButtonView onPress={() => navigation.navigate('SignUp')}>
+          <ButtonText>확 인</ButtonText>
+        </ButtonView>
+      </TitleContainer>
+    </Container>
   );
 };
 

@@ -2,8 +2,8 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import React, {useState} from 'react';
 import styled from 'styled-components/native';
 import {AuthStackParamList} from '../../navigations/Types';
-import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
-import {Alert, Keyboard} from 'react-native';
+// import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
+// import {Alert, Keyboard} from 'react-native';
 
 const Container = styled.View`
   /* flex: 1; */
@@ -62,10 +62,8 @@ export interface PhoneAuthProps {
 }
 
 const phoneAuth: React.FC<PhoneAuthProps> = ({navigation}) => {
-  // const [input, setInput] = useState<string>();
   const [buttonReady, setButtonReady] = useState<boolean>(false);
   const [input, setInput] = useState<string>();
-  const [counter, setCounter] = useState<number>(0);
 
   const ButtonChange = (text: string) => {
     setInput(text);
@@ -78,29 +76,28 @@ const phoneAuth: React.FC<PhoneAuthProps> = ({navigation}) => {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <Container>
-        <TitleContainer>
-          <Title>휴대폰 번호를 입력해주세요.</Title>
-          <SubTitle>본인 인증을 위해 필요합니다.</SubTitle>
-          <PhoneNumberInput
-            keyboardType="number-pad"
-            maxLength={11}
-            dataDetectorTypes="phoneNumber"
-            onChangeText={value => ButtonChange(value)}
-          />
-          <ButtonView
-            style={{
-              backgroundColor: buttonReady === true ? 'black' : 'lightgray',
-            }}
-            disabled={false}
-            hitSlop={{top: 20, bottom: 20, left: 20, right: 20}}
-            onPress={navigation.navigate('OtpAuth')}>
-            <ButtonText>확 인</ButtonText>
-          </ButtonView>
-        </TitleContainer>
-      </Container>
-    </TouchableWithoutFeedback>
+    // <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+    <Container>
+      <TitleContainer>
+        <Title>휴대폰 번호를 입력해주세요.</Title>
+        <SubTitle>본인 인증을 위해 필요합니다.</SubTitle>
+        <PhoneNumberInput
+          keyboardType="number-pad"
+          maxLength={11}
+          dataDetectorTypes="phoneNumber"
+          onChangeText={value => ButtonChange(value)}
+        />
+        <ButtonView
+          style={{
+            backgroundColor: buttonReady === true ? 'black' : 'lightgray',
+          }}
+          disabled={!buttonReady}
+          onPress={() => navigation.navigate('OtpAuth')}>
+          <ButtonText>확 인</ButtonText>
+        </ButtonView>
+      </TitleContainer>
+    </Container>
+    /* </TouchableWithoutFeedback> */
   );
 };
 
