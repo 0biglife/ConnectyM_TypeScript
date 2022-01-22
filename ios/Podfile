@@ -15,7 +15,7 @@ target 'ConnectyM_TS' do
   #for react-native-permissions
   permissions_path = '../node_modules/react-native-permissions/ios'
 
-  pod 'Permission-Camera', :path => "#{permissions_path}/Camera"
+  pod 'Permission-Camera', :path => "#{permissions_path}/Camera"  
   pod 'Permission-Contacts', :path => "#{permissions_path}/Contacts"
   pod 'Permission-MediaLibrary', :path => "#{permissions_path}/MediaLibrary"
   pod 'Permission-Microphone', :path => "#{permissions_path}/Microphone"
