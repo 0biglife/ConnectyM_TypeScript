@@ -292,7 +292,7 @@ const profileView: React.FC<ProfileProps> = ({navigation}) => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:3000/api/users/user?user_id=7')
+      .get('http://localhost:3000/api/users/user?user_id=4')
       .then(response => {
         console.log(response.data);
         const jsonData = response.data.user[0].name;

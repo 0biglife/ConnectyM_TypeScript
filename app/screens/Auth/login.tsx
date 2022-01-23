@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Alert} from 'react-native';
+import {Alert, Image, useColorScheme} from 'react-native';
 import styled from 'styled-components/native';
 import {Button} from '../../components';
 //Social Login
@@ -33,11 +33,41 @@ interface tokenType {
   sub: string;
 }
 
+const SafeAreaContainer = styled.SafeAreaView`
+  flex: 1;
+  background-color: ${prop => prop.theme.color.bg};
+`;
+
 const Container = styled.View`
   flex: 1;
   background-color: white;
   align-items: center;
   justify-content: center;
+`;
+
+const ImageWrapper = styled.View`
+  flex: 1;
+  justify-content: center;
+`;
+
+const ButtonWrapper = styled.View`
+  margin-bottom: 20px;
+`;
+
+const LoginButton = styled.TouchableOpacity`
+  width: 300px;
+  height: 48px;
+  border-radius: 4px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5px;
+  margin-bottom: 6px;
+`;
+
+const ButtonText = styled.Text`
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
 `;
 
 export interface LoginProps {
@@ -151,28 +181,33 @@ const loginView: React.FC<LoginProps> = ({navigation}) => {
   // };
 
   return (
-    <Container>
-      <Button
-        title="Sign In"
-        onPress={() => navigation.navigate('PermissionAuth')}
-      />
-      <GoogleSigninButton
-        style={{width: 192, height: 48}}
-        size={GoogleSigninButton.Size.Wide}
-        color={GoogleSigninButton.Color.Dark}
-        onPress={GoogleSignIn}
-      />
-      <AppleButton
-        buttonStyle={AppleButton.Style.WHITE}
-        buttonType={AppleButton.Type.SIGN_IN}
-        style={{
-          width: 160,
-          height: 45,
-        }}
-        onPress={AppleSignIn}
-        // onPress={() => Alert.alert('apple sign in test')}
-      />
-    </Container>
+    <SafeAreaContainer>
+      <Container>
+        <ImageWrapper>
+          <Image
+            source={require('../../assets/images/Connecty_logo.png')}
+            style={{
+              aspectRatio: 2,
+              resizeMode: 'contain',
+            }}
+          />
+        </ImageWrapper>
+        <ButtonWrapper>
+          <LoginButton
+            style={{backgroundColor: 'orange'}}
+            onPress={GoogleSignIn}>
+            <ButtonText>Sign in with Google</ButtonText>
+          </LoginButton>
+          <LoginButton style={{backgroundColor: 'black'}} onPress={AppleSignIn}>
+            <ButtonText>Sign in with Apple</ButtonText>
+          </LoginButton>
+          <Button
+            title="Sign In"
+            onPress={() => navigation.navigate('PermissionAuth')}
+          />
+        </ButtonWrapper>
+      </Container>
+    </SafeAreaContainer>
   );
 };
 
