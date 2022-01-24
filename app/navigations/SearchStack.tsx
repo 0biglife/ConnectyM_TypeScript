@@ -15,7 +15,11 @@ const Stack = createStackNavigator();
 const SearchStack: React.FC = () => {
   const [modalVisible, setModalVisible] = useState(false);
   return (
-    <Stack.Navigator initialRouteName="Search">
+    <Stack.Navigator
+      initialRouteName="Search"
+      screenOptions={{
+        gestureEnabled: false,
+      }}>
       <Stack.Screen
         name="Search"
         component={searchView}

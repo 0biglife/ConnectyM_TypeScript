@@ -68,9 +68,9 @@ const phoneAuth: React.FC<PhoneAuthProps> = ({navigation}) => {
 
   const ButtonChange = (text: string) => {
     setInput(text);
-    if (text.length < 13) {
+    if (text.length < 11) {
       setButtonReady(false);
-    } else if (text.length === 13) {
+    } else if (text.length === 11) {
       setButtonReady(true);
     }
     console.log(input + ' / ' + buttonReady);
@@ -89,7 +89,7 @@ const phoneAuth: React.FC<PhoneAuthProps> = ({navigation}) => {
         <SubTitle>본인 인증을 위해 필요합니다.</SubTitle>
         <PhoneNumberInput
           keyboardType="number-pad"
-          maxLength={13}
+          maxLength={11}
           dataDetectorTypes="phoneNumber"
           onChangeText={value => ButtonChange(value)}
         />

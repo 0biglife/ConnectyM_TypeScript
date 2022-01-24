@@ -2,12 +2,12 @@ import React, {useState} from 'react';
 import styled from 'styled-components/native';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {ImageSourcePropType, View} from 'react-native';
+import {View} from 'react-native';
 import {ModalView} from '../../components';
 import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {ProfileParamsList} from '../../navigations/Types';
-import ImagePicker, {ImageOrVideo} from 'react-native-image-crop-picker';
+import ImagePicker from 'react-native-image-crop-picker';
 
 const SafeAreaContainer = styled.SafeAreaView`
   flex: 1;

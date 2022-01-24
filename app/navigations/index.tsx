@@ -22,9 +22,7 @@ const isLoggedIn = false;
 export const RootNavigation = () => {
   const navigationOptions: StackNavigationOptions = {
     headerShown: false,
-    headerStyle: {
-      backgroundColor: '#323232',
-    },
+    // gestureEnabled: false,
   };
   return (
     <NavigationContainer>
@@ -36,7 +34,13 @@ export const RootNavigation = () => {
         ) : (
           <>
             <Stack.Screen name="AuthStack" component={AuthStack} />
-            <Stack.Screen name="MainTab" component={MainTab} />
+            <Stack.Screen
+              name="MainTab"
+              component={MainTab}
+              options={{
+                gestureEnabled: false,
+              }}
+            />
           </>
         )}
       </Stack.Navigator>

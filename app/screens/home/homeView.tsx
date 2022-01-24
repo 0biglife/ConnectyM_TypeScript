@@ -2,11 +2,8 @@ import React, {useState, useEffect} from 'react';
 import styled from 'styled-components/native';
 import {FlatList} from 'react-native';
 import PostCard from '../../components/PostCard';
-
-import apiClient from '../../apis/service/client';
-// import apiClient from '../../apis/spotify/client';
 import {Photo} from '../../apis/model/data';
-import {AxiosResponse} from 'axios';
+import axios, {AxiosResponse} from 'axios';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {TabNavigatorParamsList} from '../../navigations/Types';
 
@@ -25,9 +22,11 @@ const homeView: React.FC<HomeProps> = () => {
   const [posts, setPosts] = useState<Photo[]>([]);
   console.clear();
   useEffect(() => {
-    apiClient.get<Photo[]>('/photos').then((response: AxiosResponse) => {
-      setPosts(response.data);
-    });
+    axios
+      .get<Photo[]>('https://jsonplaceholder.typicode.com/photos')
+      .then((response: AxiosResponse) => {
+        setPosts(response.data);
+      });
   }, []);
 
   return (

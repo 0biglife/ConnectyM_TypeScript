@@ -12,7 +12,6 @@ import SearchStack from './SearchStack';
 //components
 import {ModalView} from '../components';
 import {TabNavigatorParamsList} from './Types';
-import { SearchBar } from 'react-native-screens';
 
 //create Navigator
 const Tab = createBottomTabNavigator<TabNavigatorParamsList>();

@@ -46,8 +46,9 @@ import {
 } from 'react-native';
 import {TabView, TabBar} from 'react-native-tab-view';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {ProfileParamsList} from '../../navigations/Types';
-import axios from 'axios';
+import { ProfileParamsList } from '../../navigations/Types';
+// HTTP
+import apiClient from '../../apis/service/client';
 
 //Header UI
 const HeaderView = styled.View`
@@ -290,14 +291,14 @@ const profileView: React.FC<ProfileProps> = ({navigation}) => {
     };
   }, [routes, tabIndex]);
 
+  const num = 3;
+
   useEffect(() => {
-    axios
-      .get('http://localhost:3000/api/users/user?user_id=4')
-      .then(response => {
-        console.log(response.data);
-        const jsonData = response.data.user[0].name;
-        setApiData(jsonData);
-      });
+    apiClient.get(`/users/user?user_id=${num}`).then(response => {
+      console.log(response.data);
+      const jsonData = response.data.user[0].name;
+      setApiData(jsonData);
+    });
   }, []);
   /**
    *  helper functions

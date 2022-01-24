@@ -17,7 +17,14 @@ const Stack = createStackNavigator();
 const ProfileStack: React.FC = () => {
   const [modalVisible, setModalVisible] = useState(false);
   return (
-    <Stack.Navigator initialRouteName="Profile">
+    <Stack.Navigator
+      initialRouteName="Profile"
+      screenOptions={{
+        headerBackTitleVisible: false,
+        headerLeft: () => {
+          return null;
+        },
+      }}>
       <Stack.Screen
         name="Profile"
         component={profileView}

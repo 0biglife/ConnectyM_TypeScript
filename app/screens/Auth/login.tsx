@@ -132,7 +132,7 @@ const loginView: React.FC<LoginProps> = ({navigation}) => {
         console.log('Storage Token : ', res),
       );
       //Move to MainTabView
-      navigation.navigate('MainTab');
+      navigation.navigate('PhoneAuth');
     } catch (error) {
       console.log('MESSAGE', error.message);
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
@@ -202,7 +202,7 @@ const loginView: React.FC<LoginProps> = ({navigation}) => {
             <ButtonText>Sign in with Apple</ButtonText>
           </LoginButton>
           <Button
-            title="Sign In"
+            title="Test Button"
             onPress={() => navigation.navigate('PermissionAuth')}
           />
         </ButtonWrapper>

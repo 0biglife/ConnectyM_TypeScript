@@ -7,7 +7,7 @@ const apiClient: AxiosInstance = axios.create({
     'Content-Type': 'application/json',
     // 'Authorization': '${TOKEN}',
   },
-  baseURL: 'https://jsonplaceholder.typicode.com',
+  baseURL: 'http://localhost:3000/api',
 });
 
 export default apiClient;
