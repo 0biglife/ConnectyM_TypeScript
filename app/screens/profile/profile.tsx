@@ -46,9 +46,10 @@ import {
 } from 'react-native';
 import {TabView, TabBar} from 'react-native-tab-view';
 import {StackNavigationProp} from '@react-navigation/stack';
-import { ProfileParamsList } from '../../navigations/Types';
+import {ProfileParamsList} from '../../navigations/Types';
 // HTTP
 import apiClient from '../../apis/service/client';
+import {Response, User} from '../../apis/model/data';
 
 //Header UI
 const HeaderView = styled.View`
@@ -291,12 +292,12 @@ const profileView: React.FC<ProfileProps> = ({navigation}) => {
     };
   }, [routes, tabIndex]);
 
-  const num = 3;
+  const num = 4;
 
   useEffect(() => {
-    apiClient.get(`/users/user?user_id=${num}`).then(response => {
-      console.log(response.data);
+    apiClient.get<Response>(`/users/user?user_id=${num}`).then(response => {
       const jsonData = response.data.user[0].name;
+      console.log('!!!!!!!!!!!!!: ', jsonData);
       setApiData(jsonData);
     });
   }, []);
@@ -516,8 +517,7 @@ const profileView: React.FC<ProfileProps> = ({navigation}) => {
           margin: 2,
           width: windowWidth / 3 - 4,
           height: windowWidth / 3 - 4,
-        }}>
-      </View>
+        }}></View>
     );
   };
 

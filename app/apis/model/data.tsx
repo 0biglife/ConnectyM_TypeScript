@@ -1,3 +1,24 @@
+//HTTP MODELS
+export interface Responses {
+  ok: boolean;
+  users: Users[];
+}
+
+export interface Users {
+  id: number;
+  name: string;
+}
+
+export interface Response {
+  ok: boolean;
+  user: User;
+}
+
+export interface User {
+  id: number;
+  name: string;
+}
+
 //Photos
 export interface Photo {
   albumId: number;
@@ -5,18 +26,6 @@ export interface Photo {
   title: string;
   url: string;
   thumbnailUrl: string;
-}
-
-//User Interface
-export interface User {
-  id: number;
-  name: string;
-  username: string;
-  email: string;
-  address: Address;
-  phone: string;
-  website: string;
-  company: Company;
 }
 
 export interface Address {

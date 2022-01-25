@@ -6,6 +6,7 @@ import {Input, Button} from '../../components';
 import { AuthStackParamList } from '../../navigations/Types';
 // HTTP
 import apiClient from '../../apis/service/client';
+import {Response} from '../../apis/model/data';
 
 const Container = styled.View`
   flex: 1;
@@ -25,8 +26,7 @@ const signupView: React.FC<SignUpProps> = ({navigation}) => {
 
   const ButtonTapped = () => {
     apiClient
-      .post('/users/add', {
-        // id: 4,
+      .post<Response>('/users/add', {
         name: name,
       })
       .then(response => {

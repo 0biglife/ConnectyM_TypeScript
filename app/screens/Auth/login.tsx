@@ -183,7 +183,7 @@ const loginView: React.FC<LoginProps> = ({navigation}) => {
   return (
     <SafeAreaContainer>
       <Container>
-        <ImageWrapper>
+        {/* <ImageWrapper>
           <Image
             source={require('../../assets/images/Connecty_logo.png')}
             style={{
@@ -191,7 +191,7 @@ const loginView: React.FC<LoginProps> = ({navigation}) => {
               resizeMode: 'contain',
             }}
           />
-        </ImageWrapper>
+        </ImageWrapper> */}
         <ButtonWrapper>
           <LoginButton
             style={{backgroundColor: 'orange'}}
