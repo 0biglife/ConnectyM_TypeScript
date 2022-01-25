@@ -84,11 +84,12 @@ const InteractionText = styled.Text`
 
 interface Props {
   item: {
-    albumId: number;
     id: number;
+    name: string;
     title: string;
     url: string;
     thumbnailUrl: string;
+    postTime: string;
   };
 }
 
@@ -104,8 +105,8 @@ const PostCard: React.FC<Props> = ({item}) => {
           }}
         />
         <UserInfoText>
-          <UserName>{item.id}</UserName>
-          <PostTime>{item.id}</PostTime>
+          <UserName>{item.name}</UserName>
+          <PostTime>{item.name}</PostTime>
         </UserInfoText>
       </UserInfo>
       <PostImg

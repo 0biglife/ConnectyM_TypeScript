@@ -6,6 +6,9 @@ import {Photo} from '../../apis/model/data';
 import axios, {AxiosResponse} from 'axios';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {TabNavigatorParamsList} from '../../navigations/Types';
+//HTTP
+import apiClient from '../../apis/service/client';
+import {ResponseFeed, Feed} from '../../apis/model/data';
 
 const SafeContainer = styled.SafeAreaView`
   flex: 1;
@@ -22,13 +25,20 @@ const homeView: React.FC<HomeProps> = () => {
   const [posts, setPosts] = useState<Photo[]>([]);
   console.clear();
   useEffect(() => {
+    apiClient.get<Feed>('/feeds').then((response: AxiosResponse) => {
+      console.log('!!!!!!! : ', response.data);
+      setPosts(response.data);
+    });
+  }, []);
+/*
+useEffect(() => {
     axios
       .get<Photo[]>('https://jsonplaceholder.typicode.com/photos')
       .then((response: AxiosResponse) => {
         setPosts(response.data);
       });
   }, []);
-
+*/
   return (
     <SafeContainer>
       <FlatList

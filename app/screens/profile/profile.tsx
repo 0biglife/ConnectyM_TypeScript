@@ -164,7 +164,7 @@ export interface ProfileProps {
 
 const profileView: React.FC<ProfileProps> = ({navigation}) => {
   //axios data get
-  const [apiData, setApiData] = useState([]);
+  const [apiData, setApiData] = useState<User>();
 
   const [tabIndex, setIndex] = useState<number>(0);
   const [routes] = useState([
@@ -296,9 +296,9 @@ const profileView: React.FC<ProfileProps> = ({navigation}) => {
 
   useEffect(() => {
     apiClient.get<Response>(`/users/user?user_id=${num}`).then(response => {
-      const jsonData = response.data.user[0].name;
+      const jsonData = response.data.user[0];
       console.log('!!!!!!!!!!!!!: ', jsonData);
-      setApiData(jsonData);
+      // setApiData(jsonData);
     });
   }, []);
   /**
