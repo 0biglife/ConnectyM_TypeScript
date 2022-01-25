@@ -5,13 +5,13 @@ import IonIcon from 'react-native-vector-icons/Ionicons';
 // const Width = Dimensions.get('window').width;
 
 const Card = styled.View`
-  /* background-color: #ebebeb; //#f8f8f8; */
-  background-color: ${props => props.theme.color.bg};
+  background-color: #ebebeb; //#f8f8f8;
+  /* background-color: ${props => props.theme.color.bg}; */
   /* width: 380px; */
   /* max-width: 100%; */
   min-width: 100%;
-  margin-bottom: 10px;
-  border-radius: 10px;
+  margin-bottom: 6px;
+  /* border-radius: 10px; */
 `;
 
 const UserInfo = styled.View`
@@ -106,7 +106,7 @@ const PostCard: React.FC<Props> = ({item}) => {
         />
         <UserInfoText>
           <UserName>{item.name}</UserName>
-          <PostTime>{item.name}</PostTime>
+          <PostTime>{item.postTime}</PostTime>
         </UserInfoText>
       </UserInfo>
       <PostImg

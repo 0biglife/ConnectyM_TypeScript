@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components/native';
-import {FlatList} from 'react-native';
+import {Alert, FlatList} from 'react-native';
 import PostCard from '../../components/PostCard';
 import {Photo} from '../../apis/model/data';
 import axios, {AxiosResponse} from 'axios';
@@ -23,22 +23,35 @@ export interface HomeProps {
 
 const homeView: React.FC<HomeProps> = () => {
   const [posts, setPosts] = useState<Photo[]>([]);
-  console.clear();
+  const [refresh, setRefresh] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(1);
+
   useEffect(() => {
+    refreshData();
+  }, []);
+
+  useEffect(() => {
+    refreshData();
+  }, [refresh]);
+
+  const refreshData = () => {
     apiClient.get<Feed>('/feeds').then((response: AxiosResponse) => {
       console.log('!!!!!!! : ', response.data);
       setPosts(response.data);
+      setPage(page + 1);
     });
-  }, []);
-/*
-useEffect(() => {
-    axios
-      .get<Photo[]>('https://jsonplaceholder.typicode.com/photos')
-      .then((response: AxiosResponse) => {
-        setPosts(response.data);
-      });
-  }, []);
-*/
+  };
+
+  const wait = timeout => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+  };
+
+  const refreshing = () => {
+    setPage(1);
+    setRefresh(true);
+    wait(1000).then(() => setRefresh(false));
+  };
+
   return (
     <SafeContainer>
       <FlatList
@@ -46,6 +59,8 @@ useEffect(() => {
         renderItem={({item}) => <PostCard item={item} />}
         keyExtractor={item => item.id}
         showsVerticalScrollIndicator={false}
+        onRefresh={() => refreshing()}
+        refreshing={refresh}
       />
     </SafeContainer>
   );
