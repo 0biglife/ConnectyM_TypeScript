@@ -62,13 +62,13 @@ const ModalView = (props: Props) => {
             <ModalTitleText>게시글 추가</ModalTitleText>
           </ModalTitle>
           <ModalButton onPress={props.firstFunction}>
-            <ModalButtonText>카메라</ModalButtonText>
+            <ModalButtonText>추가</ModalButtonText>
           </ModalButton>
           <ModalButton onPress={props.secondFunction}>
-            <ModalButtonText>앨범</ModalButtonText>
+            <ModalButtonText>추가</ModalButtonText>
           </ModalButton>
           <ModalButton onPress={props.thirdFunction}>
-            <ModalButtonText>음악</ModalButtonText>
+            <ModalButtonText>추가</ModalButtonText>
           </ModalButton>
         </ModalContainer>
       </Modal>

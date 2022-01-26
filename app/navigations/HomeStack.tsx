@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {TouchableOpacity} from 'react-native';
 import {
   homeView,
-  postView,
   SecondCatView,
   ThirdCatView,
   uploadView,
@@ -56,6 +55,8 @@ const HomeStack: React.FC<HomStackProps> = ({navigation}) => {
     <Stack.Navigator
       screenOptions={{
         headerTitle: 'Home',
+        headerBackTitleVisible: false,
+        headerLeft: () => null,
         headerRight: () => {
           return (
             <TouchableOpacity onPress={() => setModalVisible(true)}>
@@ -77,8 +78,14 @@ const HomeStack: React.FC<HomStackProps> = ({navigation}) => {
         },
       }}>
       <Stack.Screen component={HomeTabNavigation} name="HomeTab" />
-      <Stack.Screen component={postView} name="postView" />
-      <Stack.Screen component={uploadView} name="UploadView" />
+      <Stack.Screen
+        component={uploadView}
+        name="UploadView"
+        options={{
+          headerShown: false,
+          // headerRight: () => null,
+        }}
+      />
     </Stack.Navigator>
   );
 };
