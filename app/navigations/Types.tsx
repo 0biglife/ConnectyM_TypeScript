@@ -9,6 +9,11 @@ export type AuthStackParamList = {
   PermissionAuth: undefined;
 };
 
+export type HomeParamsList = {
+  HomeView: undefined;
+  UploadView: undefined;
+};
+
 export type ProfileParamsList = {
   Profile: undefined;
   EditProfile: {

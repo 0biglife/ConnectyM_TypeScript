@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import IonIcon from 'react-native-vector-icons/Ionicons';
-import {TouchableOpacity} from 'react-native';
+import {Alert, TouchableOpacity} from 'react-native';
 
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {BottomTabNavigationProp, createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 //screens
 import {mymusicView, boardView} from '../screens';
 //Navigations
@@ -11,13 +11,27 @@ import HomeStack from './HomeStack';
 import SearchStack from './SearchStack';
 //components
 import {ModalView} from '../components';
-import {TabNavigatorParamsList} from './Types';
+import {HomeParamsList, TabNavigatorParamsList} from './Types';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {CompositeNavigationProp} from '@react-navigation/native';
 
 //create Navigator
 const Tab = createBottomTabNavigator<TabNavigatorParamsList>();
 
-const MainTab = () => {
+export interface MainTabProps {
+  navigation: CompositeNavigationProp<
+    BottomTabNavigationProp<TabNavigatorParamsList, 'Home'>,
+    StackNavigationProp<HomeParamsList, 'HomeView'>
+  >;
+}
+
+const MainTab: React.FC<MainTabProps> = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
+
+  const posting = () => {
+    navigation.navigate('UploadView');
+  };
+
   return (
     <>
       <Tab.Navigator
@@ -59,6 +73,9 @@ const MainTab = () => {
                   <ModalView
                     modalVisible={modalVisible}
                     setModalVisible={setModalVisible}
+                    firstFunction={() => posting()}
+                    secondFunction={() => posting()}
+                    thirdFunction={() => posting()}
                   />
                 </TouchableOpacity>
               );

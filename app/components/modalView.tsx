@@ -7,6 +7,7 @@ interface Props {
   setModalVisible: any;
   firstFunction: () => void;
   secondFunction: () => void;
+  thirdFunction: () => void;
 }
 
 const SafeAreaView = styled.SafeAreaView`
@@ -66,7 +67,7 @@ const ModalView = (props: Props) => {
           <ModalButton onPress={props.secondFunction}>
             <ModalButtonText>앨범</ModalButtonText>
           </ModalButton>
-          <ModalButton>
+          <ModalButton onPress={props.thirdFunction}>
             <ModalButtonText>음악</ModalButtonText>
           </ModalButton>
         </ModalContainer>

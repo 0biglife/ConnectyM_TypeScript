@@ -6,12 +6,6 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import {ModalView} from '../components';
 
-export type ProfileParam = {
-  Profile: undefined;
-  EditProfile: undefined;
-  Message: undefined;
-};
-
 const Stack = createStackNavigator();
 
 const ProfileStack: React.FC = () => {

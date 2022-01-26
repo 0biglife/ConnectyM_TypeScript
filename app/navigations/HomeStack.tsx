@@ -1,5 +1,11 @@
 import React from 'react';
-import {homeView, postView, SecondCatView, ThirdCatView} from '../screens';
+import {
+  homeView,
+  postView,
+  SecondCatView,
+  ThirdCatView,
+  uploadView,
+} from '../screens';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 
@@ -35,6 +41,7 @@ const HomeStack: React.FC = () => {
     <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen component={HomeTabNavigation} name="HomeTab" />
       <Stack.Screen component={postView} name="postView" />
+      <Stack.Screen component={uploadView} name="UploadView" />
     </Stack.Navigator>
   );
 };
