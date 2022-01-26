@@ -1,10 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
-import {Alert, FlatList} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {HomeParamsList, TabNavigatorParamsList} from '../../navigations/Types';
-//HTTP
-import apiClient from '../../apis/service/client';
+import {HomeParamsList} from '../../navigations/Types';
 
 const SafeContainer = styled.SafeAreaView`
   flex: 1;
@@ -29,10 +26,10 @@ const ButtonView = styled.TouchableOpacity`
 `;
 
 export interface UploadParams {
-  navigation: StackNavigationProp<HomeParamsList, 'Upload'>;
+  navigation: StackNavigationProp<HomeParamsList, 'UploadView'>;
 }
 
-const uploadView: React.FC<UploadParams> = ({navigation}) => {
+const uploadView: React.FC<UploadParams> = () => {
   return (
     <SafeContainer>
       <Wrapper>

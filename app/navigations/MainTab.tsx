@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import IonIcon from 'react-native-vector-icons/Ionicons';
-import {Alert, TouchableOpacity} from 'react-native';
 
 import {BottomTabNavigationProp, createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 //screens
@@ -10,7 +9,6 @@ import ProfileStack from './ProfileStack';
 import HomeStack from './HomeStack';
 import SearchStack from './SearchStack';
 //components
-import {ModalView} from '../components';
 import {HomeParamsList, TabNavigatorParamsList} from './Types';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {CompositeNavigationProp} from '@react-navigation/native';
@@ -25,13 +23,7 @@ export interface MainTabProps {
   >;
 }
 
-const MainTab: React.FC<MainTabProps> = ({navigation}) => {
-  const [modalVisible, setModalVisible] = useState(false);
-
-  const posting = () => {
-    navigation.navigate('UploadView');
-  };
-
+const MainTab: React.FC<MainTabProps> = () => {
   return (
     <>
       <Tab.Navigator
@@ -61,25 +53,7 @@ const MainTab: React.FC<MainTabProps> = ({navigation}) => {
           name="Home"
           component={HomeStack}
           options={{
-            headerRight: () => {
-              return (
-                <TouchableOpacity onPress={() => setModalVisible(true)}>
-                  <IonIcon
-                    name="add"
-                    size={24}
-                    color="black"
-                    style={{marginRight: 8}}
-                  />
-                  <ModalView
-                    modalVisible={modalVisible}
-                    setModalVisible={setModalVisible}
-                    firstFunction={() => posting()}
-                    secondFunction={() => posting()}
-                    thirdFunction={() => posting()}
-                  />
-                </TouchableOpacity>
-              );
-            },
+            headerShown: false,
           }}
         />
         <Tab.Screen

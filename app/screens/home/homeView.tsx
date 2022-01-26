@@ -19,7 +19,7 @@ const SafeContainer = styled.SafeAreaView`
 `;
 
 export interface HomeProps {
-  navigation: StackNavigationProp<HomeParamsList, 'Home'>;
+  navigation: StackNavigationProp<HomeParamsList, 'HomeView'>;
 }
 
 const homeView: React.FC<HomeProps> = () => {
