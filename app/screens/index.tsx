@@ -1,7 +1,7 @@
 import homeView from './Home/homeView';
 import SecondCatView from './Home/SecondCat';
 import ThirdCatView from './Home/ThirdCat';
-import uploadView from './Home/uploadView';
+import UploadModal from './Home/UploadModal';
 
 import loginView from './Auth/login';
 import signupView from './Auth/signup';
@@ -12,12 +12,12 @@ import profileView from './profile/profile';
 import editProfileView from './profile/editProfileView';
 import MessageView from './profile/MessageView';
 
-import musicPlayer from './MusicPlayer';
+// import musicPlayer from './MusicPlayer';
 import PlayerBar from './PlayerBar';
 
 export {
   homeView,
-  uploadView,
+  UploadModal,
   SecondCatView,
   ThirdCatView,
   loginView,
@@ -27,7 +27,7 @@ export {
   boardView,
   profileView,
   editProfileView,
-  musicPlayer,
+  // musicPlayer,
   PlayerBar,
   MessageView,
 };

@@ -2,11 +2,12 @@ import React, {useState} from 'react';
 import styled from 'styled-components/native';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {Dimensions, View} from 'react-native';
 import {ModalView} from '../../components';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {HomeParamsList} from '../../navigations/Types';
 import ImagePicker from 'react-native-image-crop-picker';
+import apiClient from '../../apis/service/client';
+import {Feed, ResponseFeed} from '../../apis/model/data';
 
 const SafeAreaContainer = styled.SafeAreaView`
   flex: 1;
@@ -75,7 +76,7 @@ export interface UploadParams {
   navigation: StackNavigationProp<HomeParamsList, 'UploadView'>;
 }
 
-const uploadView: React.FC<UploadParams> = ({navigation}) => {
+const UploadModal: React.FC<UploadParams> = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [textInput, setTextInput] = useState<string>('');
   const close = () => setModalVisible(false);
@@ -102,7 +103,7 @@ const uploadView: React.FC<UploadParams> = ({navigation}) => {
       // compressImageQuality: 0.7,
     })
       .then(image => {
-        console.log('ImgaeSource : ', image);
+        // console.log('ImgaeSource : ', image);
         setUri(image.path);
       })
       .finally(close);
@@ -110,9 +111,25 @@ const uploadView: React.FC<UploadParams> = ({navigation}) => {
 
   const imageSource = require('../../assets/images/profileDefault.jpeg');
 
+  let today = new Date();
+  let time = {
+    year: today.getFullYear(),
+    month: today.getMonth() + 1,
+    date: today.getDate(),
+  };
+  let timeSet = `${time.year}-${time.month}-${time.date}`;
+
   const PostingDone = () => {
-    console.log('DATA TEXT : ', textInput);
-    console.log('DATA URI : ', uri);
+    apiClient
+      .post<ResponseFeed>('/feeds/add', {
+        title: textInput,
+        url: uri,
+        thumbnailUrl: uri,
+        postTime: timeSet,
+      })
+      .then(response => {
+        console.log(response.data);
+      });
     navigation.goBack();
   };
 
@@ -138,6 +155,7 @@ const uploadView: React.FC<UploadParams> = ({navigation}) => {
                 setModalVisible={setModalVisible}
                 firstFunction={cameraAccess}
                 secondFunction={libraryAccess}
+                thirdFunction={cameraAccess}
               />
             </ModalContainer>
           </TouchableOpacity>
@@ -156,4 +174,4 @@ const uploadView: React.FC<UploadParams> = ({navigation}) => {
   );
 };
 
-export default uploadView;
+export default UploadModal;

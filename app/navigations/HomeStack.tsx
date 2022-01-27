@@ -1,11 +1,6 @@
 import React, {useState} from 'react';
 import {TouchableOpacity} from 'react-native';
-import {
-  homeView,
-  SecondCatView,
-  ThirdCatView,
-  uploadView,
-} from '../screens';
+import {homeView, SecondCatView, ThirdCatView, UploadModal} from '../screens';
 import {ModalView} from '../components';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
@@ -79,7 +74,7 @@ const HomeStack: React.FC<HomStackProps> = ({navigation}) => {
       }}>
       <Stack.Screen component={HomeTabNavigation} name="HomeTab" />
       <Stack.Screen
-        component={uploadView}
+        component={UploadModal}
         name="UploadView"
         options={{
           headerShown: false,

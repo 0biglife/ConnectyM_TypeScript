@@ -12,13 +12,13 @@ export interface User {
 
 export interface ResponseFeed {
   ok: boolean;
-  feeds: Feed[];
+  feed: Feed;
 }
 
 export interface Feed {
   id: number;
-  title: string;
   name: string;
+  title: string;
   url: string;
   thumbnailUrl: string;
   postTime: string;
