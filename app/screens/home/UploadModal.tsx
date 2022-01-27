@@ -7,7 +7,9 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {HomeParamsList} from '../../navigations/Types';
 import ImagePicker from 'react-native-image-crop-picker';
 import apiClient from '../../apis/service/client';
-import {Feed, ResponseFeed} from '../../apis/model/data';
+import {ResponseFeed} from '../../apis/model/data';
+import { Alert } from 'react-native';
+import SimpleModal from '../../components/SimpleModal';
 
 const SafeAreaContainer = styled.SafeAreaView`
   flex: 1;
@@ -38,7 +40,7 @@ const ImageContainer = styled.View`
   align-items: center;
 `;
 
-const ProfileImage = styled.Image`
+const PostingImage = styled.Image`
   width: 100%;
   height: 300px;
   border-width: 0.5px;
@@ -76,7 +78,9 @@ export interface UploadParams {
   navigation: StackNavigationProp<HomeParamsList, 'UploadView'>;
 }
 
-const UploadModal: React.FC<UploadParams> = ({navigation}) => {
+const UploadModal: React.FC<UploadParams> = ({ navigation }) => {
+  const [cancelModal, setCancelModal] = useState<boolean>(false);
+  const [postModal, setPostModal] = useState<boolean>(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [textInput, setTextInput] = useState<string>('');
   const close = () => setModalVisible(false);
@@ -119,34 +123,66 @@ const UploadModal: React.FC<UploadParams> = ({navigation}) => {
   };
   let timeSet = `${time.year}-${time.month}-${time.date}`;
 
+  const CancelLogic = () => {
+    if (textInput || uri) {
+      setCancelModal(true);
+    } else {
+      setCancelModal(false);
+      navigation.goBack();
+    }
+  };
+
   const PostingDone = () => {
-    apiClient
-      .post<ResponseFeed>('/feeds/add', {
-        title: textInput,
-        url: uri,
-        thumbnailUrl: uri,
-        postTime: timeSet,
-      })
-      .then(response => {
-        console.log(response.data);
-      });
-    navigation.goBack();
+    if (uri) {
+      apiClient
+        .post<ResponseFeed>('/feeds/add', {
+          title: textInput,
+          url: uri,
+          thumbnailUrl: uri,
+          postTime: timeSet,
+        })
+        .then(response => {
+          console.log(response.data);
+        });
+      navigation.goBack();
+    } else {
+      setPostModal(false);
+      Alert.alert('사진이 있어야 게시 가능합니다.');
+    }
   };
 
   return (
     <SafeAreaContainer>
       <MainContainer>
         <TopButtonView>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
+          <TouchableOpacity onPress={() => CancelLogic()}>
             <IonIcon name="close-outline" style={{fontSize: 35}} />
+            <SimpleModal
+              modalVisible={cancelModal}
+              setModalVisible={setCancelModal}
+              alertTitle="취소하시겠습니까?"
+              leftTitle="돌아가기"
+              rightTitle="확인"
+              leftButton={() => setCancelModal(false)}
+              rightButton={() => navigation.goBack()}
+            />
           </TouchableOpacity>
           <Title>게시글 추가</Title>
-          <TouchableOpacity onPress={() => PostingDone()}>
+          <TouchableOpacity onPress={() => setPostModal(true)}>
             <IonIcon name="checkmark" style={{fontSize: 35}} color="#3493D9" />
+            <SimpleModal
+              modalVisible={postModal}
+              setModalVisible={setPostModal}
+              alertTitle="업로드하시겠습니까?"
+              leftTitle="취소"
+              rightTitle="업로드"
+              leftButton={() => setPostModal(false)}
+              rightButton={() => PostingDone()}
+            />
           </TouchableOpacity>
         </TopButtonView>
         <ImageContainer>
-          <ProfileImage source={uri ? {uri} : imageSource} />
+          <PostingImage source={uri ? {uri} : imageSource} />
           <TouchableOpacity onPress={() => setModalVisible(true)}>
             <ModalContainer>
               <ProfileChangeText>Posting your photo</ProfileChangeText>
