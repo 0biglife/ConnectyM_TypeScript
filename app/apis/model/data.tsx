@@ -2,12 +2,13 @@
 
 export interface Response {
   ok: boolean;
-  user: User;
+  users: User;
 }
 
 export interface User {
   id: number;
   name: string;
+  thumbnailUrl: string;
 }
 
 export interface ResponseFeed {

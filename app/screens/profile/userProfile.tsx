@@ -158,11 +158,11 @@ const SafeStatusBar = Platform.select({
 });
 const PullToRefreshDist = 150;
 
-export interface ProfileProps {
+export interface UserProfileProps {
   navigation: StackNavigationProp<ProfileParamsList, 'Profile'>;
 }
 
-const profileView: React.FC<ProfileProps> = ({navigation}) => {
+const userProfile: React.FC<UserProfileProps> = ({navigation}) => {
   //axios data get
   const [apiData, setApiData] = useState<User>();
 
@@ -291,10 +291,6 @@ const profileView: React.FC<ProfileProps> = ({navigation}) => {
       headerScrollY.removeAllListeners();
     };
   }, [routes, tabIndex]);
-
-  navigation.setOptions({
-    headerTitle: apiData?.name,
-  });
 
   useEffect(() => {
     apiClient.get<Response>(`/users`).then(response => {
@@ -743,4 +739,4 @@ const styles = StyleSheet.create({
   indicator: {backgroundColor: '#222'},
 });
 
-export default profileView;
+export default userProfile;

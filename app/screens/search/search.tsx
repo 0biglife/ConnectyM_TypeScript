@@ -1,21 +1,21 @@
 import React, {useEffect, useState} from 'react';
 import {FlatList, TouchableOpacity} from 'react-native-gesture-handler';
 import styled from 'styled-components/native';
-import {AxiosResponse} from 'axios';
-import apiClient from '../../apis/unsplash/client';
-import {Photo} from '../../apis/model/data';
 import {SearchParamsList} from '../../navigations/Types';
+import apiClient from '../../apis/service/client';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp, useNavigation} from '@react-navigation/native';
-import { accessKey } from '../../apis/unsplash/config';
-import { SearchBar } from 'react-native-screens';
-import IonIcon from 'react-native-vector-icons/Ionicons';
+import { Alert } from 'react-native';
+import axios from 'axios';
+import naverAPI from '../../apis/spotify/client';
+import Unsplash from '../../apis/unsplash/client';
 
 const headerHeight = 62;
 const BodyHeight = 150;
 
 const SafeContainer = styled.SafeAreaView`
   flex: 1;
+  background-color: ${prop => prop.theme.color.bg};
 `;
 
 const MainContainer = styled.View`
@@ -26,13 +26,6 @@ const MainContainer = styled.View`
   padding: 8px;
 `;
 
-const IconView = styled.View`
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  background-color: red;
-`;
-
 const SearchTextInput = styled.TextInput`
   align-self: center;
   width: 100%;
@@ -41,7 +34,8 @@ const SearchTextInput = styled.TextInput`
   border-radius: 8px;
   padding-left: 20px;
   border-color: lightgray;
-  background-color: ${prop => prop.theme.color.bg};
+  /* background-color: ${prop => prop.theme.color.bg}; */
+  background-color: lightgray;
 `;
 
 const CellContainer = styled.View`
@@ -94,31 +88,15 @@ export interface SearchProps {
 }
 
 const searchView: React.FC<SearchProps> = () => {
-  const [query, setQuery] = useState('');
+  const [value, setValue] = useState<string>('');
   const [filteredData, setFilteredData] = useState([]);
   const [masterData, setMasterdData] = useState([]);
-  const navigation = useNavigation();
-
-  const searchPhotos = () => {
-    apiClient
-      .get<Photo[]>(
-        `/search/photos?page=1&query=${query}&client_id=${accessKey}`,
-      )
-      .then((response: AxiosResponse) => {
-        try {
-          const res = response.data;
-          console.log(res);
-          const jsonData = res.result;
-          setFilteredData(jsonData);
-          setMasterdData(jsonData);
-        } catch (error) {
-          console.error(error);
-        }
-      });
-  };
 
   useEffect(() => {
-    searchPhotos();
+    // apiClient.get<Response>('/users').then(response => {
+    //   const jsonData = response.data;
+    //   console.log('SEARCHVIEW : ', jsonData);
+    // });
     // apiClient
     //   .get<Photo[]>(
     //     `/search/photos?page=1&query=${query}/client_id=${accessKey}`,
@@ -142,7 +120,7 @@ const searchView: React.FC<SearchProps> = () => {
         <HeaderSection>
           <TouchableOpacity
             style={{flexDirection: 'row'}}
-            onPress={() => navigation.navigate('ProfileStack')}>
+            onPress={() => Alert.alert('test')}>
             <ProfileImage source={{uri: item.user.profile_image.small}} />
             <ProfileName>{item.user.name}</ProfileName>
           </TouchableOpacity>
@@ -155,30 +133,41 @@ const searchView: React.FC<SearchProps> = () => {
   };
 
   const searchFilter = (text: string) => {
-    setQuery(text);
-    console.log(query);
-    // if (text) {
-    //   const newData = masterData.filter(item => {
-    //     const itemData = item.desctiption ? item.desctiption : '';
-    //     const textData = text;
-    //     return itemData.indexOf(textData) > -1;
-    //   });
-    //   setFilteredData(newData);
-    //   setSearch(text);
-    // } else {
-    //   setFilteredData(masterData);
-    //   setSearch(text);
-    // }
+    setValue(text);
+    console.log('searchFilter : ', value);
+  };
+
+  const searchData = async () => {
+    try {
+      // apiClient.get(`/search/${text}`).then(response => {
+      //   console.log('!!@@#!@!@: ', response.data);
+      // });
+      naverAPI
+        .get(`/v1/search/blog.xml?query=${value}&display=10&start=1&sort=sim`)
+        .then(response => {
+          console.log('UNSPLASH DATA : ', response.data);
+        });
+    } catch (error) {
+      console.log('UNSPLASH ERROR : ', error);
+    }
+  };
+
+  const onSubmit = () => {
+    Alert.alert('onSubmit');
+    searchData();
   };
 
   return (
     <SafeContainer>
       <MainContainer>
         <SearchTextInput
-          value={query}
+          value={value}
+          returnKeyType="done"
           placeholder="검색"
-          underlineColorAndroid="transparent"
-          onChangeText={text => searchFilter(text)}
+          placeholderTextColor="darkgray"
+          // underlineColorAndroid="transparent"
+          onSubmitEditing={() => onSubmit()}
+          onChangeText={(text: string) => searchFilter(text)}
         />
         <FlatList
           data={filteredData}

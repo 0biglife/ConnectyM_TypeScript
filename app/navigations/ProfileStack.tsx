@@ -35,6 +35,7 @@ const ProfileStack: React.FC = () => {
                 <ModalView
                   modalVisible={modalVisible}
                   setModalVisible={setModalVisible}
+                  //
                 />
               </TouchableOpacity>
             );

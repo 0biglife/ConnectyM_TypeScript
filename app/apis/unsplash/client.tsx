@@ -1,11 +1,12 @@
 import axios, {AxiosInstance} from 'axios';
 import {accessKey, baseUrl} from './config';
 
-const apiClient: AxiosInstance = axios.create({
+const Unsplash: AxiosInstance = axios.create({
   headers: {
     Authorization: accessKey,
   },
+  // baseURL: `${baseUrl}/?client_id=${accessKey}`,
   baseURL: baseUrl,
 });
 
-export default apiClient;
+export default Unsplash;

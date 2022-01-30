@@ -36,7 +36,7 @@ const homeView: React.FC<HomeProps> = () => {
   // }, [refresh]);
 
   const fetchData = () => {
-    apiClient.get<Feed>('/feeds').then((response: AxiosResponse) => {
+    apiClient.get<ResponseFeed>('/feeds').then((response: AxiosResponse) => {
       console.log('!!!!!!! : ', response.data);
       setPosts(response.data);
       // setPage(page + 1);

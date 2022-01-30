@@ -59,8 +59,8 @@ const SimpleModal = (props: Props) => {
     <SafeAreaView>
       <Modal
         isVisible={props.modalVisible}
-        animationInTiming={1}
-        animationOutTiming={1}
+        animationInTiming={0.1}
+        animationOutTiming={0.1}
         // hideModalContentWhileAnimating={true}
         onBackdropPress={() => props.setModalVisible(false)}>
         <ModalContainer>
