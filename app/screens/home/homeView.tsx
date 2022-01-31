@@ -5,11 +5,10 @@ import PostCard from '../../components/PostCard';
 import {Photo} from '../../apis/model/data';
 import axios, {AxiosResponse} from 'axios';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {HomeParamsList, TabNavigatorParamsList} from '../../navigations/Types';
+import {HomeParamsList} from '../../navigations/Types';
 //HTTP
 import apiClient from '../../apis/service/client';
 import {ResponseFeed, Feed} from '../../apis/model/data';
-import { number } from 'prop-types';
 
 const SafeContainer = styled.SafeAreaView`
   flex: 1;
