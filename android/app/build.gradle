@@ -1,4 +1,4 @@
-// apply plugin: 'com.android.application'
+apply plugin: 'com.android.application'
 // ㄴ : 주석처리 for react-native-google-signin error
 import com.android.build.OutputFile
 
@@ -149,26 +149,19 @@ android {
         }
     }
     signingConfigs {
-        // debug {
-        //     storeFile file('debug.keystore')
-        //     storePassword 'android'
-        //     keyAlias 'androiddebugkey'
-        //     keyPassword 'android'
-        // }
-        debug {
-         storeFile file('debug.keystore')
-         storePassword 'android'
-         keyAlias 'androiddebugkey'
-         keyPassword 'android'
+        release{
+            if(project.hasProperty('debug.keystore')){
+                storeFile file('debug.keystore')
+                storePassword 'android'
+                keyAlias 'androiddebugkey'
+                keyPassword 'android'
+            }
         }
-
-        // release {
-        //     if (project.hasProperty('debug.keystore')) {
-        //         storeFile file('debug.keystore')
-        //         storePassword 'android'
-        //         keyAlias 'androiddebugkey'
-        //         keyPassword 'android'
-        //     }
+        // debug {
+        //  storeFile file('debug.keystore')
+        //  storePassword 'android'
+        //  keyAlias 'androiddebugkey'
+        //  keyPassword 'android'
         // }
     }
     buildTypes {
@@ -183,7 +176,7 @@ android {
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release //release는 원래 debug였음
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
@@ -210,16 +203,22 @@ dependencies {
     
     //react-native-google-signin / for android
     //https://dev.to/suyashvash/google-authsignin-in-react-native-without-firebase-43n
-    implementation 'com.google.android.gms:play-services-auth:20.0.0'
-    implementation "androidx.browser:browser:1.2.0"
+
+    //아래 줄 코드 때문에 다른 com.google.gms~ 랑 겹치는 에러 : Gradle 7.0 ~
+    // implementation 'com.google.android.gms:play-services-auth:20.0.0'
+    // implementation "androidx.browser:browser:1.2.0"
 
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
-    implementation "com.facebook.react:react-native:+"  // From node_modules
+
+    //아래 코드 끝에가 React-native version
+    implementation "com.facebook.react:react-native:0.66.3"  // From node_modules
+
+    //react-native-googlesignin 코드
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
 
     implementation project(':react-native-splash-screen') //react-native-splash-screen
 
-    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
     
     implementation 'androidx.multidex:multidex:2.0.1'
 
@@ -253,4 +252,5 @@ task copyDownloadableDepsToLibs(type: Copy) {
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
+
 apply plugin: 'com.google.gms.google-services'

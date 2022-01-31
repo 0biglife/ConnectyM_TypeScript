@@ -6,7 +6,7 @@
     <!-- to access the camera -->
     <uses-permission android:name="android.permission.CAMERA"/> 
     <!-- to read and write storage -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/></
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:usesCleartextTraffic="true"

@@ -1,12 +1,47 @@
 {
-  "web":{
-    "client_id":"21966285335-pd59r4mk54v02nd8v5k2kem3gt1th3fl.apps.googleusercontent.com",
-    "project_id":"connecty-api-auth-317308",
-    "auth_uri":"https://accounts.google.com/o/oauth2/auth",
-    "token_uri":"https://oauth2.googleapis.com/token",
-    "auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs",
-    "client_secret":"Wz_WuehYVirjPPn4gMPDo5sE",
-    "redirect_uris":["http://localhost:3000/me"],
-    "javascript_origins":["http://localhost:3000"]
-  }
+  "project_info": {
+    "project_number": "353614009381",
+    "project_id": "connectymtest02",
+    "storage_bucket": "connectymtest02.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:353614009381:android:4dc343e88b46fa1b961bcc",
+        "android_client_info": {
+          "package_name": "com.connectym_ts"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "21966285335-pd59r4mk54v02nd8v5k2kem3gt1th3fl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.connectym_ts",
+            "certificate_hash": "6f9322e907c3b536fb0461ccfcb45f9f63862e1c"
+          }
+        },
+        {
+          "client_id": "353614009381-4q0gf37ea8al9rliooc7qd2hr0fajpjr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQiOxQmJRK_7UOuFfwDgxBjo1RDaU54qY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "21966285335-pd59r4mk54v02nd8v5k2kem3gt1th3fl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
 }

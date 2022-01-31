@@ -16,6 +16,8 @@ import java.util.List;
 
 import androidx.multidex.MultiDexApplication;
 
+import org.devio.rn.splashscreen.SplashScreenReactPackage;
+
 public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost =

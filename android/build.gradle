@@ -12,6 +12,7 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        jcenter()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:4.2.1'
@@ -29,12 +30,12 @@ allprojects {
     repositories {
         mavenLocal()
         google()
-        mavenCentral()
-        jcenter() {
+        mavenCentral() { //이거 원래 jcenter()였음
             content {
-                includeGroup("com.google.android.exoplayer")
+                // idncludeGroup("com.google.android.exoplayer")
             }
         }
+        jcenter()
         maven {
             // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
             url("$rootDir/../node_modules/react-native/android")
@@ -46,6 +47,7 @@ allprojects {
 
         maven { url 'https://maven.google.com' } //react-native-image-crop-picker
         maven { url 'https://www.jitpack.io' }
+        
         
     }
 }

@@ -4,6 +4,8 @@
     <item android:drawable="@color/splashprimary" />
     <item>
         <bitmap
+                android:width="300dp"
+                android:height="300dp"
                 android:gravity="center"
                 android:src="@drawable/splash_image" />
     </item>
