@@ -1,36 +1,6 @@
-// import React from 'react';
-// import styled from 'styled-components/native';
-// import {StackNavigationProp} from '@react-navigation/stack';
-// import {ProfileParamsList} from '../../navigations/Types';
-
-// const SafeViewContainer = styled.SafeAreaView`
-//   flex: 1;
-// `;
-
-// const ScrollViewContainer = styled.ScrollView`
-//   flex: 1;
-//   /* margin-top: 90; */
-//   /* padding-top: 35; */
-//   background-color: lightgray;
-// `;
-
-// // const AnimatedScrollView = Animated.createAnimatedComponent(ScrollViewContainer);
-
-// const PaddingView = styled.View`
-//   padding-top: 10px;
-//   padding-left: 10px;
-//   padding-right: 10px;
-// `;
-
-// const profileView: React.FC<ProfileProps> = ({navigation}) => {
-//   return (
-//     <SafeViewContainer>
-
-//     </SafeViewContainer>
-//   );
-// };
-
-// export default profileView;
+/* eslint-disable react/self-closing-comp */
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, {useState, useEffect, useRef} from 'react';
 import styled from 'styled-components/native';
 import {
@@ -172,7 +142,7 @@ const profileView: React.FC<ProfileProps> = ({navigation}) => {
     {key: 'tab2', title: 'Track'},
     {key: 'tab3', title: 'Info'},
   ]);
-  const [canScroll, setCanScroll] = useState(true);
+  const [canScroll, setCanScroll] = useState<boolean>(true);
   const [tab1Data] = useState(Array(12).fill(0));
   const [tab2Data] = useState(Array(4).fill(0));
 
@@ -270,7 +240,7 @@ const profileView: React.FC<ProfileProps> = ({navigation}) => {
     });
 
     headerScrollY.addListener(({value}) => {
-      listRefArr.current.forEach((item) => {
+      listRefArr.current.forEach(item => {
         if (item.key !== routes[tabIndex].key) {
           return;
         }
@@ -297,7 +267,7 @@ const profileView: React.FC<ProfileProps> = ({navigation}) => {
   });
 
   useEffect(() => {
-    apiClient.get<Response>(`/users`).then(response => {
+    apiClient.get<Response>('/users').then(response => {
       const jsonData: User = response.data.users;
       const ParsedData = jsonData[3];
       console.log('!!!!!!!!!!!!!: ', ParsedData);
@@ -340,7 +310,7 @@ const profileView: React.FC<ProfileProps> = ({navigation}) => {
 
   const startRefreshAction = () => {
     if (Platform.OS === 'ios') {
-      listRefArr.current.forEach((listRef) => {
+      listRefArr.current.forEach(listRef => {
         listRef.value.scrollToOffset({
           offset: -50,
           animated: true,
@@ -350,7 +320,7 @@ const profileView: React.FC<ProfileProps> = ({navigation}) => {
         syncScrollOffset();
         // do not bounce back if user scroll to another position
         if (scrollY._value < 0) {
-          listRefArr.current.forEach((listRef) => {
+          listRefArr.current.forEach(listRef => {
             listRef.value.scrollToOffset({
               offset: 0,
               animated: true,
@@ -540,8 +510,7 @@ const profileView: React.FC<ProfileProps> = ({navigation}) => {
           borderRadius: 8,
           width: windowWidth - 4,
           height: 100,
-        }}>
-      </View>
+        }}></View>
     );
   };
 
@@ -578,9 +547,9 @@ const profileView: React.FC<ProfileProps> = ({navigation}) => {
         // scrollEnabled={canScroll}
         {...listPanResponder.panHandlers}
         numColumns={numCols}
-        ref={(ref) => {
+        ref={ref => {
           if (ref) {
-            const found = listRefArr.current.find((e) => e.key === route.key);
+            const found = listRefArr.current.find(e => e.key === route.key);
             if (!found) {
               listRefArr.current.push({
                 key: route.key,

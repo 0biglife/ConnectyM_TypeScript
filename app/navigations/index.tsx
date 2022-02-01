@@ -17,7 +17,7 @@ export type rootStackParamList = {
 
 const Stack = createStackNavigator();
 
-const isLoggedIn = true;
+const isLoggedIn = false;
 
 export const RootNavigation = () => {
   const navigationOptions: StackNavigationOptions = {
