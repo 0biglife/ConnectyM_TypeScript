@@ -30,8 +30,10 @@ const signupView: React.FC<SignUpProps> = ({navigation}) => {
         name: name,
       })
       .then(response => {
+        console.log('SignUp View');
         console.log(response.data);
       });
+    console.log('SignUp View Navigation');
     navigation.navigate('MainTab');
   };
 
