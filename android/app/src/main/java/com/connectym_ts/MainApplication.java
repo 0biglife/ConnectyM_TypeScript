@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.reactnativecommunity.webview.RNCWebViewPackage;
 import com.burnweb.rnsendintent.RNSendIntentPackage;
 // import com.reactnativepagerview.PagerViewPackage;
 // import org.reactnative.camera.RNCameraPackage;

@@ -3,6 +3,7 @@ import styled from 'styled-components/native';
 import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {ProfileParamsList} from '../../navigations/Types';
+import {WebView} from 'react-native-webview';
 
 const SafeAreaContainer = styled.SafeAreaView`
   flex: 1;
@@ -13,6 +14,7 @@ const MainContainer = styled.View`
   width: 100%;
   height: 100%;
   background-color: white;
+  margin-top: 20;
 `;
 
 const Title = styled.Text`
