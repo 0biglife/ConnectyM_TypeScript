@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.burnweb.rnsendintent.RNSendIntentPackage;
 // import com.reactnativepagerview.PagerViewPackage;
 // import org.reactnative.camera.RNCameraPackage;
 // import com.reactnativecommunity.viewpager.RNCViewPagerPackage;
@@ -17,6 +18,9 @@ import androidx.multidex.MultiDexApplication;
 
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 
+//react-native-sent-intent
+import com.burnweb.rnsendintent.RNSendIntentPackage; 
+
 public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost =
@@ -29,8 +33,11 @@ public class MainApplication extends Application implements ReactApplication {
         @Override
         protected List<ReactPackage> getPackages() {
           @SuppressWarnings("UnnecessaryLocalVariable")
+          
           List<ReactPackage> packages = new PackageList(this).getPackages();
-          // packages.add(new SplashScreenReactPackage()); 
+
+          // packages.add( new SplashScreenReactPackage());
+
           return packages;
         }
 
@@ -39,7 +46,10 @@ public class MainApplication extends Application implements ReactApplication {
           return "index";
         }
 
-        
+        // @Override
+        // public boolean canOverrideExistingModule() {
+        //   return true;
+        // }
       };
 
       

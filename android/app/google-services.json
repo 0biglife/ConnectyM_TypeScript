@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "353614009381",
-    "project_id": "connectymtest02",
-    "storage_bucket": "connectymtest02.appspot.com"
+    "project_number": "721516894941",
+    "project_id": "serviseneeded-25a04",
+    "storage_bucket": "serviseneeded-25a04.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:353614009381:android:4dc343e88b46fa1b961bcc",
+        "mobilesdk_app_id": "1:721516894941:android:76ba420ba1cd5bb28e5934",
         "android_client_info": {
           "package_name": "com.connectym_ts"
         }
@@ -15,20 +15,12 @@
       "oauth_client": [
         {
           "client_id": "21966285335-pd59r4mk54v02nd8v5k2kem3gt1th3fl.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.connectym_ts",
-            "certificate_hash": "6f9322e907c3b536fb0461ccfcb45f9f63862e1c"
-          }
-        },
-        {
-          "client_id": "353614009381-4q0gf37ea8al9rliooc7qd2hr0fajpjr.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDQiOxQmJRK_7UOuFfwDgxBjo1RDaU54qY"
+          "current_key": "AIzaSyDLSHdSf5ivOGEAJjHFbcOi6aCxWAhM0ec"
         }
       ],
       "services": {
