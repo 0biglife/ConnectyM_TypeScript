@@ -21,6 +21,7 @@ import org.devio.rn.splashscreen.SplashScreenReactPackage;
 
 //react-native-sent-intent
 import com.burnweb.rnsendintent.RNSendIntentPackage; 
+import com.reactnativecommunity.webview.RNCWebViewPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 

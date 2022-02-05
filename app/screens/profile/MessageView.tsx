@@ -14,7 +14,6 @@ const MainContainer = styled.View`
   width: 100%;
   height: 100%;
   background-color: white;
-  margin-top: 20;
 `;
 
 const Title = styled.Text`
@@ -31,7 +30,7 @@ const MessageView: React.FC<MessageProps> = () => {
   return (
     <SafeAreaContainer>
       <MainContainer>
-        <Title>Message View</Title>
+        <WebView source={{uri: 'https://www.naver.com/'}} />
       </MainContainer>
     </SafeAreaContainer>
   );
