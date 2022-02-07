@@ -5,10 +5,6 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {ProfileParamsList} from '../../navigations/Types';
 import {WebView} from 'react-native-webview';
 
-//PG
-import IMP from 'iamport-react-native';
-import Payment from 'iamport-react-native/lib/typescript/components/Payment';
-
 const SafeAreaContainer = styled.SafeAreaView`
   flex: 1;
 `;
@@ -33,7 +29,7 @@ const MessageView: React.FC<MessageProps> = () => {
   return (
     <SafeAreaContainer>
       <MainContainer>
-        {/* <WebView source={{uri: 'https://www.naver.com/'}} /> */}
+        <WebView source={{uri: 'https://www.naver.com/'}} />
       </MainContainer>
     </SafeAreaContainer>
   );
