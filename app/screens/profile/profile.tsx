@@ -472,7 +472,7 @@ const profileView: React.FC<ProfileProps> = ({navigation}) => {
             <UserButtonText>Edit Profile</UserButtonText>
           </UserButton>
           <UserButton onPress={() => navigation.navigate('Message')}>
-            <UserButtonText>Message</UserButtonText>
+            <UserButtonText>결제하기</UserButtonText>
           </UserButton>
           <UserButton>
             <UserButtonText>Boost</UserButtonText>

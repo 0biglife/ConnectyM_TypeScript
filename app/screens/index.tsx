@@ -1,4 +1,4 @@
-import homeView from './Home/homeView';
+import HomeView from './Home/homeView';
 import SecondCatView from './Home/SecondCat';
 import ThirdCatView from './Home/ThirdCat';
 import UploadModal from './Home/UploadModal';
@@ -16,7 +16,7 @@ import MessageView from './profile/MessageView';
 import PlayerBar from './PlayerBar';
 
 export {
-  homeView,
+  HomeView,
   UploadModal,
   SecondCatView,
   ThirdCatView,

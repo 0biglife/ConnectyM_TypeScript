@@ -21,7 +21,7 @@ export interface HomeProps {
   navigation: StackNavigationProp<HomeParamsList, 'HomeView'>;
 }
 
-const homeView: React.FC<HomeProps> = () => {
+const HomeView: React.FC<HomeProps> = () => {
   const [posts, setPosts] = useState<Photo[]>([]);
   const [refresh, setRefresh] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
@@ -67,4 +67,4 @@ const homeView: React.FC<HomeProps> = () => {
   );
 };
 
-export default homeView;
+export default HomeView;

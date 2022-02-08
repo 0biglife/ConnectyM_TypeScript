@@ -6,7 +6,7 @@ import {AppRegistry} from 'react-native';
 import App from './app/index';
 import {name as appName} from './app.json';
 //Redux/store생성/미들웨어생성을 위해 필요
-//enhancer : 여러 미들웨어를 조합해서 스토어를 만드는데 스토어의 인터페이스르 바꿔서 새로운  
+//enhancer : 여러 미들웨어를 조합해서 스토어를 만드는데 스토어의 인터페이스르 바꿔서 새로운
 //            스토어 생성자를 반환하는 함수
 import {createStore, applyMiddleware, compose} from 'redux';
 //store를 찾기 위함

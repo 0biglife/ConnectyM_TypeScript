@@ -5,13 +5,12 @@ import {
 import React from 'react';
 //screens
 import {
-  loginView,
-  signupView,
-  phoneAuth,
-  otpAuth,
-  permissionAuth,
+  loginView as LoginView,
+  signupView as SignUpView,
+  phoneAuth as PhoneAuth,
+  otpAuth as OTPAuth,
+  permissionAuth as PermissionAuth,
 } from '../screens/Auth';
-import MainTab from './MainTab';
 import {AuthStackParamList} from './Types';
 
 const Stack = createStackNavigator<AuthStackParamList>();
@@ -29,11 +28,11 @@ const AuthStack = () => {
   };
   return (
     <Stack.Navigator screenOptions={navigationOptions}>
-      <Stack.Screen name="Login" component={loginView} />
-      <Stack.Screen name="SignUp" component={signupView} />
-      <Stack.Screen name="PhoneAuth" component={phoneAuth} />
-      <Stack.Screen name="OtpAuth" component={otpAuth} />
-      <Stack.Screen name="PermissionAuth" component={permissionAuth} />
+      <Stack.Screen name="Login" component={LoginView} />
+      <Stack.Screen name="SignUp" component={SignUpView} />
+      <Stack.Screen name="PhoneAuth" component={PhoneAuth} />
+      <Stack.Screen name="OtpAuth" component={OTPAuth} />
+      <Stack.Screen name="PermissionAuth" component={PermissionAuth} />
     </Stack.Navigator>
   );
 };

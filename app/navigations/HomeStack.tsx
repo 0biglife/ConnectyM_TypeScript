@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {TouchableOpacity} from 'react-native';
-import {homeView, SecondCatView, ThirdCatView, UploadModal} from '../screens';
+import {HomeView, SecondCatView, ThirdCatView, UploadModal} from '../screens';
 import {ModalView} from '../components';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
@@ -28,9 +28,9 @@ const HomeTabNavigation = () => {
           margin: -10,
         },
       }}>
-      <HomeTopTab.Screen name="팔로잉" component={homeView} />
-      <HomeTopTab.Screen name="인기아티스트" component={SecondCatView} />
-      <HomeTopTab.Screen name="게시판" component={ThirdCatView} />
+      <HomeTopTab.Screen name="Type-A" component={HomeView} />
+      <HomeTopTab.Screen name="Type-B" component={SecondCatView} />
+      <HomeTopTab.Screen name="Type-C" component={ThirdCatView} />
     </HomeTopTab.Navigator>
   );
 };
