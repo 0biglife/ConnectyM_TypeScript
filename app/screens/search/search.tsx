@@ -7,8 +7,6 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp, useNavigation} from '@react-navigation/native';
 import { Alert } from 'react-native';
 import axios from 'axios';
-import naverAPI from '../../apis/spotify/client';
-import Unsplash from '../../apis/unsplash/client';
 
 const headerHeight = 62;
 const BodyHeight = 150;
@@ -93,10 +91,11 @@ const searchView: React.FC<SearchProps> = () => {
   const [masterData, setMasterdData] = useState([]);
 
   useEffect(() => {
-    // apiClient.get<Response>('/users').then(response => {
-    //   const jsonData = response.data;
-    //   console.log('SEARCHVIEW : ', jsonData);
-    // });
+    apiClient.get<Response>('/users').then(response => {
+      const jsonData = response.data;
+      console.log('SEARCHVIEW : ', jsonData);
+      setMasterdData(jsonData);
+    });
     // apiClient
     //   .get<Photo[]>(
     //     `/search/photos?page=1&query=${query}/client_id=${accessKey}`,
@@ -121,12 +120,12 @@ const searchView: React.FC<SearchProps> = () => {
           <TouchableOpacity
             style={{flexDirection: 'row'}}
             onPress={() => Alert.alert('test')}>
-            <ProfileImage source={{uri: item.user.profile_image.small}} />
-            <ProfileName>{item.user.name}</ProfileName>
+            <ProfileImage source={{uri: item.thumbnailUrl}} />
+            <ProfileName>{item.name}</ProfileName>
           </TouchableOpacity>
         </HeaderSection>
         <BodySection>
-          <BodyImage source={{uri: item.urls.self}} />
+          <BodyImage source={{uri: item.url}} />
         </BodySection>
       </CellContainer>
     );
@@ -139,21 +138,19 @@ const searchView: React.FC<SearchProps> = () => {
 
   const searchData = async () => {
     try {
-      // apiClient.get(`/search/${text}`).then(response => {
-      //   console.log('!!@@#!@!@: ', response.data);
-      // });
-      naverAPI
-        .get(`/v1/search/blog.xml?query=${value}&display=10&start=1&sort=sim`)
-        .then(response => {
-          console.log('UNSPLASH DATA : ', response.data);
-        });
+      apiClient.get<Response>('/feeds').then(response => {
+        const jsonData = response.data;
+        console.log('SEARCHVIEW : ', jsonData);
+        setFilteredData(jsonData);
+        setMasterdData(jsonData);
+      });
     } catch (error) {
       console.log('UNSPLASH ERROR : ', error);
     }
   };
 
   const onSubmit = () => {
-    Alert.alert('onSubmit');
+    console.log('Submit! : ');
     searchData();
   };
 
