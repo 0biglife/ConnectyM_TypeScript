@@ -4,8 +4,8 @@ import styled from 'styled-components/native';
 import {SearchParamsList} from '../../navigations/Types';
 import apiClient from '../../apis/service/client';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {RouteProp, useNavigation} from '@react-navigation/native';
-import { Alert } from 'react-native';
+import {RouteProp} from '@react-navigation/native';
+import {Alert} from 'react-native';
 import axios from 'axios';
 
 const headerHeight = 62;
@@ -87,45 +87,60 @@ export interface SearchProps {
 
 const searchView: React.FC<SearchProps> = () => {
   const [value, setValue] = useState<string>('');
-  const [filteredData, setFilteredData] = useState([]);
-  const [masterData, setMasterdData] = useState([]);
+  const [dataList, setDataList] = useState([]);
+  //
+  const [unsplashData, setUnsplashData] = useState('');
 
   useEffect(() => {
-    apiClient.get<Response>('/users').then(response => {
-      const jsonData = response.data;
-      console.log('SEARCHVIEW : ', jsonData);
-      setMasterdData(jsonData);
-    });
-    // apiClient
-    //   .get<Photo[]>(
-    //     `/search/photos?page=1&query=${query}/client_id=${accessKey}`,
-    //   )
-    //   .then((response: AxiosResponse) => {
-    //     try {
-    //       const res = response.data;
-    //       console.log(res);
-    //       const jsonData = res.result;
-    //       setFilteredData(jsonData);
-    //       setMasterdData(jsonData);
-    //     } catch (error) {
-    //       console.error(error);
-    //     }
-    //   });
+    // apiClient.get('/feeds').then(response => {
+    //   const jsonData = response.data;
+    //   console.log('SEARCHVIEW : ', jsonData.users);
+    //   setDataList(jsonData);
+    // });
+
+    axios
+      .get('https://api.unsplash.com/search/photos?', {
+        params: {query: unsplashData},
+        headers: {
+          Authorization:
+            'Client-ID 3eVYYY9UEOTwk4CcDUgHt9uSSP_MJiAO3E1hcna-i1Q',
+        },
+      })
+      .then(response => {
+        console.log('UNSPLAH SERCH DATA : ', response);
+        const jsonData = response.data;
+        setUnsplashData(jsonData);
+      });
   }, []);
 
   const ItemView = ({item}) => {
     return (
+      // <CellContainer>
+      //   <HeaderSection>
+      //     <TouchableOpacity
+      //       style={{flexDirection: 'row'}}
+      //       onPress={() => Alert.alert('test')}>
+      //       <ProfileImage source={{uri: item.thumbnailUrl}} />
+      //       <ProfileName>{item.name}</ProfileName>
+      //     </TouchableOpacity>
+      //   </HeaderSection>
+      //   <BodySection>
+      //     <BodyImage source={{uri: item.url}} />
+      //   </BodySection>
+      // </CellContainer>
       <CellContainer>
         <HeaderSection>
           <TouchableOpacity
             style={{flexDirection: 'row'}}
             onPress={() => Alert.alert('test')}>
-            <ProfileImage source={{uri: item.thumbnailUrl}} />
-            <ProfileName>{item.name}</ProfileName>
+            <ProfileImage
+              source={{uri: item.results.user.profile_image.small}}
+            />
+            <ProfileName>{item.results.user.name}</ProfileName>
           </TouchableOpacity>
         </HeaderSection>
         <BodySection>
-          <BodyImage source={{uri: item.url}} />
+          <BodyImage source={{uri: item.results.urls.full}} />
         </BodySection>
       </CellContainer>
     );
@@ -134,24 +149,37 @@ const searchView: React.FC<SearchProps> = () => {
   const searchFilter = (text: string) => {
     setValue(text);
     console.log('searchFilter : ', value);
+    // searchData(text);
   };
 
-  const searchData = async () => {
+  const searchData = async (text: string) => {
     try {
-      apiClient.get<Response>('/feeds').then(response => {
-        const jsonData = response.data;
-        console.log('SEARCHVIEW : ', jsonData);
-        setFilteredData(jsonData);
-        setMasterdData(jsonData);
-      });
+      // apiClient.get<Response>('/feeds' + text.toLowerCase).then(response => {
+      //   const jsonData = response.data;
+      //   console.log('SEARCHVIEW : ', jsonData);
+      // });
+
+      axios
+        .get('https://api.unsplash.com/search/photos?', {
+          params: {query: unsplashData},
+          headers: {
+            Authorization:
+              'Client-ID 3eVYYY9UEOTwk4CcDUgHt9uSSP_MJiAO3E1hcna-i1Q',
+          },
+        })
+        .then(response => {
+          console.log('UNSPLAH SERCH DATA : ', response);
+          const jsonData = response.data;
+          setUnsplashData(jsonData);
+        });
     } catch (error) {
-      console.log('UNSPLASH ERROR : ', error);
+      console.log('SEARCHVIEW ERROR : ', error);
     }
   };
 
   const onSubmit = () => {
-    console.log('Submit! : ');
-    searchData();
+    console.log('Submit!');
+    searchData(value);
   };
 
   return (
@@ -167,7 +195,7 @@ const searchView: React.FC<SearchProps> = () => {
           onChangeText={(text: string) => searchFilter(text)}
         />
         <FlatList
-          data={filteredData}
+          data={dataList}
           keyExtractor={(item, index) => index}
           // ItemSeparatorComponent={ItemSeperatorView}
           renderItem={ItemView}
