@@ -7,6 +7,7 @@ import axios, {AxiosResponse} from 'axios';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {HomeParamsList} from '../../navigations/Types';
 //HTTP
+import useQuery from 'react-query';
 import apiClient from '../../apis/service/client';
 import {ResponseFeed, Feed} from '../../apis/model/data';
 
@@ -34,11 +35,10 @@ const HomeView: React.FC<HomeProps> = () => {
   //   fetchData();
   // }, [refresh]);
 
-  const fetchData = () => {
-    apiClient.get<ResponseFeed>('/feeds').then((response: AxiosResponse) => {
-      console.log('!!!!!!! : ', response.data);
+  const fetchData = async () => {
+    await apiClient.get<Feed>('/feeds').then((response: AxiosResponse) => {
+      console.log('HOME VIEW DATA : ', response.data);
       setPosts(response.data);
-      // setPage(page + 1);
     });
   };
 
@@ -47,7 +47,6 @@ const HomeView: React.FC<HomeProps> = () => {
   };
 
   const refreshing = () => {
-    // setPage(1);
     setRefresh(true);
     wait(1400).then(() => setRefresh(false));
     fetchData();

@@ -98,22 +98,22 @@ const searchView: React.FC<SearchProps> = () => {
     //   setDataList(jsonData);
     // });
 
-    axios
-      .get(
-        'https://api.unsplash.com/search/photos?client_id=niOhWgxJbQQJUSsBC0XauybHlWH-IqG2Rrhwx8NMeTc',
-        {
-          params: {
-            query: 'sun',
-            page: 1,
-            per_page: 3,
-          },
-        },
-      )
-      .then(response => { 
-        console.log('UNSPLAH SERCH DATA TEST : ', response.data.results);
-        const jsonData = response.data;
-        setDataList(jsonData);
-      });
+    // axios
+    //   .get(
+    //     'https://api.unsplash.com/search/photos?client_id=niOhWgxJbQQJUSsBC0XauybHlWH-IqG2Rrhwx8NMeTc',
+    //     {
+    //       params: {
+    //         query: 'sun',
+    //         page: 1,
+    //         per_page: 3,
+    //       },
+    //     },
+    //   )
+    //   .then(response => {
+    //     console.log('UNSPLAH SERCH DATA TEST : ', response.data.results);
+    //     const jsonData = response.data;
+    //     setDataList(jsonData);
+    //   });
   }, []);
 
   const ItemView = ({item}) => {
@@ -162,19 +162,19 @@ const searchView: React.FC<SearchProps> = () => {
       //   console.log('SEARCHVIEW : ', jsonData);
       // });
 
-      axios
-        .get('https://api.unsplash.com/search/photos', {
-          params: {query: text},
-          headers: {
-            Authorization:
-              'Client-ID 3eVYYY9UEOTwk4CcDUgHt9uSSP_MJiAO3E1hcna-i1Q',
-          },
-        })
-        .then(response => {
-          console.log('UNSPLAH SERCH DATA : ', response);
-          const jsonData = response.data;
-          setDataList(jsonData);
-        });
+      // axios
+      //   .get('https://api.unsplash.com/search/photos', {
+      //     params: {query: text},
+      //     headers: {
+      //       Authorization:
+      //         'Client-ID 3eVYYY9UEOTwk4CcDUgHt9uSSP_MJiAO3E1hcna-i1Q',
+      //     },
+      //   })
+      //   .then(response => {
+      //     console.log('UNSPLAH SERCH DATA : ', response);
+      //     const jsonData = response.data;
+      //     setDataList(jsonData);
+      //   });
     } catch (error) {
       console.log('SEARCHVIEW ERROR : ', error);
     }
