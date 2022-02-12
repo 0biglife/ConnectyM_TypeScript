@@ -16,6 +16,11 @@ import SplashScreen from 'react-native-splash-screen';
 import {ThemeProvider} from 'styled-components';
 import {dark, light} from './styles/theme';
 
+//React-Query
+import {QueryClient, QueryClientProvider} from 'react-query';
+
+const queryClient = new QueryClient();
+
 const App = () => {
   const theme: string = 'light';
   // useEffect(() => {
@@ -33,9 +38,11 @@ const App = () => {
   });
 
   return (
-    <ThemeProvider theme={theme === 'dark' ? dark : light}>
-      <RootNavigation />
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme === 'dark' ? dark : light}>
+        <RootNavigation />
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 };
 

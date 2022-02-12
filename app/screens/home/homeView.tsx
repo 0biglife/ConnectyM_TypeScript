@@ -1,15 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components/native';
-import {Alert, FlatList} from 'react-native';
+import {ActivityIndicator, FlatList} from 'react-native';
 import PostCard from '../../components/PostCard';
-import {Photo} from '../../apis/model/data';
-import axios, {AxiosResponse} from 'axios';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {HomeParamsList} from '../../navigations/Types';
 //HTTP
-import useQuery from 'react-query';
+import {useQuery} from 'react-query';
 import apiClient from '../../apis/service/client';
-import {ResponseFeed, Feed} from '../../apis/model/data';
+import {Feed} from '../../apis/model/data';
 
 const SafeContainer = styled.SafeAreaView`
   flex: 1;
@@ -22,45 +20,38 @@ export interface HomeProps {
   navigation: StackNavigationProp<HomeParamsList, 'HomeView'>;
 }
 
+const getArticles = async () => {
+  const response = await apiClient.get<Feed[]>('/feeds');
+  return response.data;
+};
+
 const HomeView: React.FC<HomeProps> = () => {
-  const [posts, setPosts] = useState<Photo[]>([]);
-  const [refresh, setRefresh] = useState<boolean>(false);
-  const [page, setPage] = useState<number>(1);
+  const {data, isLoading} = useQuery('articles', getArticles);
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  console.log({data, isLoading});
 
-  // useEffect(() => {
-  //   fetchData();
-  // }, [refresh]);
-
-  const fetchData = async () => {
-    await apiClient.get<Feed>('/feeds').then((response: AxiosResponse) => {
-      console.log('HOME VIEW DATA : ', response.data);
-      setPosts(response.data);
-    });
-  };
-
-  const wait = (timeout: number) => {
-    return new Promise(resolve => setTimeout(resolve, timeout));
-  };
-
-  const refreshing = () => {
-    setRefresh(true);
-    wait(1400).then(() => setRefresh(false));
-    fetchData();
-  };
+  if (!data) {
+    return <ActivityIndicator size="large" />;
+  }
 
   return (
     <SafeContainer>
       <FlatList
-        data={posts}
-        renderItem={({item}) => <PostCard item={item} />}
-        keyExtractor={item => item.id}
+        data={data}
+        renderItem={({item}) => (
+          <PostCard
+            id={item.id}
+            name={item.name}
+            title={item.title}
+            postTime={item.postTime}
+            url={item.url}
+            thumbnailUrl={item.thumbnailUrl}
+          />
+        )}
+        keyExtractor={item => item.id.toString()}
         showsVerticalScrollIndicator={false}
-        onRefresh={() => refreshing()}
-        refreshing={refresh}
+        // onRefresh={() => refreshing()}
+        // refreshing={refresh}
       />
     </SafeContainer>
   );

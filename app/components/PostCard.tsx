@@ -82,18 +82,29 @@ const InteractionText = styled.Text`
   margin-left: 5px;
 `;
 
-interface Props {
-  item: {
-    id: number;
-    name: string;
-    title: string;
-    url: string;
-    thumbnailUrl: string;
-    postTime: string;
-  };
+interface ArticleItemProps {
+  id: number;
+  name: string;
+  title: string;
+  url: string;
+  thumbnailUrl: string;
+  postTime: string;
 }
 
-const PostCard: React.FC<Props> = ({item}) => {
+const PostCard = ({
+  id,
+  name,
+  title,
+  postTime,
+  url,
+  thumbnailUrl,
+}: ArticleItemProps) => {
+  const onPress = () => {
+    console.log(id);
+  };
+
+  const formattedData = new Date(postTime).toLocaleString();
+
   // likeIcon = item.liked ? 'heart' : 'heart-outline';
   // like 에 대한 control : https://www.youtube.com/watch?v=iyNmGXt4vNA (28min ~ )
   return (
@@ -101,21 +112,21 @@ const PostCard: React.FC<Props> = ({item}) => {
       <UserInfo>
         <UserImg
           source={{
-            uri: item.thumbnailUrl,
+            uri: thumbnailUrl,
           }}
         />
         <UserInfoText>
-          <UserName>{item.name}</UserName>
-          <PostTime>{item.postTime}</PostTime>
+          <UserName>{name}</UserName>
+          <PostTime>{formattedData}</PostTime>
         </UserInfoText>
       </UserInfo>
       <PostImg
         source={{
-          uri: item.url,
+          uri: url,
         }}
       />
       {/* {item.urlToImage == '' ? <Divider /> : <PostImg source={item.urlToImage} />} */}
-      <PostText>{item.title}</PostText>
+      <PostText>{title}</PostText>
       <InteractionWrapper>
         <Interaction active>
           <IonIcon name="heart" size={22} color="#2e64e5" />
