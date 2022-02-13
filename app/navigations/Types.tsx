@@ -16,6 +16,7 @@ export type HomeParamsList = {
 
 export type ProfileParamsList = {
   Profile: undefined;
+  OtherProfile: undefined;
   EditProfile: {
     name: string;
     imageSource: ImageSourcePropType;

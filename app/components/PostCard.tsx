@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import IonIcon from 'react-native-vector-icons/Ionicons';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import {useNavigation} from '@react-navigation/native';
 
 // const Width = Dimensions.get('window').width;
 
@@ -99,8 +101,11 @@ const PostCard = ({
   url,
   thumbnailUrl,
 }: ArticleItemProps) => {
+  const navigation = useNavigation();
+
   const onPress = () => {
     console.log(id);
+    navigation.navigate('ProfileStack');
   };
 
   const formattedData = new Date(postTime).toLocaleString();
@@ -110,13 +115,17 @@ const PostCard = ({
   return (
     <Card>
       <UserInfo>
-        <UserImg
-          source={{
-            uri: thumbnailUrl,
-          }}
-        />
+        <TouchableOpacity onPress={onPress}>
+          <UserImg
+            source={{
+              uri: thumbnailUrl,
+            }}
+          />
+        </TouchableOpacity>
         <UserInfoText>
-          <UserName>{name}</UserName>
+          <TouchableOpacity onPress={onPress}>
+            <UserName>{name}</UserName>
+          </TouchableOpacity>
           <PostTime>{formattedData}</PostTime>
         </UserInfoText>
       </UserInfo>
