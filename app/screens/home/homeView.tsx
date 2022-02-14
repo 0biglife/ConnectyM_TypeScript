@@ -6,9 +6,8 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {HomeParamsList} from '../../navigations/Types';
 //HTTP
 import {useQuery} from 'react-query';
-import {Article} from '../../apis/model/data';
-import apiClient from '../../apis/service/client';
-// import {getArticles} from '../../apis/service/client';
+import {getArticles, getPosts} from '../../apis/service/client';
+import {RouteProp} from '@react-navigation/native';
 
 const SafeContainer = styled.SafeAreaView`
   flex: 1;
@@ -19,20 +18,17 @@ const SafeContainer = styled.SafeAreaView`
 
 export interface HomeProps {
   navigation: StackNavigationProp<HomeParamsList, 'HomeView'>;
+  route: RouteProp<HomeParamsList, 'HomeView'>;
 }
 
-export const getArticles = async () => {
-  const response = await apiClient.get<Article[]>('/articles');
-  return response.data;
-};
-
-const HomeView: React.FC<HomeProps> = () => {
-  const {data, isLoading} = useQuery('articles', getArticles);
+const HomeView: React.FC<HomeProps> = ({navigation, route}) => {
+  // const {data, isLoading} = useQuery('articles', getPosts);
+  const articleQuery = useQuery('articles', getArticles);
   const [refresh, setRefresh] = useState<boolean>(false);
 
-  console.log({data, isLoading});
+  console.log(articleQuery.data);
 
-  if (!data) {
+  if (!articleQuery.data) {
     return <ActivityIndicator size="large" style={{flex: 1}} />;
   }
 
@@ -49,11 +45,11 @@ const HomeView: React.FC<HomeProps> = () => {
   return (
     <SafeContainer>
       <FlatList
-        data={data}
+        data={articleQuery.data}
         renderItem={({item}) => (
           <PostCard
             id={item.id}
-            name={item.name}
+            user={item.user}
             title={item.title}
             postTime={item.postTime}
             url={item.url}

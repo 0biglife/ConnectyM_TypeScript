@@ -5,12 +5,6 @@ export interface Response {
   users: User;
 }
 
-export interface User {
-  id: number;
-  name: string;
-  thumbnailUrl: string;
-}
-
 export interface ResponseFeed {
   ok: boolean;
   feed: Feed;
@@ -33,6 +27,12 @@ export interface Article {
   postTime: string;
   user: User;
   comments: Comment;
+}
+
+export interface User {
+  id: number;
+  name: string;
+  thumbnailUrl: string;
 }
 
 export interface Comment {

@@ -78,7 +78,7 @@ export interface UploadParams {
   navigation: StackNavigationProp<HomeParamsList, 'UploadView'>;
 }
 
-const UploadModal: React.FC<UploadParams> = ({ navigation }) => {
+const UploadModal: React.FC<UploadParams> = ({navigation}) => {
   const [cancelModal, setCancelModal] = useState<boolean>(false);
   const [postModal, setPostModal] = useState<boolean>(false);
   const [modalVisible, setModalVisible] = useState(false);

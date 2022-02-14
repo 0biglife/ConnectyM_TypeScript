@@ -1,7 +1,10 @@
-import React, {useState} from 'react';
+import React from 'react';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 
-import {BottomTabNavigationProp, createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {
+  BottomTabNavigationProp,
+  createBottomTabNavigator,
+} from '@react-navigation/bottom-tabs';
 //screens
 import {mymusicView, boardView} from '../screens';
 //Navigations

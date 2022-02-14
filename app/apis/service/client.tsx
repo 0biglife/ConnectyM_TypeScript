@@ -1,11 +1,9 @@
 import axios, {AxiosInstance} from 'axios';
-import {Article, Comment} from '../model/data';
+import {Article, Comment, Feed} from '../model/data';
 
-// const baseurl = __DEV__
-//   ? 'http://localhost:3000/api'
-//   : 'http://localhost:3000/api';
+const baseurl = 'http://localhost:3000/api';
 
-const baseurl = __DEV__ ? 'http://localhost:1337' : 'http://localhost:1337';
+// const baseurl = __DEV__ ? 'http://localhost:1337' : 'http://localhost:1337';
 
 const apiClient: AxiosInstance = axios.create({
   headers: {
@@ -17,6 +15,11 @@ const apiClient: AxiosInstance = axios.create({
 });
 
 export default apiClient;
+
+export const getPosts = async () => {
+  const response = await apiClient.get<Feed[]>('/feeds');
+  return response.data;
+};
 
 export const getArticles = async () => {
   const response = await apiClient.get<Article[]>('/articles');

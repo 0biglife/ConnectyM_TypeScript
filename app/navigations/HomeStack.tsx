@@ -78,7 +78,6 @@ const HomeStack: React.FC<HomStackProps> = ({navigation}) => {
         name="UploadView"
         options={{
           headerShown: false,
-          // headerRight: () => null,
         }}
       />
     </Stack.Navigator>

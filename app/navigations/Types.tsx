@@ -10,7 +10,7 @@ export type AuthStackParamList = {
 };
 
 export type HomeParamsList = {
-  HomeView: undefined;
+  HomeView: {id: number};
   UploadView: undefined;
 };
 

@@ -3,6 +3,7 @@ import styled from 'styled-components/native';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useNavigation} from '@react-navigation/native';
+import { User } from '../apis/model/data';
 
 // const Width = Dimensions.get('window').width;
 
@@ -86,7 +87,7 @@ const InteractionText = styled.Text`
 
 interface ArticleItemProps {
   id: number;
-  name: string;
+  user: User;
   title: string;
   url: string;
   thumbnailUrl: string;
@@ -95,14 +96,13 @@ interface ArticleItemProps {
 
 const PostCard = ({
   id,
-  name,
+  user,
   title,
   postTime,
   url,
   thumbnailUrl,
 }: ArticleItemProps) => {
   const navigation = useNavigation();
-
   const onPress = () => {
     console.log(id);
     navigation.navigate('ProfileStack');
@@ -124,7 +124,7 @@ const PostCard = ({
         </TouchableOpacity>
         <UserInfoText>
           <TouchableOpacity onPress={onPress}>
-            <UserName>{name}</UserName>
+            <UserName>{user}</UserName>
           </TouchableOpacity>
           <PostTime>{formattedData}</PostTime>
         </UserInfoText>
