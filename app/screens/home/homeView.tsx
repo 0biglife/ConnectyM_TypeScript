@@ -24,11 +24,12 @@ export interface HomeProps {
 const HomeView: React.FC<HomeProps> = ({navigation, route}) => {
   // const {data, isLoading} = useQuery('articles', getPosts);
   const articleQuery = useQuery('articles', getArticles);
+  const postQuery = useQuery('posts', getPosts);
   const [refresh, setRefresh] = useState<boolean>(false);
 
   console.log(articleQuery.data);
 
-  if (!articleQuery.data) {
+  if (!postQuery.data) {
     return <ActivityIndicator size="large" style={{flex: 1}} />;
   }
 
@@ -45,15 +46,16 @@ const HomeView: React.FC<HomeProps> = ({navigation, route}) => {
   return (
     <SafeContainer>
       <FlatList
-        data={articleQuery.data}
+        data={postQuery.data}
         renderItem={({item}) => (
           <PostCard
             id={item.id}
-            user={item.user}
+            name={item.name}
             title={item.title}
             postTime={item.postTime}
             url={item.url}
             thumbnailUrl={item.thumbnailUrl}
+            onPress={() => navigation.navigate('ProfileStack')}
             // navigation={navigation}
           />
         )}

@@ -8,7 +8,7 @@
 
 import 'react-native-gesture-handler';
 import React, {useEffect} from 'react';
-import {RootNavigation} from './navigations';
+import RootNavigation from './navigations';
 import SplashScreen from 'react-native-splash-screen';
 //Redux
 

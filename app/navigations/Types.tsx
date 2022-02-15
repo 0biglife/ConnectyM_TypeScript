@@ -3,7 +3,7 @@ import {ImageSourcePropType} from 'react-native';
 export type AuthStackParamList = {
   Login: undefined;
   SignUp: undefined;
-  MainTab: undefined;
+  MainTab: TabNavigatorParamsList;
   PhoneAuth: undefined;
   OtpAuth: undefined;
   PermissionAuth: undefined;
@@ -16,7 +16,6 @@ export type HomeParamsList = {
 
 export type ProfileParamsList = {
   Profile: undefined;
-  OtherProfile: undefined;
   EditProfile: {
     name: string;
     imageSource: ImageSourcePropType;
@@ -35,47 +34,3 @@ export type TabNavigatorParamsList = {
   Board: undefined;
   ProfileStack: undefined;
 };
-/*
-RootNavigator
--> Splash
-
--> TabNavigator
-    -> HomeNavigator
-    -> BoatNavigator
-    -> TermsNavigator
-    -> Settings
------------------------------------------------------------------------------
-RootNavigator ( : createStackNavigator<RootNavigatorParamsList> )
-
- -> MainNavigator ( : createStackNavigator<TopNavigatorParamsList> )
-
-     -> Splash
-     export type SplashProps { navigation: StackNavigationProp<TopNavigatorParamsList>,'Splash}
-     const Splash: React.FC<SplashProps> = ({navigation}) ~
-
-     -> TabNavigator
-     const TabStack = createBottomTabNavigator<TabNavigatorParamsList>()
-     //
-        Home: undefined
-        Profile: undefined
-        Terminology: undefined
-        Boats: undefined
-        Settings: undefined
-     //
-        -> HomeNavigator
-          -> Home
-          export type HomeProps { navigation: ~<TabNavigatorParamsList>, 'Home' }
-          const Home: React.FC<HomeProps> = ({navigation})
-          -> Profile
-          type ProfileProps { navigation: ~<Tab~, 'Profile' }
-        -> Boats
-        -> Terminology
-        -> Settings
-
- -> ModalNavigator ( : createStackNavigator<ModalNavigatorParamsList> )
-     -> BoatInfromation
-     -> Definition
-
-
-
-*/

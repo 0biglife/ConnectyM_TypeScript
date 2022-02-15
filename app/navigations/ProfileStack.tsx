@@ -1,12 +1,7 @@
 import React, {useState} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import {
-  profileView,
-  editProfileView,
-  MessageView,
-  otherProfileView,
-} from '../screens';
+import {profileView, editProfileView, MessageView} from '../screens';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import {ModalView} from '../components';
@@ -68,7 +63,6 @@ const ProfileStack: React.FC = () => {
           },
         }}
       />
-      <Stack.Screen name="OtherProfileView" component={otherProfileView} />
       <Stack.Screen name="Message" component={MessageView} />
     </Stack.Navigator>
   );
