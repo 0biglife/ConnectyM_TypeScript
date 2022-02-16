@@ -9,18 +9,14 @@ import {
 
 //View Module Stacks
 import AuthStack from './AuthStack';
-import MainTab from './MainTab';
-import {UserProfile} from '../screens';
+import MainStack from './MainStack';
+import {RootStackparamList} from './Types';
 
-export type rootStackParamList = {
-  //
-};
-
-const Stack = createStackNavigator();
+const Stack = createStackNavigator<RootStackparamList>();
 
 const isLoggedIn = false;
 
-const RootNavigation = () => {
+const RootStack = () => {
   const navigationOptions: StackNavigationOptions = {
     headerShown: false,
     // gestureEnabled: false,
@@ -28,23 +24,21 @@ const RootNavigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName={isLoggedIn ? 'MainTab' : 'AuthStack'}
+        initialRouteName={isLoggedIn ? 'MainStack' : 'AuthStack'}
         screenOptions={navigationOptions}>
         <Stack.Screen name="AuthStack" component={AuthStack} />
-        <Stack.Screen name="MainTab" component={MainTab} />
+        <Stack.Screen name="MainStack" component={MainStack} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
 
-export default RootNavigation;
+export default RootStack;
 
 /*
 
         {isLoggedIn ? (
-          
             <Stack.Screen name="MainTab" component={MainTab} />}
-          
         ) : (
           <>
             <Stack.Screen name="AuthStack" component={AuthStack} />

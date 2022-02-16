@@ -26,7 +26,7 @@ export interface MainTabProps {
   >;
 }
 
-const MainTab: React.FC<MainTabProps> = () => {
+const MainStack: React.FC<MainTabProps> = () => {
   return (
     <>
       <Tab.Navigator
@@ -80,4 +80,4 @@ const MainTab: React.FC<MainTabProps> = () => {
   );
 };
 
-export default MainTab;
+export default MainStack;

@@ -1,36 +1,39 @@
+import {CompositeNavigationProp} from '@react-navigation/native';
 import {ImageSourcePropType} from 'react-native';
+
+//Type Checking for Navigator
+export type RootStackparamList = {
+  MainStack: MainStackParamList;
+  AuthStack: AuthStackParamList;
+};
 
 export type AuthStackParamList = {
   Login: undefined;
   SignUp: undefined;
-  MainTab: TabNavigatorParamsList;
   PhoneAuth: undefined;
   OtpAuth: undefined;
   PermissionAuth: undefined;
 };
 
-export type HomeParamsList = {
-  HomeView: {id: number};
-  UploadView: undefined;
-};
-
-export type ProfileParamsList = {
-  Profile: undefined;
+export type MainStackParamList = {
+  MainTab: MainTabParmList;
+  Post: undefined;
+  Commnet: undefined;
+  UserProfile: undefined;
   EditProfile: {
     name: string;
     imageSource: ImageSourcePropType;
   };
+  Upload: undefined;
   Message: undefined;
 };
 
-export type SearchParamsList = {
-  Search: undefined;
-};
-
-export type TabNavigatorParamsList = {
+export type MainTabParmList = {
   Home: undefined;
   SearchStack: undefined;
   MyMusician: undefined;
   Board: undefined;
   ProfileStack: undefined;
 };
+
+//Type Checking for Screens

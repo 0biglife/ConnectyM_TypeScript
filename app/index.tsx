@@ -8,7 +8,7 @@
 
 import 'react-native-gesture-handler';
 import React, {useEffect} from 'react';
-import RootNavigation from './navigations';
+import RootStack from './navigations/RootStack';
 import SplashScreen from 'react-native-splash-screen';
 //Redux
 
@@ -40,7 +40,7 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme === 'dark' ? dark : light}>
-        <RootNavigation />
+        <RootStack />
       </ThemeProvider>
     </QueryClientProvider>
   );
