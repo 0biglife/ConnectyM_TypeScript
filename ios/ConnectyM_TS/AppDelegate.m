@@ -14,7 +14,7 @@
 
 #import "RNSplashScreen.h" // react-native-splash-screen
 
-#import <React/RCTLinkingManager.h> // react-native-iamport
+// #import <React/RCTLinkingManager.h> // react-native-iamport
 
 static void InitializeFlipper(UIApplication *application) {
   FlipperClient *client = [FlipperClient sharedClient];
