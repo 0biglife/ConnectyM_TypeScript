@@ -3,7 +3,7 @@ import axios from 'axios';
 import React, {useState} from 'react';
 import styled from 'styled-components/native';
 import {Input, Button} from '../../components';
-import { AuthStackParamList } from '../../navigations/Types';
+import {AuthStackNavigationProp} from '../../navigations/Types';
 // HTTP
 import apiClient from '../../apis/service/client';
 import {Response} from '../../apis/model/data';
@@ -16,7 +16,7 @@ const Container = styled.View`
 `;
 
 export interface SignUpProps {
-  navigation: StackNavigationProp<AuthStackParamList, 'SignUp'>;
+  navigation: AuthStackNavigationProp;
 }
 
 const signupView: React.FC<SignUpProps> = ({navigation}) => {
@@ -34,7 +34,7 @@ const signupView: React.FC<SignUpProps> = ({navigation}) => {
         console.log(response.data);
       });
     console.log('SignUp View Navigation');
-    navigation.navigate('MainTab');
+    navigation.navigate('MainStack');
   };
 
   return (

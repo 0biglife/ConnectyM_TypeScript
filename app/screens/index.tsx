@@ -8,9 +8,9 @@ import signupView from './Auth/signup';
 import searchView from './search/search';
 import mymusicView from './mymusic/mymusic';
 import boardView from './board/boardView';
-import profileView from './profile/profile';
+import ProfileView from './profile/ProfileView';
 import editProfileView from './profile/editProfileView';
-import UserProfile from './profile/UserProfile';
+import UserProfileView from './profile/UserProfile';
 import MessageView from './profile/MessageView';
 
 // import musicPlayer from './MusicPlayer';
@@ -26,10 +26,9 @@ export {
   searchView,
   mymusicView,
   boardView,
-  profileView,
+  ProfileView,
   editProfileView,
-  UserProfile,
-  // musicPlayer,
+  UserProfileView,
   PlayerBar,
   MessageView,
 };

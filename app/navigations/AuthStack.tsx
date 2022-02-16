@@ -1,7 +1,7 @@
 import {
-  createStackNavigator,
-  StackNavigationOptions,
-} from '@react-navigation/stack';
+  createNativeStackNavigator,
+  NativeStackNavigationOptions,
+} from '@react-navigation/native-stack';
 import React from 'react';
 //screens
 import {
@@ -13,18 +13,11 @@ import {
 } from '../screens/Auth';
 import {AuthStackParamList} from './Types';
 
-const Stack = createStackNavigator<AuthStackParamList>();
+const Stack = createNativeStackNavigator<AuthStackParamList>();
 
 const AuthStack = () => {
-  const navigationOptions: StackNavigationOptions = {
-    // headerShown: false,
-    headerTitle: '',
-    gestureEnabled: false,
-    headerBackTitleVisible: false,
-    headerTintColor: 'black',
-    headerStyle: {
-      shadowColor: 'transparent', //버튼을 보여주되 헤더 가리기
-    },
+  const navigationOptions: NativeStackNavigationOptions = {
+    headerShown: false,
   };
   return (
     <Stack.Navigator screenOptions={navigationOptions}>

@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components/native';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {User} from '../apis/model/data';
 
 // const Width = Dimensions.get('window').width;
 

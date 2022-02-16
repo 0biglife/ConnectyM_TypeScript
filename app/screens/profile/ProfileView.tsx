@@ -16,7 +16,7 @@ import {
 } from 'react-native';
 import {TabView, TabBar} from 'react-native-tab-view';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {ProfileParamsList} from '../../navigations/Types';
+import {ProfileNavigationProp, ProfileParamsList} from '../../navigations/Types';
 // HTTP
 import apiClient from '../../apis/service/client';
 import {Response, User} from '../../apis/model/data';
@@ -129,10 +129,10 @@ const SafeStatusBar = Platform.select({
 const PullToRefreshDist = 150;
 
 export interface ProfileProps {
-  navigation: StackNavigationProp<ProfileParamsList, 'Profile'>;
+  navigation: ProfileNavigationProp;
 }
 
-const profileView: React.FC<ProfileProps> = ({navigation}) => {
+const ProfileView: React.FC<ProfileProps> = ({navigation}) => {
   //axios data get
   const [apiData, setApiData] = useState<User>();
 
@@ -712,4 +712,4 @@ const styles = StyleSheet.create({
   indicator: {backgroundColor: '#222'},
 });
 
-export default profileView;
+export default ProfileView;

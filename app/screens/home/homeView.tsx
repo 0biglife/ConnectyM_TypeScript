@@ -2,12 +2,17 @@ import React, {useState} from 'react';
 import styled from 'styled-components/native';
 import {ActivityIndicator, FlatList} from 'react-native';
 import PostCard from '../../components/PostCard';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {HomeParamsList} from '../../navigations/Types';
+import {
+  HomeNavigationProp,
+  MainTabNavigationProp,
+  MainTabParamList,
+} from '../../navigations/Types';
 //HTTP
 import {useQuery} from 'react-query';
 import {getArticles, getPosts} from '../../apis/service/client';
-import {RouteProp} from '@react-navigation/native';
+import {CompositeNavigationProp} from '@react-navigation/native';
+import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 const SafeContainer = styled.SafeAreaView`
   flex: 1;
@@ -16,13 +21,14 @@ const SafeContainer = styled.SafeAreaView`
   background-color: ${props => props.theme.color.bg};
 `;
 
-export interface HomeProps {
-  navigation: StackNavigationProp<HomeParamsList, 'HomeView'>;
-  route: RouteProp<HomeParamsList, 'HomeView'>;
+export interface HomeViewProps {
+  navigation: CompositeNavigationProp<
+    BottomTabNavigationProp<MainTabParamList, 'Home'>,
+    MainTabNavigationProp
+  >;
 }
 
-const HomeView: React.FC<HomeProps> = ({navigation, route}) => {
-  // const {data, isLoading} = useQuery('articles', getPosts);
+const HomeView: React.FC<HomeViewProps> = ({navigation}) => {
   const articleQuery = useQuery('articles', getArticles);
   const postQuery = useQuery('posts', getPosts);
   const [refresh, setRefresh] = useState<boolean>(false);
@@ -55,8 +61,7 @@ const HomeView: React.FC<HomeProps> = ({navigation, route}) => {
             postTime={item.postTime}
             url={item.url}
             thumbnailUrl={item.thumbnailUrl}
-            onPress={() => navigation.navigate('ProfileStack')}
-            // navigation={navigation}
+            onPress={() => navigation.navigate('Profile')}
           />
         )}
         keyExtractor={item => item.id.toString()}
