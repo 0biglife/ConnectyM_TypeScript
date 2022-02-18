@@ -6,8 +6,8 @@ import {
   mymusicView,
   boardView,
   searchView,
-  ProfileView,
   HomeView,
+  Profile,
 } from '../screens';
 //components
 import {MainTabParamList} from './Types';
@@ -43,7 +43,7 @@ const MainTab = () => {
       <Tab.Screen name="Search" component={searchView} />
       <Tab.Screen name="MyMusician" component={mymusicView} />
       <Tab.Screen name="Board" component={boardView} />
-      <Tab.Screen name="Profile" component={ProfileView} />
+      <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );
 };

@@ -16,10 +16,13 @@ import {
 } from 'react-native';
 import {TabView, TabBar} from 'react-native-tab-view';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {ProfileNavigationProp, ProfileParamsList} from '../../navigations/Types';
+import {MainTabParamList, ProfileNavigationProp, ProfileParamsList, RootStackparamList} from '../../navigations/Types';
 // HTTP
 import apiClient from '../../apis/service/client';
 import {Response, User} from '../../apis/model/data';
+import { CompositeNavigationProp } from '@react-navigation/native';
+import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 //Header UI
 const HeaderView = styled.View`
@@ -128,11 +131,14 @@ const SafeStatusBar = Platform.select({
 });
 const PullToRefreshDist = 150;
 
-export interface ProfileProps {
-  navigation: ProfileNavigationProp;
+interface ProfileProps {
+  navigation: CompositeNavigationProp<
+    BottomTabNavigationProp<MainTabParamList, 'Profile'>,
+    NativeStackNavigationProp<RootStackparamList>
+  >;
 }
 
-const ProfileView: React.FC<ProfileProps> = ({navigation}) => {
+const Profile: React.FC<ProfileProps> = ({navigation}) => {
   //axios data get
   const [apiData, setApiData] = useState<User>();
 
@@ -262,10 +268,6 @@ const ProfileView: React.FC<ProfileProps> = ({navigation}) => {
     };
   }, [routes, tabIndex]);
 
-  navigation.setOptions({
-    headerTitle: apiData?.name,
-  });
-
   useEffect(() => {
     apiClient.get<Response>('/users').then(response => {
       const jsonData: User = response.data.users;
@@ -274,6 +276,13 @@ const ProfileView: React.FC<ProfileProps> = ({navigation}) => {
       setApiData(ParsedData);
     });
   }, []);
+
+  useEffect(() => {
+    navigation.setOptions({
+      title: apiData?.name,
+    });
+  }, [apiData?.name, navigation]);
+
   /**
    *  helper functions
    */
@@ -625,7 +634,7 @@ const ProfileView: React.FC<ProfileProps> = ({navigation}) => {
       <TabView
         onSwipeStart={() => setCanScroll(false)}
         onSwipeEnd={() => setCanScroll(true)}
-        onIndexChange={(id) => {
+        onIndexChange={id => {
           _tabIndex.current = id;
           setIndex(id);
         }}
@@ -712,4 +721,4 @@ const styles = StyleSheet.create({
   indicator: {backgroundColor: '#222'},
 });
 
-export default ProfileView;
+export default Profile;

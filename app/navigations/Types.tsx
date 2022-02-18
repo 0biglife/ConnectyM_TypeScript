@@ -1,6 +1,3 @@
-import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
-import {CompositeNavigationProp} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {ImageSourcePropType} from 'react-native';
 
 //Type Checking for Navigator
@@ -10,12 +7,15 @@ export type RootStackparamList = {
   //
   UserProfile: {
     user_id: number;
+    name: string;
+    imageSource: string;
   };
   EditProfile: {
     name: string;
     imageSource: ImageSourcePropType;
   };
   Message: undefined;
+  Upload: undefined;
 };
 
 export type AuthStackParamList = {

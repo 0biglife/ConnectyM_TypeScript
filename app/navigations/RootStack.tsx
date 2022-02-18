@@ -8,7 +8,12 @@ import {
   createNativeStackNavigator,
   NativeStackNavigationOptions,
 } from '@react-navigation/native-stack';
-import {editProfileView, MessageView, UserProfile} from '../screens';
+import {
+  editProfileView,
+  MessageView,
+  UploadModal,
+  UserProfile,
+} from '../screens';
 import MainTab from './MainTab';
 
 const Stack = createNativeStackNavigator<RootStackparamList>();
@@ -30,6 +35,7 @@ const RootStack = () => {
         <Stack.Screen name="Message" component={MessageView} />
         <Stack.Screen name="EditProfile" component={editProfileView} />
         <Stack.Screen name="UserProfile" component={UserProfile} />
+        <Stack.Screen name="Upload" component={UploadModal} />
       </Stack.Navigator>
     </NavigationContainer>
   );
