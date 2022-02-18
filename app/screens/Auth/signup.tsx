@@ -1,12 +1,17 @@
 import {StackNavigationProp} from '@react-navigation/stack';
-import axios from 'axios';
 import React, {useState} from 'react';
 import styled from 'styled-components/native';
 import {Input, Button} from '../../components';
-import {AuthStackNavigationProp} from '../../navigations/Types';
+import {
+  AuthStackNavigationProp,
+  AuthStackParamList,
+  RootStackparamList,
+} from '../../navigations/Types';
 // HTTP
 import apiClient from '../../apis/service/client';
 import {Response} from '../../apis/model/data';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {CompositeNavigationProp} from '@react-navigation/native';
 
 const Container = styled.View`
   flex: 1;
@@ -16,7 +21,11 @@ const Container = styled.View`
 `;
 
 export interface SignUpProps {
-  navigation: AuthStackNavigationProp;
+  // navigation: CompositeNavigationProp<
+  //   NativeStackNavigationProp<AuthStackParamList, 'SignUp'>,
+  //   NativeStackNavigationProp<RootStackparamList, 'AuthStack'>
+  // >;
+  navigation: NativeStackNavigationProp<RootStackparamList, 'AuthStack'>;
 }
 
 const signupView: React.FC<SignUpProps> = ({navigation}) => {
@@ -34,7 +43,7 @@ const signupView: React.FC<SignUpProps> = ({navigation}) => {
         console.log(response.data);
       });
     console.log('SignUp View Navigation');
-    navigation.navigate('MainStack');
+    navigation.navigate('MainTab');
   };
 
   return (

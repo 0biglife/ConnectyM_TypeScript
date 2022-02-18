@@ -10,7 +10,8 @@ import mymusicView from './mymusic/mymusic';
 import boardView from './board/boardView';
 import ProfileView from './profile/ProfileView';
 import editProfileView from './profile/editProfileView';
-import UserProfileView from './profile/UserProfile';
+// import UserProfileView from './profile/UserProfileTest';
+import UserProfile from './profile/UesrProfile';
 import MessageView from './profile/MessageView';
 
 // import musicPlayer from './MusicPlayer';
@@ -28,7 +29,7 @@ export {
   boardView,
   ProfileView,
   editProfileView,
-  UserProfileView,
+  UserProfile,
   PlayerBar,
   MessageView,
 };

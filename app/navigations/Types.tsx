@@ -1,9 +1,6 @@
 import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
 import {CompositeNavigationProp} from '@react-navigation/native';
-import {
-  NativeStackNavigationProp,
-  NativeStackScreenProps,
-} from '@react-navigation/native-stack';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {ImageSourcePropType} from 'react-native';
 
 //Type Checking for Navigator
@@ -11,14 +8,13 @@ export type RootStackparamList = {
   MainTab: MainTabParamList;
   AuthStack: AuthStackParamList;
   //
-  Post: undefined;
-  Comment: undefined;
-  UserProfile: undefined;
+  UserProfile: {
+    user_id: number;
+  };
   EditProfile: {
     name: string;
     imageSource: ImageSourcePropType;
   };
-  Upload: undefined;
   Message: undefined;
 };
 
@@ -39,27 +35,27 @@ export type MainTabParamList = {
 };
 
 //Type Checking for Screens // Props : navigation
-export type RootStackNavigationProp =
-  NativeStackNavigationProp<RootStackparamList>;
+// export type RootStackNavigationProp =
+//   NativeStackNavigationProp<RootStackparamList>;
 
-export type AuthStackNavigationProp = NativeStackNavigationProp<
-  RootStackparamList,
-  'AuthStack'
->;
+// export type AuthStackNavigationProp = NativeStackNavigationProp<
+//   RootStackparamList,
+//   'AuthStack'
+// >;
 
-export type MainTabNavigationProp = CompositeNavigationProp<
-  RootStackNavigationProp,
-  BottomTabNavigationProp<MainTabParamList>
->;
+// export type MainTabNavigationProp = CompositeNavigationProp<
+//   RootStackNavigationProp,
+//   BottomTabNavigationProp<MainTabParamList>
+// >;
 
-export type HomeNavigationProp = CompositeNavigationProp<
-  BottomTabNavigationProp<MainTabParamList, 'Home'>,
-  MainTabNavigationProp
->;
+// export type HomeNavigationProp = CompositeNavigationProp<
+//   BottomTabNavigationProp<MainTabParamList, 'Home'>,
+//   MainTabNavigationProp
+// >;
 
-export type ProfileNavigationProp = CompositeNavigationProp<
-  BottomTabNavigationProp<MainTabParamList, 'Profile'>,
-  MainTabNavigationProp
->;
+// export type ProfileNavigationProp = CompositeNavigationProp<
+//   BottomTabNavigationProp<MainTabParamList, 'Profile'>,
+//   MainTabNavigationProp
+// >;
 
 //Type Checking for Screens // Props : route

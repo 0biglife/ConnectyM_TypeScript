@@ -6,6 +6,7 @@ import {
   HomeNavigationProp,
   MainTabNavigationProp,
   MainTabParamList,
+  RootStackparamList,
 } from '../../navigations/Types';
 //HTTP
 import {useQuery} from 'react-query';
@@ -13,6 +14,7 @@ import {getArticles, getPosts} from '../../apis/service/client';
 import {CompositeNavigationProp} from '@react-navigation/native';
 import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import { number } from 'prop-types';
 
 const SafeContainer = styled.SafeAreaView`
   flex: 1;
@@ -21,10 +23,10 @@ const SafeContainer = styled.SafeAreaView`
   background-color: ${props => props.theme.color.bg};
 `;
 
-export interface HomeViewProps {
+interface HomeViewProps {
   navigation: CompositeNavigationProp<
     BottomTabNavigationProp<MainTabParamList, 'Home'>,
-    MainTabNavigationProp
+    NativeStackNavigationProp<RootStackparamList>
   >;
 }
 
@@ -61,7 +63,9 @@ const HomeView: React.FC<HomeViewProps> = ({navigation}) => {
             postTime={item.postTime}
             url={item.url}
             thumbnailUrl={item.thumbnailUrl}
-            onPress={() => navigation.navigate('Profile')}
+            onPress={() =>
+              navigation.navigate('UserProfile', {user_id: item.id})
+            }
           />
         )}
         keyExtractor={item => item.id.toString()}

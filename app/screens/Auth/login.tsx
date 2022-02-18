@@ -1,11 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import {Alert, Image, useColorScheme} from 'react-native';
+import {Alert} from 'react-native';
 import styled from 'styled-components/native';
 import {Button} from '../../components';
 //Social Login
 import {
   GoogleSignin,
-  GoogleSigninButton,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
 import appleAuth, {
@@ -42,11 +41,6 @@ const Container = styled.View`
   flex: 1;
   background-color: white;
   align-items: center;
-  justify-content: center;
-`;
-
-const ImageWrapper = styled.View`
-  flex: 1;
   justify-content: center;
 `;
 
