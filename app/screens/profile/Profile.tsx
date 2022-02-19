@@ -1,6 +1,7 @@
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react-hooks/rules-of-hooks */
+import IonIcon from 'react-native-vector-icons/Ionicons';
 import React, {useState, useEffect, useRef} from 'react';
 import styled from 'styled-components/native';
 import {
@@ -13,6 +14,7 @@ import {
   Platform,
   StatusBar,
   ActivityIndicator,
+  TouchableOpacity,
 } from 'react-native';
 import {TabView, TabBar} from 'react-native-tab-view';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -23,6 +25,16 @@ import {Response, User} from '../../apis/model/data';
 import { CompositeNavigationProp } from '@react-navigation/native';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import {ModalView} from '../../components';
+
+const HeaderIconView = styled.View`
+  flex-direction: row;
+  width: 54px;
+  justify-content: space-between;
+  justify-items: center;
+  /* background-color: lightblue; */
+  margin-right: 8px;
+`;
 
 //Header UI
 const HeaderView = styled.View`
@@ -266,7 +278,45 @@ const Profile: React.FC<ProfileProps> = ({navigation}) => {
       scrollY.removeAllListeners();
       headerScrollY.removeAllListeners();
     };
-  }, [routes, tabIndex]);
+  }, [headerScrollY, routes, scrollY, syncScrollOffset, tabIndex]);
+
+  const [modalVisible, setModalVisible] = useState(false);
+
+  useEffect(() => {
+    const PostingModal = () => {
+      navigation.navigate('Upload');
+      setModalVisible(false);
+    };
+
+    navigation.setOptions({
+      headerRight: () => {
+        return (
+          <HeaderIconView>
+            <TouchableOpacity onPress={() => setModalVisible(true)}>
+              <IonIcon name="add" size={24} color="black" />
+              <ModalView
+                modalVisible={modalVisible}
+                setModalVisible={setModalVisible}
+                firstFunction={() => PostingModal()}
+                secondFunction={() => PostingModal()}
+                thirdFunction={() => PostingModal()}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => setModalVisible(true)}>
+              <IonIcon name="ellipsis-vertical-sharp" size={24} color="black" />
+              <ModalView
+                modalVisible={modalVisible}
+                setModalVisible={setModalVisible}
+                firstFunction={() => PostingModal()}
+                secondFunction={() => PostingModal()}
+                thirdFunction={() => PostingModal()}
+              />
+            </TouchableOpacity>
+          </HeaderIconView>
+        );
+      },
+    });
+  }, [modalVisible, navigation]);
 
   useEffect(() => {
     apiClient.get<Response>('/users').then(response => {

@@ -20,6 +20,7 @@ const MainTab = () => {
     <Tab.Navigator
       initialRouteName="Home"
       screenOptions={({route}) => ({
+        tabBarShowLabel: false,
         tabBarIcon: ({focused, color, size}) => {
           let iconName;
 

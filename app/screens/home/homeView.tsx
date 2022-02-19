@@ -19,6 +19,12 @@ const SafeContainer = styled.SafeAreaView`
   background-color: ${props => props.theme.color.bg};
 `;
 
+const HeaderIconView = styled.View`
+  flex-direction: row;
+  justify-items: center;
+  margin-right: 8px;
+`;
+
 interface HomeViewProps {
   navigation: CompositeNavigationProp<
     BottomTabNavigationProp<MainTabParamList, 'Home'>,
@@ -33,36 +39,33 @@ const HomeView: React.FC<HomeViewProps> = ({navigation}) => {
   //Modal
   const [modalVisible, setModalVisible] = useState(false);
 
-  const PostingModal = () => {
-    navigation.navigate('Upload');
-    setModalVisible(false);
-  };
-
   console.log(articleQuery.data);
 
   useEffect(() => {
+    const PostingModal = () => {
+      navigation.navigate('Upload');
+      setModalVisible(false);
+    };
+
     navigation.setOptions({
       headerRight: () => {
         return (
-          <TouchableOpacity onPress={() => setModalVisible(true)}>
-            <IonIcon
-              name="add"
-              size={24}
-              color="black"
-              style={{marginTop: 4, marginRight: 8}}
-            />
-            <ModalView
-              modalVisible={modalVisible}
-              setModalVisible={setModalVisible}
-              firstFunction={() => PostingModal()}
-              secondFunction={() => PostingModal()}
-              thirdFunction={() => PostingModal()}
-            />
-          </TouchableOpacity>
+          <HeaderIconView>
+            <TouchableOpacity onPress={() => setModalVisible(true)}>
+              <IonIcon name="add" size={24} color="black" />
+              <ModalView
+                modalVisible={modalVisible}
+                setModalVisible={setModalVisible}
+                firstFunction={() => PostingModal()}
+                secondFunction={() => PostingModal()}
+                thirdFunction={() => PostingModal()}
+              />
+            </TouchableOpacity>
+          </HeaderIconView>
         );
       },
     });
-  }, [modalVisible, navigation, PostingModal]);
+  }, [modalVisible, navigation]);
 
   if (!postQuery.data) {
     return <ActivityIndicator size="large" style={{flex: 1}} />;
