@@ -6,20 +6,15 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 // const Width = Dimensions.get('window').width;
 
 const Card = styled.View`
-  background-color: #ebebeb; //#f8f8f8;
-  /* background-color: ${props => props.theme.color.bg}; */
-  /* width: 380px; */
-  /* max-width: 100%; */
+  background-color: #ebebeb;
   min-width: 100%;
   margin-bottom: 6px;
-  /* border-radius: 10px; */
 `;
 
 const UserInfo = styled.View`
   flex-direction: row;
   justify-content: flex-start;
   padding: 15px;
-  /* width: 100%; */
 `;
 
 const UserImg = styled.Image`
@@ -90,7 +85,8 @@ interface ArticleItemProps {
   url: string;
   thumbnailUrl: string;
   postTime: string;
-  onPress: () => void;
+  ProfileTapped: () => void;
+  ArticleTapped: () => void;
 }
 
 const PostCard = ({
@@ -100,7 +96,8 @@ const PostCard = ({
   postTime,
   url,
   thumbnailUrl,
-  onPress,
+  ProfileTapped,
+  ArticleTapped,
 }: ArticleItemProps) => {
   const formattedData = new Date(postTime).toLocaleString();
 
@@ -109,7 +106,7 @@ const PostCard = ({
   return (
     <Card>
       <UserInfo>
-        <TouchableOpacity onPress={onPress}>
+        <TouchableOpacity onPress={ProfileTapped}>
           <UserImg
             source={{
               uri: thumbnailUrl,
@@ -117,7 +114,7 @@ const PostCard = ({
           />
         </TouchableOpacity>
         <UserInfoText>
-          <TouchableOpacity onPress={onPress}>
+          <TouchableOpacity onPress={ProfileTapped}>
             <UserName>{name}</UserName>
           </TouchableOpacity>
           <PostTime>{formattedData}</PostTime>
@@ -135,7 +132,7 @@ const PostCard = ({
           <IonIcon name="heart" size={22} color="#2e64e5" />
           <InteractionText active>Like</InteractionText>
         </Interaction>
-        <Interaction>
+        <Interaction onPress={ArticleTapped}>
           <IonIcon name="md-chatbubble-outline" size={20} />
           <InteractionText>Comment</InteractionText>
         </Interaction>

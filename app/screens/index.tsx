@@ -2,6 +2,7 @@ import HomeView from './Home/homeView';
 import SecondCatView from './Home/SecondCat';
 import ThirdCatView from './Home/ThirdCat';
 import UploadModal from './Home/UploadModal';
+import ArticleView from './Home/ArticleView';
 
 import loginView from './Auth/login';
 import signupView from './Auth/signup';
@@ -19,6 +20,7 @@ import PlayerBar from './PlayerBar';
 
 export {
   HomeView,
+  ArticleView,
   UploadModal,
   SecondCatView,
   ThirdCatView,

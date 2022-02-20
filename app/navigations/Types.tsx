@@ -16,6 +16,14 @@ export type RootStackparamList = {
   };
   Message: undefined;
   Upload: undefined;
+  Article: {
+    user_id: number;
+    name: string;
+    thumbnailUrl: string;
+    imageSource: string;
+    postTime: string;
+    title: string;
+  };
 };
 
 export type AuthStackParamList = {

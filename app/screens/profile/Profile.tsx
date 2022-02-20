@@ -1,6 +1,3 @@
-/* eslint-disable react/self-closing-comp */
-/* eslint-disable react-native/no-inline-styles */
-/* eslint-disable react-hooks/rules-of-hooks */
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import React, {useState, useEffect, useRef} from 'react';
 import styled from 'styled-components/native';
@@ -25,7 +22,7 @@ import {Response, User} from '../../apis/model/data';
 import { CompositeNavigationProp } from '@react-navigation/native';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import {ModalView} from '../../components';
+import {MenuModal, SettingModal} from '../../components';
 
 const HeaderIconView = styled.View`
   flex-direction: row;
@@ -281,6 +278,7 @@ const Profile: React.FC<ProfileProps> = ({navigation}) => {
   }, [headerScrollY, routes, scrollY, syncScrollOffset, tabIndex]);
 
   const [modalVisible, setModalVisible] = useState(false);
+  const [settingModalVisible, setSettingModalVisible] = useState<boolean>(false);
 
   useEffect(() => {
     const PostingModal = () => {
@@ -294,7 +292,7 @@ const Profile: React.FC<ProfileProps> = ({navigation}) => {
           <HeaderIconView>
             <TouchableOpacity onPress={() => setModalVisible(true)}>
               <IonIcon name="add" size={24} color="black" />
-              <ModalView
+              <MenuModal
                 modalVisible={modalVisible}
                 setModalVisible={setModalVisible}
                 firstFunction={() => PostingModal()}
@@ -302,11 +300,11 @@ const Profile: React.FC<ProfileProps> = ({navigation}) => {
                 thirdFunction={() => PostingModal()}
               />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => setModalVisible(true)}>
+            <TouchableOpacity onPress={() => setSettingModalVisible(true)}>
               <IonIcon name="ellipsis-vertical-sharp" size={24} color="black" />
-              <ModalView
-                modalVisible={modalVisible}
-                setModalVisible={setModalVisible}
+              <SettingModal
+                modalVisible={settingModalVisible}
+                setModalVisible={setSettingModalVisible}
                 firstFunction={() => PostingModal()}
                 secondFunction={() => PostingModal()}
                 thirdFunction={() => PostingModal()}
@@ -316,7 +314,7 @@ const Profile: React.FC<ProfileProps> = ({navigation}) => {
         );
       },
     });
-  }, [modalVisible, navigation]);
+  }, [modalVisible, navigation, settingModalVisible]);
 
   useEffect(() => {
     apiClient.get<Response>('/users').then(response => {

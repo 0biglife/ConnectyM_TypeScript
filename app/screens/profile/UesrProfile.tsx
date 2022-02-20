@@ -1,9 +1,7 @@
-import {NavigationRouteContext, RouteProp} from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import React, { useEffect } from 'react';
+import {RouteProp} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import React, {useEffect} from 'react';
 import styled from 'styled-components/native';
-import { BlockScopeAwareRuleWalker } from 'tslint';
-import { getJSDocOverrideTagNoCache } from 'typescript';
 import {RootStackparamList} from '../../navigations/Types';
 
 const SafeContainer = styled.SafeAreaView`
@@ -15,12 +13,6 @@ const MainContainer = styled.View`
   background-color: white;
   justify-content: center;
   align-items: center;
-`;
-
-const TestText = styled.Text`
-  font-size: 20px;
-  font-weight: 700;
-  padding-top: 20px;
 `;
 
 const ProfileImage = styled.Image`

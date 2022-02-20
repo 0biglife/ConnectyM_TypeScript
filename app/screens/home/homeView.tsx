@@ -10,7 +10,7 @@ import {getArticles, getPosts} from '../../apis/service/client';
 import {CompositeNavigationProp} from '@react-navigation/native';
 import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {ModalView} from '../../components';
+import {MenuModal} from '../../components';
 
 const SafeContainer = styled.SafeAreaView`
   flex: 1;
@@ -33,13 +33,12 @@ interface HomeViewProps {
 }
 
 const HomeView: React.FC<HomeViewProps> = ({navigation}) => {
-  const articleQuery = useQuery('articles', getArticles);
+  //API Calls
   const postQuery = useQuery('posts', getPosts);
+  //Refresh Hook
   const [refresh, setRefresh] = useState<boolean>(false);
   //Modal
   const [modalVisible, setModalVisible] = useState(false);
-
-  console.log(articleQuery.data);
 
   useEffect(() => {
     const PostingModal = () => {
@@ -53,7 +52,7 @@ const HomeView: React.FC<HomeViewProps> = ({navigation}) => {
           <HeaderIconView>
             <TouchableOpacity onPress={() => setModalVisible(true)}>
               <IonIcon name="add" size={24} color="black" />
-              <ModalView
+              <MenuModal
                 modalVisible={modalVisible}
                 setModalVisible={setModalVisible}
                 firstFunction={() => PostingModal()}
@@ -69,6 +68,8 @@ const HomeView: React.FC<HomeViewProps> = ({navigation}) => {
 
   if (!postQuery.data) {
     return <ActivityIndicator size="large" style={{flex: 1}} />;
+  } else {
+    console.log('Data Existed : ', postQuery.data);
   }
 
   const wait = (timeout: number) => {
@@ -78,7 +79,8 @@ const HomeView: React.FC<HomeViewProps> = ({navigation}) => {
   const refreshing = () => {
     setRefresh(true);
     wait(1400).then(() => setRefresh(false));
-    getArticles();
+    getPosts();
+    console.log('refresh Data : ', postQuery.data);
   };
 
   return (
@@ -93,11 +95,20 @@ const HomeView: React.FC<HomeViewProps> = ({navigation}) => {
             postTime={item.postTime}
             url={item.url}
             thumbnailUrl={item.thumbnailUrl}
-            onPress={() =>
+            ProfileTapped={() =>
               navigation.navigate('UserProfile', {
                 user_id: item.id,
                 name: item.name,
                 imageSource: item.thumbnailUrl,
+              })
+            }
+            ArticleTapped={() => navigation.navigate('Article', {
+                user_id: item.id,
+                name: item.name,
+                thumbnailUrl: item.thumbnailUrl,
+                imageSource: item.url,
+                postTime: item.postTime,
+                title: item.title,
               })
             }
           />

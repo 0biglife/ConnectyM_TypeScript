@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {View} from 'react-native';
-import {ModalView} from '../../components';
+import {MenuModal} from '../../components';
 import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {ProfileParamsList} from '../../navigations/Types';
@@ -137,11 +137,12 @@ const editProfileView: React.FC<EditProfileProps> = ({navigation, route}) => {
           <TouchableOpacity onPress={() => setModalVisible(true)}>
             <ModalContainer>
               <ProfileChangeText>Change profile photo</ProfileChangeText>
-              <ModalView
+              <MenuModal
                 modalVisible={modalVisible}
                 setModalVisible={setModalVisible}
                 firstFunction={cameraAccess}
                 secondFunction={libraryAccess}
+                thirdFunction={null}
               />
             </ModalContainer>
           </TouchableOpacity>

@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import styled from 'styled-components/native';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {ModalView} from '../../components';
+import {MenuModal} from '../../components';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {HomeParamsList} from '../../navigations/Types';
 import ImagePicker from 'react-native-image-crop-picker';
@@ -186,7 +186,7 @@ const UploadModal: React.FC<UploadParams> = ({navigation}) => {
           <TouchableOpacity onPress={() => setModalVisible(true)}>
             <ModalContainer>
               <ProfileChangeText>Posting your photo</ProfileChangeText>
-              <ModalView
+              <MenuModal
                 modalVisible={modalVisible}
                 setModalVisible={setModalVisible}
                 firstFunction={cameraAccess}

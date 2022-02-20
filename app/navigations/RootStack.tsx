@@ -9,6 +9,7 @@ import {
   NativeStackNavigationOptions,
 } from '@react-navigation/native-stack';
 import {
+  ArticleView,
   editProfileView,
   MessageView,
   UploadModal,
@@ -36,6 +37,7 @@ const RootStack = () => {
         <Stack.Screen name="EditProfile" component={editProfileView} />
         <Stack.Screen name="UserProfile" component={UserProfile} />
         <Stack.Screen name="Upload" component={UploadModal} />
+        <Stack.Screen name="Article" component={ArticleView} />
       </Stack.Navigator>
     </NavigationContainer>
   );
