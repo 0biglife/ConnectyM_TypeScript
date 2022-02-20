@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components/native';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import HeartButton from './HeartButton';
-import { Alert } from 'react-native';
+import {Alert} from 'react-native';
 
 // const Width = Dimensions.get('window').width;
 

@@ -3,6 +3,8 @@ import {Article, Comment, Feed} from '../model/data';
 
 const baseurl = 'http://localhost:3000/api';
 
+const StrapiUrl = 'http://localhost:1337';
+
 // const baseurl = __DEV__ ? 'http://localhost:1337' : 'http://localhost:1337';
 
 const apiClient: AxiosInstance = axios.create({
@@ -18,11 +20,6 @@ export default apiClient;
 
 export const getPosts = async () => {
   const response = await apiClient.get<Feed[]>('/feeds');
-  return response.data;
-};
-
-export const getArticles = async () => {
-  const response = await apiClient.get<Article[]>('/articles');
   return response.data;
 };
 

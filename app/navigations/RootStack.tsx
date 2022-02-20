@@ -19,7 +19,7 @@ import MainTab from './MainTab';
 
 const Stack = createNativeStackNavigator<RootStackparamList>();
 
-const isLoggedIn = true;
+const isLoggedIn = false;
 
 const RootStack = () => {
   const navigationOptions: NativeStackNavigationOptions = {

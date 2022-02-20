@@ -31,6 +31,7 @@ const Input: React.FC<Props> = props => {
         placeholder={props.placeholder}
         secureTextEntry={props.secureTextEntry || false}
         onChangeText={props.onChangeText}
+        autoCapitalize="none"
       />
     </Container>
   );

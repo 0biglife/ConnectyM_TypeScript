@@ -35,6 +35,7 @@ interface HomeViewProps {
 const HomeView: React.FC<HomeViewProps> = ({navigation}) => {
   //API Calls
   const postQuery = useQuery('posts', getPosts);
+  const articles = useQuery('articles', getArticles);
   //Refresh Hook
   const [refresh, setRefresh] = useState<boolean>(false);
   //Modal
@@ -66,26 +67,64 @@ const HomeView: React.FC<HomeViewProps> = ({navigation}) => {
     });
   }, [modalVisible, navigation]);
 
-  if (!postQuery.data) {
+  // if (!postQuery.data) {
+  //   return <ActivityIndicator size="large" style={{flex: 1}} />;
+  // } else {
+  //   console.log('Data Existed : ', postQuery.data);
+  // }
+
+  console.log('STR TEST : ', articles.data);
+
+  if (!articles.data) {
     return <ActivityIndicator size="large" style={{flex: 1}} />;
-  } else {
-    console.log('Data Existed : ', postQuery.data);
   }
 
-  const wait = (timeout: number) => {
-    return new Promise(resolve => setTimeout(resolve, timeout));
-  };
+  // const wait = (timeout: number) => {
+  //   return new Promise(resolve => setTimeout(resolve, timeout));
+  // };
 
-  const refreshing = () => {
-    setRefresh(true);
-    wait(1400).then(() => setRefresh(false));
-    getPosts();
-    console.log('refresh Data : ', postQuery.data);
-  };
+  // const refreshing = () => {
+  //   setRefresh(true);
+  //   wait(1400).then(() => setRefresh(false));
+  //   getPosts();
+  //   console.log('refresh Data : ', postQuery.data);
+  // };
 
   return (
     <SafeContainer>
       <FlatList
+        data={articles.data}
+        renderItem={({item}) => (
+          <PostCard
+            id={item.id}
+            name={item.user.username}
+            title={item.body}
+            postTime={item.created_at}
+            url={item.url}
+            thumbnailUrl={item.user.thumbnailUrl}
+            ProfileTapped={() =>
+              navigation.navigate('UserProfile', {
+                user_id: item.id,
+                name: item.user.username,
+                imageSource: item.url,
+              })
+            }
+            ArticleTapped={() =>
+              navigation.navigate('Article', {
+                user_id: item.id,
+                name: item.user.username,
+                thumbnailUrl: item.url,
+                imageSource: item.url,
+                postTime: item.created_at,
+                title: item.body,
+              })
+            }
+          />
+        )}
+        keyExtractor={item => item.id.toString()}
+        showsVerticalScrollIndicator={false}
+      />
+      {/* <FlatList
         data={postQuery.data}
         renderItem={({item}) => (
           <PostCard
@@ -117,7 +156,7 @@ const HomeView: React.FC<HomeViewProps> = ({navigation}) => {
         showsVerticalScrollIndicator={false}
         onRefresh={() => refreshing()}
         refreshing={refresh}
-      />
+      /> */}
     </SafeContainer>
   );
 };

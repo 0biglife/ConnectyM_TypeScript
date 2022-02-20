@@ -1,4 +1,5 @@
 //HTTP MODELS
+import {AxiosError} from 'axios';
 
 export interface Response {
   ok: boolean;
@@ -19,20 +20,32 @@ export interface Feed {
   postTime: string;
 }
 
-export interface Article {
-  id: number;
-  title: string;
-  url: string;
-  thumbnailUrl: string;
-  postTime: string;
-  user: User;
-  comments: Comment;
-}
+// export interface User {
+//   id: number;
+//   name: string;
+//   thumbnailUrl: string;
+// }
 
 export interface User {
   id: number;
-  name: string;
+  username: string;
+  email: string;
+  provider: string;
+  confirmed: boolean;
+  blocked: null | string;
+  role: number;
+  created_at: string;
+  updated_at: string;
   thumbnailUrl: string;
+}
+
+export interface Article {
+  id: number;
+  body: string;
+  url: string;
+  user: User;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface Comment {
@@ -48,3 +61,18 @@ export interface AuthResult {
   jwt: string;
   user: User;
 }
+
+//Error
+type AuthErrorData = {
+  messages: {
+    id: string;
+    message: string;
+  }[];
+}[];
+
+export type AuthError = AxiosError<{
+  statusCode: number;
+  error: string;
+  message: AuthErrorData;
+  data: AuthErrorData;
+}>;

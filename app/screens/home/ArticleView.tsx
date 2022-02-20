@@ -1,9 +1,11 @@
 import {RouteProp} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components/native';
 import {RootStackparamList} from '../../navigations/Types';
 import IonIcon from 'react-native-vector-icons/Ionicons';
+import {HeartButton} from '../../components';
+import {Alert} from 'react-native';
 
 const SafeContainer = styled.SafeAreaView`
   flex: 1;
@@ -76,6 +78,12 @@ interface ArticleViewProps {
 
 const ArticleView: React.FC<ArticleViewProps> = ({navigation, route}) => {
   const {params} = route;
+  const [like, setLike] = useState<boolean>(false);
+
+  const toggleLike = async () => {
+    Alert.alert('like');
+    setLike(!like);
+  };
 
   useEffect(() => {
     navigation.setOptions({
@@ -95,9 +103,7 @@ const ArticleView: React.FC<ArticleViewProps> = ({navigation, route}) => {
       <ImageSection source={{uri: params.imageSource}} />
       <ControlSection>
         <InteractionWrapper>
-          <Interaction>
-            <IonIcon name="heart-outline" size={24} />
-          </Interaction>
+          <HeartButton like={like} onPress={toggleLike} />
           <Interaction>
             <IonIcon name="md-chatbubble-outline" size={22} />
           </Interaction>
