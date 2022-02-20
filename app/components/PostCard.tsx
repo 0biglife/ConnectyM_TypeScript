@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import HeartButton from './HeartButton';
+import { Alert } from 'react-native';
 
 // const Width = Dimensions.get('window').width;
 
@@ -100,6 +102,12 @@ const PostCard = ({
   ArticleTapped,
 }: ArticleItemProps) => {
   const formattedData = new Date(postTime).toLocaleString();
+  const [like, setLike] = useState<boolean>(false);
+
+  const toggleLike = async () => {
+    Alert.alert('like');
+    setLike(!like);
+  };
 
   // likeIcon = item.liked ? 'heart' : 'heart-outline';
   // like 에 대한 control : https://www.youtube.com/watch?v=iyNmGXt4vNA (28min ~ )
@@ -128,10 +136,7 @@ const PostCard = ({
       {/* {item.urlToImage == '' ? <Divider /> : <PostImg source={item.urlToImage} />} */}
       <PostText>{title}</PostText>
       <InteractionWrapper>
-        <Interaction active>
-          <IonIcon name="heart" size={22} color="#2e64e5" />
-          <InteractionText active>Like</InteractionText>
-        </Interaction>
+        <HeartButton like={like} onPress={toggleLike} />
         <Interaction onPress={ArticleTapped}>
           <IonIcon name="md-chatbubble-outline" size={20} />
           <InteractionText>Comment</InteractionText>
