@@ -24,14 +24,6 @@ const signupView: React.FC<SignUpProps> = ({navigation}) => {
   const [password, setPassword] = useState<string>('');
 
   const onPress = () => {
-    // apiClient
-    //   .post<Response>('/users/add', {
-    //     name: name,
-    //   })
-    //   .then(response => {
-    //     console.log('SignUp View');
-    //     console.log(response.data);
-    //   });
     if (isLoading) {
       return;
     }
