@@ -492,6 +492,7 @@ const Profile: React.FC<ProfileProps> = ({navigation}) => {
   const logout = () => {
     setUser(null);
     clearToken();
+    navigation.navigate('AuthStack');
   };
 
   const renderHeader = () => {
