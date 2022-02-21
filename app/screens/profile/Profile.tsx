@@ -14,15 +14,16 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {TabView, TabBar} from 'react-native-tab-view';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {MainTabParamList, ProfileNavigationProp, ProfileParamsList, RootStackparamList} from '../../navigations/Types';
+import {MainTabParamList, RootStackparamList} from '../../navigations/Types';
 // HTTP
 import apiClient from '../../apis/service/client';
 import {Response, User} from '../../apis/model/data';
-import { CompositeNavigationProp } from '@react-navigation/native';
-import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import {CompositeNavigationProp} from '@react-navigation/native';
+import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {MenuModal, SettingModal} from '../../components';
+import {clearToken} from '../../apis/STRAPI/client';
+import {useUserState} from '../../apis/STRAPI/contexts/UserContext';
 
 const HeaderIconView = styled.View`
   flex-direction: row;
@@ -486,6 +487,13 @@ const Profile: React.FC<ProfileProps> = ({navigation}) => {
   /**
    * render Helper
    */
+
+  const [user, setUser] = useUserState();
+  const logout = () => {
+    setUser(null);
+    clearToken();
+  };
+
   const renderHeader = () => {
     const y = scrollY.interpolate({
       inputRange: [0, HeaderHeight],
@@ -531,8 +539,8 @@ const Profile: React.FC<ProfileProps> = ({navigation}) => {
           <UserButton onPress={() => navigation.navigate('Message')}>
             <UserButtonText>결제하기</UserButtonText>
           </UserButton>
-          <UserButton>
-            <UserButtonText>Boost</UserButtonText>
+          <UserButton onPress={() => logout()}>
+            <UserButtonText>로그아웃</UserButtonText>
           </UserButton>
         </UserButtonWrapper>
       </AnimatedViewHeader>
