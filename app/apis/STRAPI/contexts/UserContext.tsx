@@ -15,7 +15,11 @@ import {User} from '../../../apis/model/data';
 //Provider : state를 모두 모아둔 것 ( Redux에서의 스토어와 같은 개념인가? )
 
 //Provider
-const UserContextProvider = (children: React.ReactNode) => {
+export const UserContextProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   const userState = useState<User | null>(null);
   return (
     <UserContext.Provider value={userState}>{children}</UserContext.Provider>
@@ -27,7 +31,7 @@ type UserContextState = [User | null, (user: User | null) => void];
 
 const UserContext = createContext<UserContextState | null>(null);
 
-const useUserState = () => {
+export const useUserState = () => {
   const userState = useContext(UserContext);
   if (!userState) {
     throw new Error('UserContext is not used');
@@ -35,7 +39,7 @@ const useUserState = () => {
   return userState;
 };
 
-export default {UserContextProvider, useUserState};
+// export default {UserContextProvider, useUserState};
 
 //세팅이 완료되었으므로, 다음과 같이 사용할 수 있다
 // const [user, setUser] = useUserState();

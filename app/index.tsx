@@ -11,7 +11,7 @@ import React, {useEffect} from 'react';
 import RootStack from './navigations/RootStack';
 import SplashScreen from 'react-native-splash-screen';
 //Redux
-
+import {UserContextProvider} from './apis/STRAPI/contexts/UserContext';
 //theme
 import {ThemeProvider} from 'styled-components';
 import {dark, light} from './styles/theme';
@@ -38,11 +38,13 @@ const App = () => {
   });
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={theme === 'dark' ? dark : light}>
-        <RootStack />
-      </ThemeProvider>
-    </QueryClientProvider>
+    <UserContextProvider>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider theme={theme === 'dark' ? dark : light}>
+          <RootStack />
+        </ThemeProvider>
+      </QueryClientProvider>
+    </UserContextProvider>
   );
 };
 

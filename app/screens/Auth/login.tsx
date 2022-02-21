@@ -173,6 +173,10 @@ const loginView: React.FC<LoginProps> = ({navigation}) => {
   //   }
   // };
 
+  const toggleLoginButton = () => {
+    //
+  };
+
   return (
     <SafeAreaContainer>
       <Container>
@@ -195,9 +199,10 @@ const loginView: React.FC<LoginProps> = ({navigation}) => {
             <ButtonText>Sign in with Apple</ButtonText>
           </LoginButton>
           <Button
-            title="Test Button"
+            title="SignUp"
             onPress={() => navigation.navigate('PermissionAuth')}
           />
+          <Button title="Login" onPress={() => toggleLoginButton()} />
         </ButtonWrapper>
       </Container>
     </SafeAreaContainer>
