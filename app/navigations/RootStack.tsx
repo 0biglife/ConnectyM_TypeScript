@@ -16,12 +16,14 @@ import {
   UserProfile,
 } from '../screens';
 import MainTab from './MainTab';
+import useAuthLoadEffect from '../apis/STRAPI/hook/useAuthLoadEffect';
 
 const Stack = createNativeStackNavigator<RootStackparamList>();
 
-const isLoggedIn = true;
+const isLoggedIn = false;
 
 const RootStack = () => {
+  useAuthLoadEffect();
   const navigationOptions: NativeStackNavigationOptions = {
     headerShown: false,
     gestureEnabled: false,

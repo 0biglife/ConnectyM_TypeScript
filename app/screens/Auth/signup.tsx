@@ -27,13 +27,11 @@ const signupView: React.FC<SignUpProps> = ({navigation}) => {
     if (isLoading) {
       return;
     }
-
     register({
       username,
       email,
       password,
     });
-
     console.log('SignUp View Navigation');
     navigation.navigate('MainTab');
   };

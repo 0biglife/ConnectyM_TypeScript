@@ -1,6 +1,20 @@
 //HTTP MODELS
 import {AxiosError} from 'axios';
 
+export interface GoogleUser {
+  idToken: string;
+  scopes: string[];
+  serverAuthCode: string;
+  user: {
+    email: string;
+    familyName: string;
+    givenName: string;
+    id: string;
+    name: string;
+    photo: string;
+  };
+}
+
 export interface Response {
   ok: boolean;
   users: User;

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import {Alert} from 'react-native';
+import {Alert, View} from 'react-native';
 import styled from 'styled-components/native';
-import {Button} from '../../components';
+import {Button, Input} from '../../components';
 //Social Login
 import {
   GoogleSignin,
@@ -16,6 +16,8 @@ import jwtDecode from 'jwt-decode';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {AuthStackParamList} from '../../navigations/Types';
+import { GoogleUser } from '../../apis/model/data';
+import useLogin from '../../apis/STRAPI/hook/useLogin';
 
 interface tokenType {
   aud: string;
@@ -69,7 +71,11 @@ export interface LoginProps {
 }
 
 const loginView: React.FC<LoginProps> = ({navigation}) => {
+  const {mutate: login, isLoading: isLoading} = useLogin();
   const [user, setUser] = useState({});
+  //login data
+  const [identifier, setIdentifier] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
   useEffect(() => {
     GoogleSignin.configure({
       webClientId:
@@ -81,15 +87,6 @@ const loginView: React.FC<LoginProps> = ({navigation}) => {
     });
     isSignedIn();
   }, []);
-
-  const storeData = async (value: string) => {
-    try {
-      await AsyncStorage.setItem('GoogleAccessToken', value);
-      console.log('token saved successfully');
-    } catch (e) {
-      console.log('token saved error : Asynce Storage');
-    }
-  };
 
   const AppleSignIn = async () => {
     const appleAuthRequestResponse = await appleAuth.performRequest({
@@ -118,14 +115,6 @@ const loginView: React.FC<LoginProps> = ({navigation}) => {
       console.log('due_______', userInfo);
       console.log('Google Access Token : ', accessToken);
       setUser(userInfo);
-      //token setting
-      storeData(accessToken);
-      //token getItem
-      AsyncStorage.getItem('GoogleAccessToken').then(res =>
-        console.log('Storage Token : ', res),
-      );
-      //Move to MainTabView
-      navigation.navigate('PhoneAuth');
     } catch (error) {
       console.log('MESSAGE', error.message);
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
@@ -174,7 +163,13 @@ const loginView: React.FC<LoginProps> = ({navigation}) => {
   // };
 
   const toggleLoginButton = () => {
-    //
+    if (isLoading) {
+      return;
+    }
+    login({
+      identifier,
+      password,
+    });
   };
 
   return (
@@ -198,11 +193,21 @@ const loginView: React.FC<LoginProps> = ({navigation}) => {
           <LoginButton style={{backgroundColor: 'black'}} onPress={AppleSignIn}>
             <ButtonText>Sign in with Apple</ButtonText>
           </LoginButton>
+          <View style={{width: 300}}>
+            <Input
+              placeholder="email"
+              onChangeText={text => setIdentifier(text)}
+            />
+            <Input
+              placeholder="password"
+              onChangeText={text => setPassword(text)}
+            />
+          </View>
+          <Button title="Login" onPress={() => toggleLoginButton()} />
           <Button
             title="SignUp"
             onPress={() => navigation.navigate('PermissionAuth')}
           />
-          <Button title="Login" onPress={() => toggleLoginButton()} />
         </ButtonWrapper>
       </Container>
     </SafeAreaContainer>
