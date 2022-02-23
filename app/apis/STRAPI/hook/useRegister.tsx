@@ -10,13 +10,14 @@ const useRegister = () => {
 
   const mutation = useMutation(register, {
     onSuccess: data => {
-      console.log(data);
+      console.log('useRegister Success + data : ', data);
       setUser(data.user);
       applyToken(data.jwt);
       authStorage.set(data);
     },
     onError: (error: AuthError) => {
       console.log(error);
+      console.log(error.response?.data);
     },
   });
 

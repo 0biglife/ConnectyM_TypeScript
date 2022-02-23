@@ -23,7 +23,7 @@ const Stack = createNativeStackNavigator<RootStackparamList>();
 const isLoggedIn = false;
 
 const RootStack = () => {
-  useAuthLoadEffect();
+  // useAuthLoadEffect();
   const navigationOptions: NativeStackNavigationOptions = {
     headerShown: false,
     gestureEnabled: false,

@@ -15,9 +15,10 @@ import jwtDecode from 'jwt-decode';
 //Token Control
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {AuthStackParamList} from '../../navigations/Types';
+import {AuthStackParamList, RootStackparamList} from '../../navigations/Types';
 import { GoogleUser } from '../../apis/model/data';
 import useLogin from '../../apis/STRAPI/hook/useLogin';
+import { CompositeNavigationProp } from '@react-navigation/native';
 
 interface tokenType {
   aud: string;
@@ -67,7 +68,10 @@ const ButtonText = styled.Text`
 `;
 
 export interface LoginProps {
-  navigation: StackNavigationProp<AuthStackParamList, 'Login'>;
+  navigation: CompositeNavigationProp<
+    StackNavigationProp<AuthStackParamList, 'Login'>,
+    StackNavigationProp<RootStackparamList>
+  >;
 }
 
 const loginView: React.FC<LoginProps> = ({navigation}) => {
@@ -76,6 +80,7 @@ const loginView: React.FC<LoginProps> = ({navigation}) => {
   //login data
   const [identifier, setIdentifier] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+
   useEffect(() => {
     GoogleSignin.configure({
       webClientId:
@@ -175,15 +180,6 @@ const loginView: React.FC<LoginProps> = ({navigation}) => {
   return (
     <SafeAreaContainer>
       <Container>
-        {/* <ImageWrapper>
-          <Image
-            source={require('../../assets/images/Connecty_logo.png')}
-            style={{
-              aspectRatio: 2,
-              resizeMode: 'contain',
-            }}
-          />
-        </ImageWrapper> */}
         <ButtonWrapper>
           <LoginButton
             style={{backgroundColor: 'orange'}}

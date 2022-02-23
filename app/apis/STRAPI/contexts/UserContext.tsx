@@ -15,6 +15,10 @@ import {User} from '../../../apis/model/data';
 //Provider : state를 모두 모아둔 것 ( Redux에서의 스토어와 같은 개념인가? )
 
 //Provider
+type UserContextState = [User | null, (user: User | null) => void];
+
+const UserContext = createContext<UserContextState | null>(null);
+
 export const UserContextProvider = ({
   children,
 }: {
@@ -27,10 +31,6 @@ export const UserContextProvider = ({
 };
 
 //createContext
-type UserContextState = [User | null, (user: User | null) => void];
-
-const UserContext = createContext<UserContextState | null>(null);
-
 export const useUserState = () => {
   const userState = useContext(UserContext);
   if (!userState) {
