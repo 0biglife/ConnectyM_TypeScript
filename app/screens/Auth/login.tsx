@@ -204,6 +204,7 @@ const loginView: React.FC<LoginProps> = ({navigation}) => {
             title="SignUp"
             onPress={() => navigation.navigate('PermissionAuth')}
           />
+          <Button title="Jump" onPress={() => navigation.navigate('MainTab')} />
         </ButtonWrapper>
       </Container>
     </SafeAreaContainer>

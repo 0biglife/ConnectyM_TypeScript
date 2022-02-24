@@ -1,15 +1,15 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import styled from 'styled-components/native';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {MenuModal} from '../../components';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {HomeParamsList} from '../../navigations/Types';
+import {MenuModal} from '../../components';;
 import ImagePicker from 'react-native-image-crop-picker';
-import apiClient from '../../apis/service/client';
-import {ResponseFeed} from '../../apis/model/data';
-import { Alert } from 'react-native';
+import {Alert} from 'react-native';
 import SimpleModal from '../../components/SimpleModal';
+import {RootStackparamList} from '../../navigations/Types';
+import {useMutation, useQueryClient} from 'react-query';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {writeArticles} from '../../apis/STRAPI/apis/articles';
 
 const SafeAreaContainer = styled.SafeAreaView`
   flex: 1;
@@ -75,16 +75,35 @@ const EditInput = styled.TextInput`
 `;
 
 export interface UploadParams {
-  navigation: StackNavigationProp<HomeParamsList, 'UploadView'>;
+  navigation: NativeStackNavigationProp<RootStackparamList, 'MainTab'>;
 }
 
 const UploadModal: React.FC<UploadParams> = ({navigation}) => {
+  //Modal Control
   const [cancelModal, setCancelModal] = useState<boolean>(false);
   const [postModal, setPostModal] = useState<boolean>(false);
   const [modalVisible, setModalVisible] = useState(false);
-  const [textInput, setTextInput] = useState<string>('');
   const close = () => setModalVisible(false);
+  //Parameter
+  const [body, setBody] = useState<string>('');
   const [uri, setUri] = useState('');
+  //API
+  const queryClient = useQueryClient();
+  const {mutate: write} = useMutation(writeArticles, {
+    onSuccess: () => {
+      //invalidation을 통해 query가 stale(신선하지 않다: 상했다)되는 지점을 집어줄 수 있다
+      //즉, 기존의 것을 지우고 새로 캐싱하는 과정
+      queryClient.invalidateQueries('articles');
+      navigation.goBack();
+    },
+  });
+
+  //useCallback이라는 Hook은 불필요한 렌더링과 연산을 제어하며, 이는 성능 최적화에 기여한다
+  //첫 번째 인자 : 함수
+  //두 번째 인자 : Dependencies 전달 // 즉, 두 번째 인자가 변경되지 않으면 함수는 발동되지 않아 리렌더링을 방지할 수 있다
+  const onSubmit = useCallback(() => {
+    write({body, uri});
+  }, [write, body, uri]);
 
   const cameraAccess = () => {
     ImagePicker.openCamera({
@@ -93,8 +112,8 @@ const UploadModal: React.FC<UploadParams> = ({navigation}) => {
       cropping: true,
       // compressImageQuality: 0.7,
     })
-      .then(image => {
-        console.log('ImgaeSource : ', image);
+      .then(imageFromDevice => {
+        console.log('ImgaeSource : ', imageFromDevice);
       })
       .finally(close);
   };
@@ -106,9 +125,9 @@ const UploadModal: React.FC<UploadParams> = ({navigation}) => {
       cropping: true,
       // compressImageQuality: 0.7,
     })
-      .then(image => {
+      .then(imageFromDevice => {
         // console.log('ImgaeSource : ', image);
-        setUri(image.path);
+        setUri(imageFromDevice.path);
       })
       .finally(close);
   };
@@ -124,7 +143,7 @@ const UploadModal: React.FC<UploadParams> = ({navigation}) => {
   let timeSet = `${time.year}-${time.month}-${time.date}`;
 
   const CancelLogic = () => {
-    if (textInput || uri) {
+    if (body || uri) {
       setCancelModal(true);
     } else {
       setCancelModal(false);
@@ -134,17 +153,7 @@ const UploadModal: React.FC<UploadParams> = ({navigation}) => {
 
   const PostingDone = () => {
     if (uri) {
-      apiClient
-        .post<ResponseFeed>('/feeds/add', {
-          title: textInput,
-          url: uri,
-          thumbnailUrl: uri,
-          postTime: timeSet,
-        })
-        .then(response => {
-          console.log(response.data);
-        });
-      navigation.goBack();
+      onSubmit();
     } else {
       setPostModal(false);
       Alert.alert('사진이 있어야 게시 가능합니다.');
@@ -201,7 +210,8 @@ const UploadModal: React.FC<UploadParams> = ({navigation}) => {
               placeholderTextColor="gray"
               multiline={true}
               textAlignVertical="top"
-              onChangeText={text => setTextInput(text)}
+              value={body}
+              onChangeText={text => setBody(text)}
             />
           </InputContainer>
         </ImageContainer>

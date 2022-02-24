@@ -15,7 +15,9 @@ export type RootStackparamList = {
     imageSource: ImageSourcePropType;
   };
   Message: undefined;
-  Upload: undefined;
+  Upload: {
+    articleId?: number;
+  };
   Article: {
     user_id: number;
     name: string;

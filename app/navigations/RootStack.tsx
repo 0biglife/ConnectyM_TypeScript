@@ -1,12 +1,11 @@
-import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-
+import React, { useEffect, useState } from 'react';
 //View Module Stacks
 import AuthStack from './AuthStack';
 import {RootStackparamList} from './Types';
 import {
   createNativeStackNavigator,
   NativeStackNavigationOptions,
+  NativeStackNavigationProp,
 } from '@react-navigation/native-stack';
 import {
   ArticleView,
@@ -17,31 +16,34 @@ import {
 } from '../screens';
 import MainTab from './MainTab';
 import useAuthLoadEffect from '../apis/STRAPI/hook/useAuthLoadEffect';
+import authStorage from '../apis/STRAPI/storages/authStorage';
 
 const Stack = createNativeStackNavigator<RootStackparamList>();
 
-const isLoggedIn = false;
+// const isLoggedIn = false;
 
 const RootStack = () => {
-  // useAuthLoadEffect();
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
+  useAuthLoadEffect();
   const navigationOptions: NativeStackNavigationOptions = {
     headerShown: false,
     gestureEnabled: false,
   };
+
+  console.log('RootStack : ', isLoggedIn);
+
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName={isLoggedIn ? 'MainTab' : 'AuthStack'}
-        screenOptions={navigationOptions}>
-        <Stack.Screen name="AuthStack" component={AuthStack} />
-        <Stack.Screen name="MainTab" component={MainTab} />
-        <Stack.Screen name="Message" component={MessageView} />
-        <Stack.Screen name="EditProfile" component={editProfileView} />
-        <Stack.Screen name="UserProfile" component={UserProfile} />
-        <Stack.Screen name="Upload" component={UploadModal} />
-        <Stack.Screen name="Article" component={ArticleView} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Stack.Navigator
+      initialRouteName={isLoggedIn ? 'MainTab' : 'AuthStack'}
+      screenOptions={navigationOptions}>
+      <Stack.Screen name="MainTab" component={MainTab} />
+      <Stack.Screen name="Message" component={MessageView} />
+      <Stack.Screen name="EditProfile" component={editProfileView} />
+      <Stack.Screen name="UserProfile" component={UserProfile} />
+      <Stack.Screen name="Upload" component={UploadModal} />
+      <Stack.Screen name="Article" component={ArticleView} />
+      <Stack.Screen name="AuthStack" component={AuthStack} />
+    </Stack.Navigator>
   );
 };
 

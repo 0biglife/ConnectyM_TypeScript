@@ -1,5 +1,5 @@
 import {useMutation} from 'react-query';
-import {login} from '../auth';
+import {login} from '../apis/auth';
 import {AuthError} from '../../model/data';
 import {useUserState} from '../contexts/UserContext';
 import {applyToken} from '../client';
@@ -10,7 +10,8 @@ import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 const useLogin = () => {
-  const navigation = useNavigation<NativeStackNavigationProp<RootStackparamList>>();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackparamList>>();
   const [, setUser] = useUserState(); //반환값 무시 문법
 
   const mutation = useMutation(login, {

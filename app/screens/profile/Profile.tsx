@@ -24,6 +24,7 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {MenuModal, SettingModal} from '../../components';
 import {clearToken} from '../../apis/STRAPI/client';
 import {useUserState} from '../../apis/STRAPI/contexts/UserContext';
+import authStorage from '../../apis/STRAPI/storages/authStorage';
 
 const HeaderIconView = styled.View`
   flex-direction: row;
@@ -492,6 +493,7 @@ const Profile: React.FC<ProfileProps> = ({navigation}) => {
   const logout = () => {
     setUser(null);
     clearToken();
+    authStorage.clear();
     console.log('Logout Succeed');
     navigation.navigate('AuthStack');
   };

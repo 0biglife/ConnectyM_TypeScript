@@ -6,7 +6,7 @@ import {MainTabParamList, RootStackparamList} from '../../navigations/Types';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 //HTTP
 import {useQuery} from 'react-query';
-import {getArticles, getPosts} from '../../apis/service/client';
+import {getArticles} from '../../apis/STRAPI/apis/articles';
 import {CompositeNavigationProp} from '@react-navigation/native';
 import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
@@ -34,16 +34,15 @@ interface HomeViewProps {
 
 const HomeView: React.FC<HomeViewProps> = ({navigation}) => {
   //API Calls
-  const postQuery = useQuery('posts', getPosts);
   const articles = useQuery('articles', getArticles);
   //Refresh Hook
-  const [refresh, setRefresh] = useState<boolean>(false);
+  // const [refresh, setRefresh] = useState<boolean>(false);
   //Modal
   const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     const PostingModal = () => {
-      navigation.navigate('Upload');
+      navigation.navigate('Upload', {});
       setModalVisible(false);
     };
 
@@ -67,16 +66,11 @@ const HomeView: React.FC<HomeViewProps> = ({navigation}) => {
     });
   }, [modalVisible, navigation]);
 
-  // if (!postQuery.data) {
-  //   return <ActivityIndicator size="large" style={{flex: 1}} />;
-  // } else {
-  //   console.log('Data Existed : ', postQuery.data);
-  // }
-
-  console.log('STR TEST : ', articles.data);
-
   if (!articles.data) {
+    console.log('No ARTICLE Data');
     return <ActivityIndicator size="large" style={{flex: 1}} />;
+  } else {
+    console.log('STRAPI POST DATA : ', articles.data);
   }
 
   // const wait = (timeout: number) => {

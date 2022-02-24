@@ -55,9 +55,11 @@ export interface User {
 
 export interface Article {
   id: number;
+  title: string;
   body: string;
   url: string;
   user: User;
+  published_at: string;
   created_at: string;
   updated_at: string;
 }

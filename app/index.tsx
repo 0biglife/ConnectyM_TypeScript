@@ -18,14 +18,12 @@ import {dark, light} from './styles/theme';
 
 //React-Query
 import {QueryClient, QueryClientProvider} from 'react-query';
+import {NavigationContainer} from '@react-navigation/native';
 
 const queryClient = new QueryClient();
 
 const App = () => {
   const theme: string = 'light';
-  // useEffect(() => {
-  //   SplashScreen.hide();
-  // }, []);
   useEffect(() => {
     try {
       setTimeout(() => {
@@ -41,7 +39,9 @@ const App = () => {
     <UserContextProvider>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider theme={theme === 'dark' ? dark : light}>
-          <RootStack />
+          <NavigationContainer>
+            <RootStack />
+          </NavigationContainer>
         </ThemeProvider>
       </QueryClientProvider>
     </UserContextProvider>

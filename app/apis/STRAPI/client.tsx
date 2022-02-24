@@ -9,11 +9,6 @@ const client = axios.create({
 
 export default client;
 
-export const getArticles = async () => {
-  const response = await client.get<Article[]>('/articles');
-  return response.data;
-};
-
 export const applyToken = (jwt: string) => {
   console.log('Apply Token by Client : ', jwt);
   client.defaults.headers.common.Authorization = `Bearer ${jwt}`;
