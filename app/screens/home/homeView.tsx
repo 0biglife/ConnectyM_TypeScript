@@ -11,6 +11,7 @@ import {CompositeNavigationProp} from '@react-navigation/native';
 import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {MenuModal} from '../../components';
+import {useUserState} from '../../apis/STRAPI/contexts/UserContext';
 
 const SafeContainer = styled.SafeAreaView`
   flex: 1;
@@ -35,6 +36,7 @@ interface HomeViewProps {
 const HomeView: React.FC<HomeViewProps> = ({navigation}) => {
   //API Calls
   const articles = useQuery('articles', getArticles);
+  const [userInfo] = useUserState();
   //Refresh Hook
   // const [refresh, setRefresh] = useState<boolean>(false);
   //Modal
@@ -45,7 +47,6 @@ const HomeView: React.FC<HomeViewProps> = ({navigation}) => {
       navigation.navigate('Upload', {});
       setModalVisible(false);
     };
-
     navigation.setOptions({
       headerRight: () => {
         return (
@@ -91,11 +92,13 @@ const HomeView: React.FC<HomeViewProps> = ({navigation}) => {
         renderItem={({item}) => (
           <PostCard
             id={item.id}
-            name={item.user.username}
-            title={item.body}
-            postTime={item.created_at}
-            url={item.url}
-            thumbnailUrl={item.user.thumbnailUrl}
+            title={item.title}
+            body={item.body}
+            // url={item.url}
+            user={userInfo!}
+            published_at={item.published_at}
+            created_at={item.created_at}
+            updated_at={item.updated_at}
             ProfileTapped={() =>
               navigation.navigate('UserProfile', {
                 user_id: item.id,
@@ -115,7 +118,7 @@ const HomeView: React.FC<HomeViewProps> = ({navigation}) => {
             }
           />
         )}
-        keyExtractor={item => item.id.toString()}
+        keyExtractor={item => item.id}
         showsVerticalScrollIndicator={false}
       />
       {/* <FlatList

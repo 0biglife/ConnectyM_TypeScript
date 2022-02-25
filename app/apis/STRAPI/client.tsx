@@ -1,5 +1,4 @@
 import axios from 'axios';
-import {Article} from '../model/data';
 
 const baseurl = 'http://localhost:1337';
 

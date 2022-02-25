@@ -16,8 +16,7 @@ import {
 import {TabView, TabBar} from 'react-native-tab-view';
 import {MainTabParamList, RootStackparamList} from '../../navigations/Types';
 // HTTP
-import apiClient from '../../apis/service/client';
-import {Response, User} from '../../apis/model/data';
+import {User} from '../../apis/model/data';
 import {CompositeNavigationProp} from '@react-navigation/native';
 import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
@@ -25,6 +24,9 @@ import {MenuModal, SettingModal} from '../../components';
 import {clearToken} from '../../apis/STRAPI/client';
 import {useUserState} from '../../apis/STRAPI/contexts/UserContext';
 import authStorage from '../../apis/STRAPI/storages/authStorage';
+//API
+import {getLoginStatus} from '../../apis/STRAPI/apis/auth';
+import {useQuery} from 'react-query';
 
 const HeaderIconView = styled.View`
   flex-direction: row;
@@ -151,7 +153,7 @@ interface ProfileProps {
 
 const Profile: React.FC<ProfileProps> = ({navigation}) => {
   //axios data get
-  const [apiData, setApiData] = useState<User>();
+  const [user, setUser] = useUserState();
 
   const [tabIndex, setIndex] = useState<number>(0);
   const [routes] = useState([
@@ -319,19 +321,10 @@ const Profile: React.FC<ProfileProps> = ({navigation}) => {
   }, [modalVisible, navigation, settingModalVisible]);
 
   useEffect(() => {
-    apiClient.get<Response>('/users').then(response => {
-      const jsonData: User = response.data.users;
-      const ParsedData = jsonData[3];
-      console.log('!!!!!!!!!!!!!: ', ParsedData);
-      setApiData(ParsedData);
-    });
-  }, []);
-
-  useEffect(() => {
     navigation.setOptions({
-      title: apiData?.name,
+      title: user?.username,
     });
-  }, [apiData?.name, navigation]);
+  }, [navigation, user?.username]);
 
   /**
    *  helper functions
@@ -489,7 +482,6 @@ const Profile: React.FC<ProfileProps> = ({navigation}) => {
    * render Helper
    */
 
-  const [user, setUser] = useUserState();
   const logout = () => {
     setUser(null);
     clearToken();
@@ -510,7 +502,9 @@ const Profile: React.FC<ProfileProps> = ({navigation}) => {
         {...headerPanResponder.panHandlers}
         style={{transform: [{translateY: y}]}}>
         <UserTopInfoContainer>
-          <ProfileImage source={{uri: apiData?.thumbnailUrl}} />
+          <ProfileImage
+            source={user?.thumbnailUrl ? user.thumbnailUrl : imageSource}
+          />
           <UserInfoWrapper>
             <UserInfoItem>
               <UserInfoSubTitle>273</UserInfoSubTitle>
@@ -527,7 +521,7 @@ const Profile: React.FC<ProfileProps> = ({navigation}) => {
           </UserInfoWrapper>
         </UserTopInfoContainer>
         <InfoContainer>
-          <UserName>{apiData?.name}</UserName>
+          <UserName>{user?.username}</UserName>
           <UserDescription>JustMusic Company, WYBH</UserDescription>
         </InfoContainer>
         <UserButtonWrapper>

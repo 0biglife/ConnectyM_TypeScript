@@ -17,7 +17,7 @@ const useAuthLoadEffect = () => {
       setUser(auth.user); //auth가 존재한다면
       applyToken(auth.jwt);
       console.log('UserAuthLoadEffect - User and Token already Existed');
-      console.log('UserAuthLoadEffect Data : ', auth);
+      // console.log('UserAuthLoadEffect Data : ', auth);
     };
     fn();
   }, [setUser]);

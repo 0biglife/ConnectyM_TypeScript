@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, {useState} from 'react';
 //View Module Stacks
 import AuthStack from './AuthStack';
 import {RootStackparamList} from './Types';
 import {
   createNativeStackNavigator,
   NativeStackNavigationOptions,
-  NativeStackNavigationProp,
 } from '@react-navigation/native-stack';
 import {
   ArticleView,
@@ -16,7 +15,6 @@ import {
 } from '../screens';
 import MainTab from './MainTab';
 import useAuthLoadEffect from '../apis/STRAPI/hook/useAuthLoadEffect';
-import authStorage from '../apis/STRAPI/storages/authStorage';
 
 const Stack = createNativeStackNavigator<RootStackparamList>();
 

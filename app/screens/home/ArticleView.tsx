@@ -97,10 +97,10 @@ const ArticleView: React.FC<ArticleViewProps> = ({navigation, route}) => {
   return (
     <SafeContainer>
       <HeaderSection>
-        <UserProfile source={{uri: params.thumbnailUrl}} />
+        {/* <UserProfile source={{uri: params.thumbnailUrl}} /> */}
         <UserName>{params.name}</UserName>
       </HeaderSection>
-      <ImageSection source={{uri: params.imageSource}} />
+      {/* <ImageSection source={{uri: params.imageSource}} /> */}
       <ControlSection>
         <InteractionWrapper>
           <HeartButton like={like} onPress={toggleLike} />

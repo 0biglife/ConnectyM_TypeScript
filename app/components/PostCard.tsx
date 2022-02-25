@@ -4,6 +4,7 @@ import IonIcon from 'react-native-vector-icons/Ionicons';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import HeartButton from './HeartButton';
 import {Alert} from 'react-native';
+import {User} from '../apis/model/data';
 
 // const Width = Dimensions.get('window').width;
 
@@ -82,26 +83,30 @@ const InteractionText = styled.Text`
 
 interface ArticleItemProps {
   id: number;
-  name: string;
   title: string;
+  body: string;
   url: string;
-  thumbnailUrl: string;
-  postTime: string;
+  user: User;
+  published_at: string;
+  created_at: string;
+  updated_at: string;
   ProfileTapped: () => void;
   ArticleTapped: () => void;
 }
 
 const PostCard = ({
   id,
-  name,
   title,
-  postTime,
+  body,
   url,
-  thumbnailUrl,
+  user,
+  published_at,
+  created_at,
+  updated_at,
   ProfileTapped,
   ArticleTapped,
 }: ArticleItemProps) => {
-  const formattedData = new Date(postTime).toLocaleString();
+  // const formattedData = new Date(postTime).toLocaleString();
   const [like, setLike] = useState<boolean>(false);
 
   const toggleLike = async () => {
@@ -115,26 +120,17 @@ const PostCard = ({
     <Card>
       <UserInfo>
         <TouchableOpacity onPress={ProfileTapped}>
-          <UserImg
-            source={{
-              uri: thumbnailUrl,
-            }}
-          />
+          <UserImg source={{uri: user.thumbnailUrl}} />
         </TouchableOpacity>
         <UserInfoText>
           <TouchableOpacity onPress={ProfileTapped}>
-            <UserName>{name}</UserName>
+            <UserName>{user?.username}</UserName>
           </TouchableOpacity>
-          <PostTime>{formattedData}</PostTime>
+          <PostTime>{created_at}</PostTime>
         </UserInfoText>
       </UserInfo>
-      <PostImg
-        source={{
-          uri: url,
-        }}
-      />
-      {/* {item.urlToImage == '' ? <Divider /> : <PostImg source={item.urlToImage} />} */}
-      <PostText>{title}</PostText>
+      <PostImg source={{uri: url}} />
+      <PostText>{body}</PostText>
       <InteractionWrapper>
         <HeartButton like={like} onPress={toggleLike} />
         <Interaction onPress={ArticleTapped}>
