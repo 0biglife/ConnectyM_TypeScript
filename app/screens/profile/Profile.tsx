@@ -27,6 +27,9 @@ import authStorage from '../../apis/STRAPI/storages/authStorage';
 //API
 import {getLoginStatus} from '../../apis/STRAPI/apis/auth';
 import {useQuery} from 'react-query';
+//Redux
+import {useSelector} from 'react-redux';
+import { RootState } from '../../redux/slices';
 
 const HeaderIconView = styled.View`
   flex-direction: row;
@@ -153,7 +156,9 @@ interface ProfileProps {
 
 const Profile: React.FC<ProfileProps> = ({navigation}) => {
   //axios data get
-  const [user, setUser] = useUserState();
+  // const [user, setUser] = useUserState();
+  //Redux
+  const user = useSelector((state: RootState) => state.auth.user);
 
   const [tabIndex, setIndex] = useState<number>(0);
   const [routes] = useState([
@@ -198,7 +203,7 @@ const Profile: React.FC<ProfileProps> = ({navigation}) => {
       },
       onPanResponderMove: (evt, gestureState) => {
         const curListRef = listRefArr.current.find(
-          (ref) => ref.key === routes[_tabIndex.current].key,
+          ref => ref.key === routes[_tabIndex.current].key,
         );
         const headerScrollOffset = -gestureState.dy + headerScrollStart.current;
         if (curListRef.value) {
@@ -282,7 +287,8 @@ const Profile: React.FC<ProfileProps> = ({navigation}) => {
   }, [headerScrollY, routes, scrollY, syncScrollOffset, tabIndex]);
 
   const [modalVisible, setModalVisible] = useState(false);
-  const [settingModalVisible, setSettingModalVisible] = useState<boolean>(false);
+  const [settingModalVisible, setSettingModalVisible] =
+    useState<boolean>(false);
 
   useEffect(() => {
     const PostingModal = () => {
@@ -322,9 +328,9 @@ const Profile: React.FC<ProfileProps> = ({navigation}) => {
 
   useEffect(() => {
     navigation.setOptions({
-      title: user?.username,
+      title: user ? user.displayName : '로그인 필요',
     });
-  }, [navigation, user?.username]);
+  }, [navigation, user]);
 
   /**
    *  helper functions
@@ -332,7 +338,7 @@ const Profile: React.FC<ProfileProps> = ({navigation}) => {
   const syncScrollOffset = () => {
     const curRouteKey = routes[_tabIndex.current].key;
 
-    listRefArr.current.forEach((item) => {
+    listRefArr.current.forEach(item => {
       if (item.key !== curRouteKey) {
         if (scrollY._value < HeaderHeight && scrollY._value >= 0) {
           if (item.value) {
@@ -406,7 +412,7 @@ const Profile: React.FC<ProfileProps> = ({navigation}) => {
           startRefreshAction();
         } else {
           // should bounce back
-          listRefArr.current.forEach((listRef) => {
+          listRefArr.current.forEach(listRef => {
             listRef.value.scrollToOffset({
               offset: 0,
               animated: true,
@@ -450,7 +456,7 @@ const Profile: React.FC<ProfileProps> = ({navigation}) => {
     // console.log('onMomentumScrollEnd');
   };
 
-  const onScrollEndDrag = (e) => {
+  const onScrollEndDrag = e => {
     syncScrollOffset();
 
     const offsetY = e.nativeEvent.contentOffset.y;
@@ -472,7 +478,7 @@ const Profile: React.FC<ProfileProps> = ({navigation}) => {
       setTimeout(() => {
         resolve('done');
       }, 2000);
-    }).then((value) => {
+    }).then(value => {
       console.log('-- refresh done!');
       refreshStatusRef.current = false;
     });
@@ -521,7 +527,7 @@ const Profile: React.FC<ProfileProps> = ({navigation}) => {
           </UserInfoWrapper>
         </UserTopInfoContainer>
         <InfoContainer>
-          <UserName>{user?.username}</UserName>
+          <UserName>{user ? user.displayName : '로그인 필요'}</UserName>
           <UserDescription>JustMusic Company, WYBH</UserDescription>
         </InfoContainer>
         <UserButtonWrapper>
@@ -652,7 +658,7 @@ const Profile: React.FC<ProfileProps> = ({navigation}) => {
     );
   };
 
-  const renderTabBar = (props) => {
+  const renderTabBar = props => {
     const y = scrollY.interpolate({
       inputRange: [0, HeaderHeight],
       outputRange: [HeaderHeight, 0],

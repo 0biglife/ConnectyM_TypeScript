@@ -13,12 +13,14 @@ import appleAuth, {
 import jwtDecode from 'jwt-decode';
 
 //Token Control
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {AuthStackParamList, RootStackparamList} from '../../navigations/Types';
-import { GoogleUser } from '../../apis/model/data';
+import {GoogleUser} from '../../apis/model/data';
 import useLogin from '../../apis/STRAPI/hook/useLogin';
 import { CompositeNavigationProp } from '@react-navigation/native';
+//Redux
+import {useDispatch} from 'react-redux';
+import {authorize, logout} from '../../redux/slices/auth';
 
 interface tokenType {
   aud: string;
@@ -80,6 +82,8 @@ const loginView: React.FC<LoginProps> = ({navigation}) => {
   //login data
   const [identifier, setIdentifier] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  //redux
+  const dispatch = useDispatch();
 
   useEffect(() => {
     GoogleSignin.configure({
@@ -168,13 +172,21 @@ const loginView: React.FC<LoginProps> = ({navigation}) => {
   // };
 
   const toggleLoginButton = () => {
-    if (isLoading) {
-      return;
-    }
-    login({
-      identifier,
-      password,
-    });
+    //아래 코드 : Hook으로 전역변수 관리
+    // if (isLoading) {
+    //   return;
+    // }
+    // login({
+    //   identifier,
+    //   password,
+    // });
+    dispatch(
+      authorize({
+        id: 1,
+        username: '0biglife',
+        displayName: 'young big life',
+      }),
+    );
   };
 
   return (

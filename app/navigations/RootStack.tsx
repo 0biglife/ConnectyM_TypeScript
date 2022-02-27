@@ -21,7 +21,7 @@ const Stack = createNativeStackNavigator<RootStackparamList>();
 // const isLoggedIn = false;
 
 const RootStack = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   useAuthLoadEffect();
   const navigationOptions: NativeStackNavigationOptions = {
     headerShown: false,
