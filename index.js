@@ -11,7 +11,7 @@ import {Provider} from 'react-redux';
 //비동기처리가 필요한 Actioin Creator위해 필요함
 import promiseMiddleware from 'redux-promise';
 //reducers
-import rootReducer from './app/store/reducers';
+import rootReducer from './app/redux/slices';
 
 //아래 줄은 리덕스 개발자 도구와 미들웨어를 같이 쓰기위함. 크롬확장프로그램에 작성된 자바스크립트 함수.
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
