@@ -3,7 +3,6 @@ import React from 'react';
 import styled from 'styled-components/native';
 import {AuthStackParamList} from '../../navigations/Types';
 import IonIcon from 'react-native-vector-icons/Ionicons';
-import { Alert } from 'react-native';
 import {
   check,
   PERMISSIONS,

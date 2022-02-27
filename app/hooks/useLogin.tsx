@@ -1,13 +1,13 @@
 import {useMutation} from 'react-query';
-import {login} from '../apis/auth';
-import {AuthError} from '../../model/data';
-import {applyToken} from '../client';
-import authStorage from '../storages/authStorage';
+import {login} from '../apis/service/auth';
+import {AuthError} from '../apis/model/data';
+import {applyToken} from '../apis/service/client';
+import authStorage from '../apis/storages/authStorage';
 import {Alert} from 'react-native';
-import {RootStackparamList} from '../../../navigations/Types';
+import {RootStackparamList} from '../navigations/Types';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {useAuthActions} from '../../../hooks/useAuthActions';
+import {useAuthActions} from './useAuthActions';
 
 const useLogin = () => {
   const navigation =
@@ -33,4 +33,3 @@ const useLogin = () => {
 };
 
 export default useLogin;
-;

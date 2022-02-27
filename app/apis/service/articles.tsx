@@ -1,5 +1,5 @@
-import {Article} from '../../model/data';
-import client from '../client';
+import {Article} from '../model/data';
+import client from './client';
 
 //NewsFeed
 export const getArticles = async () => {

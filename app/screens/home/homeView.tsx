@@ -6,7 +6,7 @@ import {MainTabParamList, RootStackparamList} from '../../navigations/Types';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 //HTTP
 import {useQuery} from 'react-query';
-import {getArticles} from '../../apis/STRAPI/apis/articles';
+import {getArticles} from '../../apis/service/articles';
 import {CompositeNavigationProp} from '@react-navigation/native';
 import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';

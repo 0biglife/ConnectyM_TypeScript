@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 import {Input, Button} from '../../components';
 import {RootStackparamList} from '../../navigations/Types';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import useRegister from '../../apis/STRAPI/hook/useRegister';
+import useRegister from '../../hooks/useRegister';
 
 const Container = styled.View`
   flex: 1;

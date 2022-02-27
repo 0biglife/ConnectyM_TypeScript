@@ -1,36 +1,19 @@
-import axios, {AxiosInstance} from 'axios';
-import {Article, Comment, Feed} from '../model/data';
+import axios from 'axios';
 
-const baseurl = 'http://localhost:3000/api';
+const baseurl = 'http://localhost:1337';
 
-const StrapiUrl = 'http://localhost:1337';
-
-// const baseurl = __DEV__ ? 'http://localhost:1337' : 'http://localhost:1337';
-
-const apiClient: AxiosInstance = axios.create({
-  headers: {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Content-Type': 'application/json',
-  },
+const client = axios.create({
   baseURL: baseurl,
 });
 
-export default apiClient;
+export default client;
 
-export const getPosts = async () => {
-  const response = await apiClient.get<Feed[]>('/feeds');
-  return response.data;
+export const applyToken = (jwt: string) => {
+  console.log('Apply Token by Client : ', jwt);
+  client.defaults.headers.common.Authorization = `Bearer ${jwt}`;
 };
 
-export const getArticle = async (id: number) => {
-  const response = await apiClient.get<Article>(`/articles/${id}`);
-  return response.data;
-};
-
-export const getComments = async (articleId: number) => {
-  const response = await apiClient.get<Comment[]>(
-    `/articles/${articleId}/comments`,
-  );
-  return response.data;
+export const clearToken = () => {
+  console.log('Delete Token by Client');
+  client.defaults.headers.common.Authorization = '';
 };

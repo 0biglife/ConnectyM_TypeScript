@@ -4,7 +4,6 @@ import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {ProfileParamsList} from '../../navigations/Types';
 import {WebView} from 'react-native-webview';
-import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 
 const SafeAreaContainer = styled.SafeAreaView`
   flex: 1;

@@ -1,7 +1,7 @@
 import {useEffect} from 'react';
-import {useAuthActions} from '../../../hooks/useAuthActions';
-import {applyToken} from '../client';
-import authStorage from '../storages/authStorage';
+import {useAuthActions} from './useAuthActions';
+import {applyToken} from '../apis/service/client';
+import authStorage from '../apis/storages/authStorage';
 
 interface Props {
   dataExist: string;

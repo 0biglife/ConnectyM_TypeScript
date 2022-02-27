@@ -1,6 +1,5 @@
 import {StackNavigationProp} from '@react-navigation/stack';
-import axios from 'axios';
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components/native';
 import {AuthStackParamList} from '../../navigations/Types';
 // import {TouchableWithoutFeedback} from 'react-native-gesture-handler';

@@ -1,9 +1,7 @@
 import {StackNavigationProp} from '@react-navigation/stack';
-import React, {useState} from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 import {AuthStackParamList} from '../../navigations/Types';
-import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
-import {Keyboard} from 'react-native';
 
 const Container = styled.View`
   /* flex: 1; */

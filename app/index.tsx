@@ -10,8 +10,6 @@ import 'react-native-gesture-handler';
 import React, {useEffect} from 'react';
 import RootStack from './navigations/RootStack';
 import SplashScreen from 'react-native-splash-screen';
-//Redux
-import {UserContextProvider} from './apis/STRAPI/contexts/UserContext';
 //theme
 import {ThemeProvider} from 'styled-components';
 import {dark, light} from './styles/theme';

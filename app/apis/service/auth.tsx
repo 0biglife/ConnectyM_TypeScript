@@ -1,5 +1,5 @@
-import client from '../client';
-import {AuthResult, User} from '../../model/data';
+import client from './client';
+import {AuthResult, User} from '../model/data';
 
 interface RegisterParams {
   username: string;

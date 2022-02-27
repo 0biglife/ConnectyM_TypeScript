@@ -21,12 +21,8 @@ import {CompositeNavigationProp} from '@react-navigation/native';
 import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {MenuModal, SettingModal} from '../../components';
-import {clearToken} from '../../apis/STRAPI/client';
-import {useUserState} from '../../apis/STRAPI/contexts/UserContext';
-import authStorage from '../../apis/STRAPI/storages/authStorage';
-//API
-import {getLoginStatus} from '../../apis/STRAPI/apis/auth';
-import {useQuery} from 'react-query';
+import {clearToken} from '../../apis/service/client';
+import authStorage from '../../apis/storages/authStorage';
 //Redux
 import {useAuthActions} from '../../hooks/useAuthActions';
 import {useUser} from '../../hooks/useUser';

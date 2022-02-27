@@ -2,14 +2,14 @@ import React, {useCallback, useState} from 'react';
 import styled from 'styled-components/native';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {MenuModal} from '../../components';;
+import {MenuModal} from '../../components';
 import ImagePicker from 'react-native-image-crop-picker';
 import {Alert} from 'react-native';
 import SimpleModal from '../../components/SimpleModal';
 import {RootStackparamList} from '../../navigations/Types';
 import {useMutation, useQueryClient} from 'react-query';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {writeArticles} from '../../apis/STRAPI/apis/articles';
+import {writeArticles} from '../../apis/service/articles';
 
 const SafeAreaContainer = styled.SafeAreaView`
   flex: 1;

@@ -16,7 +16,7 @@ import jwtDecode from 'jwt-decode';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {AuthStackParamList, RootStackparamList} from '../../navigations/Types';
 import {GoogleUser} from '../../apis/model/data';
-import useLogin from '../../apis/STRAPI/hook/useLogin';
+import useLogin from '../../hooks/useLogin';
 import {CompositeNavigationProp} from '@react-navigation/native';
 //Redux
 import {useAuthActions} from '../../hooks/useAuthActions';

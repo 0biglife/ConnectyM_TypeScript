@@ -1,8 +1,8 @@
 import {useMutation} from 'react-query';
-import {register} from '../apis/auth';
-import {AuthError} from '../../model/data';
-import {applyToken} from '../client';
-import authStorage from '../storages/authStorage';
+import {register} from '../apis/service/auth';
+import {AuthError} from '../apis/model/data';
+import {applyToken} from '../apis/service/client';
+import authStorage from '../apis/storages/authStorage';
 
 const useRegister = () => {
   // const [, setUser] = useUserState(); //반환값 무시 문법
