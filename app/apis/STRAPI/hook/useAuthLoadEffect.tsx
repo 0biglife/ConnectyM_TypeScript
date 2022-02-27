@@ -3,8 +3,13 @@ import {applyToken} from '../client';
 import {useUserState} from '../contexts/UserContext';
 import authStorage from '../storages/authStorage';
 
+interface Props {
+  dataExist: string;
+}
+
 const useAuthLoadEffect = () => {
   const [, setUser] = useUserState();
+  const [login, setLogin] = useState();
 
   useEffect(() => {
     const fn = async () => {
@@ -17,7 +22,7 @@ const useAuthLoadEffect = () => {
       setUser(auth.user); //auth가 존재한다면
       applyToken(auth.jwt);
       console.log('UserAuthLoadEffect - User and Token already Existed');
-      // console.log('UserAuthLoadEffect Data : ', auth);
+      return;
     };
     fn();
   }, [setUser]);
