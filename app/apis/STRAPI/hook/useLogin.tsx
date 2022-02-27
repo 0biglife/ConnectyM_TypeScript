@@ -8,16 +8,18 @@ import {Alert} from 'react-native';
 import {RootStackparamList} from '../../../navigations/Types';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {useAuthActions} from '../../../hooks/useAuthActions';
 
 const useLogin = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackparamList>>();
   const [, setUser] = useUserState(); //반환값 무시 문법
+  const user = useAuthActions();
 
   const mutation = useMutation(login, {
     onSuccess: data => {
       console.log('useLogin Success + data : ', data);
-      setUser(data.user);
+      user(data.user);
       applyToken(data.jwt);
       authStorage.set(data);
       navigation.navigate('MainTab');
@@ -33,3 +35,4 @@ const useLogin = () => {
 };
 
 export default useLogin;
+;

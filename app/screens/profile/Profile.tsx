@@ -28,8 +28,8 @@ import authStorage from '../../apis/STRAPI/storages/authStorage';
 import {getLoginStatus} from '../../apis/STRAPI/apis/auth';
 import {useQuery} from 'react-query';
 //Redux
-import {useSelector, useDispatch} from 'react-redux';
-import {logout} from '../../redux/slices/auth';
+import {useAuthActions} from '../../hooks/useAuthActions';
+import {useUser} from '../../hooks/useUser';
 
 const HeaderIconView = styled.View`
   flex-direction: row;
@@ -157,9 +157,9 @@ interface ProfileProps {
 const Profile: React.FC<ProfileProps> = ({navigation}) => {
   //axios data get
   // const [user, setUser] = useUserState();
-  //Redux
-  const user = useSelector(state => state.auth.user);
-  const dispatch = useDispatch();
+  //Redux + hook
+  const {logout} = useAuthActions();
+  const user = useUser();
 
   const [tabIndex, setIndex] = useState<number>(0);
   const [routes] = useState([
@@ -493,8 +493,8 @@ const Profile: React.FC<ProfileProps> = ({navigation}) => {
     // setUser(null);
     // clearToken();
     // authStorage.clear();
-    dispatch(logout());
-    console.log('Logout Succeed');
+    // console.log('Logout Succeed');
+    logout();
     navigation.navigate('AuthStack');
   };
 
