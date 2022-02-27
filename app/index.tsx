@@ -36,15 +36,13 @@ const App = () => {
   });
 
   return (
-    <UserContextProvider>
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider theme={theme === 'dark' ? dark : light}>
-          <NavigationContainer>
-            <RootStack />
-          </NavigationContainer>
-        </ThemeProvider>
-      </QueryClientProvider>
-    </UserContextProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme === 'dark' ? dark : light}>
+        <NavigationContainer>
+          <RootStack />
+        </NavigationContainer>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 };
 

@@ -1,6 +1,6 @@
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
+import {useAuthActions} from '../../../hooks/useAuthActions';
 import {applyToken} from '../client';
-import {useUserState} from '../contexts/UserContext';
 import authStorage from '../storages/authStorage';
 
 interface Props {
@@ -8,8 +8,7 @@ interface Props {
 }
 
 const useAuthLoadEffect = () => {
-  const [, setUser] = useUserState();
-  const [login, setLogin] = useState();
+  const {authorize} = useAuthActions();
 
   useEffect(() => {
     const fn = async () => {
@@ -19,13 +18,13 @@ const useAuthLoadEffect = () => {
         console.log('No User Data Exists');
         return;
       }
-      setUser(auth.user); //auth가 존재한다면
+      authorize(auth.user); //auth가 존재한다면
       applyToken(auth.jwt);
       console.log('UserAuthLoadEffect - User and Token already Existed');
       return;
     };
     fn();
-  }, [setUser]);
+  }, [authorize]);
 };
 
 export default useAuthLoadEffect;

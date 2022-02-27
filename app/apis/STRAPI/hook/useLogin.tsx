@@ -1,7 +1,6 @@
 import {useMutation} from 'react-query';
 import {login} from '../apis/auth';
 import {AuthError} from '../../model/data';
-import {useUserState} from '../contexts/UserContext';
 import {applyToken} from '../client';
 import authStorage from '../storages/authStorage';
 import {Alert} from 'react-native';
@@ -13,13 +12,12 @@ import {useAuthActions} from '../../../hooks/useAuthActions';
 const useLogin = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackparamList>>();
-  const [, setUser] = useUserState(); //반환값 무시 문법
-  const user = useAuthActions();
+  const {authorize} = useAuthActions();
 
   const mutation = useMutation(login, {
     onSuccess: data => {
       console.log('useLogin Success + data : ', data);
-      user(data.user);
+      authorize(data.user);
       applyToken(data.jwt);
       authStorage.set(data);
       navigation.navigate('MainTab');

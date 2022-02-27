@@ -11,7 +11,8 @@ import {CompositeNavigationProp} from '@react-navigation/native';
 import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {MenuModal} from '../../components';
-import {useUserState} from '../../apis/STRAPI/contexts/UserContext';
+//Redux
+import {useUser} from '../../hooks/useUser';
 
 const SafeContainer = styled.SafeAreaView`
   flex: 1;
@@ -34,9 +35,10 @@ interface HomeViewProps {
 }
 
 const HomeView: React.FC<HomeViewProps> = ({navigation}) => {
+  //Redux
+  const user = useUser();
   //API Calls
   const articles = useQuery('articles', getArticles);
-  const [userInfo] = useUserState();
   //Refresh Hook
   // const [refresh, setRefresh] = useState<boolean>(false);
   //Modal
@@ -95,7 +97,7 @@ const HomeView: React.FC<HomeViewProps> = ({navigation}) => {
             title={item.title}
             body={item.body}
             // url={item.url}
-            user={userInfo!}
+            user={user!}
             published_at={item.published_at}
             created_at={item.created_at}
             updated_at={item.updated_at}

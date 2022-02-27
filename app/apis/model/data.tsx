@@ -22,7 +22,7 @@ export interface Response {
 
 export interface ResponseFeed {
   ok: boolean;
-  feed: Feed;
+  feed;: Feed;
 }
 
 export interface Feed {
