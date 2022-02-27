@@ -28,8 +28,8 @@ import authStorage from '../../apis/STRAPI/storages/authStorage';
 import {getLoginStatus} from '../../apis/STRAPI/apis/auth';
 import {useQuery} from 'react-query';
 //Redux
-import {useSelector} from 'react-redux';
-import { RootState } from '../../redux/slices';
+import {useSelector, useDispatch} from 'react-redux';
+import {logout} from '../../redux/slices/auth';
 
 const HeaderIconView = styled.View`
   flex-direction: row;
@@ -158,7 +158,8 @@ const Profile: React.FC<ProfileProps> = ({navigation}) => {
   //axios data get
   // const [user, setUser] = useUserState();
   //Redux
-  const user = useSelector((state: RootState) => state.auth.user);
+  const user = useSelector(state => state.auth.user);
+  const dispatch = useDispatch();
 
   const [tabIndex, setIndex] = useState<number>(0);
   const [routes] = useState([
@@ -488,10 +489,11 @@ const Profile: React.FC<ProfileProps> = ({navigation}) => {
    * render Helper
    */
 
-  const logout = () => {
-    setUser(null);
-    clearToken();
-    authStorage.clear();
+  const userLogout = () => {
+    // setUser(null);
+    // clearToken();
+    // authStorage.clear();
+    dispatch(logout());
     console.log('Logout Succeed');
     navigation.navigate('AuthStack');
   };
@@ -543,7 +545,7 @@ const Profile: React.FC<ProfileProps> = ({navigation}) => {
           <UserButton onPress={() => navigation.navigate('Message')}>
             <UserButtonText>결제하기</UserButtonText>
           </UserButton>
-          <UserButton onPress={() => logout()}>
+          <UserButton onPress={() => userLogout()}>
             <UserButtonText>로그아웃</UserButtonText>
           </UserButton>
         </UserButtonWrapper>
