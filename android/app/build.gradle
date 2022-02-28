@@ -217,13 +217,11 @@ dependencies {
     //react-native-googlesignin 코드
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
 
-    implementation project(':react-native-splash-screen') //react-native-splash-screen
-
-    //react-native-send-intent
-    // compile project(':RNSendIntentModule')
+    //react-native-splash-screen
+    implementation project(':react-native-splash-screen') 
     
     //react-native-webview
-    implementation project(':react-native-webview')
+    // implementation project(':react-native-webview')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     // implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
     implementation "com.facebook.react:react-native:+" 

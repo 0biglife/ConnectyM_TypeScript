@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 //View Module Stacks
 import AuthStack from './AuthStack';
 import {RootStackparamList} from './Types';

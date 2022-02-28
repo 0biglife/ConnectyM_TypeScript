@@ -27,7 +27,7 @@ target 'ConnectyM_TS' do
   # pod 'Firebase/Auth'
   # pod 'Firebase/Firestore'
 
-  pod 'react-native-webview', :path => '../node_modules/react-native-webview'
+  # pod 'react-native-webview', :path => '../node_modules/react-native-webview'
 
   target 'ConnectyM_TSTests' do
     inherit! :complete

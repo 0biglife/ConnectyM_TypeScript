@@ -4,8 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
-import com.reactnativecommunity.webview.RNCWebViewPackage;
-import com.burnweb.rnsendintent.RNSendIntentPackage;
+// import com.reactnativecommunity.webview.RNCWebViewPackage;
 // import com.reactnativepagerview.PagerViewPackage;
 // import org.reactnative.camera.RNCameraPackage;
 // import com.reactnativecommunity.viewpager.RNCViewPagerPackage;
@@ -18,10 +17,6 @@ import java.util.List;
 import androidx.multidex.MultiDexApplication;
 
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
-
-//react-native-sent-intent
-import com.burnweb.rnsendintent.RNSendIntentPackage; 
-import com.reactnativecommunity.webview.RNCWebViewPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
