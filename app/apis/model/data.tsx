@@ -34,12 +34,6 @@ export interface Feed {
   postTime: string;
 }
 
-// export interface User {
-//   id: number;
-//   name: string;
-//   thumbnailUrl: string;
-// }
-
 export interface User {
   id: number;
   username: string;

@@ -16,7 +16,6 @@ import {
 import {TabView, TabBar} from 'react-native-tab-view';
 import {MainTabParamList, RootStackparamList} from '../../navigations/Types';
 // HTTP
-import {User} from '../../apis/model/data';
 import {CompositeNavigationProp} from '@react-navigation/native';
 import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
@@ -151,11 +150,9 @@ interface ProfileProps {
 }
 
 const Profile: React.FC<ProfileProps> = ({navigation}) => {
-  //axios data get
-  // const [user, setUser] = useUserState();
   //Redux + hook
   const {logout} = useAuthActions();
-  const user = useUser();
+  const {user} = useUser();
 
   const [tabIndex, setIndex] = useState<number>(0);
   const [routes] = useState([
@@ -325,7 +322,7 @@ const Profile: React.FC<ProfileProps> = ({navigation}) => {
 
   useEffect(() => {
     navigation.setOptions({
-      title: user ? user.displayName : '로그인 필요',
+      title: user ? user.username : '로그인 필요',
     });
   }, [navigation, user]);
 
@@ -486,11 +483,10 @@ const Profile: React.FC<ProfileProps> = ({navigation}) => {
    */
 
   const userLogout = () => {
-    // setUser(null);
-    // clearToken();
-    // authStorage.clear();
-    // console.log('Logout Succeed');
     logout();
+    clearToken();
+    authStorage.clear();
+    console.log('Logout Succeed');
     navigation.navigate('AuthStack');
   };
 
@@ -525,7 +521,7 @@ const Profile: React.FC<ProfileProps> = ({navigation}) => {
           </UserInfoWrapper>
         </UserTopInfoContainer>
         <InfoContainer>
-          <UserName>{user ? user.displayName : '로그인 필요'}</UserName>
+          <UserName>{user ? user.username : '로그인 필요'}</UserName>
           <UserDescription>JustMusic Company, WYBH</UserDescription>
         </InfoContainer>
         <UserButtonWrapper>

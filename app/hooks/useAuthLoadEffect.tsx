@@ -3,10 +3,6 @@ import {useAuthActions} from './useAuthActions';
 import {applyToken} from '../apis/service/client';
 import authStorage from '../apis/storages/authStorage';
 
-interface Props {
-  dataExist: string;
-}
-
 const useAuthLoadEffect = () => {
   const {authorize} = useAuthActions();
 

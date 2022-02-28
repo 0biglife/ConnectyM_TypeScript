@@ -14,25 +14,23 @@ import {
   UserProfile,
 } from '../screens';
 import MainTab from './MainTab';
-import useAuthLoadEffect from '../apis/STRAPI/hook/useAuthLoadEffect';
+import useAuthLoadEffect from '../hooks/useAuthLoadEffect';
+import {useUser} from '../hooks/useUser';
 
 const Stack = createNativeStackNavigator<RootStackparamList>();
 
-// const isLoggedIn = false;
-
 const RootStack = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const authData = useUser();
+  const isLogIn: boolean = authData.isLoggedIn;
   useAuthLoadEffect();
   const navigationOptions: NativeStackNavigationOptions = {
     headerShown: false,
     gestureEnabled: false,
   };
 
-  console.log('RootStack : ', isLoggedIn);
-
   return (
     <Stack.Navigator
-      initialRouteName={isLoggedIn ? 'MainTab' : 'AuthStack'}
+      initialRouteName={isLogIn ? 'MainTab' : 'AuthStack'}
       screenOptions={navigationOptions}>
       <Stack.Screen name="MainTab" component={MainTab} />
       <Stack.Screen name="Message" component={MessageView} />

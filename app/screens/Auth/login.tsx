@@ -184,7 +184,7 @@ const loginView: React.FC<LoginProps> = ({navigation}) => {
     //   username: '0biglife',
     //   displayName: 'young big life',
     // });
-  };;
+  };
 
   return (
     <SafeAreaContainer>

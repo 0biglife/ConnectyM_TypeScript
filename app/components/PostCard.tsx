@@ -120,7 +120,7 @@ const PostCard = ({
     <Card>
       <UserInfo>
         <TouchableOpacity onPress={ProfileTapped}>
-          <UserImg source={{uri: user.thumbnailUrl}} />
+          <UserImg source={{uri: user?.thumbnailUrl}} />
         </TouchableOpacity>
         <UserInfoText>
           <TouchableOpacity onPress={ProfileTapped}>
