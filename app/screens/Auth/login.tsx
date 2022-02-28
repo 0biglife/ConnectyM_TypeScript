@@ -171,7 +171,6 @@ const loginView: React.FC<LoginProps> = ({navigation}) => {
   // };
 
   const toggleLoginButton = () => {
-    //아래 코드 : Hook으로 전역변수 관리
     if (isLoading) {
       return;
     }

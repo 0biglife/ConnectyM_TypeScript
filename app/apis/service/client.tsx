@@ -1,9 +1,11 @@
 import axios from 'axios';
+import {Platform} from 'react-native';
 
-const baseurl = 'http://localhost:1337';
+const iOSbaseurl = 'http://localhost:1337';
+const AOSbaseurl = 'http://10.0.2.2:1337';
 
 const client = axios.create({
-  baseURL: baseurl,
+  baseURL: Platform.OS === 'ios' ? iOSbaseurl : AOSbaseurl,
 });
 
 export default client;
