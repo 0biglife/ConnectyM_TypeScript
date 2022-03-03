@@ -15,30 +15,31 @@ import {
 } from '../screens';
 import MainTab from './MainTab';
 import useAuthLoadEffect from '../hooks/useAuthLoadEffect';
-import {useUser} from '../hooks/useUser';
+import {useLoggedIn} from '../hooks/useUserState';
 
 const Stack = createNativeStackNavigator<RootStackparamList>();
 
 const RootStack = () => {
-  const authData = useUser();
-  const isLogIn: boolean = authData.isLoggedIn;
   useAuthLoadEffect();
+  const authState = useLoggedIn();
   const navigationOptions: NativeStackNavigationOptions = {
     headerShown: false,
     gestureEnabled: false,
   };
 
+  console.log('RootStack: ', authState.isLoggedIn);
+
   return (
     <Stack.Navigator
-      initialRouteName={isLogIn ? 'MainTab' : 'AuthStack'}
+      initialRouteName={authState.isLoggedIn ? 'MainTab' : 'AuthStack'}
       screenOptions={navigationOptions}>
       <Stack.Screen name="MainTab" component={MainTab} />
+      <Stack.Screen name="AuthStack" component={AuthStack} />
       <Stack.Screen name="Message" component={MessageView} />
       <Stack.Screen name="EditProfile" component={editProfileView} />
       <Stack.Screen name="UserProfile" component={UserProfile} />
       <Stack.Screen name="Upload" component={UploadModal} />
       <Stack.Screen name="Article" component={ArticleView} />
-      <Stack.Screen name="AuthStack" component={AuthStack} />
     </Stack.Navigator>
   );
 };

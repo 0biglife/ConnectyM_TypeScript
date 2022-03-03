@@ -3,8 +3,10 @@ import {register} from '../apis/service/auth';
 import {AuthError} from '../apis/model/data';
 import {applyToken} from '../apis/service/client';
 import authStorage from '../apis/storages/authStorage';
+import useInform from './useInform';
 
 const useRegister = () => {
+  const inform = useInform();
   // const [, setUser] = useUserState(); //반환값 무시 문법
   //(물음표) : 사용자 전역으로 저장하는게 로그인에만 필요한거 아닌가?
 
@@ -17,8 +19,12 @@ const useRegister = () => {
       authStorage.set(data);
     },
     onError: (error: AuthError) => {
-      console.log(error);
-      console.log(error.response?.data);
+      const message =
+        error.response?.data.data?.[0]?.messages[0].message ?? '회원가입 실패';
+      inform({
+        title: '오류',
+        message,
+      });
     },
   });
 

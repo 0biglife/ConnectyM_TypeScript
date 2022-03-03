@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Alert, View} from 'react-native';
+import {Alert, Platform, View} from 'react-native';
 import styled from 'styled-components/native';
 import {Button, Input} from '../../components';
 //Social Login
@@ -194,9 +194,13 @@ const loginView: React.FC<LoginProps> = ({navigation}) => {
             onPress={GoogleSignIn}>
             <ButtonText>Sign in with Google</ButtonText>
           </LoginButton>
-          <LoginButton style={{backgroundColor: 'black'}} onPress={AppleSignIn}>
-            <ButtonText>Sign in with Apple</ButtonText>
-          </LoginButton>
+          {Platform.OS === 'ios' ? (
+            <LoginButton
+              style={{backgroundColor: 'black'}}
+              onPress={AppleSignIn}>
+              <ButtonText>Sign in with Apple</ButtonText>
+            </LoginButton>
+          ) : null}
           <View style={{width: 300}}>
             <Input
               placeholder="email"

@@ -1,8 +1,10 @@
 import {combineReducers} from 'redux';
 import auth from './auth';
+import authState from './authState';
 
 const rootReducer = combineReducers({
   auth,
+  authState,
 });
 
 //RootReducer의 반환값 타입형은 RootState type alias로 지정 가능

@@ -1,13 +1,8 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {User} from '../../apis/model/data';
+import {AuthResult, User} from '../../apis/model/data';
 
-interface AuthState {
-  isLoggedIn: boolean;
-  user: User | null;
-}
-
-const initialState: AuthState = {
-  isLoggedIn: false,
+const initialState: AuthResult = {
+  jwt: '',
   user: null,
 };
 
@@ -16,13 +11,11 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     //Shorthand method name로 function 명시 생략 가능
-    authorize(state: AuthState, action: PayloadAction<User>) {
-      state.isLoggedIn = true;
+    authorize(state: AuthResult, action: PayloadAction<User>) {
       state.user = action.payload;
     },
     logout(state) {
       //이 리듀서 사용하는 과정에서 action이 필요없으므로 인자 생략 가능
-      state.isLoggedIn = false;
       state.user = null;
     },
   },

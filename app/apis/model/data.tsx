@@ -67,9 +67,13 @@ export interface Comment {
   updated_at: string;
 }
 
+export interface AuthState {
+  isLoggedIn: boolean;
+}
+
 export interface AuthResult {
   jwt: string;
-  user: User;
+  user: User | null;
 }
 
 //Error

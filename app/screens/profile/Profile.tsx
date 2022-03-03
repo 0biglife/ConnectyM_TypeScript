@@ -25,6 +25,7 @@ import authStorage from '../../apis/storages/authStorage';
 //Redux
 import {useAuthActions} from '../../hooks/useAuthActions';
 import {useUser} from '../../hooks/useUser';
+import authStateStorage from '../../apis/storages/authStateStorage';
 
 const HeaderIconView = styled.View`
   flex-direction: row;
@@ -486,10 +487,21 @@ const Profile: React.FC<ProfileProps> = ({navigation}) => {
     logout();
     clearToken();
     authStorage.clear();
+    authStateStorage.setFalse();
     console.log('Logout Succeed');
     navigation.navigate('AuthStack');
   };
 
+  console.log(user?.thumbnailUrl);
+
+  const parseData = user?.thumbnailUrl;
+  const imgData = JSON.stringify(parseData);
+  console.log(imgData);
+  console.log(imgData);
+  console.log(imgData);
+  console.log(imgData);
+  console.log(imgData);
+  console.log(imgData);
   const renderHeader = () => {
     const y = scrollY.interpolate({
       inputRange: [0, HeaderHeight],
@@ -502,9 +514,7 @@ const Profile: React.FC<ProfileProps> = ({navigation}) => {
         {...headerPanResponder.panHandlers}
         style={{transform: [{translateY: y}]}}>
         <UserTopInfoContainer>
-          <ProfileImage
-            source={user?.thumbnailUrl ? user.thumbnailUrl : imageSource}
-          />
+          <ProfileImage source={user?.thumbnailUrl ? imgData : imageSource} />
           <UserInfoWrapper>
             <UserInfoItem>
               <UserInfoSubTitle>273</UserInfoSubTitle>
