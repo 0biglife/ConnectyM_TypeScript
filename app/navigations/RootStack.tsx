@@ -31,15 +31,27 @@ const RootStack = () => {
 
   return (
     <Stack.Navigator
-      initialRouteName={authState.isLoggedIn ? 'MainTab' : 'AuthStack'}
+      // initialRouteName={authState.isLoggedIn ? 'MainTab' : 'AuthStack'}
       screenOptions={navigationOptions}>
-      <Stack.Screen name="MainTab" component={MainTab} />
-      <Stack.Screen name="AuthStack" component={AuthStack} />
-      <Stack.Screen name="Message" component={MessageView} />
-      <Stack.Screen name="EditProfile" component={editProfileView} />
-      <Stack.Screen name="UserProfile" component={UserProfile} />
-      <Stack.Screen name="Upload" component={UploadModal} />
-      <Stack.Screen name="Article" component={ArticleView} />
+      {authState.isLoggedIn ? (
+        <>
+          <Stack.Screen name="MainTab" component={MainTab} />
+          <Stack.Screen name="Message" component={MessageView} />
+          <Stack.Screen name="EditProfile" component={editProfileView} />
+          <Stack.Screen name="UserProfile" component={UserProfile} />
+          <Stack.Screen name="Upload" component={UploadModal} />
+          <Stack.Screen name="Article" component={ArticleView} />
+        </>
+      ) : (
+        <>
+          <Stack.Screen name="AuthStack" component={AuthStack} />
+          <Stack.Screen name="Message" component={MessageView} />
+          <Stack.Screen name="EditProfile" component={editProfileView} />
+          <Stack.Screen name="UserProfile" component={UserProfile} />
+          <Stack.Screen name="Upload" component={UploadModal} />
+          <Stack.Screen name="Article" component={ArticleView} />
+        </>
+      )}
     </Stack.Navigator>
   );
 };

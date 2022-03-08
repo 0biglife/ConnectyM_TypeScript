@@ -148,7 +148,7 @@ const loginView: React.FC<LoginProps> = ({navigation}) => {
   const getCurrentUserInfo = async () => {
     try {
       const userinfo = await GoogleSignin.signInSilently();
-      setUser(userinfo);
+      // setUser(userinfo);
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_REQUIRED) {
         Alert.alert('User has not signed in yet!');
