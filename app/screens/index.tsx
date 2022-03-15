@@ -1,4 +1,4 @@
-import HomeView from './Home/homeView';
+import HomeView from './Home/Home';
 import UploadModal from './Home/UploadModal';
 import ArticleView from './Home/ArticleView';
 

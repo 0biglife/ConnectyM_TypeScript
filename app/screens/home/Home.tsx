@@ -1,10 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components/native';
-import {ActivityIndicator, FlatList, TouchableOpacity} from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import {MainTabParamList, RootStackparamList} from '../../navigations/Types';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 //Components
-import {HeaderList, PostCard} from '../../components';
+import {HeaderList, PostCard, PopularList} from '../../components';
 //HTTP
 import {useQuery} from 'react-query';
 import {getArticles} from '../../apis/service/articles';
@@ -20,6 +25,15 @@ const SafeContainer = styled.SafeAreaView`
   /* justify-content: center;
   align-items: center; */
   background-color: ${props => props.theme.color.bg};
+`;
+
+const TitleText = styled.Text`
+  font-size: 15px;
+  font-weight: 500;
+  margin-left: 10px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  background-color: lightgray;
 `;
 
 const HeaderIconView = styled.View`
@@ -90,7 +104,12 @@ const HomeView: React.FC<HomeViewProps> = ({navigation}) => {
 
   return (
     <SafeContainer>
-      <HeaderList />
+      <ScrollView stickyHeaderIndices={[2]}>
+        <TitleText>추천 인물</TitleText>
+        <HeaderList />
+        <TitleText>인기 게시물</TitleText>
+        <PopularList />
+      </ScrollView>
       {/* <FlatList
         data={articles.data}
         renderItem={({item}) => (
