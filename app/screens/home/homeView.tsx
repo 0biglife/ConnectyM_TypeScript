@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components/native';
 import {ActivityIndicator, FlatList, TouchableOpacity} from 'react-native';
-import PostCard from '../../components/PostCard';
 import {MainTabParamList, RootStackparamList} from '../../navigations/Types';
 import IonIcon from 'react-native-vector-icons/Ionicons';
+//Components
+import {HeaderList, PostCard} from '../../components';
 //HTTP
 import {useQuery} from 'react-query';
 import {getArticles} from '../../apis/service/articles';
@@ -16,8 +17,8 @@ import {useUser} from '../../hooks/useUser';
 
 const SafeContainer = styled.SafeAreaView`
   flex: 1;
-  justify-content: center;
-  align-items: center;
+  /* justify-content: center;
+  align-items: center; */
   background-color: ${props => props.theme.color.bg};
 `;
 
@@ -89,7 +90,8 @@ const HomeView: React.FC<HomeViewProps> = ({navigation}) => {
 
   return (
     <SafeContainer>
-      <FlatList
+      <HeaderList />
+      {/* <FlatList
         data={articles.data}
         renderItem={({item}) => (
           <PostCard
@@ -122,7 +124,7 @@ const HomeView: React.FC<HomeViewProps> = ({navigation}) => {
         )}
         keyExtractor={item => item.id}
         showsVerticalScrollIndicator={false}
-      />
+      /> */}
       {/* <FlatList
         data={postQuery.data}
         renderItem={({item}) => (

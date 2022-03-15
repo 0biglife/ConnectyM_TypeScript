@@ -1,6 +1,4 @@
 import HomeView from './Home/homeView';
-import SecondCatView from './Home/SecondCat';
-import ThirdCatView from './Home/ThirdCat';
 import UploadModal from './Home/UploadModal';
 import ArticleView from './Home/ArticleView';
 
@@ -22,8 +20,6 @@ export {
   HomeView,
   ArticleView,
   UploadModal,
-  SecondCatView,
-  ThirdCatView,
   loginView,
   signupView,
   searchView,
