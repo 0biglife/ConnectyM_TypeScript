@@ -3,25 +3,22 @@ import {ScrollView} from 'react-native-gesture-handler';
 import styled from 'styled-components/native';
 
 const Container = styled.View`
-  /* background-color: lightgray; */
-  /* height: 300px; */
-  margin-bottom: 0px;
-  /* flex: 1; */
+  background-color: lightblue;
+  min-width: 100px;
 `;
 
 const UserProfile = styled.Image`
-  width: 200px;
-  height: 205px;
-  border-radius: 6px;
-  margin-top: 4px;
-  margin-left: 10px;
-  margin-bottom: 10px;
+  min-width: 200px;
+  height: 220px;
+  min-width: 100%;
+  margin-top: 10px;
+  margin-bottom: 4px;
 `;
 
-const PopularList = () => {
+const PopularTrack = () => {
   return (
     <Container>
-      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <UserProfile source={require('../../assets/artwork/cover3.jpeg')} />
         <UserProfile source={require('../../assets/artwork/cover2.jpeg')} />
         <UserProfile source={require('../../assets/artwork/cover1.jpeg')} />
@@ -33,4 +30,4 @@ const PopularList = () => {
   );
 };
 
-export default PopularList;
+export default PopularTrack;

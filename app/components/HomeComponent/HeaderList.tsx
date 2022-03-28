@@ -3,9 +3,9 @@ import {ScrollView} from 'react-native-gesture-handler';
 import styled from 'styled-components/native';
 
 const Container = styled.View`
-  background-color: lightgray;
+  /* background-color: lightgray; */
   height: 82px;
-  margin-bottom: 10px;
+  margin-bottom: 0px;
 `;
 
 const UserProfile = styled.Image`
@@ -13,7 +13,7 @@ const UserProfile = styled.Image`
   height: 70px;
   border-radius: 35px;
   margin-top: 4px;
-  margin-left: 6px;
+  margin-left: 10px;
   margin-right: 4px;
 `;
 

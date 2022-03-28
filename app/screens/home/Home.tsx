@@ -19,6 +19,7 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {MenuModal} from '../../components';
 //Redux
 import {useUser} from '../../hooks/useUser';
+import PopularTrack from '../../components/HomeComponent/PopularTrack';
 
 const SafeContainer = styled.SafeAreaView`
   flex: 1;
@@ -27,13 +28,16 @@ const SafeContainer = styled.SafeAreaView`
   background-color: ${props => props.theme.color.bg};
 `;
 
+const TitleView = styled.View`
+  background-color: lightgray;
+`;
+
 const TitleText = styled.Text`
   font-size: 15px;
   font-weight: 500;
-  margin-left: 10px;
-  margin-top: 4px;
-  margin-bottom: 4px;
-  background-color: lightgray;
+  margin-left: 12px;
+  margin-top: 12px;
+  margin-bottom: 8px;
 `;
 
 const HeaderIconView = styled.View`
@@ -105,10 +109,18 @@ const HomeView: React.FC<HomeViewProps> = ({navigation}) => {
   return (
     <SafeContainer>
       <ScrollView stickyHeaderIndices={[2]}>
-        <TitleText>추천 인물</TitleText>
+        <TitleView>
+          <TitleText>추천 인물</TitleText>
+        </TitleView>
         <HeaderList />
-        <TitleText>인기 게시물</TitleText>
+        <TitleView>
+          <TitleText>인기 게시글</TitleText>
+        </TitleView>
         <PopularList />
+        <TitleView>
+          <TitleText>인기 트랙</TitleText>
+        </TitleView>
+        <PopularTrack />
       </ScrollView>
       {/* <FlatList
         data={articles.data}
