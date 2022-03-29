@@ -1,18 +1,20 @@
 import React from 'react';
-import {ScrollView} from 'react-native-gesture-handler';
+import {FlatList, ScrollView} from 'react-native-gesture-handler';
 import styled from 'styled-components/native';
 
+//model test
+import {songs} from '../../model/songs';
+
 const Container = styled.View`
-  /* background-color: lightgray; */
-  height: 82px;
-  margin-bottom: 0px;
+  /* background-color: lightblue; */
+  height: 90px;
 `;
 
 const UserProfile = styled.Image`
   width: 70px;
   height: 70px;
   border-radius: 35px;
-  margin-top: 4px;
+  margin-top: 10px;
   margin-left: 10px;
   margin-right: 4px;
 `;
@@ -20,14 +22,17 @@ const UserProfile = styled.Image`
 const HeaderList = () => {
   return (
     <Container>
-      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-        <UserProfile source={require('../../assets/artwork/cover2.jpeg')} />
-        <UserProfile source={require('../../assets/artwork/cover2.jpeg')} />
-        <UserProfile source={require('../../assets/artwork/cover2.jpeg')} />
-        <UserProfile source={require('../../assets/artwork/cover2.jpeg')} />
-        <UserProfile source={require('../../assets/artwork/cover2.jpeg')} />
-        <UserProfile source={require('../../assets/artwork/cover2.jpeg')} />
-      </ScrollView>
+      <FlatList
+        data={songs}
+        renderItem={({item}) => (
+          <Container>
+            <UserProfile source={item.image} />
+          </Container>
+        )}
+        keyExtractor={item => item.id}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+      />
     </Container>
   );
 };

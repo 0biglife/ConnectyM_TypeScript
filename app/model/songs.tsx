@@ -23,4 +23,20 @@ export const songs = [
     id: 3,
     // duration: 311,
   },
+  {
+    title: 'cover4',
+    artist: 'giriboy',
+    image: require('../assets/artwork/cover1.jpeg'),
+    url: require('../assets/songs/song1.mp3'),
+    id: 1,
+    // duration: 311,
+  },
+  {
+    title: 'cover5',
+    artist: 'giriboy',
+    image: require('../assets/artwork/cover3.jpeg'),
+    url: require('../assets/songs/song3.mp3'),
+    id: 3,
+    // duration: 311,
+  },
 ];

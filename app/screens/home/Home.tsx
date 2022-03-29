@@ -5,6 +5,7 @@ import {
   FlatList,
   ScrollView,
   TouchableOpacity,
+  View,
 } from 'react-native';
 import {MainTabParamList, RootStackparamList} from '../../navigations/Types';
 import IonIcon from 'react-native-vector-icons/Ionicons';
@@ -108,54 +109,50 @@ const HomeView: React.FC<HomeViewProps> = ({navigation}) => {
 
   return (
     <SafeContainer>
-      <ScrollView stickyHeaderIndices={[2]}>
-        <TitleView>
-          <TitleText>추천 인물</TitleText>
-        </TitleView>
-        <HeaderList />
-        <TitleView>
-          <TitleText>인기 게시글</TitleText>
-        </TitleView>
-        <PopularList />
-        <TitleView>
-          <TitleText>인기 트랙</TitleText>
-        </TitleView>
-        <PopularTrack />
-      </ScrollView>
-      {/* <FlatList
+      <FlatList
         data={articles.data}
+        ListHeaderComponent={HeaderList}
+        ListFooterComponent={PopularTrack}
         renderItem={({item}) => (
-          <PostCard
-            id={item.id}
-            title={item.title}
-            body={item.body}
-            // url={item.url}
-            user={user!}
-            published_at={item.published_at}
-            created_at={item.created_at}
-            updated_at={item.updated_at}
-            ProfileTapped={() =>
-              navigation.navigate('UserProfile', {
-                user_id: item.id,
-                name: item.user.username,
-                imageSource: item.url,
-              })
-            }
-            ArticleTapped={() =>
-              navigation.navigate('Article', {
-                user_id: item.id,
-                name: item.user.username,
-                thumbnailUrl: item.url,
-                imageSource: item.url,
-                postTime: item.created_at,
-                title: item.body,
-              })
-            }
-          />
+          <View
+            style={{
+              backgroundColor: 'lightgray',
+              height: 80,
+              marginBottom: 6,
+            }}>
+            <TitleText>test</TitleText>
+          </View>
+          // <PostCard
+          //   id={item.id}
+          //   title={item.title}
+          //   body={item.body}
+          //   // url={item.url}
+          //   user={user!}
+          //   published_at={item.published_at}
+          //   created_at={item.created_at}
+          //   updated_at={item.updated_at}
+          //   ProfileTapped={() =>
+          //     navigation.navigate('UserProfile', {
+          //       user_id: item.id,
+          //       name: item.user.username,
+          //       imageSource: item.url,
+          //     })
+          //   }
+          //   ArticleTapped={() =>
+          //     navigation.navigate('Article', {
+          //       user_id: item.id,
+          //       name: item.user.username,
+          //       thumbnailUrl: item.url,
+          //       imageSource: item.url,
+          //       postTime: item.created_at,
+          //       title: item.body,
+          //     })
+          //   }
+          // />
         )}
         keyExtractor={item => item.id}
         showsVerticalScrollIndicator={false}
-      /> */}
+      />
       {/* <FlatList
         data={postQuery.data}
         renderItem={({item}) => (
