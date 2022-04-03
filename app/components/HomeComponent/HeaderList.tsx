@@ -3,7 +3,7 @@ import {FlatList, ScrollView} from 'react-native-gesture-handler';
 import styled from 'styled-components/native';
 
 //model test
-import {songs} from '../../model/songs';
+import {examples} from '../../model/example';
 
 const Container = styled.View`
   /* background-color: lightblue; */
@@ -17,16 +17,17 @@ const UserProfile = styled.Image`
   margin-top: 10px;
   margin-left: 10px;
   margin-right: 4px;
+  background-color: lightcoral;
 `;
 
 const HeaderList = () => {
   return (
     <Container>
       <FlatList
-        data={songs}
+        data={examples}
         renderItem={({item}) => (
           <Container>
-            <UserProfile source={item.image} />
+            <UserProfile source={{uri: item.url}} />
           </Container>
         )}
         keyExtractor={item => item.id}

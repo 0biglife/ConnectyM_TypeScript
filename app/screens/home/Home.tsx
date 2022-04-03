@@ -3,7 +3,6 @@ import styled from 'styled-components/native';
 import {
   ActivityIndicator,
   FlatList,
-  ScrollView,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -21,31 +20,7 @@ import {MenuModal} from '../../components';
 //Redux
 import {useUser} from '../../hooks/useUser';
 import PopularTrack from '../../components/HomeComponent/PopularTrack';
-
-const SafeContainer = styled.SafeAreaView`
-  flex: 1;
-  /* justify-content: center;
-  align-items: center; */
-  background-color: ${props => props.theme.color.bg};
-`;
-
-const TitleView = styled.View`
-  background-color: lightgray;
-`;
-
-const TitleText = styled.Text`
-  font-size: 15px;
-  font-weight: 500;
-  margin-left: 12px;
-  margin-top: 12px;
-  margin-bottom: 8px;
-`;
-
-const HeaderIconView = styled.View`
-  flex-direction: row;
-  justify-items: center;
-  margin-right: 8px;
-`;
+import {examples} from '../../model/example';
 
 interface HomeViewProps {
   navigation: CompositeNavigationProp<
@@ -111,44 +86,56 @@ const HomeView: React.FC<HomeViewProps> = ({navigation}) => {
     <SafeContainer>
       <FlatList
         data={articles.data}
-        ListHeaderComponent={HeaderList}
-        ListFooterComponent={PopularTrack}
+        ListHeaderComponent={
+          <>
+            <TitleView>
+              <TitleText>Section01</TitleText>
+            </TitleView>
+            <>
+              <HeaderList />
+            </>
+            <TitleView>
+              <TitleText>Section02</TitleText>
+            </TitleView>
+            <PopularList />
+            <TitleView>
+              <TitleText>Section03</TitleText>
+            </TitleView>
+          </>
+        }
+        ListFooterComponent={
+          <TitleView>
+            <TitleText>LastSection</TitleText>
+          </TitleView>
+        }
         renderItem={({item}) => (
-          <View
-            style={{
-              backgroundColor: 'lightgray',
-              height: 80,
-              marginBottom: 6,
-            }}>
-            <TitleText>test</TitleText>
-          </View>
-          // <PostCard
-          //   id={item.id}
-          //   title={item.title}
-          //   body={item.body}
-          //   // url={item.url}
-          //   user={user!}
-          //   published_at={item.published_at}
-          //   created_at={item.created_at}
-          //   updated_at={item.updated_at}
-          //   ProfileTapped={() =>
-          //     navigation.navigate('UserProfile', {
-          //       user_id: item.id,
-          //       name: item.user.username,
-          //       imageSource: item.url,
-          //     })
-          //   }
-          //   ArticleTapped={() =>
-          //     navigation.navigate('Article', {
-          //       user_id: item.id,
-          //       name: item.user.username,
-          //       thumbnailUrl: item.url,
-          //       imageSource: item.url,
-          //       postTime: item.created_at,
-          //       title: item.body,
-          //     })
-          //   }
-          // />
+          <PostCard
+            id={item.id}
+            title={item.title}
+            body={item.body}
+            // url={item.url}
+            user={user!}
+            published_at={item.published_at}
+            created_at={item.created_at}
+            updated_at={item.updated_at}
+            ProfileTapped={() =>
+              navigation.navigate('UserProfile', {
+                user_id: item.id,
+                name: item.user.username,
+                imageSource: item.url,
+              })
+            }
+            ArticleTapped={() =>
+              navigation.navigate('Article', {
+                user_id: item.id,
+                name: item.user.username,
+                thumbnailUrl: item.url,
+                imageSource: item.url,
+                postTime: item.created_at,
+                title: item.body,
+              })
+            }
+          />
         )}
         keyExtractor={item => item.id}
         showsVerticalScrollIndicator={false}
@@ -189,5 +176,30 @@ const HomeView: React.FC<HomeViewProps> = ({navigation}) => {
     </SafeContainer>
   );
 };
+
+const SafeContainer = styled.SafeAreaView`
+  flex: 1;
+  /* justify-content: center;
+  align-items: center; */
+  background-color: ${props => props.theme.color.bg};
+`;
+
+const TitleView = styled.View`
+  background-color: lightgray;
+`;
+
+const TitleText = styled.Text`
+  font-size: 15px;
+  font-weight: 500;
+  margin-left: 12px;
+  margin-top: 12px;
+  margin-bottom: 8px;
+`;
+
+const HeaderIconView = styled.View`
+  flex-direction: row;
+  justify-items: center;
+  margin-right: 8px;
+`;
 
 export default HomeView;
