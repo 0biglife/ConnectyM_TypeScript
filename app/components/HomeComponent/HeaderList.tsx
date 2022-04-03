@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList, ScrollView} from 'react-native-gesture-handler';
+import {FlatList} from 'react-native-gesture-handler';
 import styled from 'styled-components/native';
 
 //model test

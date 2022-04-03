@@ -21,6 +21,7 @@ import {MenuModal} from '../../components';
 import {useUser} from '../../hooks/useUser';
 import PopularTrack from '../../components/HomeComponent/PopularTrack';
 import {examples} from '../../model/example';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 interface HomeViewProps {
   navigation: CompositeNavigationProp<
@@ -86,20 +87,21 @@ const HomeView: React.FC<HomeViewProps> = ({navigation}) => {
     <SafeContainer>
       <FlatList
         data={articles.data}
+        stickyHeaderHiddenOnScroll
         ListHeaderComponent={
           <>
             <TitleView>
-              <TitleText>Section01</TitleText>
+              <TitleText>인기 아티스트</TitleText>
             </TitleView>
             <>
               <HeaderList />
             </>
             <TitleView>
-              <TitleText>Section02</TitleText>
+              <TitleText>인기 게시글</TitleText>
             </TitleView>
             <PopularList />
             <TitleView>
-              <TitleText>Section03</TitleText>
+              <TitleText>피드</TitleText>
             </TitleView>
           </>
         }
