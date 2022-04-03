@@ -5,6 +5,8 @@ import {MainTabParamList} from '../../navigations/Types';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp} from '@react-navigation/native';
 import {Alert, Image} from 'react-native';
+import {Config} from 'react-native-config';
+import axios from 'axios';
 
 export interface SearchProps {
   navigation: StackNavigationProp<MainTabParamList, 'Search'>;
@@ -21,6 +23,24 @@ const searchView: React.FC<SearchProps> = ({navigation}) => {
     navigation.setOptions({
       headerShown: false,
     });
+    const DefaultData = async () => {
+      try {
+        const response = await axios.get(
+          `${Config.UNSPLASH_URL}/search/users`,
+          {
+            params: {query: 'nas'},
+            headers: {
+              Authorization: `Client-ID ${Config.UNSPLASH_ACCESSTOKEN}`,
+            },
+          },
+        );
+        console.log('test data : ', response.data);
+        console.log('search data test !!!!!');
+      } catch (e) {
+        console.log('search test error : ', e);
+      }
+    };
+    DefaultData();
   }, [navigation]);
 
   const ItemView = ({item}) => {
@@ -45,7 +65,7 @@ const searchView: React.FC<SearchProps> = ({navigation}) => {
 
   const searchFilter = (text: string) => {
     setValue(text);
-    console.log('searchFilter : ', value);
+    // console.log('searchFilter : ', value);
     // searchData(text);
   };
 
@@ -69,12 +89,12 @@ const searchView: React.FC<SearchProps> = ({navigation}) => {
       //     setDataList(jsonData);
       //   });
     } catch (error) {
-      console.log('SEARCHVIEW ERROR : ', error);
+      // console.log('SEARCHVIEW ERROR : ', error);
     }
   };
 
   const onSubmit = () => {
-    console.log('Submit!');
+    // console.log('Submit!');
     searchData(value);
   };
 
