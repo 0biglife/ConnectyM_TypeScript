@@ -26,18 +26,20 @@ const searchView: React.FC<SearchProps> = ({navigation}) => {
     const DefaultData = async () => {
       try {
         const response = await axios.get(
-          `${Config.UNSPLASH_URL}/search/users`,
+          `${Config.UNSPLASH_URL}/photos/random`,
           {
-            params: {query: 'nas'},
-            headers: {
-              Authorization: `Client-ID ${Config.UNSPLASH_ACCESSTOKEN}`,
+            // params: {query: 'nas'},
+            params: {
+              client_id: `${Config.UNSPLASH_ACCESSTOKEN}`,
+              count: 30,
             },
-          },
-        );
+          }, //https://api.unsplash.com/photos/?client_id=YOUR_ACCESS_KEY
+        ); ///search/users?page=1&query=nas
         console.log('test data : ', response.data);
-        console.log('search data test !!!!!');
       } catch (e) {
         console.log('search test error : ', e);
+      } finally {
+        console.log('search data test finally ! ');
       }
     };
     DefaultData();
