@@ -1,4 +1,4 @@
-import Input from './Input';
+import Input from './input';
 import Button from './Button';
 import MenuModal from './MenuModal';
 import SettingModal from './SettingModal';

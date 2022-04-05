@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {FlatList, TouchableOpacity} from 'react-native-gesture-handler';
+import {FlatList} from 'react-native-gesture-handler';
 import styled from 'styled-components/native';
 import {MainTabParamList} from '../../navigations/Types';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp} from '@react-navigation/native';
-import {Alert, Image} from 'react-native';
+import {Dimensions, Image, View} from 'react-native';
 import {Config} from 'react-native-config';
 import axios from 'axios';
 
@@ -26,15 +26,14 @@ const searchView: React.FC<SearchProps> = ({navigation}) => {
     const DefaultData = async () => {
       try {
         const response = await axios.get(
-          `${Config.UNSPLASH_URL}/photos/random`,
+          `${Config.UNSPLASH_URL}/photos`,
           {
-            // params: {query: 'nas'},
             params: {
               client_id: `${Config.UNSPLASH_ACCESSTOKEN}`,
-              count: 30,
             },
           }, //https://api.unsplash.com/photos/?client_id=YOUR_ACCESS_KEY
-        ); ///search/users?page=1&query=nas
+        );
+        setDataList(response.data);
         console.log('test data : ', response.data);
       } catch (e) {
         console.log('search test error : ', e);
@@ -44,56 +43,6 @@ const searchView: React.FC<SearchProps> = ({navigation}) => {
     };
     DefaultData();
   }, [navigation]);
-
-  const ItemView = ({item}) => {
-    return (
-      <CellContainer>
-        <HeaderSection>
-          <TouchableOpacity
-            style={{flexDirection: 'row'}}
-            onPress={() => Alert.alert('test')}>
-            <ProfileImage
-              source={{uri: item.results.user.profile_image.small}}
-            />
-            <ProfileName>{item.results.user.name}</ProfileName>
-          </TouchableOpacity>
-        </HeaderSection>
-        <BodySection>
-          <BodyImage source={{uri: item.results.user.profile_image.large}} />
-        </BodySection>
-      </CellContainer>
-    );
-  };
-
-  const searchFilter = (text: string) => {
-    setValue(text);
-    // console.log('searchFilter : ', value);
-    // searchData(text);
-  };
-
-  const searchData = async text => {
-    try {
-      // apiClient.get<Response>('/feeds' + text.toLowerCase).then(response => {
-      //   const jsonData = response.data;
-      //   console.log('SEARCHVIEW : ', jsonData);
-      // });
-      // axios
-      //   .get('https://api.unsplash.com/search/photos', {
-      //     params: {query: text},
-      //     headers: {
-      //       Authorization:
-      //         'Client-ID 3eVYYY9UEOTwk4CcDUgHt9uSSP_MJiAO3E1hcna-i1Q',
-      //     },
-      //   })
-      //   .then(response => {
-      //     console.log('UNSPLAH SERCH DATA : ', response);
-      //     const jsonData = response.data;
-      //     setDataList(jsonData);
-      //   });
-    } catch (error) {
-      // console.log('SEARCHVIEW ERROR : ', error);
-    }
-  };
 
   const onSubmit = () => {
     // console.log('Submit!');
@@ -110,20 +59,18 @@ const searchView: React.FC<SearchProps> = ({navigation}) => {
           placeholderTextColor="darkgray"
           // underlineColorAndroid="transparent"
           onSubmitEditing={() => onSubmit()}
-          onChangeText={(text: string) => searchFilter(text)}
+          // onChangeText={(text: string) => searchFilter(text)}
         />
         <FlatList
           data={dataList}
           keyExtractor={item => item.id}
+          numColumns={3}
           // ItemSeparatorComponent={ItemSeperatorView}
-          renderItem={({item, index}) => (
-            <Image
-              style={{
-                width: 100,
-                heigth: 100,
-              }}
-              source={item.results.user.profile_image.large}
-            />
+          showsVerticalScrollIndicator={false}
+          renderItem={({item}) => (
+            <CellContainer>
+              <CellImage source={{uri: item.urls.raw}} />
+            </CellContainer>
           )}
         />
       </MainContainer>
@@ -131,8 +78,7 @@ const searchView: React.FC<SearchProps> = ({navigation}) => {
   );
 };
 
-const headerHeight = 62;
-const BodyHeight = 150;
+const CellWidth = Dimensions.get('window').width / 3;
 
 const SafeContainer = styled.SafeAreaView`
   flex: 1;
@@ -141,66 +87,30 @@ const SafeContainer = styled.SafeAreaView`
 
 const MainContainer = styled.View`
   flex: 1;
-  background-color: ${prop => prop.theme.color.bg};
-  align-items: center;
-  justify-content: center;
-  padding: 8px;
 `;
 
 const SearchTextInput = styled.TextInput`
   align-self: center;
-  width: 100%;
+  justify-content: center;
+  width: 96%;
   height: 40px;
   border-width: 1px;
   border-radius: 8px;
   padding-left: 20px;
-  border-color: lightgray;
-  /* background-color: ${prop => prop.theme.color.bg}; */
-  background-color: lightgray;
+  margin-bottom: 6px;
+  border-color: gray;
+  background-color: white;
 `;
 
 const CellContainer = styled.View`
-  /* flex-direction: row; */
-  /* align-items: center; */
-  min-width: 100%;
-  height: ${headerHeight + BodyHeight}px;
-  border-radius: 8px;
-  margin-top: 6px;
-  background-color: lightgray;
+  width: ${CellWidth}px;
+  height: ${CellWidth}px;
+  margin-top: 1px;
+  margin-right: 1px;
 `;
 
-const HeaderSection = styled.View`
-  min-width: 100%;
-  height: ${headerHeight}px;
-  justify-content: center;
-  /* background-color: lightcoral; */
-`;
-
-const ProfileImage = styled.Image`
-  width: 44px;
-  height: 44px;
-  border-width: 1px;
-  border-color: lightgray;
-  border-radius: 25px;
-  margin-left: 10px;
-`;
-
-const ProfileName = styled.Text`
-  align-self: center;
-  font-size: 14px;
-  font-weight: 600;
-  margin: 10px;
-`;
-
-const BodySection = styled.View`
-  min-width: 100%;
-  height: ${BodyHeight}px;
-  /* background-color: lightblue; */
-`;
-
-const BodyImage = styled.Image`
-  width: ${BodyHeight - 20}px;
-  height: ${BodyHeight - 20}px;
+const CellImage = styled.Image`
+  flex: 1;
 `;
 
 export default searchView;
