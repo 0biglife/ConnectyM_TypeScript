@@ -14,64 +14,92 @@ export interface SearchProps {
 }
 
 const searchView: React.FC<SearchProps> = ({navigation}) => {
-  const [value, setValue] = useState<string>('');
+  const [searchValue, setSearchValue] = useState<string>('');
   const [dataList, setDataList] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
   //
   // const [unsplashData, setUnsplashData] = useState('');
+
+  const DefaultData = async () => {
+    try {
+      const response = await axios.get(
+        `${Config.UNSPLASH_URL}/photos`,
+        {
+          params: {
+            client_id: `${Config.UNSPLASH_ACCESSTOKEN}`,
+          },
+        }, //https://api.unsplash.com/photos/?client_id=YOUR_ACCESS_KEY
+      );
+      setDataList(response.data);
+      setFilteredData(response.data);
+      console.log('test data : ', response.data);
+    } catch (e) {
+      console.log('search test error : ', e);
+    } finally {
+      console.log('search data test finally ! ');
+    }
+  };
+
+  const SearchData = async () => {
+    try {
+      const response = await axios.get();
+    } catch (e) {
+    } finally {
+    }
+  };
 
   useEffect(() => {
     navigation.setOptions({
       headerShown: false,
     });
-    const DefaultData = async () => {
-      try {
-        const response = await axios.get(
-          `${Config.UNSPLASH_URL}/photos`,
-          {
-            params: {
-              client_id: `${Config.UNSPLASH_ACCESSTOKEN}`,
-            },
-          }, //https://api.unsplash.com/photos/?client_id=YOUR_ACCESS_KEY
-        );
-        setDataList(response.data);
-        console.log('test data : ', response.data);
-      } catch (e) {
-        console.log('search test error : ', e);
-      } finally {
-        console.log('search data test finally ! ');
-      }
-    };
     DefaultData();
   }, [navigation]);
 
   const onSubmit = () => {
-    // console.log('Submit!');
-    searchData(value);
+    searchData(searchValue);
+  };
+
+  const ItemSeperatorView = () => {
+    return (
+      <View style={{height: 1, width: '100%', backgroundColor: 'white'}} />
+    );
+  };
+
+  const searchFilter = text => {
+    if (text) {
+      //const newData = filteredData.filter( // ...필처 처리 // )
+      // setDataList(newData);
+      console.log('search Value : ', text);
+      setSearchValue(text);
+    } else {
+      setDataList(filteredData);
+      setSearchValue(text);
+    }
   };
 
   return (
     <SafeContainer>
       <MainContainer>
         <SearchTextInput
-          value={value}
+          value={searchValue}
           returnKeyType="done"
           placeholder="검색"
           placeholderTextColor="darkgray"
-          // underlineColorAndroid="transparent"
           onSubmitEditing={() => onSubmit()}
-          // onChangeText={(text: string) => searchFilter(text)}
+          underlineColorAndroid="transparent"
+          onChangeText={(text: string) => searchFilter(text)}
         />
         <FlatList
           data={dataList}
           keyExtractor={item => item.id}
           numColumns={3}
-          // ItemSeparatorComponent={ItemSeperatorView}
           showsVerticalScrollIndicator={false}
           renderItem={({item}) => (
             <CellContainer>
               <CellImage source={{uri: item.urls.raw}} />
             </CellContainer>
           )}
+          ItemSeparatorComponent={ItemSeperatorView}
         />
       </MainContainer>
     </SafeContainer>
@@ -105,7 +133,6 @@ const SearchTextInput = styled.TextInput`
 const CellContainer = styled.View`
   width: ${CellWidth}px;
   height: ${CellWidth}px;
-  margin-top: 1px;
   margin-right: 1px;
 `;
 
