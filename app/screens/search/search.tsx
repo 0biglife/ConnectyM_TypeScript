@@ -14,6 +14,7 @@ export interface SearchProps {
 }
 
 const searchView: React.FC<SearchProps> = ({navigation}) => {
+  const [defaultData, setDefaultData] = useState([]);
   const [searchValue, setSearchValue] = useState<string>('');
   const [dataList, setDataList] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -23,28 +24,20 @@ const searchView: React.FC<SearchProps> = ({navigation}) => {
   const DefaultData = async () => {
     try {
       const response = await axios.get(
-        `${Config.UNSPLASH_URL}/photos`,
+        `${Config.UNSPLASH_URL}/search/users?per_page=18&query=nas`,
         {
           params: {
             client_id: `${Config.UNSPLASH_ACCESSTOKEN}`,
           },
-        }, //https://api.unsplash.com/photos/?client_id=YOUR_ACCESS_KEY
+        },
       );
-      setDataList(response.data);
+      setDataList(response.data.results);
       setFilteredData(response.data);
-      console.log('test data : ', response.data);
+      console.log('search data : ', response.data);
     } catch (e) {
       console.log('search test error : ', e);
     } finally {
       console.log('search data test finally ! ');
-    }
-  };
-
-  const SearchData = async () => {
-    try {
-      const response = await axios.get();
-    } catch (e) {
-    } finally {
     }
   };
 
@@ -77,6 +70,21 @@ const searchView: React.FC<SearchProps> = ({navigation}) => {
     }
   };
 
+  const searchData = async text => {
+    try {
+      const response = await axios.post(`${Config.UNSPLASH_URL}/search/users`, {
+        query: text,
+      });
+      setDataList(response.data);
+      console.log('SearchData Value : ', response.data);
+    } catch (e) {
+      console.log('Error!');
+      console.log('SearchData Error : ', e);
+    } finally {
+      console.log('SearchData function called!');
+    }
+  };
+
   return (
     <SafeContainer>
       <MainContainer>
@@ -87,7 +95,7 @@ const searchView: React.FC<SearchProps> = ({navigation}) => {
           placeholderTextColor="darkgray"
           onSubmitEditing={() => onSubmit()}
           underlineColorAndroid="transparent"
-          onChangeText={(text: string) => searchFilter(text)}
+          onChangeText={(text: string) => searchData(text)}
         />
         <FlatList
           data={dataList}
@@ -96,7 +104,7 @@ const searchView: React.FC<SearchProps> = ({navigation}) => {
           showsVerticalScrollIndicator={false}
           renderItem={({item}) => (
             <CellContainer>
-              <CellImage source={{uri: item.urls.raw}} />
+              <CellImage source={{uri: item.profile_image.large}} />
             </CellContainer>
           )}
           ItemSeparatorComponent={ItemSeperatorView}
